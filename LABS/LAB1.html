@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../stylesheets/w3.css">
+        <link rel="stylesheet" href="../stylesheets/w3-theme-black.css">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="icon" href="../images/favicon.png" type="image/x-icon">
+        <title>CC3 LAB 1</title>
+        <style>
+            header {
+                background-image: url("../images/header.jpg");
+                color: white;
+                width:100%;
+                min-height:400px;
+                max-height:700px;
+            }
+            .w3-topnav a:first-child:hover{color: #009688;border-bottom: 3px solid transparent;}
+        </style>
+    </head>
+    <body class="w3-light-grey">
+        <nav class="w3-topnav w3-center w3-theme w3-card-4 w3-top">
+              <a href="../index.html" title="HOME"><i class="fa fa-home w3-large"></i></a>
+        </nav>
+        <header id="header" class="w3-container w3-card-4 w3-padding-32">
+            <div class="w3-center w3-padding-32">
+                <div class="w3-center">
+                    <h1 class="w3-jumbo">CC3 Estructura de Máquinas</h1>
+                    <h1 class="w3-jumbo w3-animate-bottom">Laboratorio 1</h1>
+                    <h4 class="w3-xxlarge">Number Representation</h4>
+                </div>
+            </div>
+        </header>
+        <div class="w3-container w3-margin-16">
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Objetivos</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <ul>
+                        <li class="w3-large">Construir mas intuición para trabajar con números binarios.</li>
+                        <li class="w3-large">Jugar.</li>
+                    </ul>
+                </p>
+            </div>
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Ejercicio 1: Alfabeto Binario</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Vamos a utilizar números binarios de 4-bits. Si tomamos una pila de 5 números binarios de 4 bits, podemos hacer patrones e imágenes. Para ayudarlos a visualizar esto, ustedes pueden pensar que los 0's  son blanco y los 1's son negro. Por ejemplo, el siguiente patrón de bits se mira así:
+                    <br><br>
+                    <div class="w3-row">
+                        <div class="w3-half">
+                            <p class="w3-text w3-justify w3-large w3-margin-16 w3-center">
+                                0b0110<br>
+                                0b1001<br>
+                                0b1111<br>
+                                0b1001<br>
+                                0b1001<br>
+                            </p>
+                        </div>
+                        <div class="w3-half">
+                            <p class="w3-center">
+                                <img class="w3-image w3-medium" style="width:100px;height:150px" src="../images/lab1_fig1.png" alt="fig1" />
+                            </p>
+                        </div>
+                    <br>
+                    </div>
+                </p>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <strong>Responder</strong><br><br>
+                    En un archivo de texto respondan a las siguientes preguntas:
+                    <ul>
+                        <li class="w3-large">¿Cuáles 5 números decimales producen el patrón de arriba? ¿Cuales 5 números hexadecimales?</li>
+                        <li class="w3-large">¿Que letra se dibuja con 1, 1, 9, 9, 6? ¿Con 0xF8F88?</li>
+                        <li class="w3-large">¿Qué representación hexadecimal usarían para dibujar la letra B? ¿La letra N (Probablemente no quieran usar 5 números hexadecimales para esta)?</li>
+                    </ul>
+                </p>
+            </div>
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Ejercicio 2: Cisco Binary Game</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Hagan click <a href="http://forums.cisco.com/CertCom/game/binary_game_page.htm"><span class="w3-btn w3-red w3-round w3-medium">aquí</span></a> para encontrar el juego. El objetivo es hacer coincidir el numero de la derecha con el representación binaria sin signo de la izquierda. Esto requiere una combinación de clicking y typing. Y hay presión de tiempo para hacer las cosas mas divertidas.
+                    <br><br>
+                    El juego progresivamente se va volviendo mas rápido y más difícil. Vean si pueden alcanzar arriba de 20,000 puntos y llegar al nivel 5.
+                    <br><br>
+                    <strong>Meta:</strong><br>
+                    <ul>
+                        <li class="w3-large">Logren arriba de 18,000 puntos, pausen el juego, tomen un screen shot y guardenlo en su directorio de trabajo.</li>
+                    </ul>
+                </p>
+            </div>
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Ejercicio 3: 1,000 $1 Bills</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Si les entregamos mil billetes de $1 y diez sobres. Su trabajo es encontrar una manera de poner una cantidad  <strong>X</strong> de billetes de dolar en cada uno de los diez sobres, de modo que sin importar la cantidad que uno les pida (entre $1 y $1000), ustedes solo tienen que dar una combinación de esos sobres asegurándose de dar siempre la cantidad correcta en efectivo.
+                    <br><br>
+                    <strong>Responder</strong><br><br>
+                    En un archivo de texto respondan:
+                    <ul>
+                        <li class="w3-large">¿Cómo distribuyeron los mil billetes de $1 en los 10 sobres?</li>
+                    </ul>
+                </p>
+            </div>
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Ejercicio 4: Pearls Before Swine</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Esta es una versión de un juego bien chilero que tiene una solución basada en number representation.
+                    Jueguen en el siguiente <a href="http://www.transience.com.au/pearl3.html"><span class="w3-btn w3-round w3-red w3-medium">link</span></a>. Primero jueguen un par de veces y vean si pueden ganar algunos rounds.
+                    <br><br>
+                    Después de haberlo intentado muchas veces, échenle un vistazo a este articulo de <a href="http://en.wikipedia.org/wiki/Nim"><span class="w3-btn w3-round w3-red w3-medium">Wikipedia</span></a>. Con este
+                    nuevo conocimiento a la mano, ahora ustedes deben de ser capaces de vencer a Juan siempre. Pero
+                    siempre va a tomar un poco de practica. Sigan intentado hasta que puedan ganar seguidamente.
+                    <br><br>
+                    <strong>Responder</strong><br><br>
+                    En un archivo de texto respondan:
+                    <ul>
+                        <li class="w3-large">¿Cómo es la estrategia del juego para ganar siempre?</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+        <footer class="w3-container w3-padding-32 w3-theme w3-center">
+            <h2>CC3 - 2016</h2>
+            <a class="w3-btn-floating w3-teal" href="https://slack.com/" title="SLACK"><i class="fa fa-slack"></i></a>
+            <h4>Universidad Galileo</h4>
+            <div style="position:relative;bottom:103px;z-index:1;" class="w3-tooltip w3-right">
+                <a class="w3-btn w3-theme" href="#header"><span class="w3-xlarge">
+                <i class="fa fa-chevron-circle-up"></i></span></a>
+            </div>
+        </footer>
+    </body>
+</html>

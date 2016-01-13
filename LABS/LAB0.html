@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../stylesheets/w3.css">
+        <link rel="stylesheet" href="../stylesheets/w3-theme-black.css">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="icon" href="../images/favicon.png" type="image/x-icon">
+        <title>CC3 LAB 0</title>
+        <style>
+            header {
+                background-image: url("../images/header.jpg");
+                color: white;
+                width:100%;
+                min-height:400px;
+                max-height:700px;
+            }
+            .w3-topnav a:first-child:hover{color: #009688;border-bottom: 3px solid transparent;}
+        </style>
+    </head>
+    <body class="w3-light-grey">
+        <nav class="w3-topnav w3-center w3-theme w3-card-4 w3-top">
+              <a href="../index.html" title="HOME"><i class="fa fa-home w3-large"></i></a>
+        </nav>
+        <header id="header" class="w3-container w3-card-4 w3-padding-32">
+            <div class="w3-center w3-padding-32">
+                <div class="w3-center">
+                    <h1 class="w3-jumbo">CC3 Estructura de Máquinas</h1>
+                    <h1 class="w3-jumbo w3-animate-bottom">Laboratorio 0</h1>
+                    <h4 class="w3-xxlarge">Intro</h4>
+                </div>
+            </div>
+        </header>
+        <div class="w3-container w3-margin-16">
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Objetivo</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <ul>
+                        <li class="w3-large">Verificar que tienen las habilidades necesarias de programación para este curso.</li>
+                    </ul>
+                </p>
+            </div>
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Ejercicio 1</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Una de las cosas que aconsejamos en este curso es haber llevado y aprobado CC2 “Estructura de Datos”, ya que por lo general necesitamos que tengan bastante experiencia en algún lenguaje de programación basado en C como “Java”. Muchas veces pasa que los alumnos que no tienen estas capacidades se sienten incapaces de llevar el ritmo del curso y terminan reprobándolo. Los siguientes dos problemas están diseñados para verificar que están listos para el material de CC3.
+                    <br><br>
+                    <strong>Ejercicio 1.1: Fibonacci</strong><br><br>
+                    Escriban una función que, dado un numero n, retorne el enésimo numero de la serie de Fibonacci. La función está dada por el código de abajo:
+                </p>
+
+<pre class="w3-code w3-light-grey notranslate">
+    <span class="w3-text-grey">// Retorna el n-esimo numero de la serie de Fibonacci - Deben asumir que n >= 0</span>
+    <span class="w3-text-brown">public static</span> <span class="w3-text-green">int</span> fibonacci(<span class="w3-text-green">int</span> n) {
+
+        <span class="w3-text-grey">// Su Codigo Aqui</span>
+
+    }
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    La serie de Fibonacci está definida por lo siguiente:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    Fib<sub>0</sub> = 0
+    Fib<sub>1</sub> = 1
+    Fib<sub>n</sub> = Fib<sub>n-1</sub> + Fib<sub>n-2</sub>        Donde Fib<sub>n</sub> es el n-esimo numero de Fibonacci.
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    La lista de los primeros 10 números de Fibonacci son los siguientes:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    Fib<sub>0</sub> = 0
+    Fib<sub>1</sub> = 1
+    Fib<sub>2</sub> = 1
+    Fib<sub>3</sub> = 2
+    Fib<sub>4</sub> = 3
+    Fib<sub>5</sub> = 5
+    Fib<sub>6</sub> = 8
+    Fib<sub>7</sub> = 13
+    Fib<sub>8</sub> = 21
+    Fib<sub>9</sub> = 34
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <strong>Ejercicio 1.2: Zipper</strong><br><br>
+                    Escriban una función que dado dos arreglos, cada uno ordenado de menor a mayor, retorne un nuevo arreglo que contenga todos los elementos de ambos arreglos ordenados de menor a mayor. Por ejemplo, si los arreglos de entrada son los siguientes:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    Arreglo de entrada 1 = { 1, 4, 7, 8, 8 , 9}
+    Arreglo de entrada 2 = { 2, 4, 6, 8}
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    La salida debería de ser un arreglo que contenga los elementos en el siguiente orden:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    Arreglo de salida = { 1, 2, 4, 4, 6, 7, 8, 8, 8, 9 }
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    La función está dada por el siguiente código:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span class="w3-text-grey">// Ustedes asuman que first y second no son null</span>
+    <span class="w3-text-brown">public static</span> <span class="w3-text-green">int[]</span> zipper(<span class="w3-text-green">int[]</span> first, <span class="w3-text-green">int[]</span> second) {
+
+        <span class="w3-text-grey">// Su codigo aqui</span>
+
+    }</pre>
+            </div>
+        </div>
+        <footer class="w3-container w3-padding-32 w3-theme w3-center">
+            <h2>CC3 - 2016</h2>
+            <a class="w3-btn-floating w3-teal" href="https://slack.com/" title="SLACK"><i class="fa fa-slack"></i></a>
+            <h4>Universidad Galileo</h4>
+            <div style="position:relative;bottom:103px;z-index:1;" class="w3-tooltip w3-right">
+                <a class="w3-btn w3-theme" href="#header"><span class="w3-xlarge">
+                <i class="fa fa-chevron-circle-up"></i></span></a>
+            </div>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../stylesheets/w3.css">
+        <link rel="stylesheet" href="../stylesheets/w3-theme-black.css">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="icon" href="../images/favicon.png" type="image/x-icon">
+        <title>CC3 LAB 4</title>
+        <style>
+            header {
+                background-image: url("../images/header.jpg");
+                color: white;
+                width:100%;
+                min-height:400px;
+                max-height:700px;
+            }
+            .w3-topnav a:first-child:hover{color: #009688;border-bottom: 3px solid transparent;}
+        </style>
+    </head>
+    <body class="w3-light-grey">
+        <nav class="w3-topnav w3-center w3-theme w3-card-4 w3-top">
+              <a href="../index.html" title="HOME"><i class="fa fa-home w3-large"></i></a>
+        </nav>
+        <header id="header" class="w3-container w3-card-4 w3-padding-32">
+            <div class="w3-center w3-padding-32">
+                <div class="w3-center">
+                    <h1 class="w3-jumbo">CC3 Estructura de Máquinas</h1>
+                    <h1 class="w3-jumbo w3-animate-bottom">Laboratorio 4</h1>
+                    <h4 class="w3-xxlarge">Manejo de Memoria y Assembler</h4>
+                </div>
+            </div>
+        </header>
+        <div class="w3-container w3-margin-16">
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Objetivos</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <ul>
+                        <li class="w3-large">Trabajar con dynamic memory allocation.</li>
+                        <li class="w3-large">Practicar con programas de Assembler utilizando MARS.</li>
+                    </ul>
+                </p>
+            </div>
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Setup</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Descarguen los archivos necesarios para este laboratorio en el siguiente <a href="#" target="_blank"><span class="w3-btn w3-red w3-round w3-medium">link</link></a>
+                </p>
+            </div>
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Introducción a Assembler y MARS</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Los siguientes ejercicios utilizan un simulador de MIPS llamado MARS, que provee una buena interfaz gráfica de debbuging para el código. Pueden correr MARS en sus propias computadoras bajando el archivo jar en el siguiente <a href="http://courses.missouristate.edu/kenvollmar/mars/MARS_4_5_Aug2014/Mars4_5.jar" target="_blank"><span class="w3-btn w3-medium w3-red w3-round">link</span></a>. Van a necesitar tener instalado Java en su computadora, o pueden utilizar (si no lo tienen instalado) esto para instalarlo (Únicamente en linux Ubuntu 14.04 LTS):
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span class="w3-text-grey"># Para ver si ya esta instalado</span>
+    <span class="w3-text-blue">$</span> java -version
+    <span class="w3-text-brown">java version "1.7.0_91"
+    OpenJDK Runtime Environment (IcedTea 2.6.3) (7u91-2.6.3-0ubuntu0.14.04.1)
+    OpenJDK 64-Bit Server VM (build 24.91-b01, mixed mode)</span>
+
+    <span class="w3-text-grey"># Si no aparece lo de arriba</span>
+    <span class="w3-text-grey"># Esto instala el java runtime environment y el compilador de java</span>
+    <span class="w3-text-blue">$</span> sudo apt-get install openjdk-7-jdk
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Pueden correr MARS utilizando lo siguiente:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span class="w3-text-blue">$</span> java -jar Mars4_5.jar
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <strong>Cosas básicas de Assembler:</strong>
+                    <ul>
+                        <li class="w3-large">Los programas de Assembler van en un archivo de texto con extensión (.s)</li>
+                        <li class="w3-large">Los programas deberían de llevar un label “main:” (similar a la función main() en C)</li>
+                        <li class="w3-large">Los programas deberían de terminar con “addi $v0, $zero, 10” seguido de un “syscall”.</li>
+                        <li class="w3-large">Las labels terminan con dos puntos (:)</li>
+                        <li class="w3-large">Los comentarios empiezan con numeral (#)</li>
+                        <li class="w3-large">No pueden poner mas de una instrucción por linea</li>
+                    </ul>
+                </p>
+            </div>
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Ejercicio 2: Acostumbrándose a usar MARS</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <b>Para empezar:</b>
+                        <ul>
+                            <li class="w3-large">Corran MARS (Como se les enseño arriba)</li>
+                            <li class="w3-large">Carguen lab4_ex2.s usando File-->Open</li>
+                            <li class="w3-large">Vean y editen el código en el tab “Edit”. Noten que el editor tiene highlighting y sugerencias de auto-completado</li>
+                            <li class="w3-large">Cuando estén listos, ensamblen su codigo usando Run-->Assemble (o presionando F3)</li>
+                            <li class="w3-large">Esto automáticamente los va a llevar al tab “Execute”, que es donde corren y pueden hacer debug a su programa</li>
+                            <li class="w3-large">Avancen en su programa linea por linea utilizando Run-->Step (o presionando F7)</li>
+                            <li class="w3-large">Deberían de tomarse el tiempo para familiarizarse con todo (como los atajos de teclado)</li>
+                        </ul>
+                </p>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Para este ejercicio, van a calcular la serie de Fibonacci usando fib[0] = 0; fib[1] = 1; fib[n] = fib[n-1] + fib[n-2]<br>
+                    <strong>Utilizando los siguientes pasos y guardando las respuestas a las preguntas. El menu de ayuda les puede servir (F1).</strong>
+                    <ol>
+                        <li class="w3-large">¿Qué significan las directivas .data, .word y .text? (Es decir, que ponen en cada sección)</li>
+                        <li class="w3-large">¿Cómo ponen un breakpoint en MARS? Pongan un breakpoint en la linea 14 y córranlo. ¿Cuál es dirección de la instrucción? ¿La linea 14 se ejecuta o no?</li>
+                        <li class="w3-large">En el breakpoint, ¿Cómo continuan ejecutando su código? Corran el código completo</li>
+                        <li class="w3-large">Encuentren la ventana “RUN I/O”. ¿Qué numero el programa saca? ¿Qué numero (n) de Fibonacci es ?</li>
+                        <li class="w3-large">¿En que dirección n es guardado en memoria? Prueben encontrar esto buscando en el Data Segment y Mirando el machine code (Text Segment)</li>
+                        <li class="w3-large">Sin usar el editor, hagan que el programa calcule el 13° numero de Fibonacci, manualmente modificando la locación en memoria antes de ejecutarlo.</li>
+                        <li class="w3-large">Lineas 19 y 21 usan la instrucción syscall. ¿Qué es y cómo se usa?</li>
+                    </ol>
+                </p>
+            </div>
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Ejercicio 3: Un programa corto en MIPS</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Escriban un pedazo de código desde 0 que, dado un valor en $s0 o $s1, cumpla con lo siguiente:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span class="w3-text-teal">$</span>t0 = <span class="w3-text-teal">$</span>s0
+    <span class="w3-text-teal">$</span>t1 = <span class="w3-text-teal">$</span>s1
+    <span class="w3-text-teal">$</span>t2 = <span class="w3-text-teal">$</span>t0 + <span class="w3-text-teal">$</span>t1
+    <span class="w3-text-teal">$</span>t3 = <span class="w3-text-teal">$</span>t1 + <span class="w3-text-teal">$</span>t2
+    ...
+    <span class="w3-text-teal">$</span>t7 = <span class="w3-text-teal">$</span>t5 + <span class="w3-text-teal">$</span>t6
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    En otras palabras, para cada registro desde $t2 a $t7, guarden la suma de los 2 previos $t# registros. Los registros $s0 y $s1 contienen los valores iniciales. Pongan los valores iniciales de $s0 y $s1 manualmente usando MARS en vez de utilizando código. Finalmente, hagan que su código al final imprima el valor de $t7 como un entero (Hint: syscall)
+                    <br><br>
+                    <strong>Guarden su código en un archivo llamado lab4_ex3.s.</strong> No se olviden de usar una label “main:” y terminen su programa con “syscall 10”
+                </p>
+            </div>
+        </div>
+        <footer class="w3-container w3-padding-32 w3-theme w3-center">
+            <h2>CC3 - 2016</h2>
+            <a class="w3-btn-floating w3-teal" href="https://slack.com/" title="SLACK"><i class="fa fa-slack"></i></a>
+            <h4>Universidad Galileo</h4>
+            <div style="position:relative;bottom:103px;z-index:1;" class="w3-tooltip w3-right">
+                <a class="w3-btn w3-theme" href="#header"><span class="w3-xlarge">
+                <i class="fa fa-chevron-circle-up"></i></span></a>
+            </div>
+        </footer>
+    </body>
+</html>

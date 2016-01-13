@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../stylesheets/w3.css">
+        <link rel="stylesheet" href="../stylesheets/w3-theme-black.css">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="icon" href="../images/favicon.png" type="image/x-icon">
+        <title>CC3 LAB 3</title>
+        <style>
+            header {
+                background-image: url("../images/header.jpg");
+                color: white;
+                width:100%;
+                min-height:400px;
+                max-height:700px;
+            }
+            .w3-topnav a:first-child:hover{color: #009688;border-bottom: 3px solid transparent;}
+        </style>
+    </head>
+    <body class="w3-light-grey">
+        <nav class="w3-topnav w3-center w3-theme w3-card-4 w3-top">
+              <a href="../index.html" title="HOME"><i class="fa fa-home w3-large"></i></a>
+        </nav>
+        <header id="header" class="w3-container w3-card-4 w3-padding-32">
+            <div class="w3-center w3-padding-32">
+                <div class="w3-center">
+                    <h1 class="w3-jumbo">CC3 Estructura de Máquinas</h1>
+                    <h1 class="w3-jumbo w3-animate-bottom">Laboratorio 3</h1>
+                    <h4 class="w3-xxlarge">Punteros en C y GDB</h4>
+                </div>
+            </div>
+        </header>
+        <div class="w3-container w3-margin-16">
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Objetivos</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <ul>
+                        <li class="w3-large">Aprender a usar un debugger como lo es gdb y cgdb.</li>
+                        <li class="w3-large">Arreglar un programa con pequeños bugs en C.</li>
+                        <li class="w3-large">Comprender como un debugger es útil en un entorno de trabajo.</li>
+                    </ul>
+                </p>
+            </div>
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Setup</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Descarguen los archivos necesarios para este laboratorio en el siguiente <a href="https://docs.google.com/uc?authuser=0&id=0B6TRsDuz4XayZWdrS2o0YmtPNEk&export=download" target="_blank"><span class="w3-btn w3-red w3-round w3-medium">link</link></a>
+                </p>
+            </div>
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Ejercicio 1: Debugger</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Para este ejercicio, ustedes van a encontrar útil usar el <a href="http://inst.eecs.berkeley.edu/~cs61c/resources/gdb5-refcard.pdf">GDB reference card</a>. Compilen hello.c con la bandera “-g”:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span class="w3-text-blue">$</span> gcc -g -o hello hello.c
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Esto hace que gcc guarde información en el archivo ejecutable para el gdb. Ahora comiencen el debugger, en este caso vamos a usar cgdb:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span class="w3-text-blue">$</span> cgdb hello
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <strong>Si cgdb no funciona, pueden probar usar gdb para completar los ejercicios (solo tienen que utilizar gdb hello).</strong>
+                    <br><br>
+                    Atraviesen todo el programa utilizando lo siguiente:<br>
+                    <ol>
+                        <li class="w3-large">Poniendo un breakpoint en el main</li>
+                        <li class="w3-large">Usando el comando run de gdb</li>
+                        <li class="w3-large">Usando el comando single-step de gdb</li>
+                    </ol>
+                </p>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    escriban help con gdb para encontrar los comandos que hacen estas cosas, o usan la reference card.
+                    <br><br>
+                    <strong>CGDB vs GDB</strong><br><br>
+                    En este ejercicio, usamos cgdb para verificar nuestros programas. Cgdb es idéntico a gdb, excepto que cgdb provee unas cosas extra, que hacen que su uso sea mas placentero y por ende utilizado en la practica. Todos los comandos que están en el reference sheet funcionan en gdb. En cgdb, pueden presionar ESC para ir a la ventana del código (lo que esta arriba) y presionar I para retornar a la ventana de comandos (lo que esta abajo) – similar a vim. En la parte de abajo que es la ventana de comandos, es donde tienen que ingresar los comandos.
+                    <br><br>
+                    <strong>Mas comandos de GDB</strong><br><br>
+                    aprender estos comandos, va a ser útil para lo que falta de este lab, y en general  en su carrera como programadores de C. Creen un archivo de texto y respondan las siguientes preguntas:<br>
+                    <ol>
+                        <li class="w3-large">¿Cómo pasan argumentos desde el command line hacia un programa utilizando gdb?</li>
+                        <li class="w3-large">¿Cómo ponen un breakpoint, que se cumpla solo cuando ciertas condiciones son verdaderas? (ejemplo: cuando ciertas variables tienen algún valor en especifico)</li>
+                        <li class="w3-large">¿Cómo ejecutan la siguiente linea de codigo de C en el programa, después haber parado en un breakpoint?</li>
+                        <li class="w3-large">¿Cómo resumen un programa después de un breakpoint?</li>
+                        <li class="w3-large">¿Cómo pueden ver el valor de una variable (inclusive una expresión como 1 + 2) en gdb?</li>
+                        <li class="w3-large">¿Cómo pueden configurar gdb para que imprima los valores de las variables cada step?</li>
+                        <li class="w3-large">¿Cómo pueden imprimir una lista de todas las variables y sus valores en la función actual?</li>
+                        <li class="w3-large">¿Cómo se salen de gdb?</li>
+                    </ol>
+                </p>
+            </div>
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Ejercicio 2: Debugging a buggy C program</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Ahora van a usar su nuevo conocimiento en gdb, para hacer un debug en un programa pequeño hecho en C. Consideren el programa ll_equal.c. Compilen y corran el programa, y experimenten con el. Les dará el siguiente resultado:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span class="w3-text-blue">$</span> gcc -g -o ll_equal ll_equal.c
+    <span class="w3-text-blue">$</span> ./ll_equal
+    <span class="w3-text-brown">equal test 1 result = 1
+    Segmentation fault</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Ahora, comiencen gdb en el programa, utilizando las instrucciones en el ejercicio 1. Creen un breakpoint en la función ll_equal(), y corran el programa. Cuando el debugger regrese al breakpoint, hagan un step a través de las instrucciones en la función linea por linea, y examinen los valores de las variables. Pongan atención a los punteros de a y b en la función. ¿Siempre están apuntando a la dirección correcta? Encuentren el bug y arréglenlo.
+                    <br><br>
+                    <strong>Respondan</strong><br><br>
+                    En un archivo de texto respondan:
+                    <ul>
+                        <li class="w3-large">¿Qué hicieron para arreglar el error?</li>
+                    </ul>
+                </p>
+            </div>
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Ejercicio 3: Punteros y Estructuras en C</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    En ll_cycle.c completen la funcion ll_has_cycle() para implementar el siguiente algoritmo que verifica si una simple linked-list tiene un ciclo.
+                    <ol>
+                        <li class="w3-large">Comienzen con 2 punteros en el head de la lista. Al primero le vamos a llamar tortoise y al segundo hare</li>
+                        <li class="w3-large">Avancen hare 2 nodos. Si no es posible porque hay un null-pointer, es porque es el final de la lista, y entonces la lista es aciclica.</li>
+                        <li class="w3-large">Avancen tortoise 1 nodo. (¿Es necesaria una verificación de null-pointer?, ¿Por qué?)</li>
+                        <li class="w3-large">Si tortoise y hare apuntan hacia el mismo nodo, la lista es cíclica. Sino, volver al paso 2.</li>
+                    </ol>
+                </p>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Después de haber implementado ll_has_cycle() correctamente, el programa cuando compilan ll_cycle.c les va a decir si ll_has_cycle() saca la salida esperada.
+                </p>
+            </div>
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Ejercicio 4: Linear feedback shift register</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    En este ejercicio, van a implementar una función lfsr_calculate() que determina la siguiente iteración de un linear feedback shift register (LFSR). Las aplicaciones que usan un LFSR son: Las TV Digitales, celulares CDMA, Ethernet, USB 3.0 y muchas mas. Esta función va a generar números random, utilizando bitwise operators. Para mayor información, lean el articulo de Wikipedia de los <a href="http://en.wikipedia.org/wiki/Linear_feedback_shift_register">LSFR</a>. En lfsr.c completen la funcion lfsr_calculate() para que haga lo siguiente:
+                    <br><br>
+                    <strong>Diagrama Esquemático</strong><br><br>
+                    <img src="../images/LFSR-F16.gif" alt="lfsr" />
+                </p>
+                <p class="w3-text-grey w3-justify w3-medium w3-margin-16">Image Credit: UC Berkeley</p>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <strong>Explicación del diagrama de arriba:</strong>
+                    <br><br>
+                    <ul>
+                        <li class="w3-large">En cada llamada a lfsr_calculate, ustedes le van a hacer un shift al registro 1 bit a la derecha</li>
+                        <li class="w3-large">Este no es un shift lógico o aritmético. En el lado izquierdo, ustedes van hacer shift sobre un único bit, igual al un XOR de los bits originales en la posición 11, 13, 14 y 16</li>
+                        <li class="w3-large">Las figuras que miran debajo del numero binario son XOR's, que toman 2 entradas a y b, y devuelven como salida a ^ b</li>
+                        <li class="w3-large">Si implementan lfsr_calculate() correctamente, el programa debería de sacar todos los 65535 números positivos enteros de 16-bits, antes de volver a empezar de nuevo con el número que empezó.</li>
+                    </ul>
+                </p>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Si implementaron correctamente lfsr_calculate(), compilen y corran lfsr. Su salida debería de ser similar a esta:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span class="w3-text-blue">$</span> make
+    <span class="w3-text-blue">$</span> ./lfsr
+    <span class="w3-text-brown">My number is: 1
+    My number is: 5185
+    My number is: 38801
+    My number is: 52819
+    My number is: 21116
+    My number is: 54726
+    My number is: 26552
+    My number is: 46916
+    My number is: 41728
+    My number is: 26004
+    My number is: 62850
+    My number is: 40625
+    My number is: 647
+    My number is: 12837
+    My number is: 7043
+    My number is: 26003
+    My number is: 35845
+    My number is: 61398
+    My number is: 42863
+    My number is: 57133
+    My number is: 59156
+    My number is: 13312
+    My number is: 16285
+     ... etc etc ...
+    Got 65535 numbers before cycling!
+    Congratulations! It works!</span>
+</pre>
+            </div>
+        </div>
+        <footer class="w3-container w3-padding-32 w3-theme w3-center">
+            <h2>CC3 - 2016</h2>
+            <a class="w3-btn-floating w3-teal" href="https://slack.com/" title="SLACK"><i class="fa fa-slack"></i></a>
+            <h4>Universidad Galileo</h4>
+            <div style="position:relative;bottom:103px;z-index:1;" class="w3-tooltip w3-right">
+                <a class="w3-btn w3-theme" href="#header"><span class="w3-xlarge">
+                <i class="fa fa-chevron-circle-up"></i></span></a>
+            </div>
+        </footer>
+    </body>
+</html>
