@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../stylesheets/w3.css">
+        <link rel="stylesheet" href="../stylesheets/w3-theme-black.css">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="icon" href="../images/favicon.png" type="image/x-icon">
+        <title>CC3 - PROYECTO 2-2</title>
+        <style>
+            header {
+                background-image: url("../images/header.jpg");
+                color: white;
+                width:100%;
+                min-height:400px;
+                max-height:700px;
+            }
+            .w3-topnav a:first-child:hover{color: #009688;border-bottom: 3px solid transparent;}
+        </style>
+    </head>
+    <body class="w3-light-grey">
+        <nav class="w3-topnav w3-center w3-theme w3-card-4 w3-top">
+              <a href="../index.html" title="HOME"><i class="fa fa-home w3-large"></i></a>
+              <a href="#resume">Resumen</a>
+              <a href="#prepar1">Preparando Su Código</a>
+              <a href="#cali">Calificacion</a>
+              <a href="#notas">Notas</a>
+        </nav>
+        <header id="header" class="w3-container w3-card-4 w3-padding-32">
+            <div class="w3-center w3-padding-32">
+                <h1 class="w3-jumbo">CC3 Estructura de Máquinas</h1>
+                <h1 class="w3-jumbo w3-animate-bottom">Proyecto 2</h1>
+                <h4 class="w3-xxlarge">MapReduce - Parte 2</h4>
+            </div>
+        </header>
+        <div class="w3-container w3-margin-16">
+            <h1 id="clari" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Clarificaciones y Recordatorios</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <ul class="w3-ul">
+                    <li class="w3-light-grey">Empiecen lo antes posible.</li>
+                    <li>Lean todo este documento antes de empezar a trabajar en el proyecto. Esto les ayuda a tener una mejor visión de lo que tienen que hacer.</li>
+                    <li class="w3-light-grey">Este proyecto se va a trabajar en el Amazon Elastic Cloud (EC2).</li>
+                    <li>Se requiere que trabajen en parejas en este proyecto. La misma con la que trabajaron antes</li>
+                    <li class="w3-light-grey">La versión en ingles de este documento la pueden encontrar <a href="https://inst.eecs.berkeley.edu/~cs61c/fa14/projs/02/index2.html">aquí</a>.</li>
+                    </ul>
+                </p>
+            </div>
+            <h1 id="resume" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Resumen</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    En esta parte del proyecto, ustedes van a usar el poder del EC2, para resolver el Sliding Puzzle. Vamos a estar usando 6 o 12 computadoras a la vez, cada una con las siguientes especificaciones:
+                </p>
+<pre class="w3-code notranslate">
+    High-CPU Extra Large Instance:
+
+    15 GiB de memoria
+    31 EC2 Compute Units (8 cores virtuales, Procesadores High frequency Intel Xeon E5-2666 v3 (Haswell) optimizados para EC2)
+    Plataforma de 64-bit
+    Performance de I/O: Alta
+    Nombre: c4.2xlarge
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Entonces, si usan 12 instancias (computadoras) van a trabajar con las siguientes <q>restricciones</q> :
+                </p>
+<pre class="w3-code notranslate">
+    12 High-CPU Extra Large Instance:
+
+    180 GiB de memoria
+    372 Procesadores High frequency Intel Xeon E5-2666 v3 (Haswell) optimizados para EC2
+</pre>
+            </div>
+        </div>
+        <div class="w3-container w3-margin-16">
+            <h1 id="prepar1" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Preparando su Código</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Antes de comenzar en la parte 2, hay algunas modificaciones en su código que van a tener que realizar antes de implementar cualquier cosa en el EC2. Vamos a resolver cosas mas grandes ahora y los RDD's que utilizaron en la parte 1 en general van a ser mas grandes. Hay algunas optimizaciones que tienen que tomar en cuenta en la parte 2. El código base de la parte 1 tiene también unas modificaciones que vamos a explicar mas adelante, así que descárguenlo:
+                </p>
+                <div class="w3-center">
+                    <a href="#"><span class="w3-btn w3-large w3-round w3-red">proyecto2_parte2.zip</span></a>
+                </div>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <strong>En la carpeta del código base, ustedes van a encontrar una nueva copia de SlidingBfsSpark.py. Copien su código de la parte 1 a este archivo. Van a notar que hay 2 cambios que hicimos: una variable global PARTITION_COUNT y un parámetro adicional en solve_puzzle llamado slaves. Ambos son descritos con mayor detalle abajo.</strong>
+                </p>
+                <h4 class="w3-margin-16"><strong>Partitioning</strong></h4>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Si fueron capaces de alcanzar los tiempos en la parte 1 sin utilizar particiones, les recomendamos que lo implementen ahora. Esto es porque con tableros mas grandes van haber mayor numero de datos requeridos que van hacer intercambiados (shuffling) y las particiones minimizan esto. Para mas información, miren las Notas de Spark que están al final del documento de la parte 1. La función hash() de python es un buen punto de partida para pensar en una función de partición.<br><br>
+                    Una vez que hayan implementado las particiones (o si ya lo habían hecho en la parte 1), ustedes van a encontrar la variable PARTITION_COUNT útil. Es lo que a nosotros nos pareció ser el numero exacto para particionar, y está basado en el numero de computadoras que están en paralelización.
+                </p>
+                <h4 class="w3-margin-16"><strong>Hashing</strong></h4>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    En la segunda parte del proyecto, para incrementar la performance de su código un poco más, ustedes van a explorar una manera de encoger el tamaño de su RDD así como también el tamaño de datos que se va intercambiar antes de la fase de reducción. Para hacer esto, hemos creado una función hash de 2 vías que mapea un tablero a un entero y de un entero a tablero.<br><br>
+                    En la versión actualizada de Sliding.py, ustedes van a ver dos nuevas funciones: board_to_hash y hash_to_board. Como los nombres sugieren, estas funciones van aplicar un hash a un tablero para tener un numero (único) y a partir de este reconstruir el tablero original. Ustedes no se tienen que preocupar por las implementaciones de estas 2 funciones, la parte importante es que ustedes entiendan que cada tablero tiene un numero único de hash y que ese numero se puede utilizar para construir el tablero original. Para tener una mejor visualización de como funciona el mapping, miren los comentarios de board_to_hash y hash_to_board.<br><br>
+                    Ahora la parte más importante: ¿como pueden hacer uso de estas funciones?. Como se menciono antes, la ventaja de este hash es que ustedes ahora pueden encoger el tablero original a solo un entero y fácilmente volverlo a convertir en tablero. Como su código en la parte 1 genera pares Key-Value que hacen uso del tablero, pueden aplicar esta función de hash a sus tableros antes de escribirlos a un par Key-Value en la fase de map y reduce. Solo asegúrense de convertir su hash a un tablero nuevamente antes de utilizarlo con alguna funcion de ayuda.
+                    <br>
+                    <blockquote class="w3-blockquote">
+                        NOTA: ustedes no tienen que convertir los hash que hicieron a tableros nuevamente, antes de escribirlos en un archivo de texto. Esto va incrementar el tamaño de sus archivos de salida.
+                    </blockquote>
+                </p>
+                <h4 class="w3-margin-16"><strong>Partitioning Output</strong></h4>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+
+                </p>
+            </div>
+        </div>
+        <footer class="w3-container w3-padding-32 w3-theme w3-center">
+            <h2>CC3 - 2016</h2>
+            <a class="w3-btn-floating w3-teal" href="https://slack.com/" title="SLACK"><i class="fa fa-slack"></i></a>
+            <h4>Universidad Galileo</h4>
+            <div style="position:relative;bottom:103px;z-index:1;" class="w3-tooltip w3-right">
+                <a class="w3-btn w3-theme" href="#header"><span class="w3-xlarge">
+                <i class="fa fa-chevron-circle-up"></i></span></a>
+            </div>
+        </footer>
+    </body>
+</html>
+
+<title>My Web</title>

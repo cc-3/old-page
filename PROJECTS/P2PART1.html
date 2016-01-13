@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../stylesheets/w3.css">
+        <link rel="stylesheet" href="../stylesheets/w3-theme-black.css">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="icon" href="../images/favicon.png" type="image/x-icon">
+        <title>CC3 - PROYECTO 2-1</title>
+        <style>
+            header {
+                background-image: url("../images/header.jpg");
+                color: white;
+                width:100%;
+                min-height:400px;
+                max-height:700px;
+            }
+            .w3-topnav a:first-child:hover{color: #009688;border-bottom: 3px solid transparent;}
+        </style>
+    </head>
+    <body class="w3-light-grey">
+        <nav class="w3-topnav w3-center w3-theme w3-card-4 w3-top">
+              <a href="../index.html" title="HOME"><i class="fa fa-home w3-large"></i></a>
+              <a href="#objetivo">Objetivo</a>
+              <a href="#intro">Introduccion</a>
+              <a href="#espec">Especificaciones</a>
+              <a href="#cali">Calificacion</a>
+              <a href="#notas">Notas</a>
+        </nav>
+        <header id="header" class="w3-container w3-card-4 w3-padding-32">
+            <div class="w3-center w3-padding-32">
+                <h1 class="w3-jumbo">CC3 Estructura de Máquinas</h1>
+                <h1 class="w3-jumbo w3-animate-bottom">Proyecto 2</h1>
+                <h4 class="w3-xxlarge">MapReduce - Parte 1</h4>
+            </div>
+        </header>
+        <div class="w3-container w3-margin-16">
+            <h1 id="clari" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Clarificaciones y Recordatorios</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <ul class="w3-ul">
+                    <li class="w3-light-grey">Empiecen lo antes posible.</li>
+                    <li>Lean todo este documento antes de empezar a trabajar en el proyecto, en especial las especificaciones y las notas de hasta abajo.</li>
+                    <li class="w3-light-grey">Este proyecto se debería de hacerse en las computadoras del Lab, ya que allí esta instalado todo lo necesario para que trabajen.</li>
+                    <li>Se requiere que trabajen en parejas en este proyecto.</li>
+                    <li class="w3-light-grey">Se requiere que tengan conocimientos básicos de Python.</li>
+                    <li>La versión en ingles de este documento la pueden encontrar <a href="https://inst.eecs.berkeley.edu/~cs61c/fa14/projs/02/">aquí</a>.</li>
+                    </ul>
+                </p>
+            </div>
+            <h1 id="objetivo" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Objetivo</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    El objetivo de este proyecto es que ustedes se familiaricen con el modelo de programación de MapReduce usando el framework de Apache Spark (que ya usaron en un Lab). En la primer parte del proyecto ustedes van a tener la oportunidad de convertir breadth-first-search (un algoritmo que vieron en CC2 y que esperamos lo conozcan) en un formato compatible con el framework de MapReduce (i.e. una función map y una función reduce). En la segunda parte se va a requerir que corran su implementación en un gran cluster de servidores de AWS EC2, para lograr abordar un mayor problema.
+                    <br><br>
+                    Esperamos que haciendo este proyecto ustedes ganen una habilidad de programación <strong>BASTANTE</strong> útil, además de que puedan poner en practica lo aprendido en clase en el tema de data level parallelism (DLP).
+                </p>
+            </div>
+            <h1 id="intro" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Introducción</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Para este proyecto ustedes van a resolver un PUZZLE, y en especifico la forma general de 15-puzzle que es n-puzzle. Si ustedes no conocen este juego, <a href="http://mypuzzle.org/sliding">aquí</a> hay un link en donde pueden familiarizarse con el.
+                </p>
+                <div class="w3-image w3-center">
+                    <img src="../images/puzzle.png" alt="15-puzzle"/>
+                    <p>(e.g. 15-puzzle)</p>
+                    <p>Image credit: UC Berkeley</p>
+                </div><br>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Este puzzle tiene la característica de que uno puede llegar de cualquier posición (que claro esta es una configuración única del puzzle) hacia otra (aquí no hay callejones sin salida). Con esta característica es fácil construir un algoritmo que pueda generar todas las posiciones del juego y resolverlo.
+                    <br><br>
+                    <strong>Strongly Solving Puzzle</strong><br><br>
+                    En este proyecto, ustedes van a escribir un breadth-first-solver que va empezar en la <strong>SOLUCIÓN</strong> (única) del juego y a partir de esta recorrer el grafo completo, tomando un registro de cada nueva posición del puzzle que se alcance, así como también  de cuantos movimientos le tomo para llegar a esta   posición (a esto le vamos a llamar level). El breadth-first-search original termina de buscar cuando encuentra una posición particular, ustedes sin embargo van a hacer un exhaustive search (i.e. recorrer TODO el grafo) y a esto se le llama strongly solving. Para hacer esto, vamos a mantener dos mappings (que en python van a representar diccionarios/hash tables).
+                </p>
+                <ul class="w3-text w3-justify w3-large w3-margin-16">
+                    <li><b>pos_to_level</b>: dada una posición, ¿cuál es su nivel? (cuando terminen todo, este único mapping es el que les va a servir, porque esto lo van a escribir a un archivo de texto).</li>
+                    <li><b>level_to_pos</b>: dado un nivel, ¿cuáles son todas sus posiciones? (Esto solo les va a servir en el proceso de resolver el puzzle, pero después de eso no lo van a necesitar).</li>
+                </ul>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Para el propósito de este proyecto, ustedes van a resolver la forma generalizada de 15-puzzle (n-puzzle), pero nosotros les vamos a dar el código  que necesitan para este juego en particular. Como es la forma generalizada del puzzle, esto quiere decir que dado un alto y un ancho (i.e. filas y columnas)  podemos formar un juego (e.g. 15-puzzle esta formado por 4 filas y 4 columnas). Para pequeños puzzle (pequeños valores de alto y ancho), debería ser fácil que ustedes puedan verificar si su output es correcto.  Claro que pueden tratar con parámetros mas grandes, pero si tienen tiempo y espacio en el disco duro.
+                </p>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <strong>Breadth-First-Solver</strong><br><br>
+                    Aquí hay un breadth-first-solver genérico escrito en Python. Toma como argumentos un puzzle y un max_level. El parámetro max_level es usado como un control de que tan lejos el algoritmo debería de llegar en cuanto a nivel (si se deja el valor -1, el algoritmo debería de visitar cada posición en el  grafo del puzzle). El parámetro puzzle es un objeto que tiene 2 importantes métodos.
+                </p>
+                <ul class="w3-text w3-justify w3-large w3-margin-16">
+                    <li><b>children()</b>- que retorna una lista de todas las posiciones cercanas.</li>
+                    <li><b>solution()</b>- que retorna la única solución del puzzle.</li>
+                </ul><br>
+<pre class="w3-code w3-light-grey notranslate">
+    level_to_pos = {}
+    pos_to_level = {}
+
+    <span class="w3-text-red">def</span> <span class="w3-text-teal">solve</span>(<span class="w3-text-deep-orange">puzzle</span>, <span class="w3-text-deep-orange">max_level</span>=<span class="w3-text-deep-orange">-1</span>):
+        <span class="w3-text-green">"""BF visita el grafo del puzzle completamente, construyendo las estructuras level_to_pos y pos_to_level"""</span>
+        solution = puzzle.solution()
+        level = <span class="w3-text-deep-orange">0</span>
+        level_to_pos[level] = [solution] <span class="w3-text-grey">### el level 0 consiste en la solucion unica</span>
+        pos_to_level[solution] = level
+
+        <span class="w3-text-grey">### Mientras hayan posiciones en el nivel actual</span>
+        <span class="w3-text-purple">while</span> level_to_pos[level] and (max_level==-1 or level < max_level):
+            level += <span class="w3-text-deep-orange">1</span>
+            level_to_pos[level] = []
+            <span class="w3-text-grey">### Para cada posicion en el level anterior al actual</span>
+            <span class="w3-text-purple">for</span> position <span class="w3-text-purple">in</span> level_to_pos[level-<span class="w3-text-deep-orange">1</span>]:
+                <span class="w3-text-grey">### Para cada hijo en esa posicion</span>
+                <span class="w3-text-purple">for</span> child <span class="w3-text-purple">in</span> position.children():
+                    <span class="w3-text-grey">### Si es primera vez que se ha visto al hijo</span>
+                    <span class="w3-text-purple">if</span> child <span class="w3-text-purple">not in</span> pos_to_level:
+                        <span class="w3-text-grey">### Actualizar los mappings</span>
+                        pos_to_level[child] = level
+                        level_to_pos[level].append(child)
+
+        <span class="w3-text-purple">del</span> level_to_pos[level] <span class="w3-text-grey">### El ultimo level siempre esta vacio, asi que lo borramos.</span>
+</pre>
+                <br><br>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <b>Ejemplo:</b><br><br>
+                    Imaginen que tienen un numero (que esta entre 0 y 8 , incluidos) que pueden incrementar o decrementar por 3 o 5, de tal manera que no quede por debajo de 0 ni arriba de 8. El objetivo del juego es llegar a 0. El grafo completo del juego se muestra abajo <a href="#fig1">(ver figura 1)</a>, obsérvenlo y tomen un poco de tiempo para estar seguros de que en verdad ese grafo representa cada posición del juego y cada conexión es la única entre cada posición posible. Si ustedes corrieran el breadth-first-solver que les presentamos en este puzzle, esto pasaría <a href="#tabla1">(ver tabla 1)</a>.
+                </p>
+                <div class="w3-image w3-center">
+                    <img id="fig1" src="../images/ejemplo1.png" alt="figura_1"/>
+                    <p>Figura 1</p>
+                    <p>Image credit: UC Berkeley</p>
+                </div><br>
+                <h1 id="tabla1" class="w3-light-grey w3-center">Tabla 1</h1>
+                <table class="w3-table w3-striped w3-bordered">
+                    <thead>
+                        <tr class="w3-red">
+                          <th></th>
+                          <th class="w3-center">level = 0, antes del while</th>
+                          <th class="w3-center">Después del level 1</th>
+                          <th class="w3-center">Después del level 2</th>
+                          <th class="w3-center">Después del level 3</th>
+                          <th class="w3-center">Después del level 4</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td class="w3-center">level_to_pos[0]</td>
+                        <td class="w3-center">[0]</td>
+                        <td class="w3-center">[0]</td>
+                        <td class="w3-center">[0]</td>
+                        <td class="w3-center">[0]</td>
+                        <td class="w3-center">[0]</td>
+                    </tr>
+                    <tr>
+                        <td class="w3-center">level_to_pos[1]</td>
+                        <td class="w3-center"></td>
+                        <td class="w3-center">[5, 3]</td>
+                        <td class="w3-center">[5, 3]</td>
+                        <td class="w3-center">[5, 3]</td>
+                        <td class="w3-center">[5, 3]</td>
+                    </tr>
+                    <tr>
+                        <td class="w3-center">level_to_pos[2]</td>
+                        <td class="w3-center"></td>
+                        <td class="w3-center"></td>
+                        <td class="w3-center">[2, 8, 6]</td>
+                        <td class="w3-center">[2, 8, 6]</td>
+                        <td class="w3-center">[2, 8, 6]</td>
+                    </tr>
+                    <tr>
+                        <td class="w3-center">level_to_pos[3]</td>
+                        <td class="w3-center"></td>
+                        <td class="w3-center"></td>
+                        <td class="w3-center"></td>
+                        <td class="w3-center">[7, 1]</td>
+                        <td class="w3-center">[7, 1]</td>
+                    </tr>
+                    <tr>
+                        <td class="w3-center">level_to_pos[4]</td>
+                        <td class="w3-center"></td>
+                        <td class="w3-center"></td>
+                        <td class="w3-center"></td>
+                        <td class="w3-center"></td>
+                        <td class="w3-center">[4]</td>
+                    </tr>
+                    <tr>
+                        <td class="w3-center w3-black"></td>
+                        <td class="w3-center w3-black"></td>
+                        <td class="w3-center w3-black"></td>
+                        <td class="w3-center w3-black"></td>
+                        <td class="w3-center w3-black"></td>
+                        <td class="w3-center w3-black"></td>
+                    </tr>
+                    <tr>
+                        <td class="w3-center">pos_to_level[0]</td>
+                        <td class="w3-center">0</td>
+                        <td class="w3-center">0</td>
+                        <td class="w3-center">0</td>
+                        <td class="w3-center">0</td>
+                        <td class="w3-center">0</td>
+                    </tr>
+                    <tr>
+                        <td class="w3-center">pos_to_level[1]</td>
+                        <td class="w3-center"></td>
+                        <td class="w3-center"></td>
+                        <td class="w3-center"></td>
+                        <td class="w3-center">3</td>
+                        <td class="w3-center">3</td>
+                    </tr>
+                    <tr>
+                        <td class="w3-center">pos_to_level[2]</td>
+                        <td class="w3-center"></td>
+                        <td class="w3-center"></td>
+                        <td class="w3-center">2</td>
+                        <td class="w3-center">2</td>
+                        <td class="w3-center">2</td>
+                    </tr>
+                    <tr>
+                        <td class="w3-center">pos_to_level[3]</td>
+                        <td class="w3-center"></td>
+                        <td class="w3-center">1</td>
+                        <td class="w3-center">1</td>
+                        <td class="w3-center">1</td>
+                        <td class="w3-center">1</td>
+                    </tr>
+                    <tr>
+                        <td class="w3-center">pos_to_level[4]</td>
+                        <td class="w3-center"></td>
+                        <td class="w3-center"></td>
+                        <td class="w3-center"></td>
+                        <td class="w3-center"></td>
+                        <td class="w3-center">4</td>
+                    </tr>
+                    <tr>
+                        <td class="w3-center">pos_to_level[5]</td>
+                        <td class="w3-center"></td>
+                        <td class="w3-center">1</td>
+                        <td class="w3-center">1</td>
+                        <td class="w3-center">1</td>
+                        <td class="w3-center">1</td>
+                    </tr>
+                    <tr>
+                        <td class="w3-center">pos_to_level[6]</td>
+                        <td class="w3-center"></td>
+                        <td class="w3-center"></td>
+                        <td class="w3-center">2</td>
+                        <td class="w3-center">2</td>
+                        <td class="w3-center">2</td>
+                    </tr>
+                    <tr>
+                        <td class="w3-center">pos_to_level[7]</td>
+                        <td class="w3-center"></td>
+                        <td class="w3-center"></td>
+                        <td class="w3-center"></td>
+                        <td class="w3-center">3</td>
+                        <td class="w3-center">3</td>
+                    </tr>
+                    <tr>
+                        <td class="w3-center">pos_to_level[8]</td>
+                        <td class="w3-center"></td>
+                        <td class="w3-center"></td>
+                        <td class="w3-center">2</td>
+                        <td class="w3-center">2</td>
+                        <td class="w3-center">2</td>
+                    </tr>
+                </table><br>
+                <div class="w3-image w3-center">
+                    <h5>level = 0, antes del while</h5>
+                    <img src="../images/ejemplo2.png" alt="fig2" />
+                </div><br><br>
+                <div class="w3-row w3-center">
+                    <div class="w3-quarter w3-image"><h5 class="w3-center">Despues de level = 1</h5><img src="../images/ejemplo3.png" alt="fig3"/></div>
+                    <div class="w3-quarter w3-image"><h5 class="w3-center">Despues de level = 2</h5><img src="../images/ejemplo4.png" alt="fig4"/></div>
+                    <div class="w3-quarter w3-image"><h5 class="w3-center">Despues de level = 3</h5><img src="../images/ejemplo5.png" alt="fig5"/></div>
+                    <div class="w3-quarter w3-image"><h5 class="w3-center">Despues de level = 4</h5><img src="../images/ejemplo6.png" alt="fig6"/></div>
+                </div>
+                <p class="w3-center">Image credit: UC Berkeley</p>
+            </div>
+            <h1 id="espec" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Especificaciones</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <strong>Empezando</strong><br><br>
+                    Como mencionamos arriba, ustedes van a resolver la forma generalizada de 15-puzzle, que le vamos a llamar sliding-puzzle (que tiene como parámetros de entrada un ancho y un alto). Este puzzle consiste en piezas enumeradas ordenadas aleatoriamente, faltando una de ellas. El objetivo del juego es poner las piezas en orden como se muestra en la figura de abajo <a href="#fig2">(ver figura 2)</a>, para el caso de ancho 3 y altura 3 (3x3).
+                </p>
+                <div class="w3-image w3-center">
+                    <img id="fig2" src="../images/solving.png" alt="solving"/>
+                    <p>Figura 2</p>
+                    <p>Image credit: UC Berkeley</p>
+                </div><br><br>
+                <h2 class="w3-center w3-light-grey">Código para empezar</h2><br><br>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Para empezar con el proyecto, deberán de bajar los archivos necesarios pulsando el siguiente boton <a href="#"><span class="w3-btn w3-small w3-round w3-red">proyecto2_parte1.zip</span></a>
+                    <br><br>
+                    Descompriman el zip que bajaron, y dentro de la carpeta descomprimida encontraran:
+                    <br>
+                    <ul class="w3-text w3-justify w3-large w3-margin-16">
+                        <li><b>Makefile: </b>archivo que define configuraciones para correr su programa (tamaño del sliding puzzle y el nivel de paralelismo a utilizar). Miren este archivo para ver como se corren los programas en Spark.</li>
+                        <li><b>Sliding.py: </b>implementación del juego sliding-puzzle.</li>
+                        <li><b>SlidingBfsReference.py: </b>el algoritmo bfs genérico antes mencionado. Pueden usar este codigo para verificar si su respuesta producida por MapReduce es correcta.</li>
+                        <li><b>SlidingBfsSpark.py: </b>El archivo que tienen que modificar. (Aquí van a poner su solucion de MapReduce)</li>
+                        <li><b>ref_out: </b>una carpeta que contiene una salida de referencia de lo que se espera en un juego de 2x2.</li>
+                    </ul>
+                </p>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Son libres de definir funciones extra si lo necesitan, pero solo lo pueden hacer únicamente en el archivo SlidingBfsSpark.py. <strong>Si hacen modificaciones en otros archivos, tengan en cuenta que se van a sobrescribir a la hora de la calificación.</strong>
+                </p><br>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <strong>Su trabajo</strong><br><br>
+                    <b>Su tarea es implementar un MapReduce iterativo que sea capaz de resolver el Sliding puzzle general.</b><br><br>
+                    Como mencionamos arriba, el MapReduce que van a implementar va a tomar como entrada un ancho y un alto describiendo el Sliding puzzle. Usando la solución de ese puzzle, repetidamente va ir expandiendo el árbol del BFS, y generando un mapping entre cada posición y nivel en donde esta en el árbol del BFS. Nosotros representamos el Sliding puzzle como una tupla de strings de Python. Cada pieza se representa con un carácter del alfabeto y la pieza que hace falta con un guión. Después de correr su implementación de MapReduce, esperamos que su programa produzca un archivo de texto de la siguiente forma. (por ejemplo, para el caso de un sliding-puzzle de 2x2).
+                </p><br>
+                <p class="w3-text w3-center w3-large w3-margin-16">
+                    0 ('A', 'B', 'C', '-')<br>
+                    1 ('A', '-', 'C', 'B')<br>
+                    1 ('A', 'B', '-', 'C')<br>
+                    2 ('-', 'A', 'C', 'B')<br>
+                    2 ('-', 'B', 'A', 'C')<br>
+                    3 ('B', '-', 'A', 'C')<br>
+                    3 ('C', 'A', '-', 'B')<br>
+                    4 ('B', 'C', 'A', '-')<br>
+                    4 ('C', 'A', 'B', '-')<br>
+                    5 ('B', 'C', '-', 'A')<br>
+                    5 ('C', '-', 'B', 'A')<br>
+                    6 ('-', 'C', 'B', 'A')<br>
+                </p><br>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <strong>Recomendaciones para empezar:</strong><br><br>
+                    <ul class="w3-text w3-justify w3-large w3-margin-16">
+                        <li>Vean la implementación que esta en SlidingBfsReference.py, traten de entenderla y como es que funciona. Hagan una lluvia de ideas con su pareja de como pueden traducir esto a un modelo compatible con el MapReduce framework.</li>
+                        <ul class="w3-text w3-justify w3-large">
+                            <li>Su código no se tiene que ver en nada igual a la implementación que esta en el SlidingBfsReference.py</li>
+                            <li>En vez de los diccionarios pos_to_level y level_to_pos, van a tener que mantener la información en un Spark RDD que contenga pares (key, value).</li>
+                        </ul>
+                        <li>Repasen el lab 7 para recordarse de como funciona MapReduce y como se utiliza en Python-Spark.</li>
+                        <li>Lean la sección de “Notas de Spark” y revisen la documentación de Spark para estar familiarizados con las herramientas que pueden utilizar.</li>
+                        <li>Implementen una buena solución que sea razonablemente eficiente para por lo menos los casos de 2x2 y 3x3.</li>
+                        <ul class="w3-text w3-justify w3-large">
+                            <li>Recuerden que pueden utilizar varias funciones (No hagan todo en una).</li>
+                            <li>Antes de empezar a codear, verifiquen bien que es lo que le van a mandar a las funciones que definen (i.e. que key y que value quieren utilizar). </li>
+                            <li>No se olviden que la función de Reduce, generalmente agrupa el dataset por keys y Spark provee funciones para realizar esta tarea fácilmente en un RDD.</li>
+                        </ul>
+                        <li>Prueben su implementación en el caso de 5x2, si alcanzan buenos tiempos en los casos 2x2 y 3x3 pero no en el de 5x2 puede que sea que necesiten optimizar algo. Revisen las “Notas de Spark”.</li>
+                    </ul><br>
+                </p>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <strong>Para probar su algoritmo</strong><br><br>
+                    <ul class="w3-ul">
+                        <li><b>make run-small: </b>para el caso de 2x2</li>
+                        <li class="w3-light-grey"><b>make run-medium: </b>para el caso de 3x3</li>
+                        <li><b>make run-large: </b>para el caso de 5x2</li>
+                    </ul>
+                </p>
+            </div>
+            <h1 id="cali" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Calificación</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Verifiquen que su código no tire ninguna excepción y error a la hora de correrlo, ya que a la hora de calificar se pondrá 0 en esa parte. Prueben su implementación antes de entregarla.
+                    <br><ul class="w3-large w3-striped">
+                        <li>Primero su código sera evaluado en base a la solución correcta. Esto va ser hecho comparando los resultados que nosotros obtuvimos, con los que ustedes obtuvieron.
+                        </li>
+                        <li>
+                            Segundo vamos a verificar que su código SI este corriendo en paralelo, viendo si están utilizando los Spark RDD y sus transformaciones paralelas, map y reduce.
+                        </li>
+                        <p class="w3-light-grey">Si su código no corre en paralelo, el objetivo del proyecto pierde sentido y NO tendrán nota por eso. Además no podrán correr su programa eficientemente en el Amazon EC2.</p>
+                        <li>
+                            Tercero, vamos a comparar el tiempo de corrida de su código con el que nosotros obtuvimos
+                        </li>
+                        <p class="w3-light-grey">Vamos a correrlo local con un MASTER local[8] (8 cores)</p>
+                        <p class="w3-light-grey">Algunos benchmarks aproximados: (2x2 <= 30 segundos), (3x3 <= 1 minuto) y (5x2 <= 3 minutos)</p>
+                    </ul>
+                </p>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <strong>Fecha de entrega: </strong>
+                </p>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Si tienen alguna pregunta, no duden en enviar un correo:
+                    <br><br>
+                    <strong>Catedrático: </strong> Ali A. Lemus Monterroso - alilemus@galileo.edu<br>
+                    <strong>Encargado de Proyecto: </strong> Andrés Castellanos - andres.cv@galileo.edu
+                </p>
+            </div>
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Notas</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <h1 class="w3-light-grey w3-center">NOTAS DE PYTHON</h1><br>
+                    <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Probablemente nadie o muy pocos hayan programado en el lenguaje de programación de Python y no tengan mucha práctica con solo haber hecho un Lab, se recomienda que sigan este tutorial que no les va a quitar mucho tiempo y que les va a enseñar lo necesario para que hagan este proyecto.
+                     <a href="https://www.codecademy.com/learn/python"><span class="w3-btn w3-red w3-round">TUTORIAL</span></a>
+                    </p>
+                    <h1 class="w3-light-grey w3-center">NOTAS DE SPARK</h1><br><br>
+                    <p class="w3-text w3-justify w3-large w3-margin-16">
+                        Recomendamos que se lean y entiendan esta pequeña <a href="https://spark.apache.org/docs/latest/programming-guide.html">Guía de Programación en Spark</a>, especialmente la sección de key-value pairs y sus transformaciones.   Finalmente, la otra fuente de información que les puede servir es la detallada Spark-Python API que esta disponible <a href="https://spark.apache.org/docs/latest/api/python/index.html">aquí</a>.
+                    </p><br>
+                    <p class="w3-text w3-justify w3-large w3-margin-16">
+                        <strong>Notas avanzadas de Spark</strong><br><br>
+                        Despues de tener una solución básica que si funcione, pueden probar las siguientes técnicas de optimización para ver si alcanzan una mayor performance.
+                        <br><br>
+                        <strong>Lazy Evaluation</strong><br><br>
+                        Las transformaciones en Spark son “lazy”, esto es que el resultado solo se realiza cuando es requerida una acción, así como count, collect o saveAsTextFile.  Pueden probar que en vez de aplicar una acción cada iteración, una cada N iteraciones, Spark puede optimizar esas transformaciones mejor si están en conjunto a si están por separado.
+                        <br><br>
+                        <strong>Partitioning</strong><br><br>
+                        Un RDD es una colección de elementos particionados a traves de nodos en un cluster. Por defecto, Spark parte el RDD en particiones secuenciales y las lleva a cada nodo individual. Cuando es tiempo de reducir, los KV pairs pueden ser llevados a través de los nodos en la fase de shuffling. La fase de shuffling requiere mover los datos de un lado a otro (y a veces por toda la red), y esta operación es bastante costosa. <br><br>
+                        Tal vez encuentren que pueden alcanzar una mejor performance, haciendo particiones de su dataset de una manera mas inteligente. Probando particionar  los datos cada K iteraciones (Ustedes deciden que K y como lo van a particionar).
+                    </p>
+                </p>
+            </div>
+        </div>
+        <footer class="w3-container w3-padding-32 w3-theme w3-center">
+            <h2>CC3 - 2016</h2>
+            <a class="w3-btn-floating w3-teal" href="https://slack.com/" title="SLACK"><i class="fa fa-slack"></i></a>
+            <h4>Universidad Galileo</h4>
+            <div style="position:relative;bottom:103px;z-index:1;" class="w3-tooltip w3-right">
+                <a class="w3-btn w3-theme" href="#header"><span class="w3-xlarge">
+                <i class="fa fa-chevron-circle-up"></i></span></a>
+            </div>
+        </footer>
+    </body>
+</html>
