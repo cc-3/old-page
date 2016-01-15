@@ -105,17 +105,21 @@
                     Para este ejercicio, ustedes van a completar bit_ops.c implementado las siguientes 3 funciones de manipulación de bits. Ustedes van a querer utilizar operaciones tales como and (&), or(|), xor(^), not(~), left shiffts (<<), y right shiffts (>>). Procuren no usar ningún ciclo o alguna estructura de control de flujo.
                 </p>
 <pre class="w3-code w3-light-grey notranslate">
-    <span class="w3-text-grey">// Retorna el n-esimo bit de x</span>
-    <span class="w3-text-grey">// Asuman que 0 <= n <= 31</span>
-    <span class="w3-text-teal">unsigned</span> get_bit(<span class="w3-text-teal">unsigned</span> x, <span class="w3-text-teal">unsigned</span> n);
+    <span style='color:#696969; '>// Retorna el n-esimo bit de x.</span>
+    <span style='color:#696969; '>// Asuman que 0 &lt;= n &lt;= 31</span>
+    <span style='color:#800000; font-weight:bold; '>unsigned</span> get_bit<span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>unsigned</span> x<span style='color:#808030; '>,</span>
+                     <span style='color:#800000; font-weight:bold; '>unsigned</span> n<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
 
-    <span class="w3-text-grey">// Cambia el valor del n-esimo bit del valor de x por v</span>
-    <span class="w3-text-grey">// Asuman que 0 <= n <= 31 y v es 0 o 1</span>
-    <span class="w3-text-red">void</span> set_bit(<span class="w3-text-teal">unsigned * x</span>, <span class="w3-text-teal">unsigned</span> n, <span class="w3-text-teal">unsigned</span> v);
+    <span style='color:#696969; '>// Cambia el n-esimo bit del valor de x a v</span>
+    <span style='color:#696969; '>// Asuman que 0 &lt;= n &lt;= 31, y v es 0 o 1</span>
+    <span style='color:#800000; font-weight:bold; '>void</span> set_bit<span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>unsigned</span> <span style='color:#808030; '>*</span> x<span style='color:#808030; '>,</span>
+                 <span style='color:#800000; font-weight:bold; '>unsigned</span> n<span style='color:#808030; '>,</span>
+                 <span style='color:#800000; font-weight:bold; '>unsigned</span> v<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
 
-    <span class="w3-text-grey">// Invierte el n-esimo bit del valor de x</span>
-    <span class="w3-text-grey">// Asuman que 0 <= n <= 31</span>
-    <span class="w3-text-red">void</span> flip_bit(<span class="w3-text-teal">unsigned * x</span>, <span class="w3-text-teal">unsigned</span> v);
+    <span style='color:#696969; '>// Invierte el n-esimo bit del valor de x.</span>
+    <span style='color:#696969; '>// Asuman que 0 &lt;= n &lt;= 31</span>
+    <span style='color:#800000; font-weight:bold; '>void</span> flip_bit<span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>unsigned</span> <span style='color:#808030; '>*</span> x<span style='color:#808030; '>,</span>
+                  <span style='color:#800000; font-weight:bold; '>unsigned</span> n<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
 </pre>
                     <p class="w3-text w3-justify w3-large w3-margin-16">
                         Una vez que hayan completado estas funciones, pueden compilar y correr su código usando lo siguiente:

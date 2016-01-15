@@ -37,8 +37,8 @@
             <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
                 <p class="w3-text w3-justify w3-large w3-margin-16">
                     <ul>
-                        <li class="w3-large">.</li>
-                        <li class="w3-large">.</li>
+                        <li class="w3-large">Utilizar instrucciones SIMD.</li>
+                        <li class="w3-large">Practicar loop unrolling.</li>
                     </ul>
                 </p>
             </div>
@@ -47,6 +47,169 @@
                 <p class="w3-text w3-justify w3-large w3-margin-16">
                     Descarguen los archivos necesarios para este laboratorio en el siguiente <a href="#" target="_blank"><span class="w3-btn w3-red w3-round w3-medium">link</link></a>
                 </p>
+            </div>
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Ejercicio 1</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Como hay una gran gama de instrucciones intrínsecas SIMD, queremos que ustedes aprendan como encontrar las que ustedes necesitar para realizar sus cosas.
+                    <br><br>
+                    Esta es una manera de encontrar la información necesaria:
+                    <ol class="w3-large">
+                        <li>Vayan a la pagina de <a href="http://software.intel.com/en-us/avx/">Intel</a>, busquen “Intel Intrinsics Guide”</li>
+                        <li>En la parte izquierda van a ver la cantidad de tecnologías diferentes</li>
+                        <li>Pueden buscar filtrando por tecnología y en el buscador de arriba de la página</li>
+                    </ol>
+                </p>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Hagan su mejor esfuerzo para interpretar la nueva sintaxis y la terminología. Encuentren las intrínsecas de 128-bits para las siguientes operaciones SIMD:
+                    <ol class="w3-large">
+                        <li>Cuatro divisiones en punto flotante en precisión simple. (i.e. float NO double)</li>
+                        <li>16 operaciones max sobre enteros de 8-bits con signo (i.e. char)</li>
+                        <li>Shift aritmético a la derecha de 8 enteros de 16-bits con signo (i.e. short)</li>
+                    </ol>
+                </p>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <strong>Escriban sus respuestas en un archivo de texto</strong>
+                </p>
+            </div>
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Ejercicio 2: Leyendo código SIMD</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    En este ejercicio van a considerar loa vectorización de una multiplicación de matrices de 2x2 en precisión double:<br><br>
+                    <img class="w3-image w3-center" src="../images/matmul.png" alt="matmul"/>
+                    <p class="w3-text w3-justify w3-large w3-margin-16 w3-large w3-text-grey">Image Credit: UC Berkeley</p>
+                </p>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Esto lleva a la siguientes operaciones aritméticas:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    C<span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>]</span> <span style='color:#808030; '>+</span><span style='color:#808030; '>=</span> A<span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>]</span><span style='color:#808030; '>*</span>B<span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>]</span> <span style='color:#808030; '>+</span> A<span style='color:#808030; '>[</span><span style='color:#008c00; '>2</span><span style='color:#808030; '>]</span><span style='color:#808030; '>*</span>B<span style='color:#808030; '>[</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>]</span><span style='color:#800080; '>;</span>
+    C<span style='color:#808030; '>[</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>]</span> <span style='color:#808030; '>+</span><span style='color:#808030; '>=</span> A<span style='color:#808030; '>[</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>]</span><span style='color:#808030; '>*</span>B<span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>]</span> <span style='color:#808030; '>+</span> A<span style='color:#808030; '>[</span><span style='color:#008c00; '>3</span><span style='color:#808030; '>]</span><span style='color:#808030; '>*</span>B<span style='color:#808030; '>[</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>]</span><span style='color:#800080; '>;</span>
+    C<span style='color:#808030; '>[</span><span style='color:#008c00; '>2</span><span style='color:#808030; '>]</span> <span style='color:#808030; '>+</span><span style='color:#808030; '>=</span> A<span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>]</span><span style='color:#808030; '>*</span>B<span style='color:#808030; '>[</span><span style='color:#008c00; '>2</span><span style='color:#808030; '>]</span> <span style='color:#808030; '>+</span> A<span style='color:#808030; '>[</span><span style='color:#008c00; '>2</span><span style='color:#808030; '>]</span><span style='color:#808030; '>*</span>B<span style='color:#808030; '>[</span><span style='color:#008c00; '>3</span><span style='color:#808030; '>]</span><span style='color:#800080; '>;</span>
+    C<span style='color:#808030; '>[</span><span style='color:#008c00; '>3</span><span style='color:#808030; '>]</span> <span style='color:#808030; '>+</span><span style='color:#808030; '>=</span> A<span style='color:#808030; '>[</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>]</span><span style='color:#808030; '>*</span>B<span style='color:#808030; '>[</span><span style='color:#008c00; '>2</span><span style='color:#808030; '>]</span> <span style='color:#808030; '>+</span> A<span style='color:#808030; '>[</span><span style='color:#008c00; '>3</span><span style='color:#808030; '>]</span><span style='color:#808030; '>*</span>B<span style='color:#808030; '>[</span><span style='color:#008c00; '>3</span><span style='color:#808030; '>]</span><span style='color:#800080; '>;</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Les dimos el código sseTest.c que implementa estas operaciones en una manera SIMD.
+                    <br>
+                    Las siguientes instrucciones intrínsecas fueron utilizadas:
+                    <table class="w3-table w3-striped w3-bordered">
+                      <tr>
+                        <td><tt>__m128d _mm_loadu_pd( double *p )</tt></td>
+                        <td>returns vector (p[0], p[1])</td>
+                      </tr>
+                      <tr>
+                        <td><tt>__m128d _mm_load1_pd( double *p )</tt></td>
+                        <td>returns vector (p[0], p[0])</td>
+                      </tr>
+                      <tr>
+                        <td><tt>__m128d _mm_add_pd( __m128d a, __m128d b )</tt></td>
+                        <td>returns vector (a<sub>0</sub>+b<sub>0</sub>, a<sub>1</sub>+b<sub>1</sub>)</td>
+                      </tr>
+                      <tr>
+                        <td><tt>__m128d _mm_mul_pd( __m128d a, __m128d b )</tt></td>
+                        <td>returns vector (a<sub>0</sub>b<sub>0</sub>, a<sub>1</sub>b<sub>1</sub>)</td>
+                      </tr>
+                      <tr>
+                        <td><tt>&nbsp; &nbsp;void _mm_storeu_pd( double *p, __m128d a )</tt></td>
+                        <td>stores p[0]=a<sub>0</sub>, p[1]=a<sub>1</sub></td>
+                      </tr>
+                    </table>
+                </p>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Compilen sseTest.c en código assembler de x86 y córranlo:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span class="w3-text-teal">$</span> make sseTest.s
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Encuentren el ciclo for en sseTest.s y identifiquen en que se convirtió cada instrucción intrínseca. ¿El ciclo en sseTest.s realmente existe?
+                    <br>
+                    <strong>Escriban sus respuestas en un archivo de texto y comenten sseTest.s para que su auxiliar pueda verificar que si entendieron</strong>
+                </p>
+            </div>
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Ejercicio 3: Escribiendo código SIMD</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    para el ejercicio 3, van a vectorizar el siguiente código para ganar aproximadamente una mejora en velocidad de 4x sobre una implementación no tan buena que se muestra aquí:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span style='color:#800000; font-weight:bold; '>static</span> <span style='color:#800000; font-weight:bold; '>int</span> sum_naive<span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>int</span> n<span style='color:#808030; '>,</span> <span style='color:#800000; font-weight:bold; '>int</span> <span style='color:#808030; '>*</span>a<span style='color:#808030; '>)</span> <span style='color:#800080; '>{</span>
+
+        <span style='color:#800000; font-weight:bold; '>int</span> sum <span style='color:#808030; '>=</span> <span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span>
+        <span style='color:#800000; font-weight:bold; '>for</span> <span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>int</span> i <span style='color:#808030; '>=</span> <span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span> i <span style='color:#808030; '>&lt;</span> n<span style='color:#800080; '>;</span> i<span style='color:#808030; '>+</span><span style='color:#808030; '>+</span><span style='color:#808030; '>)</span> <span style='color:#800080; '>{</span>
+
+            sum <span style='color:#808030; '>+</span><span style='color:#808030; '>=</span> a<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span><span style='color:#800080; '>;</span>
+
+        <span style='color:#800080; '>}</span>
+        <span style='color:#800000; font-weight:bold; '>return</span> sum<span style='color:#800080; '>;</span>
+
+    <span style='color:#800080; '>}</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Van a encontrar las siguientes instrucciones intrínsecas útiles:
+                    <table class="w3-table w3-striped w3-bordered">
+                      <tr>
+                        <td><tt>__m128i _mm_setzero_si128( )</tt></td>
+                        <td>returns 128-bit zero vector</td>
+                      </tr>
+                      <tr>
+                        <td><tt>__m128i _mm_loadu_si128( __m128i *p )</tt></td>
+                        <td>returns 128-bit vector stored at pointer p</td>
+                      </tr>
+                      <tr>
+                        <td><tt>__m128i _mm_add_epi32( __m128i a, __m128i b )</tt></td>
+                        <td>returns vector (a<sub>0</sub>+b<sub>0</sub>, a<sub>1</sub>+b<sub>1</sub>, a<sub>2</sub>+b<sub>2</sub>, a<sub>3</sub>+b<sub>3</sub>)</td>
+                      </tr>
+                      <tr>
+                        <td><tt>&nbsp; &nbsp;void _mm_storeu_si128( __m128i *p, __m128i a )</tt></td>
+                        <td>stores 128-bit vector a at pointer p</td>
+                      </tr>
+                    </table>
+                </p>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    comiencen con sum.c, Utilicen instrucciones SSE intrínsecas para implementar la función sum_vectorized().
+                    <br><br>
+                    Para compilar su código, corran el siguiente comando:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span class="w3-text-teal">$</span> make sum
+</pre>
+            </div>
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Ejercicio 4: Loop Unrolling</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Ustedes pueden obtener más mejoras en el perfomance! Cuidadosamente haciéndole unroll al código que crearon en el ejercicio anterior. Esto debería de llevarlos por un incremento de un factor de 2 en la perfomance. Como un ejemplo de loop unrolling, consideren la función sum_unrolled() que les damos:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span style='color:#800000; font-weight:bold; '>static</span> <span style='color:#800000; font-weight:bold; '>int</span> sum_unrolled<span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>int</span> n<span style='color:#808030; '>,</span> <span style='color:#800000; font-weight:bold; '>int</span> <span style='color:#808030; '>*</span>a<span style='color:#808030; '>)</span> <span style='color:#800080; '>{</span>
+        <span style='color:#800000; font-weight:bold; '>int</span> sum <span style='color:#808030; '>=</span> <span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span>
+
+        <span style='color:#696969; '>// unrolled loop</span>
+        <span style='color:#800000; font-weight:bold; '>for</span> <span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>int</span> i <span style='color:#808030; '>=</span> <span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span> i <span style='color:#808030; '>&lt;</span> n <span style='color:#808030; '>/</span> <span style='color:#008c00; '>4</span> <span style='color:#808030; '>*</span> <span style='color:#008c00; '>4</span><span style='color:#800080; '>;</span> i <span style='color:#808030; '>+</span><span style='color:#808030; '>=</span> <span style='color:#008c00; '>4</span><span style='color:#808030; '>)</span> <span style='color:#800080; '>{</span>
+            sum <span style='color:#808030; '>+</span><span style='color:#808030; '>=</span> a<span style='color:#808030; '>[</span>i<span style='color:#808030; '>+</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>]</span><span style='color:#800080; '>;</span>
+            sum <span style='color:#808030; '>+</span><span style='color:#808030; '>=</span> a<span style='color:#808030; '>[</span>i<span style='color:#808030; '>+</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>]</span><span style='color:#800080; '>;</span>
+            sum <span style='color:#808030; '>+</span><span style='color:#808030; '>=</span> a<span style='color:#808030; '>[</span>i<span style='color:#808030; '>+</span><span style='color:#008c00; '>2</span><span style='color:#808030; '>]</span><span style='color:#800080; '>;</span>
+            sum <span style='color:#808030; '>+</span><span style='color:#808030; '>=</span> a<span style='color:#808030; '>[</span>i<span style='color:#808030; '>+</span><span style='color:#008c00; '>3</span><span style='color:#808030; '>]</span><span style='color:#800080; '>;</span>
+         <span style='color:#800080; '>}</span>
+
+         <span style='color:#696969; '>// tail case</span>
+         <span style='color:#800000; font-weight:bold; '>for</span> <span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>int</span> i <span style='color:#808030; '>=</span> n <span style='color:#808030; '>/</span> <span style='color:#008c00; '>4</span> <span style='color:#808030; '>*</span> <span style='color:#008c00; '>4</span><span style='color:#800080; '>;</span> i <span style='color:#808030; '>&lt;</span> n<span style='color:#800080; '>;</span> i<span style='color:#808030; '>+</span><span style='color:#808030; '>+</span><span style='color:#808030; '>)</span> <span style='color:#800080; '>{</span>
+            sum <span style='color:#808030; '>+</span><span style='color:#808030; '>=</span> a<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span><span style='color:#800080; '>;</span>
+         <span style='color:#800080; '>}</span>
+
+         <span style='color:#800000; font-weight:bold; '>return</span> sum<span style='color:#800080; '>;</span>
+      <span style='color:#800080; '>}</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Siéntanse libres de verificar el articulo de <a href="http://en.wikipedia.org/wiki/Loop_unrolling">Wikipedia</a> que habla sobre loop unrolling para más información
+                    <br><br>
+                    En sum.c, copien su código de sum_vectorized() en sum_vectorized_unrolled() y hagan un unroll 4 veces.
+                    <br><br>
+                    Para compilar su código y correrlo, corran el siguiente comando:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span class="w3-text-teal">$</span> make sum
+</pre>
             </div>
         </div>
         <footer class="w3-container w3-padding-32 w3-theme w3-center">

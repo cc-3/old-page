@@ -37,15 +37,62 @@
             <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
                 <p class="w3-text w3-justify w3-large w3-margin-16">
                     <ul>
-                        <li class="w3-large">.</li>
-                        <li class="w3-large">.</li>
+                        <li class="w3-large">Trabajar en Logisim.</li>
                     </ul>
                 </p>
             </div>
             <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Setup</h1>
             <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
                 <p class="w3-text w3-justify w3-large w3-margin-16">
-                    Descarguen los archivos necesarios para este laboratorio en el siguiente <a href="#" target="_blank"><span class="w3-btn w3-red w3-round w3-medium">link</link></a>
+                    Bajen logisim en el siguiente link <a href="http://www.cburch.com/logisim/download.html" target="_blank"><span class="w3-btn w3-red w3-round w3-medium">link</link></a>
+                </p>
+            </div>
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Ejercicio 0: Lo Básico</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Vamos a comenzar creando un simple circuito solo para conocer como poner las compuertas y los cables.
+                    <ol class="w3-large">
+        				<li><img class="btn" src="../images/and.gif"> Comiencen haciendo click en el botón “AND gate”. Esto va a causar que la sombra del AND gate siga al cursor por todas partes. Hagan una vez click en la ventana del main schematic para poner el AND gate.</li>
+
+        				<li><img class="btn" src="../images/input.gif"> Hagan click al botón “Input Pin”. Ahora, posicionen dos “input pins” en algún lugar a la izquierda del AND gate.</li>
+
+        				<li><img class="btn" src="../images/output.gif"> Hagan click al boton “Output Pin”. Despues posicionen el pin en algún lugar a la derecha del AND gate. Su main schematic debería verse algo parecido a esto:
+        					<p><center>
+        						<img style="position:relative; top: 6px;" src="../images/schematic1.gif">
+        					</center></p>
+        				</li>
+
+        				<li><img class="btn" src="../images/selection.gif"> Hagan click al botón “Select tool”. Hagan click y arrastren para conectar los input pins de la izquierda del AND gate al AND gate. Despues la salida del AND conectenla al output pin. Deberia de verse algo como esto:
+        					<p><center>
+        						<img style="position:relative; top: 6px;" src="../images/schematic2.gif">
+        					</center></p>
+        				</li>
+
+        				<li><img class="btn" src="../images/poke.gif"> Finalmente, hagan click a la herramienta “Poke” y traten de hacer click a los input pins en su main schematic. Observen que pasa.</p>
+        			</ol>
+                </p>
+            </div>
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Ejercicio 1: Sub-Circuits</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Así como los programas en C pueden contener funciones en varias partes, los schematic pueden tener sub-circuits. En esta parte del lab, vamos a crear varios subcircuits para demostrar su uso.
+                    <ol class="w3-large">
+                        <li>Creen un nuevo schematic (File->New).</li>
+                        <li>Creen un nuevo subcircuit (Project->Add Circuit). Les va a salir que le pongan un nombre a su circuito; llamenlo “NAND”.</li>
+                        <li>En la nueva ventana de schematic, creen una simple compuerta NAND que tome dos input pins en el lado izquierdo y un output pin en el lado derecho. Hagan esto sin utilizar la compuerta que ya se llama NAND en la carpeta GATES.</li>
+                        <li>Vuelvan a su main schematic, haciendo doble click en main, en la parte donde están los circuitos.</li>
+                        <li>Ahora, hagan click en la lista a su NAND. Esto le va a decir a Logisim que quieren añadir su NAND en su main schematic.</li>
+                        <li>Traten de poner su NAND en el main schematic. Si lo hicieron bien, van a ver un gate con 2 input pins en la izquierda y un output pin en la derecha. Traten de probarlo para ver si trabaja como esperaban.</li>
+                        <li>Repitan estos pasos para crear mas subcircuits: NOR, XOR, MUX de 2 a 1 y de 4 a 1. No utilicen los que ya estan pre-instalados. Sin embargo, cuando construyan sus propios subcircuits, pueden utilizarlos para construir otros.</li>
+                    </ol>
+                </p>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <blockquote class="w3-blockquote">HINT: Utilicen tablas de verdad</blockquote>
+                </p>
+            </div>
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Ejercicio 2: Storing State</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
                 </p>
             </div>
         </div>

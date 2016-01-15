@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../stylesheets/w3.css">
         <link rel="stylesheet" href="../stylesheets/w3-theme-black.css">
-        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">>
         <link rel="icon" href="../images/favicon.png" type="image/x-icon">
         <title>CC3 LAB 7</title>
         <style>
@@ -28,7 +28,7 @@
                 <div class="w3-center">
                     <h1 class="w3-jumbo">CC3 Estructura de Máquinas</h1>
                     <h1 class="w3-jumbo w3-animate-bottom">Laboratorio 7</h1>
-                    <h4 class="w3-xxlarge">MapReduce, Hadoop, y Spark</h4>
+                    <h4 class="w3-xxlarge">MapReduce y Spark</h4>
                 </div>
             </div>
         </header>
@@ -37,6 +37,7 @@
             <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
                 <p class="w3-text w3-justify w3-large w3-margin-16">
                     <ul>
+                        <li class="w3-large">Conocer un poco Python.</li>
                         <li class="w3-large">Ganar experiencia corriendo MapReduce y ganar entendimiento en el paradigma MapReduce.</li>
                         <li class="w3-large">Quedar más familiarizado con Apache Spark y ganar experiencia corriendo Spark local.</li>
                         <li class="w3-large">Aprender como aplicar MapReduce en Spark implementando algunos problemas/algoritmos en Spark.</li>
@@ -49,54 +50,405 @@
                     Descarguen los archivos necesarios para este laboratorio en el siguiente <a href="#" target="_blank"><span class="w3-btn w3-red w3-round w3-medium">link</link></a>
                 </p>
             </div>
-            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Información</h1>
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Python</h1>
             <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
                 <p class="w3-text w3-justify w3-large w3-margin-16">
-                    En las clases les hemos mostrado el “cluster computing” (particularmente, MapReduce), como se prepara y se ejecuta, pero ahora es la hora de ganar experiencia haciendo y corriendo programas hechos en un framework que soporta “cluster computing”.
-                    <br><br>
-                    En este laboratorio, los vamos a introducir a dos diferentes frameworks de cluster computing:
-                    <ul>
-                        <li class="w3-large">El primero es Hadoop – donde van a correr las rutinas Map y Reduce localmente</li>
-                        <li class="w3-large">El segundo es Spark – donde van a traducir lo hecho con Hadoop para que corra en Spark</li>
-                    </ul>
+                    En este laboratorio vamos a utilizar Python y como tal vez la mayoría no ha tenido la experiencia de programar en este lenguaje aquí hay una pequeña introducción.
+                    <br>
+                    <blockquote class="w3-blockquote">
+                        NOTA1: aquí les vamos a mostrar lo básico, Python tiene un sin fin de cosas bien cool que pueden buscar por su cuenta como “NumPy, SciPy, MatPlotLib, etc.”
+                    </blockquote>
                 </p>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
-                    Ambos frameworks tienen sus propias paginas (Hadoop y Spark), asi que son libres de instalar los dos en sus maquinas, sin embargo va a ser mas fácil que trabajen en las computadoras del laboratorio para completar este lab. Esten seguros de entender como funciona el framework de Spark bien, porque este es el que vamos a utilizar en el proyecto 2.
-                    <br><br>
-                    <strong>Eviten las Variables Globales</strong>
-                    <br><br>
-                    Cuando usen ya sea Hadoop o Spark, eviten utilizar variables globales! Esto arruina el propósito de tener múltiples tareas corriendo en paralelo y genera embotellamientos cuando múltiples tareas tratan de acceder a la variable global al mismo tiempo. Como resultado, la mayoría de algoritmos van a ser implementados sin usar variables globales.
-                    <br><br>
-                    <strong>Como correr Spark via command line</strong>
-                    <br><br>
-                    Para este laboratorio y en el proyecto les  vamos a proporcionar un Makefile para ayudarlos a correr sus  archivos de Spark, pero cuando usen Spark en algún otro lugar (Esperamos lo utilicen, DEBERIAN :P),  van a necesitar saber como correr Spark via command line. Solo necesitan correr el siguiente comando:
+                    Python es un lenguaje de programación de alto nivel (su abstracción es bastante alta, casi es pseudocódigo). Además Python es un lenguaje interpretado y usa “dynamic typing”, esto a diferente de Java que usa “static typing”, significa que no se declara que tipo de dato va a ser una variable sino que dinámicamente el interprete lo decide dependiendo del tipo de dato que se le sea asignado a la variable. Se dice que el código de Python es pseudocódigo porque los deja expresar ideas bastante poderosas en muy pocas lineas de código y sigue siendo bastante entendible. Como un ejemplo, aquí hay una implementación del clásico quicksort en Python.
+                    <blockquote class="w3-blockquote">
+                        NOTA2: Python es un lenguaje de programación orientado a objetos, todo los tipos en Python hasta los basicos son objetos inclusive las funciones son objetos (que raro). En Python si es necesario tomar en cuanta la identación porque asi es como Python interpreta el flujo del programa "IDENTEN BIEN".
+                    </blockquote>
                 </p>
-<pre class="w3-code w3-light-grey notranslate">
-    <span class="w3-text-teal">$</span> spark-submit xxx.py <span class="w3-text-grey"># Corrre el archivo de Spark xxx.py</span>
-</pre>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
-                    Si su archivo de spark toma argumentos, el comando es similar solo tienen que añadir cualesquiera argumentos que necesiten, así:
+                    Para correr el interprete de Python en sus computadoras vía command line utilicen:
                 </p>
 <pre class="w3-code w3-light-grey notranslate">
-    <span class="w3-text-teal">$</span> spark-submit xxx.py arg1 arg2<span class="w3-text-grey"> # Corre el archivo de Spark xxx.py y pasa los argumentos arg1 y arg2 a xxx.py</span>
+    <span class="w3-text-teal">$</span> python
 </pre>
-                <p class="w3-text w3-justify w3-large w3-margin-16">
-                    Spark también incluye su interprete que corre con Python, y los va ayudar a testear cualesquiera de sus comandos de Spark.
-                </p>
 <pre class="w3-code w3-light-grey notranslate">
-    <span class="w3-text-teal">$</span> pyspark <span class="w3-text-grey"># Corre el interprete de spark, prueben cualquier cosa aqui</span>
-</pre>
+    <span style='color:#800000; font-weight:bold; '>def</span> quicksort<span style='color:#808030; '>(</span>arr<span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+        <span style='color:#800000; font-weight:bold; '>if</span> <span style='color:#400000; '>len</span><span style='color:#808030; '>(</span>arr<span style='color:#808030; '>)</span> <span style='color:#44aadd; '>&lt;=</span> <span style='color:#008c00; '>1</span><span style='color:#808030; '>:</span>
+            <span style='color:#800000; font-weight:bold; '>return</span> arr
+        pivot <span style='color:#808030; '>=</span> arr<span style='color:#808030; '>[</span><span style='color:#400000; '>len</span><span style='color:#808030; '>(</span>arr<span style='color:#808030; '>)</span> <span style='color:#44aadd; '>/</span> <span style='color:#008c00; '>2</span><span style='color:#808030; '>]</span>
+        left <span style='color:#808030; '>=</span> <span style='color:#808030; '>[</span>x <span style='color:#800000; font-weight:bold; '>for</span> x <span style='color:#800000; font-weight:bold; '>in</span> arr <span style='color:#800000; font-weight:bold; '>if</span> x <span style='color:#44aadd; '>&lt;</span> pivot<span style='color:#808030; '>]</span>
+        middle <span style='color:#808030; '>=</span> <span style='color:#808030; '>[</span>x <span style='color:#800000; font-weight:bold; '>for</span> x <span style='color:#800000; font-weight:bold; '>in</span> arr <span style='color:#800000; font-weight:bold; '>if</span> x <span style='color:#44aadd; '>==</span> pivot<span style='color:#808030; '>]</span>
+        right <span style='color:#808030; '>=</span> <span style='color:#808030; '>[</span>x <span style='color:#800000; font-weight:bold; '>for</span> x <span style='color:#800000; font-weight:bold; '>in</span> arr <span style='color:#800000; font-weight:bold; '>if</span> x <span style='color:#44aadd; '>></span> pivot<span style='color:#808030; '>]</span>
+        <span style='color:#800000; font-weight:bold; '>return</span> quicksort<span style='color:#808030; '>(</span>left<span style='color:#808030; '>)</span> <span style='color:#44aadd; '>+</span> middle <span style='color:#44aadd; '>+</span> quicksort<span style='color:#808030; '>(</span>right<span style='color:#808030; '>)</span>
 
+    <span style='color:#800000; font-weight:bold; '>print</span> quicksort<span style='color:#808030; '>(</span><span style='color:#808030; '>[</span><span style='color:#008c00; '>3</span><span style='color:#808030; '>,</span><span style='color:#008c00; '>6</span><span style='color:#808030; '>,</span><span style='color:#008c00; '>8</span><span style='color:#808030; '>,</span><span style='color:#008c00; '>10</span><span style='color:#808030; '>,</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>,</span><span style='color:#008c00; '>2</span><span style='color:#808030; '>,</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>]</span><span style='color:#808030; '>)</span>
+    <span style='color:#696969; '># Prints "[1, 1, 2, 3, 6, 8, 10]</span>
+</pre>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
-                    <strong>Spark Debbuging y algunos tips</strong><br><br>
-                    Si alguna vez se encuentran preguntándose a ustedes mismos, porqué su output es raro o algo sale mal cuando corren sus archivos de Spark, recuerden estos tips:
-                    <ul>
-                        <li class="w3-large">Hagan uso de la funcion take, la función take puede correr en cualquier objeto RDD. Esta función toma un argumento N, que es un entero y  retorna los primeros N elementos que están dentro de su objeto RDD.</li>
-                        <li class="w3-large">Pueden probar su funciones (map, reduce, etc.) dentro del interprete de Spark (pyspark, mencionado arriba). Simplemente importen su función que quieran probar en pyspark y van a ser capaces de correr la función y verificar si la salida es la que esperan. Aquí hay un pequeño ejemplo de wordcount.py:</li>
-                    </ul>
+                    <strong class="w3-xlarge">Tipos de datos básicos</strong><br><br>
+                    Como muchos lenguajes, Python tiene un numero de tipos de datos básicos incluyendo enteros, floats, booleans y strings. Estos tipos de datos se comportan como lo han visto en otros lenguajes de programación (Java por ejemplo).
+                    <br><br>
+                    <strong>Manejo de Números:</strong> Los enteros y los floats trabajan como ustedes vieron que trabajaban en Java
                 </p>
 <pre class="w3-code w3-light-grey notranslate">
+    x <span style='color:#808030; '>=</span> <span style='color:#008c00; '>3</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> <span style='color:#400000; '>type</span><span style='color:#808030; '>(</span>x<span style='color:#808030; '>)</span> <span style='color:#696969; '># Imprime "&lt;type 'int'>"</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> x       <span style='color:#696969; '># Imprime "3"</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> x <span style='color:#44aadd; '>+</span> <span style='color:#008c00; '>1</span>   <span style='color:#696969; '># Suma; Imprime "4"</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> x <span style='color:#44aadd; '>-</span> <span style='color:#008c00; '>1</span>   <span style='color:#696969; '># Resta; Imprime "2"</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> x <span style='color:#44aadd; '>*</span> <span style='color:#008c00; '>2</span>   <span style='color:#696969; '># Multiplicacion; Imprime "6"</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> x <span style='color:#44aadd; '>**</span> <span style='color:#008c00; '>2</span>  <span style='color:#696969; '># Exponenciar; Imprime "9"</span>
+    x <span style='color:#44aadd; '>+</span><span style='color:#808030; '>=</span> <span style='color:#008c00; '>1</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> x  <span style='color:#696969; '># Imprime "4"</span>
+    x <span style='color:#44aadd; '>*</span><span style='color:#808030; '>=</span> <span style='color:#008c00; '>2</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> x  <span style='color:#696969; '># Imprime "8"</span>
+    y <span style='color:#808030; '>=</span> <span style='color:#008000; '>2.5</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> <span style='color:#400000; '>type</span><span style='color:#808030; '>(</span>y<span style='color:#808030; '>)</span> <span style='color:#696969; '># Imprime "&lt;type 'float'>"</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> y<span style='color:#808030; '>,</span> y <span style='color:#44aadd; '>+</span> <span style='color:#008c00; '>1</span><span style='color:#808030; '>,</span> y <span style='color:#44aadd; '>*</span> <span style='color:#008c00; '>2</span><span style='color:#808030; '>,</span> y <span style='color:#44aadd; '>**</span> <span style='color:#008c00; '>2</span> <span style='color:#696969; '># Imprime "2.5 3.5 5.0 6.25"</span>
 </pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <p class="w3-blockquote">Noten que no como muchos lenguajes, Python no tiene incremento unitario (x++) o decremento (x--).</p>
+                </p>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Python también tiene tipos long para enteros y números complejos. Vean la <a href=" https://docs.python.org/2/library/stdtypes.html#numeric-types-int-float-long-complex">documentación</a> para más detalles.
+                    <br><br>
+                    <strong>Booleans:</strong> Python implementa todos los operadores usuales para hacer lógica booleana, pero usa palabras en Ingles en vez de simbolos (&&, ||, etc.):
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    t <span style='color:#808030; '>=</span> <span style='color:#074726; '>True</span>
+    f <span style='color:#808030; '>=</span> <span style='color:#074726; '>False</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> <span style='color:#400000; '>type</span><span style='color:#808030; '>(</span>t<span style='color:#808030; '>)</span> <span style='color:#696969; '># Imprime "&lt;type 'bool'>"</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> t <span style='color:#800000; font-weight:bold; '>and</span> f <span style='color:#696969; '># AND; Imprime "False"</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> t <span style='color:#800000; font-weight:bold; '>or</span> f  <span style='color:#696969; '># OR; Imprime "True"</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> <span style='color:#800000; font-weight:bold; '>not</span> t   <span style='color:#696969; '># NOT; Imprime "False"</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> t <span style='color:#44aadd; '>!=</span> f  <span style='color:#696969; '># XOR; Imprime "True"</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <strong>Strings:</strong> Python tiene buen soporte de strings:
+                    <br><br>
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    hello <span style='color:#808030; '>=</span> <span style='color:#0000e6; '>'hello'</span>   <span style='color:#696969; '># Literales String  se pueden usar apostrofes</span>
+    world <span style='color:#808030; '>=</span> <span style='color:#0000e6; '>"world"</span>   <span style='color:#696969; '># o comillas, no importa la verdad</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> hello       <span style='color:#696969; '># Imprime "hello"</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> <span style='color:#400000; '>len</span><span style='color:#808030; '>(</span>hello<span style='color:#808030; '>)</span>  <span style='color:#696969; '># String length; Imprime "5"</span>
+    hw <span style='color:#808030; '>=</span> hello <span style='color:#44aadd; '>+</span> <span style='color:#0000e6; '>' '</span> <span style='color:#44aadd; '>+</span> world  <span style='color:#696969; '># Concatenacion de Strings</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> hw  <span style='color:#696969; '># Imprime "hello world"</span>
+    hw12 <span style='color:#808030; '>=</span> <span style='color:#0000e6; '>'%s %s %d'</span> <span style='color:#44aadd; '>%</span> <span style='color:#808030; '>(</span>hello<span style='color:#808030; '>,</span> world<span style='color:#808030; '>,</span> <span style='color:#008c00; '>12</span><span style='color:#808030; '>)</span>  <span style='color:#696969; '># Estilo sprintf</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> hw12  <span style='color:#696969; '># Imprime "hello world 12"</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Los objetos strings tienen un montón de métodos útiles; Por ejemplo:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    s <span style='color:#808030; '>=</span> <span style='color:#0000e6; '>"hello"</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> s<span style='color:#808030; '>.</span>capitalize<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>  <span style='color:#696969; '># Pone la letra del principio en mayuscula</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> s<span style='color:#808030; '>.</span>upper<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>       <span style='color:#696969; '># Pasa el string a mayusculas</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> s<span style='color:#808030; '>.</span>rjust<span style='color:#808030; '>(</span><span style='color:#008c00; '>7</span><span style='color:#808030; '>)</span>      <span style='color:#696969; '># Justifica un string, rellenando con espacios; Imprime "  hello"</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> s<span style='color:#808030; '>.</span>center<span style='color:#808030; '>(</span><span style='color:#008c00; '>7</span><span style='color:#808030; '>)</span>     <span style='color:#696969; '># Centra un string, rellanando con espacios; imprime " hello "</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> s<span style='color:#808030; '>.</span>replace<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'l'</span><span style='color:#808030; '>,</span> <span style='color:#0000e6; '>'(ell)'</span><span style='color:#808030; '>)</span>  <span style='color:#696969; '># Reemplaza todas las apariciones de un substring por otro;</span>
+                                   <span style='color:#696969; '># imprime "he(ell)(ell)o"</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> <span style='color:#0000e6; '>'  world '</span><span style='color:#808030; '>.</span>strip<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>  <span style='color:#696969; '># Quita los white-characters del principio y final; prints "world"</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Pueden encontrar una lista de todos los metodos en la <a href="https://docs.python.org/2/library/stdtypes.html#string-methods">documentación.</a>
+                    <br><br>
+                    <strong class="w3-xlarge">Contenedores</strong><br><br>
+                    Python incluye un montón de tipos de contenedores: listas, diccionarios, sets y tuplas.
+                    <br><br>
+                    <strong>Listas</strong>
+                    <br><br>
+                    una lista en Python es equivalente a un arreglo en Java, pero es dinámico (puede cambiar su tamaño, es decir no es fijo) y puede tener elementos de diferentes tipos:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    xs <span style='color:#808030; '>=</span> <span style='color:#808030; '>[</span><span style='color:#008c00; '>3</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>1</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>2</span><span style='color:#808030; '>]</span>   <span style='color:#696969; '># Crea una lista</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> xs<span style='color:#808030; '>,</span> xs<span style='color:#808030; '>[</span><span style='color:#008c00; '>2</span><span style='color:#808030; '>]</span>  <span style='color:#696969; '># Imprime "[3, 1, 2] 2"</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> xs<span style='color:#808030; '>[</span><span style='color:#44aadd; '>-</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>]</span>     <span style='color:#696969; '># Los indices negativos empiezan desde el final de la lista prints "2"</span>
+    xs<span style='color:#808030; '>[</span><span style='color:#008c00; '>2</span><span style='color:#808030; '>]</span> <span style='color:#808030; '>=</span> <span style='color:#0000e6; '>'foo'</span>    <span style='color:#696969; '># Las listas pueden contener elementos de diferentes tipos</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> xs         <span style='color:#696969; '># Imprime "[3, 1, 'foo']"</span>
+    xs<span style='color:#808030; '>.</span>append<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'bar'</span><span style='color:#808030; '>)</span> <span style='color:#696969; '># Añade un elemento al final de la lista</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> xs         <span style='color:#696969; '># Imprime la lista</span>
+    x <span style='color:#808030; '>=</span> xs<span style='color:#808030; '>.</span>pop<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>     <span style='color:#696969; '># Quita y devuelve el ultimo elemento de la lista</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> x<span style='color:#808030; '>,</span> xs      <span style='color:#696969; '># Imprime "bar [3, 1, 'foo']"</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Puden encontrar más detalles en la <a href=" https://docs.python.org/2/tutorial/datastructures.html#more-on-lists">documentación</a> de listas.
+                    <br><br>
+                    <strong>Slicing:</strong> Además de acceder a los elementos de una lista uno a la vez, Python provee una sintaxis consistente para acceder a sublistas; esto se conoce como slicing.
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    nums <span style='color:#808030; '>=</span> <span style='color:#400000; '>range</span><span style='color:#808030; '>(</span><span style='color:#008c00; '>5</span><span style='color:#808030; '>)</span>    <span style='color:#696969; '># range es una funcion que ya viene con Python y crea una lista de n elementos enteros.</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> nums         <span style='color:#696969; '># Imprime "[0, 1, 2, 3, 4]"</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> nums<span style='color:#808030; '>[</span><span style='color:#008c00; '>2</span><span style='color:#808030; '>:</span><span style='color:#008c00; '>4</span><span style='color:#808030; '>]</span>    <span style='color:#696969; '># Agarra una sublista desde el indice 2 hasta el indice 3 es decir [2,4)</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> nums<span style='color:#808030; '>[</span><span style='color:#008c00; '>2</span><span style='color:#808030; '>:</span><span style='color:#808030; '>]</span>     <span style='color:#696969; '># Agarra una sublista desde el indice 2 hasta el final de la lista, es decir [2,4]</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> nums<span style='color:#808030; '>[</span><span style='color:#808030; '>:</span><span style='color:#008c00; '>2</span><span style='color:#808030; '>]</span>     <span style='color:#696969; '># Agarra una sublista desde el principio de la misma hasta el indice 2 sin incluir, es decir [0,2)</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> nums<span style='color:#808030; '>[</span><span style='color:#808030; '>:</span><span style='color:#808030; '>]</span>      <span style='color:#696969; '># Agarra toda la lista "[0, 1, 2, 3, 4]"</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> nums<span style='color:#808030; '>[</span><span style='color:#808030; '>:</span><span style='color:#44aadd; '>-</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>]</span>    <span style='color:#696969; '># El slice puede ser negativo, en este caso agarra desde el principio hasta el penultimo elemento, es decir [0,3]</span>
+    nums<span style='color:#808030; '>[</span><span style='color:#008c00; '>2</span><span style='color:#808030; '>:</span><span style='color:#008c00; '>4</span><span style='color:#808030; '>]</span> <span style='color:#808030; '>=</span> <span style='color:#808030; '>[</span><span style='color:#008c00; '>8</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>9</span><span style='color:#808030; '>]</span> <span style='color:#696969; '># Asigna una sublista al slice</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> nums         <span style='color:#696969; '># Imprime "[0, 1, 8, 8, 4]"</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <strong>Ciclos:</strong> Pueden iterar sobre elementos de una lista de la siguiente manera:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    animals <span style='color:#808030; '>=</span> <span style='color:#808030; '>[</span><span style='color:#0000e6; '>'cat'</span><span style='color:#808030; '>,</span> <span style='color:#0000e6; '>'dog'</span><span style='color:#808030; '>,</span> <span style='color:#0000e6; '>'monkey'</span><span style='color:#808030; '>]</span>
+    <span style='color:#800000; font-weight:bold; '>for</span> animal <span style='color:#800000; font-weight:bold; '>in</span> animals<span style='color:#808030; '>:</span>
+        <span style='color:#800000; font-weight:bold; '>print</span> animal
+    <span style='color:#696969; '># Imprime "cat", "dog", "monkey", cada uno en una nueva linea</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Si quieren acceder al indice de cada elemento dentro del ciclo, pueden utilizar la funcion “enumerate”:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    animals <span style='color:#808030; '>=</span> <span style='color:#808030; '>[</span><span style='color:#0000e6; '>'cat'</span><span style='color:#808030; '>,</span> <span style='color:#0000e6; '>'dog'</span><span style='color:#808030; '>,</span> <span style='color:#0000e6; '>'monkey'</span><span style='color:#808030; '>]</span>
+    <span style='color:#800000; font-weight:bold; '>for</span> idx<span style='color:#808030; '>,</span> animal <span style='color:#800000; font-weight:bold; '>in</span> <span style='color:#400000; '>enumerate</span><span style='color:#808030; '>(</span>animals<span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+        <span style='color:#800000; font-weight:bold; '>print</span> <span style='color:#0000e6; '>'#%d: %s'</span> <span style='color:#44aadd; '>%</span> <span style='color:#808030; '>(</span>idx <span style='color:#44aadd; '>+</span> <span style='color:#008c00; '>1</span><span style='color:#808030; '>,</span> animal<span style='color:#808030; '>)</span>
+    <span style='color:#696969; '># Imprime "#1: cat", "#2: dog", "#3: monkey", Cada uno en su linea</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <strong>List comprehensions:</strong> Cuando estamos programando, frecuentemente vamos a querer transformar un tipo de dato hacia otro. Como un ejemplo simple, consideren el siguiente código que calcula numeros al cuadrado:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    nums <span style='color:#808030; '>=</span> <span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>1</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>2</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>3</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>4</span><span style='color:#808030; '>]</span>
+    squares <span style='color:#808030; '>=</span> <span style='color:#808030; '>[</span><span style='color:#808030; '>]</span>
+    <span style='color:#800000; font-weight:bold; '>for</span> x <span style='color:#800000; font-weight:bold; '>in</span> nums<span style='color:#808030; '>:</span>
+        squares<span style='color:#808030; '>.</span>append<span style='color:#808030; '>(</span>x <span style='color:#44aadd; '>**</span> <span style='color:#008c00; '>2</span><span style='color:#808030; '>)</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> squares   <span style='color:#696969; '># Imprime [0, 1, 4, 9, 16]</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Pueden hacer este código más simple utilizando una list comprehension:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    nums <span style='color:#808030; '>=</span> <span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>1</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>2</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>3</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>4</span><span style='color:#808030; '>]</span>
+    squares <span style='color:#808030; '>=</span> <span style='color:#808030; '>[</span>x <span style='color:#44aadd; '>**</span> <span style='color:#008c00; '>2</span> <span style='color:#800000; font-weight:bold; '>for</span> x <span style='color:#800000; font-weight:bold; '>in</span> nums<span style='color:#808030; '>]</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> squares   <span style='color:#696969; '># Imprime [0, 1, 4, 9, 16]</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Las list comprehension pueden contener condiciones:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    nums <span style='color:#808030; '>=</span> <span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>1</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>2</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>3</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>4</span><span style='color:#808030; '>]</span>
+    even_squares <span style='color:#808030; '>=</span> <span style='color:#808030; '>[</span>x <span style='color:#44aadd; '>**</span> <span style='color:#008c00; '>2</span> <span style='color:#800000; font-weight:bold; '>for</span> x <span style='color:#800000; font-weight:bold; '>in</span> nums <span style='color:#800000; font-weight:bold; '>if</span> x <span style='color:#44aadd; '>%</span> <span style='color:#008c00; '>2</span> <span style='color:#44aadd; '>==</span> <span style='color:#008c00; '>0</span><span style='color:#808030; '>]</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> even_squares  <span style='color:#696969; '># Imprime "[0, 4, 16]"</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <strong class="w3-xlarge">Diccionarios</strong><br><br>
+                    Un diccionario guarda un par (key, value), similar a un Map en java. Pueden utilizarlo así:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    d <span style='color:#808030; '>=</span> <span style='color:#800080; '>{</span><span style='color:#0000e6; '>'cat'</span><span style='color:#808030; '>:</span> <span style='color:#0000e6; '>'cute'</span><span style='color:#808030; '>,</span> <span style='color:#0000e6; '>'dog'</span><span style='color:#808030; '>:</span> <span style='color:#0000e6; '>'furry'</span><span style='color:#800080; '>}</span>  <span style='color:#696969; '># Crea un nuevo diccionario con algunos datos</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> d<span style='color:#808030; '>[</span><span style='color:#0000e6; '>'cat'</span><span style='color:#808030; '>]</span>       <span style='color:#696969; '># Toma el valor del key “cat”</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> <span style='color:#0000e6; '>'cat'</span> <span style='color:#800000; font-weight:bold; '>in</span> d     <span style='color:#696969; '># Verifica que el key “cat” este en el diccionario   d</span>
+    d<span style='color:#808030; '>[</span><span style='color:#0000e6; '>'fish'</span><span style='color:#808030; '>]</span> <span style='color:#808030; '>=</span> <span style='color:#0000e6; '>'wet'</span>    <span style='color:#696969; '># Añade un par key,value al diccionario </span>
+    <span style='color:#800000; font-weight:bold; '>print</span> d<span style='color:#808030; '>[</span><span style='color:#0000e6; '>'fish'</span><span style='color:#808030; '>]</span>      <span style='color:#696969; '># Imprime "wet"; si tratan de buscar un key que no existe # print d['monkey']  # KeyError: 'monkey' not a key of d</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> d<span style='color:#808030; '>.</span>get<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'monkey'</span><span style='color:#808030; '>,</span> <span style='color:#0000e6; '>'N/A'</span><span style='color:#808030; '>)</span>  <span style='color:#696969; '># Agarra un elemento con un valor por defecto; imprime "N/A"</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> d<span style='color:#808030; '>.</span>get<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'fish'</span><span style='color:#808030; '>,</span> <span style='color:#0000e6; '>'N/A'</span><span style='color:#808030; '>)</span>    <span style='color:#696969; '># Agarra un elemento con un valor por defecto; imprime "N/A"</span>
+    <span style='color:#800000; font-weight:bold; '>del</span> d<span style='color:#808030; '>[</span><span style='color:#0000e6; '>'fish'</span><span style='color:#808030; '>]</span>        <span style='color:#696969; '># Remueve un elemento del diccionario</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> d<span style='color:#808030; '>.</span>get<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'fish'</span><span style='color:#808030; '>,</span> <span style='color:#0000e6; '>'N/A'</span><span style='color:#808030; '>)</span> <span style='color:#696969; '># "fish" ya no pertenece al diccionario; imprime "N/A"</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Pueden encontrar todo lo que necesitan saber de diccionarios en la <a href="https://docs.python.org/2/library/stdtypes.html#dict">documentación.</a>
+                    <br><br>
+                    <strong>Ciclos:</strong> es fácil iterar sobre las keys de un diccionario:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    d <span style='color:#808030; '>=</span> <span style='color:#800080; '>{</span><span style='color:#0000e6; '>'person'</span><span style='color:#808030; '>:</span> <span style='color:#008c00; '>2</span><span style='color:#808030; '>,</span> <span style='color:#0000e6; '>'cat'</span><span style='color:#808030; '>:</span> <span style='color:#008c00; '>4</span><span style='color:#808030; '>,</span> <span style='color:#0000e6; '>'spider'</span><span style='color:#808030; '>:</span> <span style='color:#008c00; '>8</span><span style='color:#800080; '>}</span>
+    <span style='color:#800000; font-weight:bold; '>for</span> animal <span style='color:#800000; font-weight:bold; '>in</span> d<span style='color:#808030; '>:</span>
+        legs <span style='color:#808030; '>=</span> d<span style='color:#808030; '>[</span>animal<span style='color:#808030; '>]</span>
+        <span style='color:#800000; font-weight:bold; '>print</span> <span style='color:#0000e6; '>'A %s has %d legs'</span> <span style='color:#44aadd; '>%</span> <span style='color:#808030; '>(</span>animal<span style='color:#808030; '>,</span> legs<span style='color:#808030; '>)</span>
+    <span style='color:#696969; '># Imprime "A person has 2 legs", "A spider has 8 legs", "A cat has 4 legs"</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Si quieren acceder a las keys y sus valores correspondientes pueden utilizar el método “iteritems”:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    d <span style='color:#808030; '>=</span> <span style='color:#800080; '>{</span><span style='color:#0000e6; '>'person'</span><span style='color:#808030; '>:</span> <span style='color:#008c00; '>2</span><span style='color:#808030; '>,</span> <span style='color:#0000e6; '>'cat'</span><span style='color:#808030; '>:</span> <span style='color:#008c00; '>4</span><span style='color:#808030; '>,</span> <span style='color:#0000e6; '>'spider'</span><span style='color:#808030; '>:</span> <span style='color:#008c00; '>8</span><span style='color:#800080; '>}</span>
+    <span style='color:#800000; font-weight:bold; '>for</span> animal<span style='color:#808030; '>,</span> legs <span style='color:#800000; font-weight:bold; '>in</span> d<span style='color:#808030; '>.</span>iteritems<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+        <span style='color:#800000; font-weight:bold; '>print</span> <span style='color:#0000e6; '>'A %s has %d legs'</span> <span style='color:#44aadd; '>%</span> <span style='color:#808030; '>(</span>animal<span style='color:#808030; '>,</span> legs<span style='color:#808030; '>)</span>
+    <span style='color:#696969; '># Imprime "A person has 2 legs", "A spider has 8 legs", "A cat has 4 legs"</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <strong>Dictionary comprehensions:</strong> Estos son similares a las list comprehensions, pero ayuda a construir diccionarios fácilmente, por ejemplo:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    nums <span style='color:#808030; '>=</span> <span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>1</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>2</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>3</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>4</span><span style='color:#808030; '>]</span>
+    even_num_to_square <span style='color:#808030; '>=</span> <span style='color:#800080; '>{</span>x<span style='color:#808030; '>:</span> x <span style='color:#44aadd; '>**</span> <span style='color:#008c00; '>2</span> <span style='color:#800000; font-weight:bold; '>for</span> x <span style='color:#800000; font-weight:bold; '>in</span> nums <span style='color:#800000; font-weight:bold; '>if</span> x <span style='color:#44aadd; '>%</span> <span style='color:#008c00; '>2</span> <span style='color:#44aadd; '>==</span> <span style='color:#008c00; '>0</span><span style='color:#800080; '>}</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> even_num_to_square  <span style='color:#696969; '># Imprime "{0: 0, 2: 4, 4: 16}"</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <strong class="w3-xlarge">Sets</strong><br><br>
+                    Un set es un la colección no ordenada de elementos distintos. Como ejemplo simple, consideren lo siguiente:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    animals <span style='color:#808030; '>=</span> <span style='color:#800080; '>{</span><span style='color:#0000e6; '>'cat'</span><span style='color:#808030; '>,</span> <span style='color:#0000e6; '>'dog'</span><span style='color:#800080; '>}</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> <span style='color:#0000e6; '>'cat'</span> <span style='color:#800000; font-weight:bold; '>in</span> animals   <span style='color:#696969; '># Verifica que un elemento este en el set; Imprime “True”</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> <span style='color:#0000e6; '>'fish'</span> <span style='color:#800000; font-weight:bold; '>in</span> animals  <span style='color:#696969; '># Imprime "False"</span>
+    animals<span style='color:#808030; '>.</span>add<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'fish'</span><span style='color:#808030; '>)</span>      <span style='color:#696969; '># Añade un elemento al set</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> <span style='color:#0000e6; '>'fish'</span> <span style='color:#800000; font-weight:bold; '>in</span> animals  <span style='color:#696969; '># Imprime "True"</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> <span style='color:#400000; '>len</span><span style='color:#808030; '>(</span>animals<span style='color:#808030; '>)</span>       <span style='color:#696969; '># Numero de elementos en un set; imprime "3"</span>
+    animals<span style='color:#808030; '>.</span>add<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'cat'</span><span style='color:#808030; '>)</span>       <span style='color:#696969; '># Añadir un elemento que ya esta en el set, lo permite pero no pasa nada</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> <span style='color:#400000; '>len</span><span style='color:#808030; '>(</span>animals<span style='color:#808030; '>)</span>       <span style='color:#696969; '># Imprime "3"</span>
+    animals<span style='color:#808030; '>.</span>remove<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'cat'</span><span style='color:#808030; '>)</span>    <span style='color:#696969; '># Remueve un elemento del set</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> <span style='color:#400000; '>len</span><span style='color:#808030; '>(</span>animals<span style='color:#808030; '>)</span>       <span style='color:#696969; '># imprime "2"</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Otra vez, todo lo que quieran saber acerca de los sets lo pueden encontrar en la <a href="https://docs.python.org/2/library/sets.html#set-objects">documentación.</a>
+                    <br><br>
+                    <strong>Loops:</strong> Iterear sobre un set tienen la misma sintaxis que iterar sobre una lista; sin embargo como los sets no tienen orden, no pueden asumir sobre en que orden se van a visitar los elementos del set:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    animals <span style='color:#808030; '>=</span> <span style='color:#800080; '>{</span><span style='color:#0000e6; '>'cat'</span><span style='color:#808030; '>,</span> <span style='color:#0000e6; '>'dog'</span><span style='color:#808030; '>,</span> <span style='color:#0000e6; '>'fish'</span><span style='color:#800080; '>}</span>
+    <span style='color:#800000; font-weight:bold; '>for</span> idx<span style='color:#808030; '>,</span> animal <span style='color:#800000; font-weight:bold; '>in</span> <span style='color:#400000; '>enumerate</span><span style='color:#808030; '>(</span>animals<span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+        <span style='color:#800000; font-weight:bold; '>print</span> <span style='color:#0000e6; '>'#%d: %s'</span> <span style='color:#44aadd; '>%</span> <span style='color:#808030; '>(</span>idx <span style='color:#44aadd; '>+</span> <span style='color:#008c00; '>1</span><span style='color:#808030; '>,</span> animal<span style='color:#808030; '>)</span>
+    <span style='color:#696969; '># Imprime "#1: fish", "#2: dog", "#3: cat"</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Set comprehensions: como las listas y los diccionarios, podemos construir sets fácilmente utilizando set comprehensions:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span style='color:#800000; font-weight:bold; '>from</span> math <span style='color:#800000; font-weight:bold; '>import</span> sqrt
+    nums <span style='color:#808030; '>=</span> <span style='color:#800080; '>{</span><span style='color:#400000; '>int</span><span style='color:#808030; '>(</span>sqrt<span style='color:#808030; '>(</span>x<span style='color:#808030; '>)</span><span style='color:#808030; '>)</span> <span style='color:#800000; font-weight:bold; '>for</span> x <span style='color:#800000; font-weight:bold; '>in</span> <span style='color:#400000; '>range</span><span style='color:#808030; '>(</span><span style='color:#008c00; '>30</span><span style='color:#808030; '>)</span><span style='color:#800080; '>}</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> nums  <span style='color:#696969; '># Imprime "set([0, 1, 2, 3, 4, 5])"</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <strong class="w3-xlarge">Tuplas</strong><br><br>
+                    Una tupla es una lista ordenada de elementos “fija”. Una tupla es bastante similar a una lista, una de las más importantes diferencias es que las tuplas se pueden utilizar como keys en un diccionario y como elementos de los sets, mientras que las listas no. Aquí hay un ejemplo:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    d <span style='color:#808030; '>=</span> <span style='color:#800080; '>{</span><span style='color:#808030; '>(</span>x<span style='color:#808030; '>,</span> x <span style='color:#44aadd; '>+</span> <span style='color:#008c00; '>1</span><span style='color:#808030; '>)</span><span style='color:#808030; '>:</span> x <span style='color:#800000; font-weight:bold; '>for</span> x <span style='color:#800000; font-weight:bold; '>in</span> <span style='color:#400000; '>range</span><span style='color:#808030; '>(</span><span style='color:#008c00; '>10</span><span style='color:#808030; '>)</span><span style='color:#800080; '>}</span>  <span style='color:#696969; '># Crea un diccionario con keys de tuplas</span>
+    t <span style='color:#808030; '>=</span> <span style='color:#808030; '>(</span><span style='color:#008c00; '>5</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>6</span><span style='color:#808030; '>)</span>       <span style='color:#696969; '># Crea una tupla</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> <span style='color:#400000; '>type</span><span style='color:#808030; '>(</span>t<span style='color:#808030; '>)</span>    <span style='color:#696969; '># Imprime "&lt;type 'tuple'>"</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> d<span style='color:#808030; '>[</span>t<span style='color:#808030; '>]</span>       <span style='color:#696969; '># Imprime "5"</span>
+    <span style='color:#800000; font-weight:bold; '>print</span> d<span style='color:#808030; '>[</span><span style='color:#808030; '>(</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>2</span><span style='color:#808030; '>)</span><span style='color:#808030; '>]</span>  <span style='color:#696969; '># Imprime "1"</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    La <a href="https://docs.python.org/2/tutorial/datastructures.html#tuples-and-sequences">documentación</a> tiene mas información acerca de las tuplas.
+                    <br><br>
+                    <strong class="w3-xlarge">Funciones</strong><br><br>
+                    Las funciones de Python se definen utilizando el keyword def. Por ejemplo:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span style='color:#800000; font-weight:bold; '>def</span> sign<span style='color:#808030; '>(</span>x<span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+        <span style='color:#800000; font-weight:bold; '>if</span> x <span style='color:#44aadd; '>></span> <span style='color:#008c00; '>0</span><span style='color:#808030; '>:</span>
+            <span style='color:#800000; font-weight:bold; '>return</span> <span style='color:#0000e6; '>'positive'</span>
+        <span style='color:#800000; font-weight:bold; '>elif</span> x <span style='color:#44aadd; '>&lt;</span> <span style='color:#008c00; '>0</span><span style='color:#808030; '>:</span>
+            <span style='color:#800000; font-weight:bold; '>return</span> <span style='color:#0000e6; '>'negative'</span>
+        <span style='color:#800000; font-weight:bold; '>else</span><span style='color:#808030; '>:</span>
+            <span style='color:#800000; font-weight:bold; '>return</span> <span style='color:#0000e6; '>'zero'</span>
+
+    <span style='color:#800000; font-weight:bold; '>for</span> x <span style='color:#800000; font-weight:bold; '>in</span> <span style='color:#808030; '>[</span><span style='color:#44aadd; '>-</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>0</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>1</span><span style='color:#808030; '>]</span><span style='color:#808030; '>:</span>
+        <span style='color:#800000; font-weight:bold; '>print</span> sign<span style='color:#808030; '>(</span>x<span style='color:#808030; '>)</span>
+    <span style='color:#696969; '># Imprime "negative", "zero", "positive"</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Vamos a definir funciones que toman argumentos, y opcionalmente argumentos keyword, como esto:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span style='color:#800000; font-weight:bold; '>def</span> hello<span style='color:#808030; '>(</span>name<span style='color:#808030; '>,</span> loud<span style='color:#808030; '>=</span><span style='color:#074726; '>False</span><span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+        <span style='color:#800000; font-weight:bold; '>if</span> loud<span style='color:#808030; '>:</span>
+            <span style='color:#800000; font-weight:bold; '>print</span> <span style='color:#0000e6; '>'HELLO, %s'</span> <span style='color:#44aadd; '>%</span> name<span style='color:#808030; '>.</span>upper<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
+        <span style='color:#800000; font-weight:bold; '>else</span><span style='color:#808030; '>:</span>
+            <span style='color:#800000; font-weight:bold; '>print</span> <span style='color:#0000e6; '>'Hello, %s!'</span> <span style='color:#44aadd; '>%</span> name
+
+    hello<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'Bob'</span><span style='color:#808030; '>)</span> <span style='color:#696969; '># Imprime "Hello, Bob"</span>
+    hello<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'Fred'</span><span style='color:#808030; '>,</span> loud<span style='color:#808030; '>=</span><span style='color:#074726; '>True</span><span style='color:#808030; '>)</span>  <span style='color:#696969; '># Imprime "HELLO, FRED!"</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Hay mucha información acerca de como definir funciones en Python en la <a href="https://docs.python.org/2/tutorial/controlflow.html#defining-functions">documentación.</a>
+                    <br><br>
+                    <strong class="w3-xlarge">Clases </strong><br><br>
+                    La sintaxis para definir clases en Python es así:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span style='color:#800000; font-weight:bold; '>class</span> Greeter<span style='color:#808030; '>:</span>
+
+        <span style='color:#696969; '># Constructor</span>
+        <span style='color:#800000; font-weight:bold; '>def</span> <span style='color:#074726; '>__init__</span><span style='color:#808030; '>(</span>self<span style='color:#808030; '>,</span> name<span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+            self<span style='color:#808030; '>.</span>name <span style='color:#808030; '>=</span> name  <span style='color:#696969; '># Crea un atributo para la clase</span>
+
+        <span style='color:#696969; '># Un metodo de la clase</span>
+        <span style='color:#800000; font-weight:bold; '>def</span> greet<span style='color:#808030; '>(</span>self<span style='color:#808030; '>,</span> loud<span style='color:#808030; '>=</span><span style='color:#074726; '>False</span><span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+            <span style='color:#800000; font-weight:bold; '>if</span> loud<span style='color:#808030; '>:</span>
+                <span style='color:#800000; font-weight:bold; '>print</span> <span style='color:#0000e6; '>'HELLO, %s!'</span> <span style='color:#44aadd; '>%</span> self<span style='color:#808030; '>.</span>name<span style='color:#808030; '>.</span>upper<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
+            <span style='color:#800000; font-weight:bold; '>else</span><span style='color:#808030; '>:</span>
+                <span style='color:#800000; font-weight:bold; '>print</span> <span style='color:#0000e6; '>'Hello, %s'</span> <span style='color:#44aadd; '>%</span> self<span style='color:#808030; '>.</span>name
+
+    g <span style='color:#808030; '>=</span> Greeter<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'Fred'</span><span style='color:#808030; '>)</span>  <span style='color:#696969; '># Crea una instancia de la clase</span>
+    g<span style='color:#808030; '>.</span>greet<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>            <span style='color:#696969; '># Llama al metodo de la clase; imprime "Hello, Fred"</span>
+    g<span style='color:#808030; '>.</span>greet<span style='color:#808030; '>(</span>loud<span style='color:#808030; '>=</span><span style='color:#074726; '>True</span><span style='color:#808030; '>)</span>   <span style='color:#696969; '># Llama al metodo de la clase; imprime "HELLO, FRED!"</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Pueden leer sobre las clases en Python y su definición en la <a href="https://docs.python.org/2/tutorial/classes.html">documentación.</a>
+                </p>
+            </div>
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Ejercicio 0: Mini Programa en Python</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Para ver si entendieron bien como utilizar Python, en un archivo llamado pruebas.py hagan un programa con lo siguiente:
+                    <ul class="w3-large">
+                        <li>Una función recursiva que calcule en n-esimo numero de Fibonacci</li>
+                        <li>Una función recursiva que calcule factorial de un numero N</li>
+                        <li>Una función que devuelva si un numero es divisible entre 2 o no</li>
+                    </ul>
+                </p>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Recuerden que siempre que sea necesario (si no se recuerdan de algo) siempre pueden ir a la <a href="https://docs.python.org/release/2.7.6/">documentación</a>
+                    <br><br>
+                    Sus funciones pueden ser asi:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span style='color:#800000; font-weight:bold; '>def</span> fibonacci<span style='color:#808030; '>(</span>n<span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+
+        <span style='color:#696969; '># Su Codigo Aqui</span>
+
+    <span style='color:#800000; font-weight:bold; '>def</span> factorial<span style='color:#808030; '>(</span>n<span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+
+        <span style='color:#696969; '># Su Codigo Aqui</span>
+
+    <span style='color:#800000; font-weight:bold; '>def</span> divisible<span style='color:#808030; '>(</span>n<span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+
+        <span style='color:#696969; '># Su Codigo Aqui</span>
+</pre>
+            </div>
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Información de Spark</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    En las clases les hemos enseñado “cluster computing” (En particular, el framework MapReduce), como se escribe y como se ejecuta, pero ahora es hora de que ustedes hagan sus propios programas y los corran en una librería que tiene “cluster computing”·
+                    <br><br>
+                    Para este lab van a trabajar con Spark. Spark tiene su propia <a href="http://spark.apache.org/">pagina</a>, asi que siéntanse libres de instalarlos en sus máquinas localmente. Pero va a ser más fácil que trabajen en las computadoras del laboratorio. Asegúrense de entender bien el framework de Spark porque lo vamos a utilizar en el proyecto 2 de la clase.
+                    <br><br>
+                    <strong class="w3-xlarge">Eviten las Variables Globales</strong><br><br>
+                    Cuando utilicen Spark, eviten utilizar variables globales. Esto mata el propósito de tener múltiples tareas corriendo en paralelo y crea un embotellamiento cuando múltiples tareas tratan de acceder a la variable global al mismo tiempo. Como resultado, la mayoría de algoritmos van a ser implementados sin el uso de variables globales.
+                    <br><br>
+                    <strong class="w3-xlarge">Como Correr Spark vía Command Line</strong><br><br>
+                    En este lab y para el proyecto les vamos a dar los Makefile para que puedan correr y probar su código fácilmente. Pero cuando utilicen Spark fuera de la clase (Esperamos lo hagan) van a necesitar saber como correr Spark. Noten que Spark trabaja con Python (por eso el tutorial), así que para correr sus archivos de Spark xxx.py, solo corran el siguiente comando:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span class="w3-text-teal">$</span> spark-submit xxx.py <span style="color:#aeaeae"># Corre el archivo de Spark file xxx.py</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Si su archivo de Spark espera argumentos, pueden mandárselos por el command line:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span class="w3-text-teal">$</span> spark-submit xxx.py arg1 arg2 <span style="color:#aeaeae"># Corre el archivo de Spark file xxx.py y le paso los argumentos arg1 y arg2</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    También pueden correr el interprete de Spark, esto es útil para probar su código en el instante. Corran el interprete con el siguiente comando:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span class="w3-text-teal">$</span> pyspark <span style="color:#aeaeae"># Corre el interprete de Spark!, aqui prueben lo que sea!!!</span>
+</pre>
+            </div>
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Ejercicio 1: Trabajando con Spark</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Ahora que tienen experiencia con Python, vamos a utilizar Spark para ver como funciona el framework de MapReduce. En los archivos necesarios les dimos wordcount.py para que estén mas familiarizados con como funciona Spark. Para ayudarlos a entender el código, hay comentarios en algunas lineas, pero siéntanse libres de ver las <a href="http://spark.apache.org/docs/latest/programming-guide.html#transformations">transformaciones</a> y las <a href="http://spark.apache.org/docs/latest/programming-guide.html#actions">acciones</a> en la página de Spark, donde lo explican de una manera mas detallada.
+                    <br><br>
+                    docwordcount.py es un archivo base para que terminen de implementar allí lo necesario para este ejercicio. Para este lab vamos a utilizar archivos con extensión .seq que van a ser la entrada para el MapReduce.
+                    <br><br>
+                    En este ejercicio, van a encontrar útil ver las páginas de transformaciones y acciones que mencionamos arriba ya que les va a ayudar a entender los métodos que pueden utilizar para hacer un sort de los datos, imprimir la salidas o remover datos duplicados.
+                    <br><br>
+                </p>
             </div>
         </div>
         <footer class="w3-container w3-padding-32 w3-theme w3-center">

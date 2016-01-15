@@ -54,12 +54,12 @@
                     <strong>Este ejercicio usa el archivo listmanips.s</strong><br><br>
                     En este ejercicio, ustedes van a implementar una función map en MIPS. Su función va ser simplimente cambiar una lista in-place, es decir, sin la necesidad de crear y retornar una nueva lista con los valores modificados. Su procedimiento “map” va a tomar dos parámetros. El primer parámetro va a ser la dirección del head de una linked-list que sus valores son enteros de 32-bits. Así que el struct en C estaría definido de la siguiente manera:
 <pre class="w3-code w3-light-grey notranslate">
-    <span class="w3-text-red">struct</span> node {
+    <span style='color:#800000; font-weight:bold; '>struct</span> node <span style='color:#800080; '>{</span>
 
-        <span class="w3-text-teal">int</span> value;
-        <span class="w3-text-red">struct</span> node *next;
+      <span style='color:#800000; font-weight:bold; '>int</span> value<span style='color:#800080; '>;</span>
+      <span style='color:#800000; font-weight:bold; '>struct</span> node <span style='color:#808030; '>*</span>next<span style='color:#800080; '>;</span>
 
-    };
+    <span style='color:#800080; '>}</span><span style='color:#800080; '>;</span>
 </pre>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
                     El segundo parámetro va a ser la dirección de la función que toma como parámetro un entero y devuelve un entero. Van a utilizar jalr para llamar a esta función con la lista.
@@ -67,13 +67,13 @@
                     Su función “map” recursivamente va ir bajando en la lista visitando cada nodo, aplicando la función a cada valor de la lista y guardando el valor retornado en esa posición. En C, esto se miraría algo así:
                 </p>
 <pre class="w3-code w3-light-grey notranslate">
-    <span class="w3-text-red">void</span> map(<span class="w3-text-red">struct</span> node *head, <span class="w3-text-teal">int</span> (*f)(<span class="w3-text-teal">int</span>)) {
+    <span style='color:#800000; font-weight:bold; '>void</span> map<span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>struct</span> node <span style='color:#808030; '>*</span>head<span style='color:#808030; '>,</span> <span style='color:#800000; font-weight:bold; '>int</span> <span style='color:#808030; '>(</span><span style='color:#808030; '>*</span>f<span style='color:#808030; '>)</span><span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>int</span><span style='color:#808030; '>)</span><span style='color:#808030; '>)</span> <span style='color:#800080; '>{</span>
 
-      <span class="w3-text-teal">if</span>(!head) { return; }
-      head->value = f(head->value);
-      map(head->next,f);
+      <span style='color:#800000; font-weight:bold; '>if</span><span style='color:#808030; '>(</span><span style='color:#808030; '>!</span>head<span style='color:#808030; '>)</span> <span style='color:#800080; '>{</span> <span style='color:#800000; font-weight:bold; '>return</span><span style='color:#800080; '>;</span> <span style='color:#800080; '>}</span>
+      head<span style='color:#808030; '>-</span><span style='color:#808030; '>></span>value <span style='color:#808030; '>=</span> f<span style='color:#808030; '>(</span>head<span style='color:#808030; '>-</span><span style='color:#808030; '>></span>value<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+      map<span style='color:#808030; '>(</span>head<span style='color:#808030; '>-</span><span style='color:#808030; '>></span>next<span style='color:#808030; '>,</span>f<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
 
-    }
+    <span style='color:#800080; '>}</span>
 </pre>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
                     Si nunca habían visto este tipo de declaración (*f)(int), no se preocupen. Básicamente significa que f es un puntero hacia una función, que en C es utilizada como cualquier otra función.
