@@ -39,7 +39,7 @@
             <h1 id="clari" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Clarificaciones y Recordatorios</h1>
             <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
                 <p class="w3-text w3-justify w3-large w3-margin-16">
-                    <ul class="w3-ul">
+                    <ul class="w3-ul w3-large">
                     <li class="w3-light-grey">Empiecen lo antes posible.</li>
                     <li>Lean todo este documento antes de empezar a trabajar en el proyecto, en especial las especificaciones y las notas de hasta abajo.</li>
                     <li class="w3-light-grey">Este proyecto se debería de hacerse en las computadoras del Lab, ya que allí esta instalado todo lo necesario para que trabajen.</li>
@@ -58,7 +58,7 @@
                 </p>
             </div>
             <h1 id="intro" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Introducción</h1>
-            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large" style="overflow: scroll">
                 <p class="w3-text w3-justify w3-large w3-margin-16">
                     Para este proyecto ustedes van a resolver un PUZZLE, y en especifico la forma general de 15-puzzle que es n-puzzle. Si ustedes no conocen este juego, <a href="http://mypuzzle.org/sliding">aquí</a> hay un link en donde pueden familiarizarse con el.
                 </p>
@@ -87,35 +87,35 @@
                 <ul class="w3-text w3-justify w3-large w3-margin-16">
                     <li><b>children()</b>- que retorna una lista de todas las posiciones cercanas.</li>
                     <li><b>solution()</b>- que retorna la única solución del puzzle.</li>
-                </ul><br>
+                </ul>
 <pre class="w3-code w3-light-grey notranslate">
-    level_to_pos = {}
-    pos_to_level = {}
+    level_to_pos <span style='color:#808030; '>=</span> <span style='color:#800080; '>{</span><span style='color:#800080; '>}</span>
+    pos_to_level <span style='color:#808030; '>=</span> <span style='color:#800080; '>{</span><span style='color:#800080; '>}</span>
 
-    <span class="w3-text-red">def</span> <span class="w3-text-teal">solve</span>(<span class="w3-text-deep-orange">puzzle</span>, <span class="w3-text-deep-orange">max_level</span>=<span class="w3-text-deep-orange">-1</span>):
-        <span class="w3-text-green">"""BF visita el grafo del puzzle completamente, construyendo las estructuras level_to_pos y pos_to_level"""</span>
-        solution = puzzle.solution()
-        level = <span class="w3-text-deep-orange">0</span>
-        level_to_pos[level] = [solution] <span class="w3-text-grey">### el level 0 consiste en la solucion unica</span>
-        pos_to_level[solution] = level
+    <span style='color:#800000; font-weight:bold; '>def</span> solve<span style='color:#808030; '>(</span>puzzle<span style='color:#808030; '>,</span> max_level<span style='color:#808030; '>=</span><span style='color:#44aadd; '>-</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+        <span style='color:#696969; '>"""BF visita el grafo del puzzle completamente, construyendo las estructuras level_to_pos y pos_to_level"""</span>
+        solution <span style='color:#808030; '>=</span> puzzle<span style='color:#808030; '>.</span>solution<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
+        level <span style='color:#808030; '>=</span> <span style='color:#008c00; '>0</span>
+        level_to_pos<span style='color:#808030; '>[</span>level<span style='color:#808030; '>]</span> <span style='color:#808030; '>=</span> <span style='color:#808030; '>[</span>solution<span style='color:#808030; '>]</span> <span style='color:#696969; '>### el level 0 consiste en la solucion unica</span>
+        pos_to_level<span style='color:#808030; '>[</span>solution<span style='color:#808030; '>]</span> <span style='color:#808030; '>=</span> level
 
-        <span class="w3-text-grey">### Mientras hayan posiciones en el nivel actual</span>
-        <span class="w3-text-purple">while</span> level_to_pos[level] and (max_level==-1 or level < max_level):
-            level += <span class="w3-text-deep-orange">1</span>
-            level_to_pos[level] = []
-            <span class="w3-text-grey">### Para cada posicion en el level anterior al actual</span>
-            <span class="w3-text-purple">for</span> position <span class="w3-text-purple">in</span> level_to_pos[level-<span class="w3-text-deep-orange">1</span>]:
-                <span class="w3-text-grey">### Para cada hijo en esa posicion</span>
-                <span class="w3-text-purple">for</span> child <span class="w3-text-purple">in</span> position.children():
-                    <span class="w3-text-grey">### Si es primera vez que se ha visto al hijo</span>
-                    <span class="w3-text-purple">if</span> child <span class="w3-text-purple">not in</span> pos_to_level:
-                        <span class="w3-text-grey">### Actualizar los mappings</span>
-                        pos_to_level[child] = level
-                        level_to_pos[level].append(child)
+        <span style='color:#696969; '>### Mientras hayan posiciones en el level actual</span>
+        <span style='color:#800000; font-weight:bold; '>while</span> level_to_pos<span style='color:#808030; '>[</span>level<span style='color:#808030; '>]</span> <span style='color:#800000; font-weight:bold; '>and</span> <span style='color:#808030; '>(</span>max_level<span style='color:#44aadd; '>==</span><span style='color:#44aadd; '>-</span><span style='color:#008c00; '>1</span> <span style='color:#800000; font-weight:bold; '>or</span> level <span style='color:#44aadd; '>&lt;</span> max_level<span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+            <span style='color:#696969; '>### Aumentamos el level, por lo que el level actual cambia</span>
+            level <span style='color:#44aadd; '>+</span><span style='color:#808030; '>=</span> <span style='color:#008c00; '>1</span>
+            level_to_pos<span style='color:#808030; '>[</span>level<span style='color:#808030; '>]</span> <span style='color:#808030; '>=</span> <span style='color:#808030; '>[</span><span style='color:#808030; '>]</span>
+            <span style='color:#696969; '>### Para cada posicion en el level anterior al actual (porque cambio)</span>
+            <span style='color:#800000; font-weight:bold; '>for</span> position <span style='color:#800000; font-weight:bold; '>in</span> level_to_pos<span style='color:#808030; '>[</span>level<span style='color:#44aadd; '>-</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>]</span><span style='color:#808030; '>:</span>
+                <span style='color:#696969; '>### Para cada hijo en esa posicion</span>
+                <span style='color:#800000; font-weight:bold; '>for</span> child <span style='color:#800000; font-weight:bold; '>in</span> position<span style='color:#808030; '>.</span>children<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+                    <span style='color:#696969; '>### Si es primera vez que se ha visto al hijo</span>
+                    <span style='color:#800000; font-weight:bold; '>if</span> child <span style='color:#800000; font-weight:bold; '>not</span> <span style='color:#800000; font-weight:bold; '>in</span> pos_to_level<span style='color:#808030; '>:</span>
+                        <span style='color:#696969; '>### Actualizar los mappings</span>
+                        pos_to_level<span style='color:#808030; '>[</span>child<span style='color:#808030; '>]</span> <span style='color:#808030; '>=</span> level
+                        level_to_pos<span style='color:#808030; '>[</span>level<span style='color:#808030; '>]</span><span style='color:#808030; '>.</span>append<span style='color:#808030; '>(</span>child<span style='color:#808030; '>)</span>
 
-        <span class="w3-text-purple">del</span> level_to_pos[level] <span class="w3-text-grey">### El ultimo level siempre esta vacio, asi que lo borramos.</span>
+        <span style='color:#800000; font-weight:bold; '>del</span> level_to_pos<span style='color:#808030; '>[</span>level<span style='color:#808030; '>]</span> <span style='color:#696969; '>### El ultimo level siempre esta vacio, asi que lo borramos.</span>
 </pre>
-                <br><br>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
                     <b>Ejemplo:</b><br><br>
                     Imaginen que tienen un numero (que esta entre 0 y 8 , incluidos) que pueden incrementar o decrementar por 3 o 5, de tal manera que no quede por debajo de 0 ni arriba de 8. El objetivo del juego es llegar a 0. El grafo completo del juego se muestra abajo <a href="#fig1">(ver figura 1)</a>, obsérvenlo y tomen un poco de tiempo para estar seguros de que en verdad ese grafo representa cada posición del juego y cada conexión es la única entre cada posición posible. Si ustedes corrieran el breadth-first-solver que les presentamos en este puzzle, esto pasaría <a href="#tabla1">(ver tabla 1)</a>.
@@ -283,7 +283,7 @@
                 </div><br><br>
                 <h2 class="w3-center w3-light-grey">Código para empezar</h2><br><br>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
-                    Para empezar con el proyecto, deberán de bajar los archivos necesarios pulsando el siguiente boton <a href="#"><span class="w3-btn w3-small w3-round w3-red">proyecto2_parte1.zip</span></a>
+                    Para empezar con el proyecto, deberán de bajar los archivos necesarios en el siguiente link <a href="#"><span class="w3-btn w3-small w3-round w3-red">proyecto2_parte1.zip</span></a>
                     <br><br>
                     Descompriman el zip que bajaron, y dentro de la carpeta descomprimida encontraran:
                     <br>
@@ -297,9 +297,9 @@
                 </p>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
                     Son libres de definir funciones extra si lo necesitan, pero solo lo pueden hacer únicamente en el archivo SlidingBfsSpark.py. <strong>Si hacen modificaciones en otros archivos, tengan en cuenta que se van a sobrescribir a la hora de la calificación.</strong>
-                </p><br>
+                </p>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
-                    <strong>Su trabajo</strong><br><br>
+                    <strong class="w3-xlarge">Su trabajo</strong><br><br>
                     <b>Su tarea es implementar un MapReduce iterativo que sea capaz de resolver el Sliding puzzle general.</b><br><br>
                     Como mencionamos arriba, el MapReduce que van a implementar va a tomar como entrada un ancho y un alto describiendo el Sliding puzzle. Usando la solución de ese puzzle, repetidamente va ir expandiendo el árbol del BFS, y generando un mapping entre cada posición y nivel en donde esta en el árbol del BFS. Nosotros representamos el Sliding puzzle como una tupla de strings de Python. Cada pieza se representa con un carácter del alfabeto y la pieza que hace falta con un guión. Después de correr su implementación de MapReduce, esperamos que su programa produzca un archivo de texto de la siguiente forma. (por ejemplo, para el caso de un sliding-puzzle de 2x2).
                 </p><br>
@@ -318,7 +318,7 @@
                     6 ('-', 'C', 'B', 'A')<br>
                 </p><br>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
-                    <strong>Recomendaciones para empezar:</strong><br><br>
+                    <strong class="w3-xlarge">Recomendaciones para empezar:</strong><br><br>
                     <ul class="w3-text w3-justify w3-large w3-margin-16">
                         <li>Vean la implementación que esta en SlidingBfsReference.py, traten de entenderla y como es que funciona. Hagan una lluvia de ideas con su pareja de como pueden traducir esto a un modelo compatible con el MapReduce framework.</li>
                         <ul class="w3-text w3-justify w3-large">
@@ -337,7 +337,7 @@
                     </ul><br>
                 </p>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
-                    <strong>Para probar su algoritmo</strong><br><br>
+                    <strong class="w3-xlarge">Para probar su algoritmo</strong><br><br>
                     <ul class="w3-ul">
                         <li><b>make run-small: </b>para el caso de 2x2</li>
                         <li class="w3-light-grey"><b>make run-medium: </b>para el caso de 3x3</li>
@@ -369,7 +369,6 @@
                 <p class="w3-text w3-justify w3-large w3-margin-16">
                     Si tienen alguna pregunta, no duden en enviar un correo:
                     <br><br>
-                    <strong>Catedrático: </strong> Ali A. Lemus Monterroso - alilemus@galileo.edu<br>
                     <strong>Encargado de Proyecto: </strong> Andrés Castellanos - andres.cv@galileo.edu
                 </p>
             </div>
@@ -381,12 +380,12 @@
                     Probablemente nadie o muy pocos hayan programado en el lenguaje de programación de Python y no tengan mucha práctica con solo haber hecho un Lab, se recomienda que sigan este tutorial que no les va a quitar mucho tiempo y que les va a enseñar lo necesario para que hagan este proyecto.
                      <a href="https://www.codecademy.com/learn/python"><span class="w3-btn w3-red w3-round">TUTORIAL</span></a>
                     </p>
-                    <h1 class="w3-light-grey w3-center">NOTAS DE SPARK</h1><br><br>
+                    <h1 class="w3-light-grey w3-center">NOTAS DE SPARK</h1><br>
                     <p class="w3-text w3-justify w3-large w3-margin-16">
                         Recomendamos que se lean y entiendan esta pequeña <a href="https://spark.apache.org/docs/latest/programming-guide.html">Guía de Programación en Spark</a>, especialmente la sección de key-value pairs y sus transformaciones.   Finalmente, la otra fuente de información que les puede servir es la detallada Spark-Python API que esta disponible <a href="https://spark.apache.org/docs/latest/api/python/index.html">aquí</a>.
-                    </p><br>
+                    </p>
                     <p class="w3-text w3-justify w3-large w3-margin-16">
-                        <strong>Notas avanzadas de Spark</strong><br><br>
+                        <strong class="w3-xlarge">Notas avanzadas de Spark</strong><br><br>
                         Despues de tener una solución básica que si funcione, pueden probar las siguientes técnicas de optimización para ver si alcanzan una mayor performance.
                         <br><br>
                         <strong>Lazy Evaluation</strong><br><br>
