@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <head>
+        <meta charset="utf-8">
+        
+        <link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
+               
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+                <title>CC3 - Proyecto 1-1</title>
+
+</head>
+<body>
+	<nav class="w3-topnav2 w3-center2 w3-theme2 w3-top2">
+        <a href="../index.html" title="HOME"><i class="fa fa-home w3-large2"></i></a>
+        <a href="#acrec">Aclaraciones/Recomendaciones</a>
+        <a href="#objetivos"> Objetivos </a>
+        <a href="#background">Background</a>
+        <a href="#depth">Depth Perception</a>
+        <a href="#parta">Parte A</a>
+        <a href="#partb">Parte B</a>
+        <a href="#deb"> Debuggin y Testing </a> 
+        <a href="#entrega"> Entrega</a>
+    </nav>
+
+    <div class="header">
+    	<h1>CC3 2016 Proyecto 1: C/MIPS</h1>
+    	<big>Auxiliar: Ivan Juárez</big><br>
+    	<big><i>alexanderj@galileo.edu</big></i><br>
+	</div>
+
+	<div class="content">
+		<h2 id = "acrec">Aclaraciones/Recomendaciones</h2>
+			<ul>
+  			<li>Empiece pronto!</li>
+  			<li>Este proyecto puede realizarse en parejas o individualmente. Usted puede compartir código <strong>únicamente con su pareja.</strong></li>
+  			<li><strong>Asegúrese de leer todas las especificaciones del proyecto antes de iniciarlo.</strong></li>
+		</ul>
+
+		<h2 id = "objetivos">Objetivos</h2>
+		<p>
+			Este proyecto le permitirá conocer C y MIPS con mayor profundidad. La primera parte le da la oportunidad de mejorar sus habilidades de programacion en C, principalmente en el uso de punteros y estructuras, mientras que en la segunda parte deberá usar el lenguaje MIPS. Parte de este proyecto también servirá como base para el proyecto 3. ¡Esperamos que se divierta!
+		</p>
+
+		<h2 id = "background">Background</h2>
+
+		<p>
+			Las cámaras tradicionalmente capturan una proyección bidimensional de una escena. Sin embargo, la información de profundidad
+			es muy importante para muchas aplicaciones en el mundo real. Por ejemplo, la navegación robótica, reconocimiento de rostros, gestos o reconocimiento de
+			posición, digitalización en 3D y más. El sistema visual humano puede percibir la profundidad mediante la comparación de las imagenes captadas por nuestros ojos. Esto es llamado "stereo vision". En este proyecto vamos a experimentar con una simple técnica de computer vision/image processing, llamada "shape from stereo" que, al igual que lo hacen los humanos, calcula la información de profundidad a partir de imagenes stereo (imagenes tomadas desde dos lugares distintos).
+		</p>
+
+		<h3 id = "depth">Depth Perception</h3>
+		<p>
+			Los seres humanos pueden saber qué tan lejos está un objeto mediante la comparación de la posición del objeto se encuentra en la imagen del ojo izquierdo con respecto a la imagen del ojo derecho. Si un objeto está muy cerca de usted, su ojo izquierdo verá el objeto más a la derecha, mientras que el ojo derecho verá el objeto a la izquierda. Un efecto similar se produce con cámaras que se compensan con respecto a la otra como se ve a continuación.
+		</p>
+
+		<p align="center">
+			<img src="../images/PJ1/displ_im.png" onerror="this.src=&#39;displ_im.png&#39;;" width="700">
+		</p>
+
+		<p>
+			La ilustración de arriba muestra tres objetos a diferente profundidad y posición. También muestra la posición en la que los objetos se proyectan en la imagen en la cámara 1 y la cámara 2. Como se puede ver, el objeto más cercano (verde) se desplaza más de la imagen 1 a la imagen 2 (6 pixeles). El objeto más lejano (rojo) se desplaza la menor cantidad de pixeles (3 pixeles). Por lo tanto, podemos asignar un valor de desplazamiento para cada pixel en la imagen 1. El arreglo de desplazamientos se llama mapa de desplazamiento (displacement map). La figura muestra el mapa de desplazamiento correspondiente a la imagen 1.
+		</p>
+
+		<p>
+			Su tarea será encontrar el mapa de desplazamiento mediante un sencillo algoritmo de coincidencia de bloques. Dado que las imágenes son de dos dimensiones, necesitamos explicar cómo se representan las imágenes antes de describir el algoritmo.
+		</p>
+		
+		<p>
+			A continuación se muestra un ejemplo clásico de imágenes stereo y el mapa de desplazamiento se mostrará como una imagen.
+		</p>	
+
+		<p align="center">
+			<img src="../images/PJ1/displacement_example.png" height="200">
+		</p>
+
+		<h2 id = "parta">Parte A</h2>
+
+		<h3>Objectivo</h3>
+		<p>
+			Vamos a intentar simular la percepción de profundidad en la computadora, escribiendo un programa que puede distinguir objetos que se encuentran cerca o lejos.
+		</p>
+
+		<h3>Empezando</h3>
+		<p>
+			Copie los archivos necesarios en su directorio de trabajo, introduciendo el siguiente comando:
+		</p>
+
+		<pre class="output">$ <span class="input"> git clone https://github.com/cc-3/PJ1_1.git</span></pre>
+
+		<p>Los archivos que necesita modificar son:</p>
+
+		<ul>
+  		<li>
+  			<code>calc_depth.c</code>: Crea el depth map a partir de dos imagenes. Usted debe implementar la función <code>calc_depth()</code>.
+  		</li>
+  	
+  		<li>
+  			<code>make_qtree.c</code>: Crea la representación quadtree de un depth map. Usted debe implementar las funciones <code>depth_to_quad()</code> y <code>homogenous()</code>.
+  		</li>
+  		
+  		<li>
+  			<code>proj1_1A.txt</code>: Sus respuestas a las preguntas presentadas deben ir aquí.
+  		</li>
+		</ul>
+
+		<p>
+			Usted es libre de definir e implementar funciones adicionales, pero sólo puede hacerlo en los archivos <code>calc_depth.c</code> o <code>make_qtree.c</code>. <b>Los cambios que realice en cualquier otro archivo se sobrescribirán cuando se califique su proyecto</b>
+		</p>
+
+		<p>
+			El resto de los archivos son parte de la estructura del proyecto. Puede ser útil examinar todos los archivos.
+		</p>
+
+
+		<ul>
+    	<li><code>Makefile</code>: Define todos los comandos de compilación.</li>
+
+    	<li><code>depth_map.c</code>: Cargas imagenes bmp y llama  a la función <tt>calc_depth()</tt> para calcular el depth map.</li>
+    	
+    	<li><code>calc_depth.h</code>: Define la firma para la función <tt>calc_depth()</tt> que usted debe implementar.</li>
+    	
+    	<li><code>make_qtree.h</code>: Define la firma para las funciones <tt>depth_to_quad()</tt> y <tt>homogenous()</tt> que usted debe implementar.</li>
+    	
+    	<li><code>quadtree.h</code>: Define la estructura <tt>qNode</tt>, así como cabeceras de la función quadtree.c.</li>
+    	
+    	<li><code>quadtree.c</code>: Llama a las funciones <tt>depth_to_quad()</tt> y <tt>free_qtree()</tt>.</li>
+    	
+    	<li><code>utils.h</code>: Define la estructura <tt>Image</tt> y la firma de funciones de utilidad.</li>
+   		
+   		<li><code>utils.c</code>: Define las funciones para cargar, imprimir, y guardar imagenes bmp.</li>
+    	
+    	<li><code>test/</code>: Contiene los archivos necesarios para probar su código. En  <tt>images/</tt> se encuentran las imagenes de entrada, <tt>output/</tt> contiene los archivos creados por su programa, y <tt>expected/</tt> contiene la salida correcta para los archivos de prueba.</li>
+		</ul>
+
+		<p>
+			Su primera tarea será implementar la función que genera el depth map. Esta función recibe como argumentos dos imagenes (<tt>unsigned char *left</tt> y <tt>unsigned char *right</tt>), que representan los que se ve con el ojo izquierdo y el derecho, y genera un depth map usando el buffer de salida que asignamos para usted (<tt>unsigned char *depth_map</tt>).
+		</p>
+
+		<p align="center">
+			<img src="../images/PJ1/search_anim_2.gif" style="height: 300px;">
+		</p>
+
+		<p>
+			El primer paso es tomar un pequeño parque (aquí 5x5) alrededor del pixel verde. Este parche es representado por el rectángulo rojo. LLamaremos a este parche <strong><u>feature</u></strong>. Para encontrar el desplazamiento, nos gustaría encontrar la posición del correspondiente parche (<strong><u>feature</u></strong>) en la otra imagen. Podemos hacer esto mediante la comparación de los parches (<strong><u>features</u></strong>) de tamaño similar en la otra imagen y elegir el más parecido. Por supuesto, comparar contra todos los parches posibles sería mucho tiempo. Vamos a suponer que hay un límite de cuánto un feature puede desplazarse -- esto se define como espacio de búsqueda (<strong><u>search space</u></strong>) representado por el rectángulo grande (aquí 11x11). Tenga en cuenta que, a pesar de que nuestras imagenes se nombran "left" y "right", nuestro espacio de búsqueda se extiendo tanto izquierda/derecha como arriba/abajo. Como buscamos sobre una región, si la imagen "left" es actualmente la imagen "right" y la imagen "right" es actualmente la "left", el depth map correcto aún se puede generar.
+		</p>
+
+		<p>
+			El parche (feature) fue encontrada en la posición indicada por el cuadro azul en la imagen de la derecha (en la esquina de la caja blanca de la imagen etiquetada como <strong><u>right</u></strong>.
+		</p>
+
+		<p>
+			Decimos que dos features son <strong><u>similares</u></strong> si el cuadrado de su <a href="http://en.wikipedia.org/wiki/Euclidean_distance"><font color = "blue">Distancia Euclídea</font></a> es pequeño. Si comparamos dos features, <tt>A</tt> y <tt>B</tt>, que tienen ancho <tt>W</tt> y alto <tt>H</tt>, su Distancia Euclidea (al cuadrado) está dada por:
+		</p>
+
+		<p align="center">
+			<img src="../images/PJ1/eu_dis_2.png" style="height: 100px;">
+			<br>
+			<small>(Note que esto es <u>siempre</u> un número positivo.)</small>
+		</p>
+
+		<p>
+		Por ejemplo, dados dos conjuntos de imagenes de 2×2:</p>
+		<p>
+			<img src="../images/PJ1/mat1456.png" height="60">&#8592; el cuadrado de su distancia euclídea es (1-1)<sup>2</sup>+(5-5)<sup>2</sup>+(4-4)<sup>2</sup>+(6-6)<sup>2</sup> = 0 &#8594;<img src="../images/PJ1/mat1456.png" height="60">
+		</p>
+		
+		<p>
+			<img src="../images/PJ1/mat1456.png" height="60">&#8592; el cuadrado de su distancia euclídea es (1-3)<sup>2</sup>+(5-5)<sup>2</sup>+(4-4)<sup>2</sup>+(6-6)<sup>2</sup> = 4 &#8594;<img src="../images/PJ1/mat3456.png" height="60"><br>
+			<small>(Fuente: http://cybertron.cg.tu-berlin.de/pdci08/imageflight/descriptors.html)</small>
+		</p>
+
+		<p>
+			Una vez que hemos encontrado el parche (feature) más similar en la imagen derecha, comprobamos a qué distancia se encuentra de parche original (el de la imagen de la derecha) y esto nos dice que tan cerca o lejos se encuentra el objeto.
+		</p>
+
+		<h4>Inputs</h4>
+
+		<p>Definimos estas variables en su función (más bien son argumentos de esta):</p>
+
+		<ul>
+  			<li>image_width</li>
+  			<li>image_height</li>
+  			<li>feature_width</li>
+  			<li>feature_height</li>
+  			<li>maximum_displacement</li>
+		</ul>
+
+		<p>
+			Definimos las variables <code>feature_width</code> y <code>feature_height</code> que son las dimensiones del parche, es decir
+			este tendrá un tamaño de: <code>(2 × feature_width + 1) × (2 × feature_height + 1)</code>. En el ejemplo anterior, <code>feature_width = feature_height = 2</code> lo que da un parche de 5×5. También definimos la variable
+			<code>maximum_displacement</code> que limita el espacio de búsqueda. En el ejemplo anterior <code>maximum_displacement = 3</code> lo que significa
+			que se deberá buscar sobre <code>(2 × maximum_displacement + 1)<sup>2</sup></code> parches en la segunda imagen.
+		</p>
+
+		<h4>Output</h4>
+
+		<p>
+			Para que nuestros resultados se ajusten al rango de un <tt>unsigned char</tt>, debemos "normalizar" la distancia entre el rango de 0 a 255. El desplazamiento normalizado que debe utilizar está dado por:
+		</p>
+
+		<p align="center"> 
+			<img src="../images/PJ1/displacement.png" style="height: 55px;">
+		</p>
+
+		<p>
+		Esta función está implementada para usted en <tt>calc_depth.c</tt>.
+		</p>
+
+		<p>
+			En el caso del ejemplo anterior, <code>dy=1</code> y <code>dx=2</code> son los desplazamientos horizontal y vertical del pixel verde. Esta fórmula garantiza que tendremos un valor que cabe en un <code>unsigned char</code>, por lo que el desplazamiento normalizado es <code>255 × sqrt(1 + 2<sup>2</sup>)/sqrt(2 × 3<sup>2</sup>) = 134</code>, redondeado a un entero.
+		</p>
+
+		<h4>Imagenes Bitmap (bmp)</h4>
+
+		<p>
+			Vamos a trabajar con <a href="http://en.wikipedia.org/wiki/BMP_file_format"> <font color = "blue">imagenes bitmap</font></a> de 8 bits en escala de grises. En este formato (8 bits), cada pixel toma un valor entre 0 y 255,
+			donde 0 = negro, 255 = blanco, y los valores intermedios representan varios niveles de gris. Los pixels
+			forman una matriz 2D con <code>image_height</code> filas y <code>image_width</code> columnas. Usted debería estar relacionado con el formato de estas imágenes, ya que las empleo en su proyecto <i>BMP Image Handler</i> en el curso de CC2.
+		</p>
+
+		<p>
+			Debido a que cada pixel puede ser uno de los 256 valores, podemos representar una imagen en memoria usando un arreglo de <code>unsigned char</code> de tamaño
+			<code>image_width * image_height</code>. Guardamos una imagen 2D en un  arreglo 1D de tal manera que cada fila de la imagen ocupa una parte continua del arreglo. Los pixeles se almacenan de arriba hacia abajo y de izquierda a derecha (como en la ilustración de abajo):
+		</p>
+
+		<img src="../images/PJ1/rowMajor.png"><br>
+		<small>(Fuente: http://cnx.org/content/m32159/1.4/rowMajor.png)</small>
+
+		<p>
+			Podemos referirnos a los pixeles individuales en la matriz especificando la fila y la columna en la que se encuentra. Recordemos que en una matriz, las
+			filas y columnas se numeran de arriba a la izquierda. Nosostros seguiremos este esquema de numeración, por lo que el cuadro rojo de la izquierda
+			está en la fila 0, columna 0, y el cuadrado azul más a la derecha está en la fila 2, columa 1. Nos referimos al número de columnas en la imagen como <i>image_width</i>, y el número de filas como <i>image_height</i>. Por lo tanto, la imagen de arriba tiene una anchura de 2, altura de 3,
+			y el elemento en <code>x=1</code> y <code>y=2</code> es el cuadrado azul más a la derecha.
+		</p>
+
+		<h4>En resumen</h4>
+
+		<p>
+			Implemente la función en <code>calc_depth.c</code> de manera que genere un depth map y lo guarde (el depth map) en <code>unsigned char *depth_map</code>, que apunta a un buffer (un arreglo de unsignerd char, para ser más preciso) pre-asignado de tamaño <code>image_width</code> × <code>image_height</code>. Las dos imagenes, <code>left</code> y <code>right</code> se proporcionan y también son de tamaño <code>image_width</code> × <code>image_height</code>. Los parámetros <code>feature_width</code> y <code>feature_height</code> describen el alto y ancho de un parche (feature).
+
+		<p> Aquí hay algunos detalles de implementación y consejos:</p>
+<ul>
+  <li>Un feature es una caja o parche de ancho <code><u>2 × feature_width + 1</u></code> y alto <code><u>2 × feature_height + 1</u></code>, en cuyo centro se encuentra el pixel original.</li>
+  <li>Usted <u>no</u> puede asumir <code>feature_height</code> = <code>feature_width</code> = <code>maximum_displacement</code>. Todos ellos pueden ser diferentes (e.g. un feature rectangular y no cuadrado).</li>
+  <li>Los pixeles en el borde de la imagen, cuyos parches (features) izquierdos no encajan dentro de la imagen deben de tener una distancia de 0 (infinito).</li>
+  <li>Cuando <code>maximum_displacement</code> es 0, toda la imagen tendría un desplazamiento normalizado de 0.</li>
+  <li> Su algoritmo no debe considerar los parches (features) que están parcialmente fuera del area de la imagen. Sin embargo, si el parche de un pixel está completamente dentro del área de la imagen, siempre debe ser capaz de asignar un desplazamiento normalizado a ese pixel. Si esto le parece confuso, pregunte para que no tenga problemas cuando usted implemente su algoritmo.</li>
+  <li>Los pixeles siempre deben venir de <code>unsigned char *left</code>, mientras que en la imagen <code>unsigned char *right</code>  es la que se analiza en busca de features similares o cercanos.</li>
+  <li>Usted <u>no</u> puede asumir que <code>unsigned char *depth_map</code> se ha llenado con ceros.</li>
+  <li>Usted <u>no</u> puede almacenar variables globales que persisten entre varias llamadas a <code>calc_depth</code>.</li>
+  <li>El cuadrado de la distancia euclídea debe calcularse según la siguiente fórmula:<br><img src="../images/PJ1/eu_dis_2.png" style="height: 65px;"></li>
+  <li>Después de encontrar la el parche (feature) de la imagen derecha con la menor distancia euclídea (al cuadrado), el desplazamiento normalizado está dado por la fórmula:<br><img src="../images/PJ1/displacement.png" style="height: 55px;"></li>
+  <li>Si uno o varios parches (features) tienen la misma distancia euclídea, deberá considerarse el que tenga un menor desplazamiento normalizado.</li>
+  <li>Algunos test cases son proporcionados por <code>make check</code>. Estas no son todas las pruebas que vamos a realizar al momento de calificar su proyecto, se recomienda que realice sus propias pruebas.</li>
+</ul>
+
+
+<p>Use <code>make</code> para compilar <code>calc_depth</code>. Su código debe compilar con  el <code>Makefile</code> dado:</p>
+
+<pre class="output">$ <span class="input">make</span>
+gcc -Wall -g -std=c99 -o  ....
+    ....
+</pre>
+
+<p>Ahora puede ejecutar <code>./depth_map</code> para ver las opciones que tiene su programa.</p>
+
+<pre class="output">$ <span class="input">./depth_map</span>
+USAGE: ./depth_map [options]
+
+REQUIRED
+    -l [LEFT_IMAGE]       The left image
+    -r [RIGHT_IMAGE]      The right image
+    -w [WIDTH_PIXELS]     The width of the smallest feature
+    -h [HEIGHT_PIXELS]    The height of the smallest feature
+    -t [MAX_DISPLACE]     The threshold for maximum displacement
+
+OPTIONAL
+    -o [OUTPUT_IMAGE]     Draw output to this file
+    -v                    Print the output to stdout as readable bytes
+</pre>
+
+<p>La opción <code>-o</code> le permitirá visualizar su depth map como una imagen BMP. En estas imagenes, las regiones azules están muy lejos mientras que las regiones rojas están muy cerca.</p>
+
+<p><strong>Los tests que se realizan no son una garantía de la exactitud de su código.</strong> Usted puede ejecutar los tests para su código con <code>make check</code>. Para <tt>calc_depth</tt>, las imagenes y bytes se escribirán en <code>test/output/<i>TEST_NAME</i>-output.bmp</code> y <code>test/output/<i>TEST_NAME</i>-output.txt</code>. Para <tt>quadtree</tt>, la salida impresa se escribe en <code>test/output/<i>TEST_NAME</i>-output.txt</code>.</p>
+
+<p>Usted puede utilizar sus propias imagenes BMP de 8 bits (grayscale) para probar el código. Hay funciones auxiliares en <code>utils.c</code> para generar archivos BMP (arreglos <code>unsigned char</code>). Como alternativa puede generarlas con un programa de edición de imagenes como Photoshop.</p>
+
+<pre class="output">$ <span class="input">./depth_map -l test/images/quilt2-left.bmp -r test/images/quilt2-right.bmp -h 0 -w 0 -t 1 -o test/output/quilt2-output.bmp -v</span>
+00 00 00
+00 ff 00
+00 00 b4
+</pre>
+
+<h4>Preguntas que debe responder</h4>
+
+<p> Después de implementar la función <code> calc_depth()</code>, por favor responda las siguientes preguntas en proj1_1A.txt:</p><p>
+</p><ol>
+  <li>
+  Las imagenes <code>real1-left.bmp</code> y <code>real1-right.bmp</code> en la carpeta <code>test/images/</code> son fotografías reales de una nota adhesiva en la ventana contra un fondo distante. Ejecute <code>./depth_map</code> con <code>feature_width</code> = <code>feature_height</code> = 3 y <code>maximum_displacement</code> = 14. Guarde el depth map BMP en un archivo llamado <code>test/output/real1-output.bmp</code> .(Cuando usted ejecuta el comando<code>make check</code> también se genera la imagen <code>test/output/real1-output.bmp</code>.) ¿Qué tan bien identifica el algoritmo la nota adhesiva? ¿Se identifican erroneamente otras cosas como "cerca" también? Explique por qué.
+  </li>
+  <li>
+  Repita #1 con <code>real2-left.bmp</code> y <code>real2-right.bmp</code>. ¿El algoritmo funciona mejor o peor con estas imagenes? ¿Por qué o por qué no?
+  </li>
+  <li>
+  Ejecute <code>./depth_map</code> con <code>test/images/cal1-left.bmp</code> y <code>test/images/cal1-right.bmp</code>. Use <code>feature_width</code> = <code>feature_height</code> = 0, y <code>maximum_displacement = 3</code>. Guarde el BMP de salida como <code>test/output/cal1-output-0.bmp</code>. Ahora, intente configurar los valores de <code>feature_width</code> y <code>feature_height</code> a 1. A continuación intente con 2 y luego con 3. Guarde los BMP de salida como <code>test/output/cal1-output-1.bmp</code>, <code>test/output/cal1-output-2.bmp</code>, y <code>test/output/cal1-output-3.bmp</code>. ¿Cómo cambian las imagenes de salida a medida que aumenta el tamaño de las característica? Explique por qué sucede esto.
+  </li>
+</ol>
+
+<h3 id ="partb">Parte B</h3>
+
+<p>
+	Su segunda tarea será la de implementar la compresión quadtree. Esta función toma un depth map (<code>unsigned char *depth</code>), y genera una estructura de datos recursiva llamada <i>quad tree</i>.
+</p>
+
+<h4>Compresión Quadtree</h4>
+
+<p>Los depth map que creamos en este proyecto son simplemente matrices 2D de <code>unsigned char</code>. Utilizamos mapas de bits (imágenes bmp) en este proyecto, pero sería increíblemente ineficiente (debido al espacio ocupado) si cada imagen en el Internet fueron almacenadas de esta manera, ya que los mapas de bits almacenan el valor de cada píxel por separado. En cambio, hay muchas maneras de comprimir imágenes (formas de almacenar la misma información de la imagen cuyo tamaño más pequeño). En la parte 1B del proyecto, se le pedirá a aplicar un tipo de compresión utilizando una estructura de datos llamada quadtree.</p>
+
+<p>Un quadtree es similar a un árbol binario (que usted utilizó en el curso de CC2), excepto que cada nodo debe tener o bien 0  o 4 nodos hijo. Se aplica a imagenes BMP cuadradas cuya anchura y altura puede ser expresada como <strong>2<sup>N</sup></strong> (¿Por qué, qué pasaría si se aplica a una imagen cuyas filas y columnas no pueden expresarse como 2<sup>N</sup>?), el nodo root de un árbol representa toda la imagen. Cada nodo del árbol represenra una subregión cuadrada dentro de la imagen. Decimos que una región cuadrada es <b>homogenea</b> Si sus pixeles tienen todos el mismo valor. Si una región cuadrada  no es <b>homogenea</b>, entonces dividimos la región en cuatro cuadrantes, cada uno de los cuales está representado por un nodo hijo del nodo padre en el quadtree. Si la región cuadrada es homogenea, entonces el nodo del quadtree no tiene nodos hijo y en su lugar, tiene un valor igual al color de los pixeles en esa región.</p>
+
+<p>Realizamos la comprobación de la homogeneidad de las regiones de la imagen representadas por cada nodo, hasta que todos los nodos del quadtree contenga sólo los pixeles de un sólo valor de escala de grises. Cada <b>leaf node</b> en el quadtree es asociado con una sección cuadrada de la imagen y un valor particular de escala de grises. Cualquier <b>non-leaf node</b> tendrá un valor de 256 (fuera del rango de escala de grises) asociado a él, y debe tener 4 nodos hijo.</p>
+
+<p align="center"><img src="../images/PJ1/quadtree.png"><br><small>(Fuente: http://en.wikipedia.org/wiki/File:Quad_tree_bitmap.svg)</small></p>
+
+<p>Numeraremos cada nodo hijo (1-4) hacia la derecha, desde al parte superior izquierda como las direcciones ordinales (NW, NE, SE, SW). Al analizar a través de los nodos, utilizaremos el siguiente orden: 1: NW, 2: NE, 3: SE, 4: SW. </p>
+
+<p>Dado un quadtree, podemos optar por mantener sólo los nodos hoja y usar esto para representar a la imagen original. Debido a que los nodos hoja deben contener el valor del color que representan, los nodos que no son hojas no son necesarios para reconstruir la imagen. Esta técnica de compresión funciona bien si una imagen tiene grandes regiones con el mismo valor de escala de grises (imágenes artificiales), frente a las imágenes con un montón de ruido aleatorio (imágenes reales). Los depth map son relativamente una buena entrada, ya que tenemos grandes regiones con profundidades similares.</p>
+
+<p align="center"><img src="../images/PJ1/quadtree_compressed.png"></p>
+
+<p>
+Su tarea consiste en escribir las funciones <tt>depth_to_quad()</tt> y <tt>homogenous()</tt> que se encuentran en <tt>make_qtree.c</tt>.
+La primera función, <tt>depth_to_quad()</tt> toma un array de <tt>unsigned char</tt>, la convierte en un quadtree, y retorna un puntero
+al <tt>qNode</tt> root en el árbol. Tenga en mente que las variables locales no sobreviven después de que la función retorna un valor, por lo que <b> debe utilizar dynamic memory allocation</b> en la función. Dado que la asignación de memoria puede fallar, es necesario comprobar si el puntero devuelto por <code>malloc()</code> es válido o no. Si este es NULL, debe llamar a la función <tt>allocation_failed()</tt> (definida en <tt>utils.h</tt>).
+</p>
+
+<p><strong>Su implementación debe utilizar un árbol de qNodes. Todos los qNodes tienen 0 o 4 nodos hijo. La declaración de la estructura <tt>qNode</tt> está en <tt>quadtree.h</tt>.</strong></p>
+
+<p>La segunda función <tt>homogenous()</tt> toma el <tt>depth_map</tt> así como una región de la imagen (dada con las coordenadas superiores, ancho, y alto). Si cada pixel en esta región tiene el mismo valor de escala de grises, entoces <tt>homogenous()</tt> debe retornar ese valoe. O bien, si la región no es homogenea, debe retornar 256.</p>
+
+<p>
+Aquí hay algunos puntos clave con respecto a su representación quadtree:
+</p><ol><li>Cada qNode contiene el miembro <tt>leaf</tt> que sirve para indicar si un nodo es una hoja o no, este tiene el valor de 1 si el nodo es hoja (no tiene ningún nodo hijo) o 0 de lo contario (el nodo tiene 4 nodos hijo).</li>
+<li>El miembro <tt>gray_value</tt> representa el valor de escala de grises de la región que represenra el nodo, este debe tener el valor de 256 en caso de que el nodo no sea una hoja (leaf = 0).</li>
+<li>Los miembros <tt>x</tt> e <tt>y</tt> representan la coordenada del pixel superior izquierdo de la región que representa el nodo.</li>
+<li>Sólo requerimos que su código funcione con imagenes que tienen ancho que son potencias de dos. Esto significa que todos los tamaños <tt>qNode</tt> también serán potencias de dos y el tamaño más pequeño de un <tt>qNode</tt> será de un pixel.</li>
+<li>Los cuatro nodos hijos están nombrado con las direcciones ordinales (NW, NE, SE, SW), que deben coincidir con las secciones correspondientes de la imagen.</li>
+<li>Algunos test cases son proporcionados por <code>make check</code>. Estas no son todas las pruebas que realizaremos a su código cuándo se califique.</li>
+<li>No se preocupe por las imagenes NULL o imagenes de tamaño 0, no vamos a probar para estos casos (pero le invitamos a verificarlo de todos modos y devolver NULL si fuera el caso)</li>
+</ol>
+
+<p>
+El siguiente ejemplo ilustra los puntos anteriores:
+</p>
+
+<figure>
+	<img src="../images/PJ1/matrix_to_quadtree_example.png">
+	<figcaption><i>Convirtiendo una matriz en un quadtree.</i></figcaption>
+</figure>
+
+<p>
+Usted puede compilar su código para la parte B con el siguiente comando:
+</p>
+
+<pre class="output">$ <span class="input">make quadtree</span>
+</pre>
+
+<p>
+Al ejecutar el programa sin argumentos imprimirá el quadtree y la representación comprimida de algunos arreglos definidos en <tt>print_basic()</tt>. También puede pasar el nombre de una imagen bmp en escala de grises y el código va a comprimir la imagen e imprimir su representación quadtree. Tenga en cuenta que las imagenes con las que trabajamos deben ser cuadradas y sus dimensiones (filas y columnas) deben ser potencias de dos.
+</p>
+
+<h3 id = "deb">Debugging y Testing</h3>
+
+<p>
+Si compila su código cona la bandera -g, puede utilizar GDB que le ayudará a depurar su programa.GDB puede ayudarle a hacer su depuración mucho más rápido, especialmente para las cuestiones relacionadas con el acceso a memoria.
+</p>
+
+<p>
+Además, hemos incluido algunas funciones para ayudar a que el desarrollo y la depuración sea más fácil:
+</p><ul>
+<li>
+<tt><b>print_image(const unsigned char *data, int width, int height)</b></tt>: Esta función toma un arreglo de pixeles e imprime sus valores en hexadecimal en la salida estándar.
+</li>
+<li>
+<tt><b>save_image(char *filename, const unsigned char *data, int width, int height)</b></tt>: Esta función toma un arreglo de pixels
+y lo guarda en un archo bmp especificado en <tt>filename</tt>.
+</li>
+<li>
+<tt><b>print_qtree(qNode *qtree_root)</b></tt>: Esta función toma un qNode e imprime el quadtree.
+</li>
+<li>
+<tt><b>print_compressed(qNode *qtree_root)</b></tt>: Esta función toma un qNode e imprime la representación comprimida del quadtree.
+</li>
+</ul>
+<p></p>
+
+<p>
+Los test cases que le proporcionamos no son todos con los que se pondrá a prueba su código.
+Le animamos a escribir sus pruebas antes de enviar su proyecto. Siéntase libre de agregar tests adicionales
+en el codigo base (el que le proporcionamos), <b>pero no realice ninguna modificación a las firmas de las funciones o la declaración de estructuras.</b>
+Esto puede hacer que su código no compile durante la calificación.
+</p>
+
+<p>
+  Al ejecutar <code>make check</code> usted ejecutará su código con los test cases. Usted puede obtener resultados como este:
+</p>
+
+<pre class="output">$ <span class="input">make check</span>
+Running: ./depth_map -l test/images/quilt1-left.bmp -r test/images/quilt1-right.bmp -h 0 -w 0 -t 1 -o test/output/quilt1-output.bmp -v
+Wrong output. Check test/output/quilt1-output.txt and test/expected/quilt1-expected.txt
+...
+</pre>
+
+<p>
+Puede abrir la imagen <code>test/output/quilt1-output.bmp</code> para ver que tipo de depht map produjo su algoritmo, y puede abrir el archivo de texto <code>test/output/quilt1-output.txt</code> para ver los valores (en hexadecimal) que produjo. Los valores esperados están en <code>test/expected/quilt1-expected.txt</code>.
+</p>
+
+<p>
+Antes de enviar, <b>asegúrese de probar su código.</b>.
+<b><font color="red">SI SU PROGRAMA FALLA AL COMPILAR, AUTOMÁTICAMENTE TENDRÁ CERO EN ESA PARTE DEL PROYECTO</font></b>
+(es decir, si <tt>depth_map</tt> funciona, pero <tt>quadtree</tt> no compila, usted recibirá puntos por <tt>depth_map</tt>
+pero no por <tt>quadtree</tt>). No hay excusa para no probar su código.
+</p>
+
+<h2 id ="entrega">Entrega</h2>
+
+<p> 
+Debe enviar un correo a <i><font color = "blue" size = 2>alexanderj@galileo.edu</font></i> indicando los miembros de su grupo para que se le asigne un número de grupo en el GES.
+Todas las partes del proyecto deben entregarse el día X, X de Febrero antes de las 11:55 pm en el GES. Por favor comprima la carpeta <code>pj1-CC3</code> que contiene ambas partes del proyecto en un archivo llamado <code>pj1-NGRUPO.zip</code> . <strong> Asegúrese de que su código funciona correctamente antes de enviarlo</strong>.</p>
+<HR width=30% align="center">
+
+<H3 align="center"> <i>¡Le deseamos buena suerte!</i> </H3>
+
+	</div>
+
+</body>
+</html>
