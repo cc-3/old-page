@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <head>
+        <meta charset="utf-8">
+        
+        <link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
+               
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+                <title>CC3 - Proyecto 1-2</title>
+
+</head>
+<body>
+	<nav class="w3-topnav2 w3-center2 w3-theme2 w3-top2">
+        <a href="../index.html" title="HOME"><i class="fa fa-home w3-large2"></i></a>
+        <a href="#lfsr">LFSR</a>
+        <a href="#parta">Parte A</a>
+        <a href="#partb">Parte B</a>
+        <a href="#deb"> Debuggin y Testing </a> 
+        <a href="#entrega"> Entrega</a>
+    </nav>
+
+    <div class="header">
+    	<h1>CC3 2016 Proyecto 1: C/MIPS</h1>
+    	<big>Auxiliar: Ivan Juárez</big><br>
+    	<big><i>alexanderj@galileo.edu</big></i><br>
+	</div>
+
+	<div class="content">
+		<h2>Parte 2</h2>
+			<p>En la primera parte del proyecto vimos un sencillo algoritmo de computer vision que genera mapas de desplazamiento a partir de imagenes stereo.
+			También vimos como comprimir los mapas de desplazamiento usando la estructura de datos quadtree. En esta parte implementará una tarea complementaria. Vamos a utilizar mapas de desplazamiento para generar los llamados random dot autostereograms.Los random dot autostereograms son como imagenes aleatorias que cuando se ven de cierta manera (wall-eyed o cross-eyed) dan a su cerebro la ilusión de una imagen 3D. Si piensa en todo ello, el proyecto completo le permitirá capturar datos 3D de un entorno y luego visualizarlos en un 3D autostereogram!!!</p>
+
+			<p>Como un complemento a la compresión quadtree, usted deberá implementar un procedimiento de "decompresión" que devuelve un mapa de desplazamiento a partir de una estructura quadtree.</p>
+
+			<p>Los random-dot-autostereograms también son conocidos con el nombre de Magic Eye. Son muy interesantes, pero algunas personas pueden tener dificultad para ver la escena 3D. De hecho, hay un cierto porcentaje de la población que es incapaz de ver la escena 3D en absoluto. Posiblemente algunas persona de la clase no podrán verlos. Pedimos disculpas por eso! Para tener más información sobre los métodos y la visualización de autostereograms, le recomendamos leer <font color="blue"><a href="http://en.wikipedia.org/wiki/Autostereogram">este artículo de Wikipedia</a></font>. En particular, vea la sección de técnicas de visualización. En el primer autostereogram a continuación se mostrará un relieve de "Cal" cuando se ve wall-eyed. Cuando se vé cross-eyed, se verá como una escultura o un molde. El segundo autostereogram se invierte y se mostrará en relieve cuando se ve cross-eyed y como escultura o molde cuando se vé wall-eyed.</p>
+
+			<p align="center">
+				<img src="../images/PJ1/cal_wall.png" style="width: 800px;"> 
+				<img src="../images/PJ1/cal_cross.png" style="width: 800px;">
+			</p>
+
+			<h3>Empezando</h3>
+			<p>
+				Copie los archivos necesarios en su directorio de trabajo, introduciendo el siguiente comando:
+			</p>
+
+			<pre class="output">$ <span class="input"> git clone https://github.com/cc-3/PJ1_2.git</span></pre>
+
+
+			<p>Los archivos que necesita modificar son:</p>
+
+			<ul>
+ 			 <li>
+  				<code>calc_autostereogram.s</code>: Crea un autostereogram. Debe implementar la función <code>calc_autostereogram()</code>.
+ 			 </li>
+  			<li>
+  				<code>lfsr_random.s</code>: Genera números aleatorios utilizando un LFSR. Debe implementar la función <code>lfsr_random()</code>.
+ 			</li>
+ 			<li>
+  				<code>quad2matrix.s</code>: Convierte un quadtree en la imagen original. Debe implementar la función <code>quad2matrix()</code>.
+			</li>
+		</ul>
+
+		<p>
+  			Usted es libre de definir e implementar funciones de ayuda adicionales, pero sólo puede hacerlo en <code>calc_autostereogram.s</code>, <code>lfsr_random.s</code>, o <code>quad2matrix.s</code>. <b>Los cambios a cualquier otro archivo se sobreescribirán durante su calificación.</b>
+		</p>
+
+		<p>
+			El resto de los archivos son parte de la estructura del proyecto. Puede ser útil examinar todos los archivos.
+		</p>
+
+		<ul>
+		  <li>
+		  	<code>autostereogram.s</code>: El programa principal (aquí se define el main) para calc_autostereogram. Enlaza todos los demás archivos también.
+		  </li>
+
+		  <li>
+		  	<code>check.py</code>: Ejecuta algunas pruebas con su implementación.
+		  </li>
+
+		  <li>
+		  	<code>debug_random.s</code>: Un reemplazo para lfsr_random (vea <strong>Debugging y Testing</strong> abajo).
+		  </li>
+
+		  <li>
+		  	<code>Makefile</code>: No tenemos que compilar nada para este proyecto.No es muy útil.
+		  </li>
+
+		  <li>
+		  	<code>mars</code>: Un bash script que inicia mars con opciones de linea de comandos.
+		  </li>
+
+		  <li>
+		  	<code>Mars4_5.jar</code>: El simulador de MIPS que usaremos.
+		  </li>
+
+		  <li>
+		  	<code>matrix.s</code>: El programa principal para quad2matrix. Enlaza los demás archivos también.
+		  </li>
+
+		  <li>
+		  	<code>print_helpers.s</code>: Algunas funciones de ayuda para imprimir valores.
+		  </li>
+
+		  <li>
+		  	<code>print_matrix.s</code>: Una función de ayuda para imprimir una matriz 2D de un tamaño arbitrario.
+		  </li>
+
+		  <li>
+		  	<code>quad2matrix_data.s</code>: Un test case para quad2matrix.
+		  </li>
+
+		  <li>
+		  	<code>random.s</code>: El programa principal para lfsr_random. Enlaza todos los demás archivos también.
+		  </li>
+
+		  <li>
+		  	<code>utils.s</code>: Funciones de ayuda para el programa.
+		  </li>
+		</ul>
+
+
+		<h2 id = "parta">Parte A</h2>
+
+
+			<p>Su primera tarea es implementar el generador de autostereograms, como los ejemplos de introducción en arriba. Para implementar el generador de autostereograms, primero necesita crear una función para generar números pseudo-aleatorios.</p>
+
+			<p>Edite la función en <code>lfsr_random.s</code> para implementar el 16-bit LFSR del Lab 3, y edite la función <code>calc_autostereogram.s</code> para implementar el algoritmo autostereogram usando lfsr_random como un generador de números aleatorios.</p>
+
+			<h4 id ="lfsr">Linear-Feedback Shift Register (LFSR) Pseudo Random Numbers Generator</h4>
+
+			<p>Implemente el generador de números pseudo-aleatorios de 16-bit del lab 3, pero ahora en MIPS. Su función debe seguir <u>exactamente</u> las siguientes especificaciones. La solución en C está disponible para usted. <strong>Note que esta versión realiza la operación calculate-shift en un ciclo, 16 veces en total.</strong> Par el código del lab 3 sólo se realizaba un shift por llamada a la función, mientras que en esta versión se realizan 16 shifts por cada llamada a la función. Esto se hace con el fin de desplazar los 16 bits anteriores con 16 nuevos bits.</p>
+
+			<p align="center"><img src="../images/PJ1/LFSR-F16.gif"></p>
+
+<pre>static uint16_t reg = 0x1;
+
+for (int i = 0; i &lt; 16; i++) {
+  uint16_t highest = ((reg &gt;&gt; 0) ^ (reg &gt;&gt; 2) ^ (reg &gt;&gt; 3) ^ (reg &gt;&gt; 5));
+  reg = (reg &gt;&gt; 1) | (highest &lt;&lt; 15);
+}
+
+return reg;
+</pre>
+
+<p>No hay argumentos para lfsr_random. Debe usar la sección <tt>.data</tt> de <tt>lfsr_random.s</tt> para guardar su estado. Debe retornar un número de 16-bit (los 16 bits superiores de $v0 deben ser 0).</p>
+
+<p>Su salida debe coincidir con la nuestra:</p>
+
+<pre class="output">$ <span class="input">mars random.s</span>
+MARS 4.5  Copyright 2003-2014 Pete Sanderson and Kenneth Vollmar
+
+26625
+5185
+27515
+38801
+56379
+52819
+14975
+21116
+38463
+54726
+38049
+26552
+4508
+46916
+37319
+41728
+23224
+26004
+11119
+62850
+</pre>
+
+<h4>Generando un autostereogram</h4>
+
+<p>El tipo particular de autostereogram que estaremos generando se conoce como random dot autostereogram. Para generarlo, necesitamos el LFSR pseudo-random generator y un mapa de desplazamiento. La siguiente imagen muestra el depth map para el primer autostereogram de los dos ejemplos anteriores. Para poder visualizarlo mejor, hemos escalado la intensidad (el depth map original es más oscuro).</p>
+<p align="center"><img src="../images/PJ1/cal_win.png" style="width: 400px;"></p>
+
+<p> <font color="blue"><a href="https://inst.eecs.berkeley.edu/~cs61c/fa14/projs/01/cal.png">Aquí</a> </font> esta en depth map sin escalar.</p>
+
+	<p>
+		Si <tt>I(i,j)</tt> es un stereogram con <tt>width=M</tt> y <tt>height=N</tt> nos gustaría crearlo utilizando el mapa de desplazamiento, <tt>depth(i,j)</tt>.
+		<tt>S</tt> representa el <tt>strip_size</tt>, que siempre es mayor que maximum displacement (en el depth map). El autostereogram <tt>I(i,j)</tt> puede ser creado de la siguiente manera:
+	</p>
+
+	<p align="center"><img src="../images/PJ1/autostereogram_formula.png" style="width: 450px;"></p>
+
+	<p>
+		De nuevo, en esta descripción, la imagen tiene <tt>width=M</tt> y <tt>height=N</tt>. Decimos que <tt>I(i, j)</tt> es el pixel de la imagen con coordenadas <tt>X=i, Y=j</tt> y <tt>depth(i, j)</tt> es el valor del depth map en <tt>X=i, Y=j</tt>. Definimos <tt>S</tt> como nuestro <tt>strip_size</tt>, que está a pocas columnas de pixeles en el lado izquierdo de la imagen. Como se puede deducir de la fórmula nos basamos en el "strip" y lo repetimos en la dirección X a lo largo del resto de la imagen, con un pequeño desplazamiento. La función <tt>random(A)</tt> selecciona una valor aleatorio del conjunto <tt>A</tt>.
+	</p>
+
+	<h4>Generador Autostereogram</h4>
+
+	<p>
+		Una vez que tenga la función <tt>lfsr_random</tt>, implemente la función <tt>calc_autostereogram</tt>. Por favor, siga exactamente estas especificaciones para asegurarnos de que su programa coincide con el nuestro. (Existen otras formas de generar un autostereogram, pero su código se calificará basado en estas especificaciones.)
+	</p>
+
+	<p>Argumentos para calc_autostereogram:</p>
+
+	<ul>
+	  <li>autostereogram - Un puntero a un array de <tt>unsigned char</tt>. Deberá llenar este arreglo.</li>
+	  <li>depth_map - Un puntero a un array de <tt>unsigned char</tt>. Este es el arreglo <tt>depth()</tt> en la fórmula del autostereogram.</li>
+	  <li>width</li>
+	  <li>height</li>
+	  <li>strip_size</li>
+	</ul>
+
+	<p>Algunas aclaraciones:</p>
+
+		<ol>
+		  <li>Siga la <a href="../images/PJ1/autostereogram_formula.png">fórmula autostereogram</a> proporcionada anteriormente para generar su autostereogram. Asegúrese de que su ciclo rellene la matriz columna por columna como en la fórmula.</li>
+		  <li>La coordenada (0, 0) está en la parte superior de la imagen. La coordenada (M-1, 0) está en la parte superior derecha. La coordenada (M-1, N-1) está en la parte inferior derecha de la imagen.</li>
+		  <li>Las columnas de <tt>0</tt> a <tt>S - 1</tt> deben de tener el valor <tt>lfsr_random() &amp; 0xff</tt>. Específicamente:
+		  <ol type="a">
+		    <li>Ignore el valor del depth map en esas columnas.</li>
+		    <li>Utilice sólo los 8 bits más bajos, a pesar de que se generan 16 bits aleatorios en cada llamada a nuestra función lfsr_random().</li>
+		  </ol>
+		  </li>
+		  <li>Las columnas de<tt>S</tt> a <tt>M - 1</tt> deben tener el valor <tt>I((i + depth(i, j) - S), j)</tt> donde <tt>i</tt> es la coordenada X y <tt>j</tt> es la coordenada Y del pixel actual.</li>
+		  <li>No necesita manejar los valores en el depth map que son menores que 0.</li>
+		  <li>No necesita manejar los valores en el depth map que son mayores o iguales al strip size, <tt>S</tt>.</li>
+		  <li>No necesita manejar strip_sizes que son mayores que el ancho de la imagen.</li>
+		  <li>Debe llamar a lfsr_random exactamente <i>strip_size × height</i> veces, y es necesario rellenar una columna de la matriz a la vez. Específicamente:
+		  <ol type="a">
+		    <li>Utilice el primer resultado de lfsr_random() en (0, 0). A continuación, en (0, 1). Luego en (0, 2). Etc.</li>
+		    <li>Después de llegar a ..., (0, N-2), (0, N-1), debe pasar a (1, 0).</li>
+		  </ol>
+		</li>
+		</ol>
+
+	<p>Utilice el generador autostereogram en MARS como sigue.</p>
+
+<pre class="output">$ <span class="input">mars autostereogram.s pa INPUT_FILE.bmp OUTPUT_FILE.bmp 16</span>
+MARS 4.5  Copyright 2003-2014 Pete Sanderson and Kenneth Vollmar
+
+...
+</pre>
+
+
+<p>Aquí hay algunos comandos de ejemplo que se pueden utilizar para generar autostereograms:</p>
+
+<pre class="output">$ <span class="input">./mars autostereogram.s pa test/images/blob1-input.bmp test/output/blob1-output.bmp 50</span>
+...
+$ <span class="input">./mars autostereogram.s pa test/images/blob2-input.bmp test/output/blob2-output.bmp 47</span>
+...
+</pre>
+
+<p>Agrege la opción --verbose hasta el FINAL de la lista de argumentos para imprimir el depth_map y el autostereogram generado. (No añadir en cualquier lugar, excepto al final.)</p>
+
+<h3 id ="partb">Parte B</h3>
+
+	<p>
+		Su segunda tarea será la de tomar el quadtree que construyó en la parte 1 del proyecto y convertirlo de nuevo en la arreglo 1-D por filas (que representa una matriz de imagen 2-D). Recordemos que nuestra estructura para los nodos del quadtree es de la siguiente manera manera:
+	</p>
+
+
+<pre>struct quadtree {
+    int leaf;
+    int size;
+    int x;
+    int y;
+    int gray_value;
+    qNode *child_NW, *child_NE, *child_SE, *child_SW;
+};
+</pre>
+
+<p>Debe implementar la función <tt>quad2matrix.s</tt>. Se proporciona un puntero al root del quadtree, un puntero al primer elemento de la matriz que usted debe llenar, y el ancho de la matriz. Su función debe recorrer el árbol y llenar la matriz con los valores correctos para cada cuadrante.</p>
+
+<p>Le proporcionamos la función <tt>print_matrix</tt> para ver la matriz de salida que está llenando. Los datos en <tt>quad2matrix_data.s</tt> son similares al los del ejemplo quadtree que hemos utilizado en las especificaciones. La salida para ello debería verse así</p>
+
+
+<p align="center"><img src="../images/PJ1/quadtree_matrix.png" style="width: 650px;"></p>
+
+<p>Estos son algunos consejos:</p>
+<ul>
+  <li>Para ejecutar el programa, escriba <tt>./mars matrix.s</tt>.</li>
+  <li>Se le proporciona la matriz (en el archivo default: de 8 x 8; este tamaño puede cambiar por lo que no codifique su función para un tamaño predefinido) con todos los valores en 0.</li>
+  <li>Cada elemento de la matriz es un byte (8 bits), no una palabra (word-32 bits).</li>
+  <li>Asegúrese de probar su código con otra matriz. Usted puede generar su propia matriz siguiendo el formato utilizado en <tt>quad2matrix_data.s.</tt></li>
+  <li>Puede asumir que los nodos que no son hoja (leaf = 0) tiene un gray_value de 256, y que los nodos hoja (leaf = 1) pueden tener un valor entre 0 y 255.</li>
+  <li>Pude asumir que los nodos hoja tienen NULL (0) en los punteros a los nodos hijo.</li>
+  <li>Puede asumir que <tt>int leaf;</tt> es o bien 1 (nodo hoja) o 0 (nodo que tiene 4 nodos hijo).</li>
+</ul>
+
+
+<h3 id = "deb">Debugging y Testing</h3>
+
+<p>En los archivos se incluyen algunos tests para su código. <strong>Esos test no garantizan la exactitud de su código.</strong>. Puede ejecutar los tests con el comando <code>make check</code>. Para <tt>lfsr_random</tt> y <tt>quad2matrix</tt>, la salida impresa se muestra en la salida estándar. Para <tt>calc_autostereogram</tt>, la imagen de salida y los bytes se escribirán en <code>test/output/<i>TEST_NAME</i>-output.bmp</code> y <code>test/output/<i>TEST_NAME</i>-output.txt.</code></p>
+
+
+<pre class="output">$ <span class="input">make check</span>
+./check.py
+Testing lfsr...
+Running: ./mars random.s
+  Found: 26625
+  Found: 5185
+  ...
+  ...
+All OK
+</pre>
+
+<p>También puede ejecutar los tres programas por separado usando mars:</p>
+
+<pre class="output">$ <span class="input">./mars random.s</span>
+...
+$ <span class="input">./mars matrix.s</span>
+...
+$ <span class="input">./mars autostereogram.s</span>
+mars autostereogram.s pa [input_file] [output_file] [strip_size] [--verbose]
+...
+</pre>
+
+<h4>Habilitación de argumentos en MARS</h4>
+
+<p>Utilizamos argumentos para pasar los archivos de entrada/salida y los parametros para el programa autostereogram. MARS le permite pasar argumentos a su programa de la siguiente forma:</p>
+
+<pre class="output">$ <span class="input">./mars pa [ARGUMENT_1] [ARGUMENT_2] [...]</span>
+</pre>
+
+<p>Si desea pasar argumentos al programa durante la ejecución de MARS en el modo gráfico, vaya a <strong>Settings &#8594; Program arguments provided to MIPS program</strong> y asegúrese que está activado. Ahora puede establecer los argumentos del programa MIPS. (Recuerde que debe omitir el 'pa', que es una palabra clave de MARS, no un argumento a nuestro programa)</p>
+
+<p align="center"><img src="../images/PJ1/mars_program_arguments.png" style="width: 650px;"></p>
+
+<h4>Examinando el heap en MARS</h4>
+
+<p>Para almacenar nuestras imagenes, a veces, necesitamos asignar memoria en el heap (como en malloc). Por defecto, MARS muestra el segmento de datos de la memoria cuando se está depurando el código. Puede cambiar al heap mediante el menú desplegable. (Vea abajo).
+.</p>
+
+<p align="center"><img src="../images/PJ1/mars_heap.png" style="width: 650px;"></p>
+
+<p>También puede utilizar las flechas verdes (izquierda y derecha) para desplazarse a otras partes de la memoria. (Tendrá que hacer esto con el fin de ver en donde se encuentra <tt>unsigned char *autostereogram</tt>)</p>
+
+<h4>Debugging autostereogram</h4>
+
+<p><strong>Nota:</strong> Antes de empezar a depurar calc_autostereogram.s, asegúrese de que su función lfsr_random.s pasa el script check</p>
+
+<style type="text/css">
+  .grid.inline {
+    display: inline-block;
+  }
+  .grid td {
+    width: 30px;
+    min-height: 30px;
+    font-size: 14px;
+    line-height: 30px;
+    border: 1px solid #666;
+    text-align: center;
+  }
+  .grid td.p00 {
+    background: #000;
+    color: #fff;
+  }
+  .grid td.p01 {
+    background: #222;
+    color: #fff;
+  }
+  .grid td.p02 {
+    background: #444;
+    color: #fff;
+  }
+  .grid td.p03 {
+    background: #666;
+    color: #fff;
+  }
+  .grid td.pff {
+    background: #fff;
+    color: #000;
+  }
+  .grid td.pxx {
+    background: #transparent;
+    color: #666;
+  }
+</style>
+
+
+<p>La función calc_autostereogram es un poco difícil de depurar, pero le hemos proporcionado un para de herramientas para hacerlo más fácil. Primero, le hemos proporcionado un reemplazo para lfsr_random (que es difícil de predecir) que hemos llamado debug_random1. Esta función  devuelve <tt>0xff</tt> cada tercera vez que es llamada, empezando con la primera vez, y <tt>0</tt> en caso contrario. Así, en una matriz de 8 s× 2, llenando <u>UNA COLUMNA A LA VEZ de arriba hacia abajo y de izquierda a derecha</u>, se llega a esto:</p>
+
+<p>(Nota: los colores son exagerados)</p>
+
+
+<table class="grid">
+  <tbody><tr><td colspan="8">debug_random1 (strip_size=3)</td></tr>
+  <tr>
+    <td class="pff">ff</td>
+    <td class="p00">00</td>
+    <td class="p00">00</td>
+    <td class="pxx"></td>
+    <td class="pxx"></td>
+    <td class="pxx"></td>
+    <td class="pxx"></td>
+    <td class="pxx"></td>
+  </tr>
+  <tr>
+    <td class="p00">00</td>
+    <td class="pff">ff</td>
+    <td class="p00">00</td>
+    <td class="pxx"></td>
+    <td class="pxx"></td>
+    <td class="pxx"></td>
+    <td class="pxx"></td>
+    <td class="pxx"></td>
+  </tr>
+</tbody></table>
+
+<p>Este es el depth map grid1-input.bmp, que se encuentra en <tt>test/debug/grid1-input.bmp</tt>. Note que hay dos pixeles con el valor de <tt>1</tt> (desplazamiento de 1) y todo lo demás es <tt>0</tt> (sin desplazamiento).</p>
+
+<table class="grid">
+  <tbody><tr><td colspan="8">grid1-input.bmp</td></tr>
+  <tr>
+    <td class="p00">00</td>
+    <td class="p00">00</td>
+    <td class="p00">00</td>
+    <td class="p00">00</td>
+    <td class="p00">00</td>
+    <td class="p01">01</td>
+    <td class="p00">00</td>
+    <td class="p00">00</td>
+  </tr>
+  <tr>
+    <td class="p00">00</td>
+    <td class="p00">00</td>
+    <td class="p00">00</td>
+    <td class="p00">00</td>
+    <td class="p01">01</td>
+    <td class="p00">00</td>
+    <td class="p00">00</td>
+    <td class="p00">00</td>
+  </tr>
+</tbody></table>
+<p>Tomando <strong>strip_size = 3</strong> y aplicando el algoritmo autostereogram con debug_random1 y grid1-input.bmp. Usted debe obtener esta salida: (si no se puede entender por qué, pensar en ello durante un tiempo y hacerlo a mano).</p>
+
+<table class="grid">
+  <tbody><tr><td colspan="8">grid1-expected.bmp</td></tr>
+  <tr>
+    <td class="pff">ff</td>
+    <td class="p00">00</td>
+    <td class="p00">00</td>
+    <td class="pff">ff</td>
+    <td class="p00">00</td>
+    <td class="pff">ff</td>
+    <td class="pff">ff</td>
+    <td class="p00">00</td>
+  </tr>
+  <tr>
+    <td class="p00">00</td>
+    <td class="pff">ff</td>
+    <td class="p00">00</td>
+    <td class="p00">00</td>
+    <td class="p00">00</td>
+    <td class="p00">00</td>
+    <td class="p00">00</td>
+    <td class="p00">00</td>
+  </tr>
+</tbody></table>
+
+<p>Para ejecutar esta prueba, tendrá que hacer lo siguiente::</p>
+
+<ol>
+  <li>Cambie su llamada a <tt>lfsr_random</tt> en <tt>calc_autostereogram.s</tt> a <tt>debug_random1</tt>.
+  </li><li>Asegúrese de que estállenando la matriz de izquierda a derecha y de arriba hacia abajo, donde el ciclo COLUMNA es el más interior.
+  </li><li>Asegúrese de que llama a la función <tt>debug_random1</tt> EXACTAMENTE strip_size × height veces.
+  </li><li>Ejecute el comando:
+  <pre class="output">$ <span class="input">./mars autostereogram.s pa test/debug/grid1-input.bmp test/output/grid1-output.bmp 3 --verbose</span>
+MARS 4.5  Copyright 2003-2014 Pete Sanderson and Kenneth Vollmar
+
+Depth map:
+  -----0----------1----------2----------3----------4----------5----------6----------7-----
+0 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000001 0x00000000 0x00000000
+1 0x00000000 0x00000000 0x00000000 0x00000000 0x00000001 0x00000000 0x00000000 0x00000000
+Output:
+  -----0----------1----------2----------3----------4----------5----------6----------7-----
+0 0x000000ff 0x00000000 0x00000000 0x000000ff 0x00000000 0x000000ff 0x000000ff 0x00000000
+1 0x00000000 0x000000ff 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000
+</pre>
+  </li><li>Asegúrese de que la salida (la segunda matriz) coincide con lo que aparece aquí.
+  </li><li>Cambie debug_random1 de vuelta a lfsr_random antes usar <tt>make check</tt>
+</li></ol>
+
+<p>Hemos proporcionado en total 4 matrices de depuración,  diseñadas para atrapar una variedad de problemas y ayudar a depurar en caso de que su código no funcione. Todos ellos dependen del mismo generador debug_random1. Estos son los comandos y visualizaciones para todas las matrices de prueba de depuración:</p>
+
+<h4>Debug image: grid1</h4>
+<pre>$ <span class="input">./mars autostereogram.s pa test/debug/grid1-input.bmp test/output/grid1-output.bmp 3 --verbose</span>
+</pre>
+<p>
+  </p><table class="grid inline">
+    <tbody><tr><td colspan="8">debug_random1 (strip_size=3)</td></tr>
+    <tr>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+    </tr>
+    <tr>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+    </tr>
+  </tbody></table>
+
+  <table class="grid inline">
+    <tbody><tr><td colspan="8">grid1-input.bmp</td></tr>
+    <tr>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p01">01</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+    </tr>
+    <tr>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p01">01</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+    </tr>
+  </tbody></table>
+
+  <table class="grid inline">
+    <tbody><tr><td colspan="8">grid1-expected.bmp</td></tr>
+    <tr>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+    </tr>
+    <tr>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+    </tr>
+  </tbody></table>
+<p>
+
+</p><h4>Debug image: grid2</h4>
+<pre>$ <span class="input">./mars autostereogram.s pa test/debug/grid2-input.bmp test/output/grid2-output.bmp 3 --verbose</span>
+</pre>
+<p>
+  </p><table class="grid inline">
+    <tbody><tr><td colspan="8">debug_random1 (strip_size=3)</td></tr>
+    <tr>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+    </tr>
+    <tr>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+    </tr>
+    <tr>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+    </tr>
+    <tr>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+    </tr>
+  </tbody></table>
+
+  <table class="grid inline">
+    <tbody><tr><td colspan="8">grid1-input.bmp</td></tr>
+    <tr>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p01">01</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+    </tr>
+    <tr>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p01">01</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+    </tr>
+    <tr>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p01">01</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+    </tr>
+    <tr>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p01">01</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+    </tr>
+  </tbody></table>
+
+  <table class="grid inline">
+    <tbody><tr><td colspan="8">grid1-expected.bmp</td></tr>
+    <tr>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+    </tr>
+    <tr>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+    </tr>
+    <tr>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+    </tr>
+    <tr>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+    </tr>
+  </tbody></table>
+<p></p>
+
+
+<h4>Debug image: grid3</h4>
+<pre>$ <span class="input">./mars autostereogram.s pa test/debug/grid3-input.bmp test/output/grid3-output.bmp 3 --verbose</span>
+</pre>
+<p>
+  </p><table class="grid inline">
+    <tbody><tr><td colspan="8">debug_random1 (strip_size=3)</td></tr>
+    <tr>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+    </tr>
+    <tr>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+    </tr>
+  </tbody></table>
+
+  <table class="grid inline">
+    <tbody><tr><td colspan="8">grid3-input.bmp</td></tr>
+    <tr>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p02">02</td>
+      <td class="p01">01</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+    </tr>
+    <tr>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p01">01</td>
+      <td class="p00">00</td>
+      <td class="p01">01</td>
+      <td class="p02">02</td>
+      <td class="p00">00</td>
+    </tr>
+  </tbody></table>
+
+  <table class="grid inline">
+    <tbody><tr><td colspan="8">grid3-output.bmp</td></tr>
+    <tr>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+      <td class="pff">ff</td>
+      <td class="pff">ff</td>
+      <td class="pff">ff</td>
+      <td class="pff">ff</td>
+    </tr>
+    <tr>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+      <td class="pff">ff</td>
+      <td class="pff">ff</td>
+      <td class="pff">ff</td>
+      <td class="pff">ff</td>
+    </tr>
+  </tbody></table>
+<p></p>
+
+<h4>Debug image: grid4 (Note: strip_size has changed to 4 for this one)</h4>
+<pre>$ <span class="input">./mars autostereogram.s pa test/debug/grid4-input.bmp test/output/grid4-output.bmp 4 --verbose</span>
+</pre>
+<p>
+  </p><table class="grid inline">
+    <tbody><tr><td colspan="7">debug_random1 (strip_size=4)</td></tr>
+    <tr>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+    </tr>
+    <tr>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+    </tr>
+    <tr>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+    </tr>
+    <tr>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+    </tr>
+    <tr>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+      <td class="pxx"></td>
+    </tr>
+  </tbody></table>
+
+  <table class="grid inline">
+    <tbody><tr><td colspan="7">grid4-input.bmp</td></tr>
+    <tr>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p02">02</td>
+      <td class="p02">02</td>
+      <td class="p01">01</td>
+    </tr>
+    <tr>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p01">01</td>
+      <td class="p01">01</td>
+      <td class="p02">02</td>
+    </tr>
+    <tr>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p02">02</td>
+      <td class="p03">03</td>
+      <td class="p01">01</td>
+    </tr>
+    <tr>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p01">01</td>
+      <td class="p02">02</td>
+      <td class="p03">03</td>
+    </tr>
+    <tr>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="p01">01</td>
+      <td class="p02">02</td>
+      <td class="p02">02</td>
+    </tr>
+  </tbody></table>
+
+  <table class="grid inline">
+    <tbody><tr><td colspan="7">grid4-output.bmp</td></tr>
+    <tr>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+      <td class="pff">ff</td>
+    </tr>
+    <tr>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+    </tr>
+    <tr>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+    </tr>
+    <tr>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+      <td class="pff">ff</td>
+    </tr>
+    <tr>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+      <td class="p00">00</td>
+      <td class="pff">ff</td>
+    </tr>
+  </tbody></table>
+<p></p>
+
+
+
+<h2 id ="entrega">Entrega</h2>
+
+<p> 
+El proyecto deben entregarse el día Jueves, 10 de Marzo antes de las 11:55 pm en el GES. Por favor comprima la carpeta <code>PJ1_2</code> que contiene ambas partes del proyecto en un archivo llamado <code>pj1-NGRUPO.zip</code> . <strong> Asegúrese de que su código funciona correctamente antes de enviarlo</strong>.</p>
+<HR width=30% align="center">
+
+<H3 align="center"> <i>¡Le deseamos buena suerte!</i> </H3>
+
+	</div>
+
+</body>
+</html>
