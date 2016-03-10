@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="../stylesheets/w3-theme-black.css">
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">>
         <link rel="icon" href="../images/favicon.png" type="image/x-icon">
-        <title>CC3 LAB 7</title>
+        <title>CC3 TUTORIAL Python</title>
         <style>
             header {
                 background-image: url("../images/header.jpg");
@@ -27,26 +27,18 @@
             <div class="w3-center w3-padding-32">
                 <div class="w3-center">
                     <h1 class="w3-jumbo">CC3 Estructura de Máquinas</h1>
-                    <h1 class="w3-jumbo w3-animate-bottom">Laboratorio 7</h1>
-                    <h4 class="w3-xxlarge">MapReduce y Spark</h4>
+                    <h1 class="w3-jumbo w3-animate-bottom">Tutorial 1</h1>
+                    <h4 class="w3-xxlarge">PYTHON</h4>
                 </div>
             </div>
         </header>
         <div class="w3-container w3-margin-16">
-            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Objetivos</h1>
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Objetivo</h1>
             <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
                 <p class="w3-text w3-justify w3-large w3-margin-16">
                     <ul>
-                        <li class="w3-large">Ganar experiencia corriendo MapReduce y ganar entendimiento en el paradigma MapReduce.</li>
-                        <li class="w3-large">Quedar más familiarizado con Apache Spark y ganar experiencia corriendo Spark local.</li>
-                        <li class="w3-large">Aprender como aplicar MapReduce en Spark implementando algunos problemas/algoritmos en Spark.</li>
+                        <li class="w3-large">Aprender casi todo sobre python</li>
                     </ul>
-                </p>
-            </div>
-            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Setup</h1>
-            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
-                <p class="w3-text w3-justify w3-large w3-margin-16">
-                    Descarguen los archivos necesarios para este laboratorio en el siguiente <a href="#" target="_blank"><span class="w3-btn w3-red w3-round w3-medium">link</link></a>
                 </p>
             </div>
             <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Python</h1>
@@ -380,76 +372,7 @@
                     Pueden leer sobre las clases en Python y su definición en la <a href="https://docs.python.org/2/tutorial/classes.html">documentación.</a>
                 </p>
             </div>
-            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Ejercicio 0: Mini Programa en Python</h1>
-            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
-                <p class="w3-text w3-justify w3-large w3-margin-16">
-                    Para ver si entendieron bien como utilizar Python, en un archivo llamado pruebas.py hagan un programa con lo siguiente:
-                    <ul class="w3-large">
-                        <li>Una función recursiva que calcule en n-esimo numero de Fibonacci</li>
-                        <li>Una función recursiva que calcule factorial de un numero N</li>
-                        <li>Una función que devuelva si un numero es divisible entre 2 o no</li>
-                    </ul>
-                </p>
-                <p class="w3-text w3-justify w3-large w3-margin-16">
-                    Recuerden que siempre que sea necesario (si no se recuerdan de algo) siempre pueden ir a la <a href="https://docs.python.org/release/2.7.6/">documentación</a>
-                    <br><br>
-                    Sus funciones pueden ser asi:
-                </p>
-<pre class="w3-code w3-light-grey notranslate">
-    <span style='color:#800000; font-weight:bold; '>def</span> fibonacci<span style='color:#808030; '>(</span>n<span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
-
-        <span style='color:#696969; '># Su Codigo Aqui</span>
-
-    <span style='color:#800000; font-weight:bold; '>def</span> factorial<span style='color:#808030; '>(</span>n<span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
-
-        <span style='color:#696969; '># Su Codigo Aqui</span>
-
-    <span style='color:#800000; font-weight:bold; '>def</span> divisible<span style='color:#808030; '>(</span>n<span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
-
-        <span style='color:#696969; '># Su Codigo Aqui</span>
-</pre>
-            </div>
-            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Información de Spark</h1>
-            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
-                <p class="w3-text w3-justify w3-large w3-margin-16">
-                    En las clases les hemos enseñado “cluster computing” (En particular, el framework MapReduce), como se escribe y como se ejecuta, pero ahora es hora de que ustedes hagan sus propios programas y los corran en una librería que tiene “cluster computing”·
-                    <br><br>
-                    Para este lab van a trabajar con Spark. Spark tiene su propia <a href="http://spark.apache.org/">pagina</a>, asi que siéntanse libres de instalarlos en sus máquinas localmente. Pero va a ser más fácil que trabajen en las computadoras del laboratorio. Asegúrense de entender bien el framework de Spark porque lo vamos a utilizar en el proyecto 2 de la clase.
-                    <br><br>
-                    <strong class="w3-xlarge">Eviten las Variables Globales</strong><br><br>
-                    Cuando utilicen Spark, eviten utilizar variables globales. Esto mata el propósito de tener múltiples tareas corriendo en paralelo y crea un embotellamiento cuando múltiples tareas tratan de acceder a la variable global al mismo tiempo. Como resultado, la mayoría de algoritmos van a ser implementados sin el uso de variables globales.
-                    <br><br>
-                    <strong class="w3-xlarge">Como Correr Spark vía Command Line</strong><br><br>
-                    En este lab y para el proyecto les vamos a dar los Makefile para que puedan correr y probar su código fácilmente. Pero cuando utilicen Spark fuera de la clase (Esperamos lo hagan) van a necesitar saber como correr Spark. Noten que Spark trabaja con Python (por eso el tutorial), así que para correr sus archivos de Spark xxx.py, solo corran el siguiente comando:
-                </p>
-<pre class="w3-code w3-light-grey notranslate">
-    <span class="w3-text-teal">$</span> spark-submit xxx.py <span style="color:#aeaeae"># Corre el archivo de Spark file xxx.py</span>
-</pre>
-                <p class="w3-text w3-justify w3-large w3-margin-16">
-                    Si su archivo de Spark espera argumentos, pueden mandárselos por el command line:
-                </p>
-<pre class="w3-code w3-light-grey notranslate">
-    <span class="w3-text-teal">$</span> spark-submit xxx.py arg1 arg2 <span style="color:#aeaeae"># Corre el archivo de Spark file xxx.py y le paso los argumentos arg1 y arg2</span>
-</pre>
-                <p class="w3-text w3-justify w3-large w3-margin-16">
-                    También pueden correr el interprete de Spark, esto es útil para probar su código en el instante. Corran el interprete con el siguiente comando:
-                </p>
-<pre class="w3-code w3-light-grey notranslate">
-    <span class="w3-text-teal">$</span> pyspark <span style="color:#aeaeae"># Corre el interprete de Spark!, aqui prueben lo que sea!!!</span>
-</pre>
-            </div>
-            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Ejercicio 1: Trabajando con Spark</h1>
-            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
-                <p class="w3-text w3-justify w3-large w3-margin-16">
-                    Ahora que tienen experiencia con Python, vamos a utilizar Spark para ver como funciona el framework de MapReduce. En los archivos necesarios les dimos wordcount.py para que estén mas familiarizados con como funciona Spark. Para ayudarlos a entender el código, hay comentarios en algunas lineas, pero siéntanse libres de ver las <a href="http://spark.apache.org/docs/latest/programming-guide.html#transformations">transformaciones</a> y las <a href="http://spark.apache.org/docs/latest/programming-guide.html#actions">acciones</a> en la página de Spark, donde lo explican de una manera mas detallada.
-                    <br><br>
-                    docwordcount.py es un archivo base para que terminen de implementar allí lo necesario para este ejercicio. Para este lab vamos a utilizar archivos con extensión .seq que van a ser la entrada para el MapReduce.
-                    <br><br>
-                    En este ejercicio, van a encontrar útil ver las páginas de transformaciones y acciones que mencionamos arriba ya que les va a ayudar a entender los métodos que pueden utilizar para hacer un sort de los datos, imprimir la salidas o remover datos duplicados.
-                    <br><br>
-                </p>
-            </div>
-        </div>
+          </div>
         <footer class="w3-container w3-padding-32 w3-theme w3-center">
             <h2>CC3 - 2016</h2>
             <a class="w3-btn-floating w3-teal" href="https://slack.com/" title="SLACK"><i class="fa fa-slack"></i></a>
