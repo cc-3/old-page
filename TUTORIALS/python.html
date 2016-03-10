@@ -44,16 +44,14 @@
             <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Python</h1>
             <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
                 <p class="w3-text w3-justify w3-large w3-margin-16">
-                    En este laboratorio vamos a utilizar Python y como tal vez la mayoría no ha tenido la experiencia de programar en este lenguaje aquí hay una pequeña introducción.
-                    <br>
                     <blockquote class="w3-blockquote">
                         NOTA1: aquí les vamos a mostrar lo básico, Python tiene un sin fin de cosas bien cool que pueden buscar por su cuenta como “NumPy, SciPy, MatPlotLib, etc.”
                     </blockquote>
                 </p>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
-                    Python es un lenguaje de programación de alto nivel (su abstracción es bastante alta, casi es pseudocódigo). Además Python es un lenguaje interpretado y usa “dynamic typing”, esto a diferente de Java que usa “static typing”, significa que no se declara que tipo de dato va a ser una variable sino que dinámicamente el interprete lo decide dependiendo del tipo de dato que se le sea asignado a la variable. Se dice que el código de Python es pseudocódigo porque los deja expresar ideas bastante poderosas en muy pocas lineas de código y sigue siendo bastante entendible. Como un ejemplo, aquí hay una implementación del clásico quicksort en Python.
+                    Python es un lenguaje de programación de alto nivel (su abstracción es bastante alta, casi es pseudocódigo). Además Python es un lenguaje interpretado y usa “dynamic typing”, esto a diferente de Java que usa “static typing”, significa que no se declara que tipo de dato va a ser una variable sino que dinámicamente el interprete lo decide dependiendo del tipo de dato que se le sea asignado a la variable. Se dice que el código de Python es pseudocódigo porque los deja expresar ideas bastante poderosas en muy pocas lineas de código y sigue siendo bastante entendible.
                     <blockquote class="w3-blockquote">
-                        NOTA2: Python es un lenguaje de programación orientado a objetos, todo los tipos en Python hasta los basicos son objetos inclusive las funciones son objetos (que raro). En Python si es necesario tomar en cuanta la identación porque asi es como Python interpreta el flujo del programa "IDENTEN BIEN".
+                        NOTA2: Python es un lenguaje de programación orientado a objetos, todo los tipos en Python hasta los basicos son objetos, inclusive las funciones son objetos (que raro). En Python si es necesario tomar en cuanta la identación porque asi es como Python interpreta el flujo del programa "IDENTEN BIEN".
                     </blockquote>
                 </p>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
@@ -61,19 +59,6 @@
                 </p>
 <pre class="w3-code w3-light-grey notranslate">
     <span class="w3-text-teal">$</span> python
-</pre>
-<pre class="w3-code w3-light-grey notranslate">
-    <span style='color:#800000; font-weight:bold; '>def</span> quicksort<span style='color:#808030; '>(</span>arr<span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
-        <span style='color:#800000; font-weight:bold; '>if</span> <span style='color:#400000; '>len</span><span style='color:#808030; '>(</span>arr<span style='color:#808030; '>)</span> <span style='color:#44aadd; '>&lt;=</span> <span style='color:#008c00; '>1</span><span style='color:#808030; '>:</span>
-            <span style='color:#800000; font-weight:bold; '>return</span> arr
-        pivot <span style='color:#808030; '>=</span> arr<span style='color:#808030; '>[</span><span style='color:#400000; '>len</span><span style='color:#808030; '>(</span>arr<span style='color:#808030; '>)</span> <span style='color:#44aadd; '>/</span> <span style='color:#008c00; '>2</span><span style='color:#808030; '>]</span>
-        left <span style='color:#808030; '>=</span> <span style='color:#808030; '>[</span>x <span style='color:#800000; font-weight:bold; '>for</span> x <span style='color:#800000; font-weight:bold; '>in</span> arr <span style='color:#800000; font-weight:bold; '>if</span> x <span style='color:#44aadd; '>&lt;</span> pivot<span style='color:#808030; '>]</span>
-        middle <span style='color:#808030; '>=</span> <span style='color:#808030; '>[</span>x <span style='color:#800000; font-weight:bold; '>for</span> x <span style='color:#800000; font-weight:bold; '>in</span> arr <span style='color:#800000; font-weight:bold; '>if</span> x <span style='color:#44aadd; '>==</span> pivot<span style='color:#808030; '>]</span>
-        right <span style='color:#808030; '>=</span> <span style='color:#808030; '>[</span>x <span style='color:#800000; font-weight:bold; '>for</span> x <span style='color:#800000; font-weight:bold; '>in</span> arr <span style='color:#800000; font-weight:bold; '>if</span> x <span style='color:#44aadd; '>></span> pivot<span style='color:#808030; '>]</span>
-        <span style='color:#800000; font-weight:bold; '>return</span> quicksort<span style='color:#808030; '>(</span>left<span style='color:#808030; '>)</span> <span style='color:#44aadd; '>+</span> middle <span style='color:#44aadd; '>+</span> quicksort<span style='color:#808030; '>(</span>right<span style='color:#808030; '>)</span>
-
-    <span style='color:#800000; font-weight:bold; '>print</span> quicksort<span style='color:#808030; '>(</span><span style='color:#808030; '>[</span><span style='color:#008c00; '>3</span><span style='color:#808030; '>,</span><span style='color:#008c00; '>6</span><span style='color:#808030; '>,</span><span style='color:#008c00; '>8</span><span style='color:#808030; '>,</span><span style='color:#008c00; '>10</span><span style='color:#808030; '>,</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>,</span><span style='color:#008c00; '>2</span><span style='color:#808030; '>,</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>]</span><span style='color:#808030; '>)</span>
-    <span style='color:#696969; '># Prints "[1, 1, 2, 3, 6, 8, 10]</span>
 </pre>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
                     <strong class="w3-xlarge">Tipos de datos básicos</strong><br><br>
