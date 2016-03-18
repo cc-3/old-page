@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../stylesheets/w3.css">
+        <link rel="stylesheet" href="../stylesheets/w3-theme-black.css">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="icon" href="../images/favicon.png" type="image/x-icon">
+        <title>CC3 - PROYECTO 2-2</title>
+        <style>
+            header {
+                background-image: url("../images/header.jpg");
+                color: white;
+                width:100%;
+                min-height:400px;
+                max-height:700px;
+            }
+            .w3-topnav a:first-child:hover{color: #009688;border-bottom: 3px solid transparent;}
+        </style>
+    </head>
+    <body class="w3-light-grey">
+        <nav class="w3-topnav w3-center w3-theme w3-card-4 w3-top">
+              <a href="../index.html" title="HOME"><i class="fa fa-home w3-large"></i></a>
+              <a href="#resume">Resumen</a>
+              <a href="#prepar1">Preparando Su Código</a>
+              <a href="#cali">Calificacion</a>
+              <a href="#notas">Notas</a>
+        </nav>
+        <header id="header" class="w3-container w3-card-4 w3-padding-32">
+            <div class="w3-center w3-padding-32">
+                <h1 class="w3-jumbo">CC3 Estructura de Máquinas</h1>
+                <h1 class="w3-jumbo w3-animate-bottom">Proyecto 2</h1>
+                <h4 class="w3-xxlarge">MapReduce - Parte 2</h4>
+            </div>
+        </header>
+        <div class="w3-container w3-margin-16">
+            <h1 id="clari" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Clarificaciones y Recordatorios</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <ul class="w3-ul w3-large">
+                    <li class="w3-light-grey">Empiecen lo antes posible.</li>
+                    <li>Lean todo este documento antes de empezar a trabajar en el proyecto. Esto les ayuda a tener una mejor visión de lo que tienen que hacer.</li>
+                    <li class="w3-light-grey">Este proyecto se va a trabajar en el Amazon Elastic Cloud (EC2).</li>
+                    <li>Se requiere que trabajen en parejas en este proyecto. La misma con la que trabajaron antes</li>
+                    <li class="w3-light-grey">La versión en ingles de este documento la pueden encontrar <a href="https://inst.eecs.berkeley.edu/~cs61c/fa14/projs/02/index2.html">aquí</a>.</li>
+                    </ul>
+                </p>
+            </div>
+            <h1 id="resume" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Resumen</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    En esta parte del proyecto, vamos a utilizar el poder del Amazon Elastic Cloud EC2, para resolver nuestro Sliding puzzle. Vamos a estar utilizando entre 6 y 12 maquinas al mismo tiempo, cada una con las siguientes especificaciones:
+                    <br><br>
+<pre class="w3-code w3-light-grey notranslate">
+    High<span style='color:#808030; '>-</span>CPU Extra Large Instance<span style='color:#808030; '>:</span>
+    <span style='color:#008c00; '>7</span> GiB of memory
+    <span style='color:#008c00; '>20</span> EC2 Compute Units <span style='color:#808030; '>(</span><span style='color:#008c00; '>8</span> virtual cores with <span style='color:#008c00; '>2.5</span> EC2 Compute Units each<span style='color:#808030; '>)</span>
+    <span style='color:#808030; '>(</span>according to Amazon<span style='color:#808030; '>,</span> this is approximately equivalent to a machine
+    with <span style='color:#008c00; '>20</span> early<span style='color:#808030; '>-</span><span style='color:#008c00; '>2006</span> <span style='color:#008c00; '>1.7</span> GHz Intel Xeon Processors<span style='color:#808030; '>)</span>
+    <span style='color:#008c00; '>1.65</span> TiB of instance storage
+    <span style='color:#008c00; '>64</span><span style='color:#808030; '>-</span>bit platform
+    I<span style='color:#808030; '>/</span>O Performance<span style='color:#808030; '>:</span> High
+    API name<span style='color:#808030; '>:</span> c1<span style='color:#008c00; '>.</span>xlarge
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Entonces, cuando estamos trabajando con 12 instancias (máquinas), estamos trabajando bajo las siguientes “restricciones”:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span style='color:#008c00; '>12</span> High<span style='color:#808030; '>-</span>CPU Extra Large Instances<span style='color:#808030; '>:</span>
+    Total of <span style='color:#008c00; '>84</span> GiB of memory
+    Total of <span style='color:#008c00; '>240</span> early<span style='color:#808030; '>-</span><span style='color:#008c00; '>2006</span> <span style='color:#008c00; '>1.7</span> GHz Intel Xeon Processors
+    Total of <span style='color:#008c00; '>19.8</span> TiB of instance storage
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <strong>Eso si que es poder de computo !!!</strong>
+                </p>
+            </div>
+            <h1 id="resume" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Preparando su código</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Antes de empezar en el parte 2, hay unas pocas modificaciones que necesitan hacerle a su código para que todo funcione mejor en el EC2. Los tableros con los que vamos a estar trabajando van a ser más grandes y en general también nuestros RDDs, entonces hay unas pocas optimizaciones que necesitamos tomar en cuenta antes de empezar la parte 2.
+                    <br><br>
+                    Comiencen descargando los archivos base en el siguiente <a href="#" target="_blank"><span class="w3-btn w3-red w3-round w3-medium">link</link></a> y poniendo la carpeta en home ~
+                    <br><br>
+                    <strong>Dentro del directorio base, van a encontrar una nueva copia de SlidingBfsSpark.py. Copien su código de la parte 1 en este archivo. Van a encontrar dos cambios que hemos hecho: una variable global PARTITION_COUNT y un parámetro adicional en solve_puzzle llamado slaves. Ambos van a ser descritos con mayor detalle abajo.</strong>
+                    <br><br>
+                    <strong class="w3-xxlarge">Partitioning</strong>
+                    <br><br>
+                    Si fueron capaces de alcanzar los tiempos en la parte 1 sin utilizar partitioning, les recomendamos que lo implementen ahora. Esto es porque con tableros más grandes van haber un gran numero de datos que se les va a requerir intercambiarse (shuffled), y hacer partitioning minimiza esto. Para más información, vean la parte de hasta bajo de las especificaciones de la parte 1. La función por defecto de Python hash() es un buen punto de partida para hacer partitioning.
+                    <br><br>
+                    Una vez que hayan implementado partitioning (o si ya lo tenían en la parte 1), van a encontrar la variable PARTITION_COUNT útil. Esta variable es lo que encontramos que es la medida justa para el numero de partitions, y esta basado en el numero de máquinas que están utilizando en paralelo.
+                    <br><br>
+                    <strong class="w3-xxlarge">Hashing</strong><br><br>
+                    Para la segunda parte del proyecto, para incrementar el performance de nuestro código un poco más, vamos a explorar una manera de encoger el tamaño de nuestro RDD, así como también la cantidad de datos que necesitar intercambiarse (shuffled) antes de la fase de reduce. Para hacer esto, hemos creado una función hash de dos vías que hace un map de un tablero hacia un entero y de un entero hacia un tablero.
+                    <br><br>
+                    En el archivo modificado Sliding.py, van a ver dos nuevas funciones: board_to_hash y hash_to_board. Como los nombres sugieren, estas funciones van hacer un hash de un tablero hacia un numero y con este numero también podemos determinar el tablero original antes de hacerle hash. Ustedes no se tienen que preocupar acerca de la implementación de estas funciones, la parte importante es que entiendan que cada tablero únicamente va tener un numero hash que lo represente. Para tener una mejor visualización de como funcionan estos mappings, échenle un vistazo a los comentarios (docstrings) en las funciones board_to_hash y hash_to_board.
+                    <br><br>
+                    Ahora viene la parte importante: ¿cómo pueden hacer uso de estas funciones? Como se menciono antes, la ventaja de este hash es que ahora podemos encoger nuestro tablero a un único entero y fácilmente volverlo a convertir en tablero. Como nuestro código crea pares key-value que hacen uso del tablero en la parte 1, pueden aplicar estas funciones hash en sus tableros antes de escribirlos en un par key-value en las faces map y reduce. Solo asegúrense de volverlos a convertir a tablero para usarlos en otras funciones de ayuda, como children.
+                    <br><br>
+                    <strong>No tienen que volver los enteros en tableros nuevamente, antes de escribirlos a un archivo de texto, esto va a incrementar BASTANTE el tamaño de nuestros archivos de salida</strong>
+                    <br><br>
+                    <strong class="w3-xxlarge">Haciendo un Partitioning a la salida </strong>
+                    <br><br>
+                    También, ahora que nuestros tableros van a ser mas grandes que los tableros que utilizamos en la parte pasada, no vamos estar haciendo uso del paralelismo si tratamos de escribir nuestra salida en forma serial (utilizando un ciclo). Para cambiar esto, vamos a utilzar saveAsTextFile asi como lo hicimos en el laboratorio. De esta manera, cada una de las partitions van a ser escritas en diferentes archivos en el directorio de salida. Para implementar este cambio, dado su RDD final al que quieran escribirlo en los archivos, (digamos que se llama nodes):
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    nodes<span style='color:#808030; '>.</span>coalesce<span style='color:#808030; '>(</span>NUM_WORKERS<span style='color:#808030; '>)</span><span style='color:#808030; '>.</span>saveAsTextFile<span style='color:#808030; '>(</span>output<span style='color:#808030; '>)</span> <span style='color:#696969; '># Que NUM_WORKERS sea 6 o 12</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <strong>Esto va a guardar su RDD en un folder llamado output en un sistema de archivos compartidos (sigan leyendo las instrucciones para buscar esos resultados). Dentro del directorio van a ver bastantes archivos, uno por cada partition, etiquetado part-00**. Van a encontrar el parámetro slaves útil en esta parte.</strong>
+                </p>
+            </div>
+        </div>
+        <div class="w3-container w3-margin-16">
+            <h1 id="prepar1" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Preparando su cuenta</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <blockquote class="w3-blockquote w3-large">NOTA: Tienen que tener una cuenta de AWS antes de hacer esta parte.</blockquote>
+                </p>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Primero necesitamos hacer un par de configuraciones para prepar su cuenta y poner a trabajar cosas en el EC2. Sigan estos pasos (del 1 al 10):
+                </p>
+                <div class="w3-center">
+                    <ul class="w3-pagination w3-xlarge w3-teal">
+                        <span onclick="document.getElementById('div0').style.display='none'"><li><a href="#paso1">01</a></li></span>
+                        <span onclick="document.getElementById('div0').style.display='none'"><li><a href="#paso2">02</a></li></span>
+                        <span onclick="document.getElementById('div0').style.display='none'"><li><a href="#paso3">03</a></li></span>
+                        <span onclick="document.getElementById('div0').style.display='none'"><li><a href="#paso4">04</a></li></span>
+                        <span onclick="document.getElementById('div0').style.display='none'"><li><a href="#paso5">05</a></li></span>
+                        <span onclick="document.getElementById('div0').style.display='none'"><li><a href="#paso6">06</a></li></span>
+                        <span onclick="document.getElementById('div0').style.display='none'"><li><a href="#paso7">07</a></li></span>
+                        <span onclick="document.getElementById('div0').style.display='none'"><li><a href="#paso8">08</a></li></span>
+                        <span onclick="document.getElementById('div0').style.display='none'"><li><a href="#paso9">09</a></li></span>
+                        <span onclick="document.getElementById('div0').style.display='none'"><li><a href="#paso10">10</a></li></span>
+                    </ul>
+                </div>
+                <div id="div0" class="w3-container">
+                    <p class="w3-text w3-justify w3-large w3-margin-16">
+                        Métanse a su cuenta de AWS en el siguiente <a href="http://aws.amazon.com/">link</a>. Una vez dentro les va a aparecer algo como esto:
+                        <br><br>
+                        <center>
+                        <img class="w3-image" src="../images/aws1.png" alt="aws1_dashboard" style="width:30%;cursor:zoom-in" onclick="document.getElementById('modal01').style.display='block'"/>
+                        </center>
+                        <div id="modal01" class="w3-modal" onclick="this.style.display='none'">
+                          <img class="w3-modal-content" src="../images/aws1.png" style="width:100%">
+                        </div>
+                    </p>
+                </div>
+                <div class="w3-tab">
+                    <div id="paso1" class="w3-container">
+                        <p class="w3-text w3-justify w3-large w3-margin-16">
+                            Métanse a su cuenta de AWS en el siguiente <a href="http://aws.amazon.com/">link</a>. Una vez dentro les va a aparecer algo como esto:
+                            <br><br>
+                            <center>
+                            <img class="w3-image" src="../images/aws1.png" alt="aws1_dashboard" style="width:30%;cursor:zoom-in" onclick="document.getElementById('modal02').style.display='block'"/>
+                            </center>
+                            <div id="modal02" class="w3-modal" onclick="this.style.display='none'">
+                              <img class="w3-modal-content" src="../images/aws1.png" style="width:100%">
+                            </div>
+                        </p>
+                    </div>
+                    <div id="paso2" class="w3-container">
+                        <p class="w3-text w3-justify w3-large w3-margin-16">
+                            Vayan donde aparece su nombre, hagan click y les va a salir un dropdown menu y denle click donde dice Security Credentials
+                            <br><br>
+                            <center>
+                            <img src="../images/aws2.png" alt="aws1_dashboard" style="width:30%;cursor:zoom-in" onclick="document.getElementById('modal03').style.display='block'"/>
+                            </center>
+                            <div id="modal03" class="w3-modal" onclick="this.style.display='none'">
+                              <img class="w3-modal-content" src="../images/aws2.png" style="width:100%">
+                            </div>
+                        </p>
+                    </div>
+                    <div id="paso3" class="w3-container">
+                        <p class="w3-text w3-justify w3-large w3-margin-16">
+                            Les va a salir algo como esto:
+                        </p>
+                        <center>
+                        <img src="../images/aws3.png" alt="aws1_dashboard" style="width:30%;cursor:zoom-in" onclick="document.getElementById('modal04').style.display='block'"/>
+                        </center>
+                        <div id="modal04" class="w3-modal" onclick="this.style.display='none'">
+                          <img class="w3-modal-content" src="../images/aws3.png" style="width:100%">
+                        </div>
+                    </div>
+                    <div id="paso4" class="w3-container">
+                        <p class="w3-text w3-justify w3-large w3-margin-16">
+                            En la pestaña que dice Access Keys (Access Key ID and Secret Access Key) den click, les va a salir algo como esto:
+                            <br><br>
+                            <strong>A ustedes no les va a salir que ya tienen una, esto es porque en mi cuenta ya tengo una creada...</strong>
+                            <br><br>
+                            Denle click donde dice Create new Access Key
+                            <br><br>
+                            <center>
+                                <img class="w3-half"src="../images/aws4.png" alt="aws1_dashboard" style="width:30%;cursor:zoom-in" onclick="document.getElementById('modal05').style.display='block'"/>
+                                <img src="../images/aws5.png" alt="aws1_dashboard" style="width:30%;cursor:zoom-in" onclick="document.getElementById('modal06').style.display='block'"/>
+                            </center>
+                        </p>
+                        <div id="modal05" class="w3-modal" onclick="this.style.display='none'">
+                          <img class="w3-modal-content" src="../images/aws4.png" style="width:100%">
+                        </div>
+                        <div id="modal06" class="w3-modal" onclick="this.style.display='none'">
+                          <img class="w3-modal-content" src="../images/aws5.png" style="width:100%">
+                        </div>
+                    </div>
+                    <div id="paso5" class="w3-container">
+                        <p class="w3-text w3-justify w3-large w3-margin-16">
+                            Esto va a crear una nueva Access Key y va a bajar un archivo llamado rootkey.csv
+                            <br><br>
+                            <strong class="w3-large">NO PIERDAN ESTE ARCHIVO, GUARDENLO, NO LO COMPARTAN y NO LO DEJEN EN LAS COMPUTADORAS DE LOS LABS. ESTO ES PERSONAL</strong>
+                            <br><br>
+                            Ahora vuelvan al dashboard de AWS console, apachando el cubo que aparece en la esquina superior izquierda
+                            <br><br>
+                            <center>
+                                <img src="../images/aws6.png" alt="aws1_dashboard" style="width:30%;cursor:zoom-in" onclick="document.getElementById('modal07').style.display='block'"/>
+                            </center>
+                            <div id="modal07" class="w3-modal" onclick="this.style.display='none'">
+                              <img class="w3-modal-content" src="../images/aws6.png" style="width:100%">
+                            </div>
+                        </p>
+                    </div>
+                    <div id="paso6" class="w3-container">
+                        <p class="w3-text w3-justify w3-large w3-margin-16">
+                            Den click donde dice EC2
+                            <br><br>
+                            <center>
+                                <img src="../images/aws7.png" alt="aws1_dashboard" style="width:30%;cursor:zoom-in" onclick="document.getElementById('modal08').style.display='block'"/>
+                            </center>
+                            <div id="modal08" class="w3-modal" onclick="this.style.display='none'">
+                              <img class="w3-modal-content" src="../images/aws7.png" style="width:100%">
+                            </div>
+                        </p>
+                    </div>
+                    <div id="paso7" class="w3-container">
+                        <p class="w3-text w3-justify w3-large w3-margin-16">
+                            Busquen donde dice Key Pairs
+                            <br><br>
+                            <center>
+                                <img src="../images/aws8.png" alt="aws1_dashboard" style="width:30%;cursor:zoom-in" onclick="document.getElementById('modal09').style.display='block'"/>
+                            </center>
+                            <div id="modal09" class="w3-modal" onclick="this.style.display='none'">
+                              <img class="w3-modal-content" src="../images/aws8.png" style="width:100%">
+                            </div>
+                        </p>
+                    </div>
+                    <div id="paso8" class="w3-container">
+                        <p class="w3-text w3-justify w3-large w3-margin-16">
+                            Hagan click donde dice Create Key Pair
+                            <br><br>
+                            <center>
+                                <img src="../images/aws9.png" alt="aws1_dashboard" style="width:30%;cursor:zoom-in" onclick="document.getElementById('modal10').style.display='block'"/>
+                            </center>
+                            <div id="modal10" class="w3-modal" onclick="this.style.display='none'">
+                              <img class="w3-modal-content" src="../images/aws9.png" style="width:100%">
+                            </div>
+                        </p>
+                    </div>
+                    <div id="paso9" class="w3-container">
+                        <p class="w3-text w3-justify w3-large w3-margin-16">
+                            Escriban MapReduceCC3 (Tiene que verse igual las mayúsculas importan) y denle click a create
+                            <br><br>
+                            <center>
+                                <img src="../images/aws10.png" alt="aws1_dashboard" style="width:30%;cursor:zoom-in" onclick="document.getElementById('modal11').style.display='block'"/>
+                            </center>
+                            <div id="modal11" class="w3-modal" onclick="this.style.display='none'">
+                              <img class="w3-modal-content" src="../images/aws10.png" style="width:100%">
+                            </div>
+                        </p>
+                    </div>
+                    <div id="paso10" class="w3-container">
+                        <p class="w3-text w3-justify w3-large w3-margin-16">
+                            Les va aparecer esto y va a bajar un archivo llamado MapReduceCC3.pem, de nuevo guardenlo, cuidenlo, etc...
+                            <br><br>
+                            <center>
+                                <img src="../images/aws11.png" alt="aws1_dashboard" style="width:30%;cursor:zoom-in" onclick="document.getElementById('modal12').style.display='block'"/>
+                            </center>
+                            <div id="modal12" class="w3-modal" onclick="this.style.display='none'">
+                              <img class="w3-modal-content" src="../images/aws11.png" style="width:100%">
+                            </div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <h1 id="clari" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Como correr el código en EC2</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Una vez hecho las modificaciones a su código verificando que funcione bien y configurando su cuenta en el AWS, vamos a enseñarles como tienen que probar su programa.
+                    <br><br>
+                    Primero describamos como su código va a correr en el EC2. A través del AWS vamos a rentar un cluster – que es un set de computadoras conectadas entre si en una red local rápida. Spark corre en el tope de estas maquinas y designa una como master y el resto como slaves. La máquina master, es la encargada de designarle trabajo a los slaves y observa todas las operaciones. Los slaves son utilizados para realizar todas las tareas paralelas, como map y reduce.
+                </p>
+                <div class="w3-image w3-center">
+                    <img src="../images/cluster-overview.png" alt="cluster-spark" />
+                </div>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Primero copien su key MapReduceCC3.pem dentro de la carpeta del proyecto, una vez hecho eso en el archivo que se bajo que se llama rootkey.csv van a encontrar dos lineas, en la primera esta AWSAccessKeyID y en la segunda está AWSSecretKey lo que esta después del igual es lo que necesitamos.
+                    <br><br>
+                    Dentro de la carpeta del proyecto, van a encontrar un archivo llamado ec2-init.sh, dentro de ese archivo en donde dice <b>export AWS_ACCESS_KEY_ID</b>, después del igual pongan su  AWSAccessKeyID y en donde dice <b>export AWS_SECRET_ACCESS_KEY</b>, después del igual su  AWSSecretKey, ejemplo:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span style="color:red">export</span> AWS_ACCESS_KEY_ID=ABCDEFG1234567890123
+    <span style="color:red">export</span> AWS_SECRET_ACCESS_KEY=AaBbCcDdEeFGgHhIiJjKkLlMmNnOoPpQqRrSsTtU
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Hagan lo mismo dentro del archivo <b>destroy.sh</b> y dentro del archivo <b>login.sh</b>
+                    <br><br>
+                    Noten que dentro de ec2-init.sh, está como se ejecuta Spark desde el command line traten de entenderlo y si quieren más información <a href="http://spark.apache.org/docs/latest/ec2-scripts.html">aquí</a> explican bien que significa todo lo que esta ahi o la mayoría.
+                    <br><br>
+                    <strong class="w3-xxlarge">Probando su Código</strong><br><br>
+                    Si ya hicieron todos los pasos anteriores y están seguros seguros que su código está bien, pueden utilizar el script install-ec2 para probar su código
+                    <br><br>
+                    <strong class="w3-xlarge">ADVERTENCIA:</strong><br><br>
+                    NO lo hagan solo por probar porque les pueden cobrar aprox US $6.00 por correr el script aunque después le den destroy solo con que estén un par de segundos les cobran como si estuvieran una hora completa. Recuerden que solo tienen US $100.00
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span class="w3-text-teal">$</span> ./ec2-init.sh
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Al principio después de correr el script se tiene que ver algo así:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span class="w3-text-teal">$</span>  ./ec2-init.sh
+    <span class="w3-text-brown">Setting up security groups...
+    Searching for existing cluster mapreduce-cluster in region us-east-1...
+    Spark AMI: ami-5bb18832
+    Launching instances...
+    Launched 12 slaves in us-east-1b, regid = r-071ba0ab
+    Launched master in us-east-1b, regid = r-961ba03a
+    Waiting for AWS to propagate instance metadata...
+    Waiting for cluster to enter 'ssh-ready' state.........</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Esperen un buen rato a que todo termine y estén atentos, durante este proceso puede que les salga un mensaje como este:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    Warning: SSH connection error. (This could be temporary.)
+    Host: ec2-52-91-142-9.compute-1.amazonaws.com
+    SSH return code: 255
+    SSH output: ssh: connect to host ec2-52-91-142-9.compute-1.amazonaws.com port 22: Connection refused
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Si les sale repetidamente (más de 6 veces vayan a la sección de problemas)
+                    <br><br>
+                    Después que les salga este mensaje un par de veces (o si no les salio) se tiene que ver algo como esto:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    Cluster is now in 'ssh-ready' state. Waited 629 seconds.
+    Generating cluster's SSH key on master...
+    Warning: Permanently added 'ec2-52-91-142-9.compute-1.amazonaws.com,52.91.142.9' (ECDSA) to the list of known hosts.
+    Connection to ec2-52-91-142-9.compute-1.amazonaws.com closed.
+    Warning: Permanently added 'ec2-52-91-142-9.compute-1.amazonaws.com,52.91.142.9' (ECDSA) to the list of known hosts.
+    Transferring cluster's SSH key to slaves...
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Esto indica que se pudo conectar con el cluster via ssh en el puerto 22
+                    <br><br>
+                    y ahora solo queda esperar a que todo se instale en el cluster.
+                    <br><br>
+                    Al finalizar todo, les va a salir algo como esto en el puro final del command line:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    Connection to ec2-52-91-142-9.compute-1.amazonaws.com closed.
+    Spark standalone cluster started at <span class="w3-text-teal">http://ec2-52-91-142-9.compute-1.amazonaws.com:8080</span>
+    Ganglia started at http://ec2-52-91-142-9.compute-1.amazonaws.com:5080/ganglia
+    Done!
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Guarden el link parecido a http://ec2-52-91-142-9.compute-1.amazonaws.com:8080
+                    porque les va a servir para ver como van sus tareas y que tiempo llevan ejecutándose además de la cantidad de maquinas que están funcionando.
+                    <br><br>
+                    Si ponen ese link en su navegador se veria algo como esto:
+                </p>
+                <div class="w3-center">
+                    <img src="../images/aws13.png" alt="aws1_dashboard" style="width:30%;cursor:zoom-in" onclick="document.getElementById('modal13').style.display='block'"/>
+                </div>
+                <div id="modal13" class="w3-modal" onclick="this.style.display='none'">
+                  <img class="w3-modal-content" src="../images/aws13.png" style="width:100%">
+                </div>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    y En su AWS Console algo como esto:
+                </p>
+                <div class="w3-center">
+                    <img src="../images/aws12.png" alt="aws1_dashboard" style="width:30%;cursor:zoom-in" onclick="document.getElementById('modal14').style.display='block'"/>
+                </div>
+                <div id="modal14" class="w3-modal" onclick="this.style.display='none'">
+                  <img class="w3-modal-content" src="../images/aws12.png" style="width:100%">
+                </div>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Ahora es tiempo de que copiemos la carpeta del proyecto en el master del cluster y después entrar a el.
+                    <br><br>
+                    Primero corran en el siguiente comando:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span class="w3-text-teal">$</span> ./get-master.sh
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    les tiene que salir algo como esto:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    Searching for existing cluster mapreduce-cluster in region us-east-1...
+    Found 1 master, 12 slaves.
+    ec2-52-91-142-9.compute-1.amazonaws.com
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    copien lo que dice ec2-*.amazonaws.com en el Makefile donde dice URL y modifiquen SLAVE_COUNT con 6 o 12. También van a necesitar utilizar el siguiente comando que enseña como copiar su carpeta al master en el EC2. Donde vean MASTER en los comandos remplácenlo por lo que copiaron (ec2-*.amazonaws.com).
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span class="w3-text-teal">$</span> scp -i ~/proj2-2/MapReduceCC3.pem -r ~/proj2-2 root@MASTER:~
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    pongan "yes"si les sale algo como esto:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    Are you sure you want to continue connecting (yes/no)?
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    ahora pueden hacer log in:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span class="w3-text-teal">$</span> ./login.sh
+    <span class="w3-text-brown">Searching for existing cluster mapreduce-cluster in region us-east-1...
+    Found 1 master, 12 slaves.
+    Logging into master ec2-52-91-142-9.compute-1.amazonaws.com...
+    Warning: Permanently added 'ec2-52-91-142-9.compute-1.amazonaws.com,52.91.142.9' (ECDSA) to the list of known hosts.
+    Last login: Mon Jan 18 18:41:04 2016 from ip-172-31-31-251.ec2.internal
+
+           __|  __|_  )
+           _|  (     /   Amazon Linux AMI
+          ___|\___|___|
+
+    https://aws.amazon.com/amazon-linux-ami/2013.03-release-notes/
+    Amazon Linux version 2015.09 is available.
+    root@ip-172-31-31-251 ~]$</span>
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    asegurense que su carpeta proj2-2 este en el home y metanse:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span class="w3-text-teal">root@ip-172-31-31-251 ~]$</span> ls
+    <span class="w3-text-brown">ephemeral-hdfs  hadoop-native  mapreduce  persistent-hdfs  proj2-2  scala  spark  spark-ec2  tachyon</span>
+    <span class="w3-text-teal">root@ip-172-31-31-251 ~]$</span> cd proj2-2
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    y prueben con make ec2-medium y vean en el link que copiaron en su navegador la info que sale ahí solo para ver que todo esta funcionando bien
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span class="w3-text-teal">root@ip-172-31-31-251 ~]:~/proj2-2$</span> make ec2-medium
+    <span class="w3-text-brown">~/spark-ec2/copy-dir ~/proj2-2
+    RSYNC'ing /root/proj2-2 to slaves...
+    ec2-54-152-209-243.compute-1.amazonaws.com
+    ec2-54-164-206-247.compute-1.amazonaws.com
+    ec2-54-84-236-65.compute-1.amazonaws.com
+    ec2-52-91-207-195.compute-1.amazonaws.com
+    ec2-52-91-109-255.compute-1.amazonaws.com
+    ec2-54-164-150-43.compute-1.amazonaws.com
+    ec2-54-88-180-38.compute-1.amazonaws.com
+    ec2-54-152-38-201.compute-1.amazonaws.com
+    ec2-52-91-179-214.compute-1.amazonaws.com
+    ec2-54-86-246-75.compute-1.amazonaws.com
+    ec2-54-84-151-93.compute-1.amazonaws.com
+    ec2-54-164-233-182.compute-1.amazonaws.com</span>
+</pre>
+                <div class="w3-center">
+                    <img src="../images/aws14.png" alt="aws1_dashboard" style="width:30%;cursor:zoom-in" onclick="document.getElementById('modal15').style.display='block'"/>
+                </div>
+                <div id="modal15" class="w3-modal" onclick="this.style.display='none'">
+                  <img class="w3-modal-content" src="../images/aws14.png" style="width:100%">
+                </div>
+            </div>
+            <h1 id="clari" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Su tarea</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                </p>
+            </div>
+        </div>
+        <footer class="w3-container w3-padding-32 w3-theme w3-center">
+            <h2>CC3 - 2016</h2>
+            <a class="w3-btn-floating w3-teal" href="https://slack.com/" title="SLACK"><i class="fa fa-slack"></i></a>
+            <h4>Universidad Galileo</h4>
+            <div style="position:relative;bottom:103px;z-index:1;" class="w3-tooltip w3-right">
+                <a class="w3-btn w3-theme" href="#header"><span class="w3-xlarge">
+                <i class="fa fa-chevron-circle-up"></i></span></a>
+            </div>
+        </footer>
+    </body>
+</html>
+
+<title>My Web</title>
