@@ -394,6 +394,8 @@
                         <strong>Partitioning</strong><br><br>
                         Un RDD es una colección de elementos particionados a traves de nodos en un cluster. Por defecto, Spark parte el RDD en particiones secuenciales y las lleva a cada nodo individual. Cuando es tiempo de reducir, los KV pairs pueden ser llevados a través de los nodos en la fase de shuffling. La fase de shuffling requiere mover los datos de un lado a otro (y a veces por toda la red), y esta operación es bastante costosa. <br><br>
                         Tal vez encuentren que pueden alcanzar una mejor performance, haciendo particiones de su dataset de una manera mas inteligente. Probando particionar  los datos cada K iteraciones (Ustedes deciden que K y como lo van a particionar).
+                        <br><br>
+                        Pueden probar con el metodo de Spark <a href="https://spark.apache.org/docs/latest/api/python/pyspark.html?highlight=partitionby#pyspark.RDD.partitionBy">partitionBy</a> para particionar sus RDD's, en el link esta la informacion de como utilizarlo.
                     </p>
                 </p>
             </div>
