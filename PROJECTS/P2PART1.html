@@ -288,11 +288,13 @@
                     Descompriman el zip que bajaron, y dentro de la carpeta descomprimida encontraran:
                     <br>
                     <ul class="w3-text w3-justify w3-large w3-margin-16">
-                        <li><b>Makefile: </b>archivo que define configuraciones para correr su programa (tamaño del sliding puzzle y el nivel de paralelismo a utilizar). Miren este archivo para ver como se corren los programas en Spark. Tambien tiene info de como pueden probarlo en sus compus.</li>
+                        <li><b>Makefile: </b>archivo que define configuraciones para correr su programa (tamaño del sliding puzzle y el nivel de paralelismo a utilizar). Miren este archivo para ver como se corren los programas en Spark. Tiene info de como pueden probarlo en sus compus. Tambien define como probar su codigo para ver si es correcto.</li>
                         <li><b>Sliding.py: </b>implementación del juego sliding-puzzle.</li>
+                        <li><b>check.py: </b>script para verificar si su output es correcto (funciona con make check)</li>
                         <li><b>SlidingBfsReference.py: </b>el algoritmo bfs genérico antes mencionado. Pueden usar este codigo para verificar si su respuesta producida por MapReduce es correcta.</li>
                         <li><b>SlidingBfsSpark.py: </b>El archivo que tienen que modificar. (Aquí van a poner su solucion de MapReduce)</li>
-                        <li><b>ref_out: </b>una carpeta que contiene una salida de referencia de lo que se espera en un juego de 2x2.</li>
+                        <li><b>ref_out: </b>una carpeta que contiene una salida de referencia de lo que se espera en un juego de 2x2. y un resultado de hacer make check</li>
+                        <li><b>expected: </b>una carpeta que contiene las respuestas correctas de todas las pruebas (small-puzzle-expected.txt, medium-puzzle-expected.txt y large-puzzle-expected.txt)</li>
                     </ul>
                 </p>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
@@ -302,6 +304,8 @@
                     <strong class="w3-xlarge">Su trabajo</strong><br><br>
                     <b>Su tarea es implementar un MapReduce iterativo que sea capaz de resolver el Sliding puzzle general.</b><br><br>
                     Como mencionamos arriba, el MapReduce que van a implementar va a tomar como entrada un ancho y un alto describiendo el Sliding puzzle. Usando la solución de ese puzzle, repetidamente va ir expandiendo el árbol del BFS, y generando un mapping entre cada posición y nivel en donde esta en el árbol del BFS. Nosotros representamos el Sliding puzzle como una tupla de strings de Python. Cada pieza se representa con un carácter del alfabeto y la pieza que hace falta con un guión. Después de correr su implementación de MapReduce, esperamos que su programa produzca un archivo de texto de la siguiente forma. (por ejemplo, para el caso de un sliding-puzzle de 2x2).
+                    <br><br>
+                    <strong> NOTA: En la presentacion del proyecto les dijimos que tenian que ordenar su respuesta final como se muestra en el ejemplo de abajo, ESTO YA NO ES OBLIGATORIO Y MEJOR SI NO LO HACEN.</strong>
                 </p><br>
                 <p class="w3-text w3-center w3-large w3-margin-16">
                     0 ('A', 'B', 'C', '-')<br>
@@ -338,12 +342,44 @@
                 </p>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
                     <strong class="w3-xlarge">Para probar su algoritmo</strong><br><br>
-                    <ul class="w3-ul">
-                        <li><b>make run-small: </b>para el caso de 2x2</li>
-                        <li class="w3-light-grey"><b>make run-medium: </b>para el caso de 3x3</li>
-                        <li><b>make run-large: </b>para el caso de 5x2</li>
-                    </ul>
-                </p>
+                    <strong class="w3-large">make run-small</strong><br><br>
+                    Esto va a probar su implementacion con un tablero de 2x2, y les va a generar un archivo llamado small-puzzle-out.txt.<br><br>
+                    <strong class="w3-large">make run-medium</strong><br><br>
+                    Esto va a probar su implementacion con un tablero de 3x3, y les va a generar un archivo llamado medium-puzzle-out.txt.
+                    <br><br>
+                    <strong class="w3-large">make run-large</strong><br><br>
+                    Esto va a probar su implementacion con un tablero de 5x2, y les va a generar un archivo llamado large-puzzle-out.txt.
+                    <br><br>
+                    <strong class="w3-large">make check</strong><br><br>
+                    Esto va a probar su codigo con las pruebas de arriba verificando tiempo y si la respuesta es igual a la esperada. Esto les va a generar un archivo llamado resultados.txt, ese archivo tiene info de porque fallaron asi pueden ver más rapido que estan haciendo mal. Si tienen todo bien el resultado les deberia de salir algo asi:
+<pre class="w3-code w3-light-grey notranslate">
+		Tablero de: 2x2
+		-----------------
+		Tiempo: 4.81 segundos
+		El tiempo fue menor o igual al esperado
+		La cantidad de lineas de su respuesta es correcta
+		Su respuesta hace match con la nuestra (es igual)
+		All Ok
+	
+
+		Tablero de: 3x3
+		-----------------
+		Tiempo: 12.97 segundos
+		El tiempo fue menor o igual al esperado
+		La cantidad de lineas de su respuesta es correcta
+		Su respuesta hace match con la nuestra (es igual)
+		All Ok
+	
+
+		Tablero de: 5x2
+		-----------------
+		Tiempo: 124.15 segundos
+		El tiempo fue menor o igual al esperado
+		La cantidad de lineas de su respuesta es correcta
+		Su respuesta hace match con la nuestra (es igual)
+		All Ok
+</pre>
+                    </p>
             </div>
             <h1 id="cali" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Calificación</h1>
             <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
@@ -360,7 +396,7 @@
                             Tercero, vamos a comparar el tiempo de corrida de su código con el que nosotros obtuvimos
                         </li>
                         <p class="w3-light-grey">Vamos a correrlo local con un MASTER local[8] (8 cores)</p>
-                        <p class="w3-light-grey">Algunos benchmarks aproximados: (2x2 <= 30 segundos), (3x3 <= 1 minuto) y (5x2 <= 3 minutos)</p>
+                        <p class="w3-light-grey">Algunos benchmarks aproximados: (2x2 <= 50 segundos), (3x3 <= 2 minuto) y (5x2 <= 5 minutos)</p>
                     </ul>
                 </p>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
