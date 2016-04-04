@@ -24,8 +24,11 @@
               <a href="../index.html" title="HOME"><i class="fa fa-home w3-large"></i></a>
               <a href="#resume">Resumen</a>
               <a href="#prepar1">Preparando Su Código</a>
+              <a href="#prepar2">Preparando Su Cuenta</a>
+              <a href="#prepar3">Como correr el código en EC2</a>
+              <a href="#prepar4">Su tarea</a>
               <a href="#cali">Calificacion</a>
-              <a href="#notas">Notas</a>
+              <a href="#notas">Troubleshooting</a>
         </nav>
         <header id="header" class="w3-container w3-card-4 w3-padding-32">
             <div class="w3-center w3-padding-32">
@@ -43,7 +46,7 @@
                     <li>Lean todo este documento antes de empezar a trabajar en el proyecto. Esto les ayuda a tener una mejor visión de lo que tienen que hacer.</li>
                     <li class="w3-light-grey">Este proyecto se va a trabajar en el Amazon Elastic Cloud (EC2).</li>
                     <li>Se requiere que trabajen en parejas en este proyecto. La misma con la que trabajaron antes</li>
-                    <li class="w3-light-grey">La versión en ingles de este documento la pueden encontrar <a href="https://inst.eecs.berkeley.edu/~cs61c/fa14/projs/02/index2.html">aquí</a>.</li>
+                    <li class="w3-light-grey">La versión en ingles de este documento la pueden encontrar <a href="https://inst.eecs.berkeley.edu/~cs61c/fa14/projs/02/index2.html">aquí</a> (No sirve mucho).</li>
                     </ul>
                 </p>
             </div>
@@ -67,23 +70,23 @@
                     Entonces, cuando estamos trabajando con 12 instancias (máquinas), estamos trabajando bajo las siguientes “restricciones”:
                 </p>
 <pre class="w3-code w3-light-grey notranslate">
-    <span style='color:#008c00; '>12</span> High<span style='color:#808030; '>-</span>CPU Extra Large Instances<span style='color:#808030; '>:</span>
-    Total of <span style='color:#008c00; '>84</span> GiB of memory
-    Total of <span style='color:#008c00; '>240</span> early<span style='color:#808030; '>-</span><span style='color:#008c00; '>2006</span> <span style='color:#008c00; '>1.7</span> GHz Intel Xeon Processors
-    Total of <span style='color:#008c00; '>19.8</span> TiB of instance storage
+    <span style='color:#008c00; '>12</span> High<span style='color:#808030; '>-</span>CPU Extra Large Instances con un total de<span style='color:#808030; '>:</span>
+    <span style='color:#008c00; '>84</span> GiB de memoria
+    <span style='color:#008c00; '>240</span> previous-gen <span style='color:#008c00; '>1.7</span> GHz Intel Xeon Processors
+    <span style='color:#008c00; '>19.8</span> TiB de instance storage
 </pre>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
                     <strong>Eso si que es poder de computo !!!</strong>
                 </p>
             </div>
-            <h1 id="resume" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Preparando su código</h1>
+            <h1 id="prepar1" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Preparando su código</h1>
             <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
                 <p class="w3-text w3-justify w3-large w3-margin-16">
                     Antes de empezar en el parte 2, hay unas pocas modificaciones que necesitan hacerle a su código para que todo funcione mejor en el EC2. Los tableros con los que vamos a estar trabajando van a ser más grandes y en general también nuestros RDDs, entonces hay unas pocas optimizaciones que necesitamos tomar en cuenta antes de empezar la parte 2.
                     <br><br>
-                    Comiencen descargando los archivos base en el siguiente <a href="#" target="_blank"><span class="w3-btn w3-red w3-round w3-medium">link</link></a> y poniendo la carpeta en home ~
+                    Pero primero, comiencen descargando los archivos base en el siguiente <a href="https://www.dropbox.com/s/gjo6txg7r4xzk57/proj2-2.zip?dl=1" target="_blank"><span class="w3-btn w3-red w3-round w3-medium">link</link></a>
                     <br><br>
-                    <strong>Dentro del directorio base, van a encontrar una nueva copia de SlidingBfsSpark.py. Copien su código de la parte 1 en este archivo. Van a encontrar dos cambios que hemos hecho: una variable global PARTITION_COUNT y un parámetro adicional en solve_puzzle llamado slaves. Ambos van a ser descritos con mayor detalle abajo.</strong>
+                    <strong>Dentro del directorio base, van a encontrar una nueva copia de SlidingBfsSpark.py. Copien su código de la parte 1 en este archivo (les puse comentarios para guiarlos). Van a encontrar dos cambios que hemos hecho: una variable global PARTITION_COUNT y un parámetro adicional en solve_sliding_puzzle llamado slaves. Ambos van a ser descritos con mayor detalle abajo.</strong>
                     <br><br>
                     <strong class="w3-xxlarge">Partitioning</strong>
                     <br><br>
@@ -105,7 +108,7 @@
                     También, ahora que nuestros tableros van a ser mas grandes que los tableros que utilizamos en la parte pasada, no vamos estar haciendo uso del paralelismo si tratamos de escribir nuestra salida en forma serial (utilizando un ciclo). Para cambiar esto, vamos a utilzar saveAsTextFile asi como lo hicimos en el laboratorio. De esta manera, cada una de las partitions van a ser escritas en diferentes archivos en el directorio de salida. Para implementar este cambio, dado su RDD final al que quieran escribirlo en los archivos, (digamos que se llama nodes):
                 </p>
 <pre class="w3-code w3-light-grey notranslate">
-    nodes<span style='color:#808030; '>.</span>coalesce<span style='color:#808030; '>(</span>NUM_WORKERS<span style='color:#808030; '>)</span><span style='color:#808030; '>.</span>saveAsTextFile<span style='color:#808030; '>(</span>output<span style='color:#808030; '>)</span> <span style='color:#696969; '># Que NUM_WORKERS sea 6 o 12</span>
+    nodes<span style='color:#808030; '>.</span>coalesce<span style='color:#808030; '>(</span>NUM_WORKERS<span style='color:#808030; '>)</span><span style='color:#808030; '>.</span>saveAsTextFile<span style='color:#808030; '>(</span>output<span style='color:#808030; '>)</span> <span style='color:#696969; '># NUM_WORKERS va a ser 6 o 12</span>
 </pre>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
                     <strong>Esto va a guardar su RDD en un folder llamado output en un sistema de archivos compartidos (sigan leyendo las instrucciones para buscar esos resultados). Dentro del directorio van a ver bastantes archivos, uno por cada partition, etiquetado part-00**. Van a encontrar el parámetro slaves útil en esta parte.</strong>
@@ -113,10 +116,25 @@
             </div>
         </div>
         <div class="w3-container w3-margin-16">
-            <h1 id="prepar1" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Preparando su cuenta</h1>
+            <h1 id="prepar2" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Preparando su cuenta</h1>
             <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
                 <p class="w3-text w3-justify w3-large w3-margin-16">
                     <blockquote class="w3-blockquote w3-large">NOTA: Tienen que tener una cuenta de AWS antes de hacer esta parte.</blockquote>
+                </p>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                	Si ya tienen su cuenta de amazon pueden aplicar al AWS educate para que les acreditemos los US $100. Sigan los pasos que estan aqui:
+                	<ol>
+                		<li class="w3-large">Ingresar a: <a href="https://aws.amazon.com/">https://aws.amazon.com/</a> y hacer login con su correo de galileo o el correo que pusieron</li>
+                		<li class="w3-large">Al ingresar con su usuario, ir a "My Account" que se encuentra en la esquina superior derecha donde esta su nombre y anotar su "Account Id"</li>
+                		<li class="w3-large">Ingresar a <a href="https://www.awseducate.com">https://www.awseducate.com</a>  y darle "Apply Now" y en la siguiente pagina dar click donde dice "Apply for AWS Educate for Students" algo como la Figura 1 tienen que tener</li>
+                		<li class="w3-large">Si les sale algo que tienen que ingresar en algun lugar: course numbers and names o algo parecido escriban: CCIII</li>
+                	</ol>
+                	<center>
+            		<a href="../images/educate1.png"><img class="w3-modal-content" src="../images/educate1.png" style="width:30%"></a>
+            		<p class="w3-text w3-justify w3-large w3-margin-16 w3-center">
+            		Figura 1
+            		</p>
+            		</center>
                 </p>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
                     Primero necesitamos hacer un par de configuraciones para prepar su cuenta y poner a trabajar cosas en el EC2. Sigan estos pasos (del 1 al 10):
@@ -281,7 +299,7 @@
                     </div>
                 </div>
             </div>
-            <h1 id="clari" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Como correr el código en EC2</h1>
+            <h1 id="prepar3" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Como correr el código en EC2</h1>
             <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
                 <p class="w3-text w3-justify w3-large w3-margin-16">
                     Una vez hecho las modificaciones a su código verificando que funcione bien y configurando su cuenta en el AWS, vamos a enseñarles como tienen que probar su programa.
@@ -292,30 +310,38 @@
                     <img src="../images/cluster-overview.png" alt="cluster-spark" />
                 </div>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
-                    Primero copien su key MapReduceCC3.pem dentro de la carpeta del proyecto, una vez hecho eso en el archivo que se bajo que se llama rootkey.csv van a encontrar dos lineas, en la primera esta AWSAccessKeyID y en la segunda está AWSSecretKey lo que esta después del igual es lo que necesitamos.
+                    Primero copien su key MapReduceCC3.pem dentro de la carpeta del proyecto llamada AWS, una vez hecho eso en el archivo que se bajo (en la seccion preparando su cuenta) que se llama <b>rootkey.csv</b> van a encontrar dos lineas, en la primera esta AWSAccessKeyID y en la segunda está AWSSecretKey lo que esta después del igual es lo que necesitamos.
                     <br><br>
-                    Dentro de la carpeta del proyecto, van a encontrar un archivo llamado ec2-init.sh, dentro de ese archivo en donde dice <b>export AWS_ACCESS_KEY_ID</b>, después del igual pongan su  AWSAccessKeyID y en donde dice <b>export AWS_SECRET_ACCESS_KEY</b>, después del igual su  AWSSecretKey, ejemplo:
+                    Dentro de la carpeta del proyecto AWS, van a encontrar unos archivos llamados destroy.sh, ec2-init.sh, get-master.sh y login.sh dentro de estos archivos en donde dice <b>export AWS_ACCESS_KEY_ID=</b>, después del igual pongan su  AWSAccessKeyID y en donde dice <b>export AWS_SECRET_ACCESS_KEY=</b>, después del igual su  AWSSecretKey, ejemplo:
                 </p>
 <pre class="w3-code w3-light-grey notranslate">
     <span style="color:red">export</span> AWS_ACCESS_KEY_ID=ABCDEFG1234567890123
     <span style="color:red">export</span> AWS_SECRET_ACCESS_KEY=AaBbCcDdEeFGgHhIiJjKkLlMmNnOoPpQqRrSsTtU
 </pre>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
-                    Hagan lo mismo dentro del archivo <b>destroy.sh</b> y dentro del archivo <b>login.sh</b>
-                    <br><br>
-                    Noten que dentro de ec2-init.sh, está como se ejecuta Spark desde el command line traten de entenderlo y si quieren más información <a href="http://spark.apache.org/docs/latest/ec2-scripts.html">aquí</a> explican bien que significa todo lo que esta ahi o la mayoría.
+                    Tambien dentro de los archivos van a encontrar algo como:
+                    <b>SPARKPATH=</b>, despues del igual pongan el path de la carpeta de spark que tienen. Si estan usando la maquina virtual de CC3, lo que iria despues del igual seria algo como: ~/spark1.6/
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span style="color:red">SPARKPATH=</span>~/spark1.6/
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <br>
+                    Noten que dentro de ec2-init.sh, está como se ejecuta Spark desde el command line para que se instale todo lo necesario para el EC2, traten de entenderlo y si quieren más información <a href="http://spark.apache.org/docs/latest/ec2-scripts.html">aquí</a> explican bien que significa todo lo que esta ahi o la mayoría. Los demas archivos tambien enseñan: como apagar el cluster, hacer login, etc.
                     <br><br>
                     <strong class="w3-xxlarge">Probando su Código</strong><br><br>
-                    Si ya hicieron todos los pasos anteriores y están seguros seguros que su código está bien, pueden utilizar el script install-ec2 para probar su código
+                    Si ya hicieron todos los pasos anteriores y están seguros seguros que su código está bien, pueden utilizar el script <b>ec2-init</b> para empezar a preparar el AWS EC2.
+                    <br><br>
+                    Noten que dentro de este archivo hay una variable que se llama <b>SLAVES</b> esta la tienen que modificar a que sea 6 o 12 para cambiar el tamaño del cluster a 6  o 12 slaves y 1 master para responder a las preguntas de hasta abajo. Cada vez que cambien esta variable SLAVES tienen que cambiar la variable <b>SLAVE_COUNT</b> del Makefile para que sea igual. Con esto en mente podemos seguir: (en esta guia yo utilice 12 slaves)
                     <br><br>
                     <strong class="w3-xlarge">ADVERTENCIA:</strong><br><br>
-                    NO lo hagan solo por probar porque les pueden cobrar aprox US $6.00 por correr el script aunque después le den destroy solo con que estén un par de segundos les cobran como si estuvieran una hora completa. Recuerden que solo tienen US $100.00
+                    NO lo hagan solo por probar porque les pueden cobrar aprox US $6.00 por correr el script aunque después le den destroy solo con que estén un par de segundos les cobran como si estuvieran una hora completa. Recuerden que solo tienen US $100.00 y seguramente van a tener que hacer varias pruebas, 1 de ellas (tablero de 4x3) tarda aprox 1 hora en terminar.
                 </p>
 <pre class="w3-code w3-light-grey notranslate">
     <span class="w3-text-teal">$</span> ./ec2-init.sh
 </pre>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
-                    Al principio después de correr el script se tiene que ver algo así:
+                    Al principio después de correr el script se tiene que ver algo así: (si se tarda un poco en aparecer lo de abajo no se desesperen, Spark esta instalando lo necesario en su maquina para que pueda correr los Scripts del EC2)
                 </p>
 <pre class="w3-code w3-light-grey notranslate">
     <span class="w3-text-teal">$</span>  ./ec2-init.sh
@@ -401,10 +427,10 @@
     ec2-52-91-142-9.compute-1.amazonaws.com
 </pre>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
-                    copien lo que dice ec2-*.amazonaws.com en el Makefile donde dice URL y modifiquen SLAVE_COUNT con 6 o 12. También van a necesitar utilizar el siguiente comando que enseña como copiar su carpeta al master en el EC2. Donde vean MASTER en los comandos remplácenlo por lo que copiaron (ec2-*.amazonaws.com).
+                    copien lo que dice ec2-*.amazonaws.com en el Makefile donde dice MASTER. Ya modificado el Makefile, dentro de copy.sh donde dice MASTER tambien pongan el master que pusieron en el Makefile y por ultimo ejecuten lo siguiente:
                 </p>
 <pre class="w3-code w3-light-grey notranslate">
-    <span class="w3-text-teal">$</span> scp -i ~/proj2-2/MapReduceCC3.pem -r ~/proj2-2 root@MASTER:~
+    <span class="w3-text-teal">$</span> ./copy.sh
 </pre>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
                     pongan "yes"si les sale algo como esto:
@@ -413,7 +439,7 @@
     Are you sure you want to continue connecting (yes/no)?
 </pre>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
-                    ahora pueden hacer log in:
+                    Si les salio que se copio (les sale una progressbar con 100%), ahora pueden hacer log in:
                 </p>
 <pre class="w3-code w3-light-grey notranslate">
     <span class="w3-text-teal">$</span> ./login.sh
@@ -432,7 +458,7 @@
     root@ip-172-31-31-251 ~]$</span>
 </pre>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
-                    asegurense que su carpeta proj2-2 este en el home y metanse:
+                    ya que estan adentro del master, asegurense que su carpeta proj2-2 este en el home y metanse:
                 </p>
 <pre class="w3-code w3-light-grey notranslate">
     <span class="w3-text-teal">root@ip-172-31-31-251 ~]$</span> ls
@@ -465,10 +491,104 @@
                 <div id="modal15" class="w3-modal" onclick="this.style.display='none'">
                   <img class="w3-modal-content" src="../images/aws14.png" style="width:100%">
                 </div>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Si todo corrio correctamente, su salida va a estar en el shared file system. Para ver los archivos de salida utilicen el siguieten comando:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    # Lista todas las partes de archivos generados.
+    <span class="w3-text-teal">$</span> ~/ephemeral-hdfs/bin/hadoop fs -ls hdfs:///user/root/medium-puzzle-out/
+    # O usen large-puzzle-out en vez de medium-puzzle-out para el puzzle de 4x3
+    
+    Warning: $HADOOP_HOME is deprecated.}
+    Found 3 items
+    -rw-r--r--   3 root supergroup          0 2014-10-29 04:57 /user/root/medium-puzzle-out/_SUCCESS
+    -rw-r--r--   3 root supergroup   13096372 2014-10-29 04:57 /user/root/medium-puzzle-out/part-00000
+    -rw-r--r--   3 root supergroup   11749378 2014-10-29 04:57 /user/root/medium-puzzle-out/part-00001
+    ... # pueden salir mas lineas dependiendo de la cantidad de slaves
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Pueden utilizar la salida de arriba para calcular el filesize total. La quinta columna lista la cantidad de bytes en cada archivo. Sumen toda esa columna y conviertan el resultado en un IEC prefix format para facilitar el computo. (jaja suena bien loco eso va? es KiloBytes, Megabytes y esas cosas ... )
+                    <br><br>
+                    Para traer esos archivos de salida utilicen los siguientes comandos:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    # Lista todas las partes de archivos generados.
+    <span class="w3-text-teal">$</span> ~/ephemeral-hdfs/bin/hadoop fs -cat hdfs:///user/root/medium-puzzle-out/part-00000 >> medium-puzzle-out
+    <span class="w3-text-teal">$</span> ~/ephemeral-hdfs/bin/hadoop fs -cat hdfs:///user/root/medium-puzzle-out/part-00001 >> medium-puzzle-out
+    ...
+    # Corran esto para cada parte en el directorio de salida (y no se olviden de utilizar el nombre correcto dependiendo del tamaño del puzzle!!)
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Para puzzles de tamaño grande, esos comandos no van a ser demsiado factibles, ya que el tamaño del archivo de salida va a ser en gigabytes o terabytes. Especialmente, no traten de copiar el output que resulta de correr su codigo en el puzzle de tamaño 4x3.
+                    <br><br>
+                    Si quieren correr otra tarea mapreduce despues de que una concluya, van a necesitar limpiar el directorio de salida en los servers de Amazon. Antes de limpiar los directorios asegurense de anotar y verificar todos los datos que necesitan! una vez que esten listos y hayan anotado todo, corran los siguientes comandos para limpiar los directorios.
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span class="w3-text-teal">$</span> make clean-medium
+    <span class="w3-text-teal">$</span> make clean-large
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Finalmente, una vez que hayan terminado de obtener toda la informacion que se requiere y que hayan corrido todas las tareas que se necesitan, vamos a darle shutdown al cluster. Esto destruye todos los datos que pusieron en las maquinas del cluster. Tambien, la URL's que utilizaron anteriormente van a quedar sin funcionalidad asi como la web GUI de spark. Entonces, esten seguros, otra vez, de que tienen todos los datos necesarios para terminar el proyecto antes de salir y apagar el cluster. Para poder apagar el cluster, utilicen los siguientes comandos:
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    <span class="w3-text-teal">$</span> exit
+    <span class="w3-text-teal">$</span> ./destroy.sh
+</pre>
+                 <p class="w3-text w3-justify w3-large w3-margin-16">
+                    <strong>NOTA: asegurense de hacer esto de apagar el cluster, si lo dejan corriendo indefinidamente les van a seguir cobrando por hora hasta que se queden sin credits y en el peor de los casos si no tienen una tarjeta de debito/creido como la BI credit online, les van a dar un susto al siguiente mes. $$$$$$ </strong>
+                 </p>
             </div>
-            <h1 id="clari" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Su tarea</h1>
+            <h1 id="prepar4" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Su tarea</h1>
             <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
                 <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Realmente esta parte del proyecto es solo para que miren como es que podemos utilizar varias maquinas, que se comunican entre si, para resolver tareas a una gran escala. Tambien esperamos que hayan aprendido bastante y que como programadores tengan en su toolbox a MapReduce siempre, no para todo sirve pero para lo que sirve es bastante bueno.
+                    <br><br>
+                    Ahora directo a lo que tienen que hacer:
+                    <br><br>
+                    Antes de correr su codigo en el EC2, corranlo localmente para estar seguros de que es correcto y razonablemente eficiente (lo tuvieron que hacer para la parte 1 de todos modos). Si siguen teniendo problemas de optimizacion pidan ayuda a los auxiliares en Slack en un mensaje privado para ver que se puede hacer, antes de correrlo en el EC2.
+                    <br><br>
+                    Completen las siguientes preguntas (que requiere que corran su codigo en el EC2) y pongan las respuestas en el archivo de texto llamado respuestas.txt que esta en la carpeta del proyecto. El contenido de este archivo es el que vamos a calificar para esta parte del proyecto. Por favor lean todas las preguntas antes de empezar a correr cualquier cosa en el EC2, para que exactamente sepan que informacion necesitan recolectar antes de apagar el cluster.
+                    <br>
+                    <ol>
+                        <li class="w3-large">Corran su codigo en un Sliding Puzzle de tamaño 5x2 (make ec2-medium) en un cluster con 6 y 12 slaves y en un Sliding Puzzle de tamaño 4x3 en un cluster con 12 slaves. ¿Cuanto tiempo le toma a cada uno terminar?.</li>
+                        <li class="w3-large">¿Cual fue el mean processing rate (que es MB/s) de su codigo para 6 y 12 slaves? Utilicen el tamaño total que calcularon de los archivos de salida y el tiempo que se tardo de la pregunta 1.</li>
+                        <li class="w3-large">¿Como es que mejoro, en cuanto a tiempo, para 12 slaves relativo a los 6 slaves para el tablero de 5x2? ¿Qué concluyen acerca de que tambien Spark hace su trabajo en paralelo? ¿Este es un caso de <a href="http://en.wikipedia.org/wiki/Scalability#Weak_versus_strong_scaling">strong scaling o weak scaling</a>? ¿Por qué si o Por qué no?</li>
+                        <li class="w3-large">¿Cual fue el precio por GB procesado para cada cluster que utilizaron? Vean cuanto cuesta correr una instancia c1.xlarge por hora <a href="http://aws.amazon.com/ec2/previous-generation/">aqui</a>, y hagan un ceil a la cantidad de horas, si se tardaron 3.3 horas el ceil de eso seria 4 horas</li>
+                        <li class="w3-large">¿Cuanto dinero de los creditos gastaron aproximadamente, para completar este proyecto? esto es el precio de correr c1.xlarge por tamaño de cluster por total de horas, como corrieron en diferentes tamaños tienen que sumar cada resultado</li>
+                    </ol>
+                </p>
+            </div>
+            <h1 id="cali" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Calificacion:</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Solo vamos a ver si sus respuestas tienen un razonamiento correcto y si hicieron las modificaciones que les pedimos en su codigo. Suban una carpeta comprimida en zip que tenga el SlidingBfsSpark.py modificado y su archivo respuestas.txt
+                    <br><br>
+                    <strong>
+                    La parte1 representa 2/3 de la nota del proyecto 2<br>
+                    La parte2 representa 1/3 de la nota del proyecto 2
+                    </strong>
+                    <br><br>
+                    <strong>Fecha de entrega: Pendiente</strong>
+                </p>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Si tienen alguna pregunta:
+                    <br><br>
+                    <strong>Encargado de Proyecto: </strong> Andrés Castellanos - andres.cv@galileo.edu, SLACK: andres
+                </p>
+            </div>
+            <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Troubleshooting:</h1>
+            <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Si a la hora de tratar de correr un cluster les sale algo como esto repetidamente (más de 6 veces aprox):
+                </p>
+<pre class="w3-code w3-light-grey notranslate">
+    Warning: SSH connection error. (This could be temporary.)
+    Host: ec2-52-91-142-9.compute-1.amazonaws.com
+    SSH return code: 255
+    SSH output: ssh: connect to host ec2-52-91-142-9.compute-1.amazonaws.com port 22: Connection refused
+</pre>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                    Intenten esto:
                 </p>
             </div>
         </div>
