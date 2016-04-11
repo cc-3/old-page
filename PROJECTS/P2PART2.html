@@ -364,7 +364,7 @@
     SSH output: ssh: connect to host ec2-52-91-142-9.compute-1.amazonaws.com port 22: Connection refused
 </pre>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
-                    Si les sale repetidamente (más de 6 veces vayan a la sección de problemas)
+                    Si les sale repetidamente (más de 25 veces vayan a la sección de problemas)
                     <br><br>
                     Después que les salga este mensaje un par de veces (o si no les salio) se tiene que ver algo como esto:
                 </p>
@@ -550,7 +550,7 @@
                     Completen las siguientes preguntas (que requiere que corran su codigo en el EC2) y pongan las respuestas en el archivo de texto llamado respuestas.txt que esta en la carpeta del proyecto. El contenido de este archivo es el que vamos a calificar para esta parte del proyecto. Por favor lean todas las preguntas antes de empezar a correr cualquier cosa en el EC2, para que exactamente sepan que informacion necesitan recolectar antes de apagar el cluster.
                     <br>
                     <ol>
-                        <li class="w3-large">Corran su codigo en un Sliding Puzzle de tamaño 5x2 (make ec2-medium) en un cluster con 6 y 12 slaves y en un Sliding Puzzle de tamaño 4x3 en un cluster con 12 slaves. ¿Cuanto tiempo le toma a cada uno terminar?.</li>
+                        <li class="w3-large">Corran su codigo en un Sliding Puzzle de tamaño 5x2 (make ec2-medium) en un cluster con 6 y 12 slaves y en un Sliding Puzzle de tamaño 4x3 en un cluster con 12 slaves. ¿Cuanto tiempo le toma a cada uno terminar?. Tambien tomen un screenshot de la Web GUI de Spark de cuando estan corriendo su programa con 6 y 12 maquinas (son 2 imagenes) que se van a parecer a <a href="../images/aws14.png" target="_blank">esta</a>.</li>
                         <li class="w3-large">¿Cual fue el mean processing rate (que es MB/s) de su codigo para 6 y 12 slaves? Utilicen el tamaño total que calcularon de los archivos de salida y el tiempo que se tardo de la pregunta 1.</li>
                         <li class="w3-large">¿Como es que mejoro, en cuanto a tiempo, para 12 slaves relativo a los 6 slaves para el tablero de 5x2? ¿Qué concluyen acerca de que tambien Spark hace su trabajo en paralelo? ¿Este es un caso de <a href="http://en.wikipedia.org/wiki/Scalability#Weak_versus_strong_scaling">strong scaling o weak scaling</a>? ¿Por qué si o Por qué no?</li>
                         <li class="w3-large">¿Cual fue el precio por GB procesado para cada cluster que utilizaron? Vean cuanto cuesta correr una instancia c1.xlarge por hora <a href="http://aws.amazon.com/ec2/previous-generation/">aqui</a>, y hagan un ceil a la cantidad de horas, si se tardaron 3.3 horas el ceil de eso seria 4 horas</li>
@@ -561,14 +561,13 @@
             <h1 id="cali" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Calificacion:</h1>
             <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
                 <p class="w3-text w3-justify w3-large w3-margin-16">
-                    Solo vamos a ver si sus respuestas tienen un razonamiento correcto y si hicieron las modificaciones que les pedimos en su codigo. Suban una carpeta comprimida en zip que tenga el SlidingBfsSpark.py modificado y su archivo respuestas.txt
+                    Solo vamos a ver si sus respuestas tienen un razonamiento correcto y si hicieron las modificaciones que les pedimos en su codigo. Suban una carpeta comprimida en zip que tenga el SlidingBfsSpark.py modificado y su archivo respuestas.txt, tambien un screenshot de la WEB UI de Spark corriendo en un cluster de 6 slaves y 12 slaves.
                     <br><br>
                     <strong>
-                    La parte1 representa 2/3 de la nota del proyecto 2<br>
-                    La parte2 representa 1/3 de la nota del proyecto 2
+                   	+5 pts netos extra si hacen esta parte.
                     </strong>
                     <br><br>
-                    <strong>Fecha de entrega: Pendiente</strong>
+                    <strong>Fecha de entrega: 22 de Abril de 2016</strong>
                 </p>
                 <p class="w3-text w3-justify w3-large w3-margin-16">
                     Si tienen alguna pregunta:
@@ -579,7 +578,7 @@
             <h1 id="notas" class="w3-card-24 w3-theme w3-round-large w3-padding-left w3-card-4">Troubleshooting:</h1>
             <div class="w3-card-24 w3-white w3-padding-8 w3-round-large">
                 <p class="w3-text w3-justify w3-large w3-margin-16">
-                    Si a la hora de tratar de correr un cluster les sale algo como esto repetidamente (más de 6 veces aprox):
+                    Si a la hora de tratar de correr un cluster les sale algo como esto repetidamente (más de 25 veces aprox):
                 </p>
 <pre class="w3-code w3-light-grey notranslate">
     Warning: SSH connection error. (This could be temporary.)
@@ -598,6 +597,42 @@
                         <li class="w3-large">Esperar a que todo salga bien jaja sino repetir ??????.</li>
                         <li class="w3-large">Sino avisar inmediatamente al encargado del proyecto para solucionarlo</li>
                     </ol>
+                </p>
+ 				<p class="w3-text w3-justify w3-large w3-margin-16">
+ 					Si a la hora de crear un cluster con ec2-init.sh les sale
+ 					algo como esto:
+ 				</p>
+<pre class="w3-code w3-light-grey notranslate">
+    *"PendingVerification
+    Your account is currently being verified. Verification normally takes less
+    than 2 hours. Until your account is verified, you may not be able to launch
+    additional instances or create additional volumes. If you are still
+    receiving this message after more than 2 hours, please let us know by
+    writing to aws-verification@amazon.com. We appreciate your patience..."*
+</pre>
+				<p class="w3-text w3-justify w3-large w3-margin-16">
+                    Intenten esto:
+                    <ol>
+                        <li class="w3-large">vayan a <a href="http://aws.amazon.com/">aws.amazon.com</a> y hagan login.</li>
+                        <li class="w3-large">En el dashboard de AWS en la esquina superior derecha den click a support.</li>
+                        <li class="w3-large">Click en Support Center.</li>
+                        <li class="w3-large">Les va a aparecer un boton que dice create case, den click en ese boton.</li>
+                        <li class="w3-large">Esto les va abrir un formulario y lo vamos a llenar para solicitar mas instancias (por eso el error).</li>
+                        <li class="w3-large">En CC no ponen nada.</li>
+                        <li class="w3-large">en Regarding seleccionan Service Limit Increase.</li>
+                        <li class="w3-large">En limit type buscan en el dropdown EC2 Instances.</li>
+                        <li class="w3-large">En region buscan US East (Northern Virginia).</li>
+                        <li class="w3-large">En Primary Instance Type buscan c1.xlarge.</li>
+                        <li class="w3-large">En Limit lo dejan asi.</li>
+                        <li class="w3-large">En new limit value ponen 13.</li>
+                        <li class="w3-large">En Use Case Description, ponen una descripcion en ingles de que estan trabajando en un proyecto de universidad y que necesitan esa cantidad para poder realizarlo.</li>
+                        <li class="w3-large">En Support Language ponen English.</li>
+                        <li class="w3-large">En contact method ponen Web.</li>
+                        <li class="w3-large">Por ultimo Submit.</li>
+                    </ol>
+                </p>
+                <p class="w3-text w3-justify w3-large w3-margin-16">
+                	Esto crea una solicitud para que los de AWS les den permiso de utilizar mas de 2 instancias tipo c1.xlarge al mismo tiempo. Les tienen que enviar un correo de que ya se les cambio ese limite y tienen que cerrar el caso en la misma pagina donde lo crearon (sigan los pasos).
                 </p>
             </div>
         </div>
