@@ -1,0 +1,174 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		
+		<link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
+		<link rel="stylesheet" type="text/css" href="./CC3 2015 Proyecto 1_files/style.css">
+		 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+		<title>CC3 2016 Proyecto 3</title>
+	</head>
+
+<body>
+	<nav class="w3-topnav2 w3-center2 w3-theme2 w3-top2">
+        <a href="../index.html" title="HOME"><i class="fa fa-home w3-large2"></i></a>
+    </nav>
+
+<div class="header">
+    <h1>CC3 2016 Proyecto 3: Performance Optimization - SSE/SIMD</h1>
+    <big>Auxiliar: Ivan Juárez</big><br>
+    <big><i>alexanderj@galileo.edu</i></big></div>
+
+<div class="content">
+
+<h2>Aclaraciones/Recomendaciones</h2>
+<ul>
+  <li>¡Empiece pronto!</li>
+  <li>Este proyecto debe probarse en las computadoras del <b>laboratorio</b>. El código no se compilará en máquinas que no
+  son x86 y es probable que funcione de manera distinta en otras máquinas no configuradas de manera similar</li>
+	<li>Este proyecto puede realizarse en parejas o individualmente. Usted puede compartir código <strong>únicamente</strong> con su pareja.</li>
+  <li><strong>Asegúrese de leer todas las especificaciones del proyecto antes de iniciarlo.</strong></li>
+</ul>
+
+
+<h2>Objetivo</h2>
+<p>
+En el proyecto 1, usted escribió un programa que genera un mapa de profundidad a partir de imágenes estéreo. Sin embargo, el código para el proyecto 1 era bastante lento, y por lo tanto imposible de utilizar en la práctica con imágenes más grandes (o en tiempo real debido a la latencia), como las que se ven en el mundo real o en la producción. Este proyecto le permitirá aplicar las técnicas de optimización de rendimiento que aprendió para escribir una versión optimizada de <code>calcDepth</code> que será capaz de manejar imágenes mucho más grandes en tiempos de funcionamiento más razonables.</p>
+
+<h2>Background</h2>
+
+	<p>
+		Su objetivo es poner en paralelo y optimizar un generador de mapas de profundidad muy similar al que escribió para el proyecto 1.
+		Mientras que el algoritmo es en gran parte exactamente el mismo, hay algunas diferencias clave a tener en cuenta: 
+	</p>
+	<ul>
+	<li>
+		La primera diferencia es el modo en que representamos imágenes en escala de grises. Para el Proyecto 3 vamos a utilizar <code>float</code>s en el intervalo [0,255] en lugar de <code>char</code>s que usamos en el proyecto 1. Esta representación es ventajosa porque permite el uso de <code>float</code> SSE intrinsics que no tienen homólogos <code>char</code>. Tenga en cuenta que las imágenes de entrada a <code>depthMap</code> 
+		son todavía  .bmp. Esto se debe a que manejamos la conversión de
+		<code>unsigned char</code> a <code>float</code> por usted. 
+	</li>
+	<li>
+		La otra diferencia es la forma en que se calcula el desplazamiento. Ya no estamos limitados por el rango <code>unsigned char</code> por lo que vamos a utilizar desplazamiento absoluto en lugar de desplazamiento normalizado. La ecuación para el desplazamiento absoluto es sólo <code>sqrt(dx * dx + dy * 
+		dy).</code></li> 
+</ul>
+
+
+<h3>Arquitectura</h3>
+<p>Su código será puesto a prueba en las máquinas del laboratorio. A continuación se presenta información detallada sobre las computadoras del laboratorio; que puede o no encontrar útil.</p>
+
+<h3>Performance (Medición)</h3>
+	<p>
+		Para este proyecto vamos a medir el rendimiento en GFlop/s, una métrica estándar de rendimiento en la industria. GFlop/s significa miles de millones de operaciones de punto flotante por segundo. hay dos valores necesarios para calcular este valor: tiempo y número de operaciones de punto flotante realizadas por el algoritmo. El tiempo se calcula fácilmente mediante la medición de la diferencia entre las marcas de tiempo antes y después de que el algoritmo se ejecutó. Contar el número de operaciones de punto flotante es un poco más complicado. Para este proyecto el número de operaciones se cuenta manualmente en <code>calcDepthNaive.c</code> y se almacenan en un puntero que <code>benchmark.c</code> para calcular los GFlop/s para su código optimizado.</p>
+
+<h2>Parte 1</h2>
+
+<p>
+	Optimizar su generador de mapas de profundidad (depth map) utilizando cualquiera de las técnicas que ha aprendido <strong>a excepción de OpenMP</strong> (o cualquier otra librería de threads como pthreads, o cualquiera que use multiples núcleos). Para obtener su calificación completa, su programa necesita lograr un rendimiento promedio de <b>5.5</b> GFlop/s para varios tamaños de imágenes. El resultado debe seguir siendo correcto, y hemos proporcionado archivos para comprobar la exactitud de su código. Por favor, recuerde, sin embargo, que el código proporcionado <strong>no</strong> no es una garantía de la exactitud de su código y esperamos que usted ponga a prueba su propio código. El código que produzca una salida incorrecta será considerado funcionando con 0 GFlop/s para propósitos de calificación.</p>
+<p>
+	El código también será probado con diferentes parámetros (nada demasiado pequeño) y tiene que lograr un rendimiento medio de <b>4.0</b> GFlop/s.</p>
+<p>
+ A modo de recordatorio, en la parte 1 <b>no está autorizado</b> el uso de OpenMP o cualquier otra librería de threading. El código que no cumpla este requisito no recibirá nota.</p>
+
+<h3>Empezando</h3>
+<p>Copie los archivos necesarios en su directorio de trabajo, introduciendo el siguiente comando:</p>
+
+<pre class="output">
+<span class="input">git clone https://github.com/cc-3/PJ3.git</span>
+</pre>
+
+<p>
+  El <b>único</b> archivo que necesita modificar y enviar es <code>calcDepthOptimized.c</code>. Su trabajo es implementar una versión optimizada de <code>calcDepthNaive</code> en <code>calcDepthOptimized</code>.
+</p>
+<p>
+	El esqueleto incluye una solución ingenua (no optimizada) para <code>calcDepth</code> en <code>calcDepthNaive.c</code>. Puede que le resulte útil comenzar con este archivo como base o desde cero (no dude en utilizar su propio código del proyecto 1 -sin embargo tendrá que hacer algunos cambios). Si necesita repasar sobre como funciona el algoritmo consulte las especificaciones del <a href="http://cc-3.github.io/PROJECTS/P1_PART1.html">Proyecto 1</a>. 
+</p>
+
+<p>
+Puede serle útil examinar y modificar algunos de los otros archivos para probar más a fondo su código. A continuación se proporciona una descripción de estos archivos:
+</p>
+
+<ul>
+    <li><code>Makefile</code>: Define todos los comandos de compilación.</li>
+		<li><code>check.c</code>: Prueba <code>calcDepthOptimized</code> con varios tamaños de entradas generados aleatoriamente y compara los resultados con <code>calcDepthNaive</code></li>
+		<li><code>benchmark.c</code>: Prueba <code>calcDepthOptimized</code> con imágenes cada vez más grandes e informa los resultados en GFlop/s.</li>
+    <li><code>depthMap.c</code>: Carga imágenes bitmap y llama a <tt>calcDepthOptimized()</tt> para calcular el depth map.</li>
+    <li><code>utils.c</code>: Define bitmap loading, printing, y saving functions junto con otras utilidades.</li>
+    <li><code>test/</code>: Contiene el conjunto de imágenes para realizar las pruebas.</li>
+</ul> 
+
+
+<p>
+  Usted es libre de definir e implementar funciones auxiliares adicionales, pero si usted quiere que se ejecuten cuando se califique su proyecto debe incluirlas en <code>calcDepthOptimized.c</code>. <b>Los cambios que se realicen en cualquier otro archivo se sobreescribirán durante la calificación.</b>
+</p>
+
+<p>Pruebe los cambios en su código compilando sus archivos con <code>make</code> y ejecutando <code>benchmark</code> o el ejecutable <code>check</code>. 
+</p><pre class="output"><span class="input">make</span>
+<span class="input">./check</span>
+<span class="input">./benchmark</span>
+</pre>
+
+<h2>Scoring</h2>
+<p>
+Aquí está el desgloce de como se otorgarán puntos. Tenga en cuenta que no necesariamente va a utilizar los mismos tamaños previstos en el punto de referencia, sin embargo, vamos a utilizar tamaños similares. También vamos a asegurarnos de que el feature width/height y el maximum displacement es de al menos 4 para fines de evaluación comparativa.</p>
+
+<table border="1" align="center">
+<tbody><tr>
+<td>Gflop/s</td>
+<td>1.5</td>
+<td>2.0</td>
+<td>3.0</td>
+<td>4.0</td>
+<td>4.5</td>
+<td>5.0</td>
+<td>5.5</td>
+
+
+</tr>
+<tr>
+<td>Puntos</td>
+<td>0</td>
+<td>5</td>
+<td>14</td>
+<td>23</td>
+<td>28</td>
+<td>32</td>
+<td>35</td>
+</tr>
+</tbody></table>
+
+<p>Los valores intermedios de Gflops/s se <a href = "https://en.wikipedia.org/wiki/Linear_interpolation"> interpolan linealmente</a> sobre la base de los valores de los puntos de los dos vecinos determinados y luego se redondea al entero más cercano.
+</p>
+
+
+
+<p> Aquí están algunas sugerencias para mejorar el rendimiento de su código:</p>
+<ul>
+	<li>Factorizar cálculos comúnes y mantener el resultado.</li>
+	<li>Evitar recalcular valores que que ya se han calculado</li>
+	<li>
+	Unroll loops: para poder usar SSE y realizar 4 operaciones a la vez.</li>
+	<li>Puede reestructurar los bucles o cambiar el orden de algunas operaciones.</li>
+	<li>Llenar las matrices puede dar un mejor rendimiento para las matrices de tamaño especial.</li> 
+</ul>
+
+<h3>Debugging and Testing</h3>
+<p>
+Hemos añadido un objetivo de depuración en el Makefile para ayudar en la depuración. 
+La adición de declaraciones de impresión puede ser útil, GDB y valgrid pueden hacer que la depuración sea mucho más rápida.
+Para usar el debug target, puede ejecutar el siguiente comando:</p>
+<pre class="output"><span class="input">make debug</span></pre>
+
+
+<p>
+Antes de enviar, <b>asegúrese de probar su código en las máquinas del laboratorio.</b> Calificaremos su código allí.
+<b><font color="red">SI SU PROGRAMA FALLA AL COMPILAR, AUTOMÁTICAMENTE OBTENDRÁ CERO</font></b>
+. No hay excusa para no probar su código.</p>
+
+<h3>Entrega</h3>
+
+<p> 
+Debe enviar un correo a <i><font color = "blue">alexanderj@galileo.edu</font></i> indicando con quién trabajará <b>antes</b> del sábado 23 de abril, de lo contrario no se le asignará grupo en el GES.
+El proyecto debe entregarse el lunes 2 de mayo antes de las 11:55 pm en el GES. Comprima <b>sólo</b> el archivo <code>calcDepthOptimized.c</code> en un archivo <b>.zip (no .tar o .rar)</b></p>
+
+</div>
+
+</body></html>
