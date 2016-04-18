@@ -1,7 +1,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		
+
 		<link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
 		<link rel="stylesheet" type="text/css" href="./CC3 2015 Proyecto 1_files/style.css">
 		 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -38,17 +38,17 @@ En el proyecto 1, usted escribió un programa que genera un mapa de profundidad 
 
 	<p>
 		Su objetivo es poner en paralelo y optimizar un generador de mapas de profundidad muy similar al que escribió para el proyecto 1.
-		Mientras que el algoritmo es en gran parte exactamente el mismo, hay algunas diferencias clave a tener en cuenta: 
+		Mientras que el algoritmo es en gran parte exactamente el mismo, hay algunas diferencias clave a tener en cuenta:
 	</p>
 	<ul>
 	<li>
-		La primera diferencia es el modo en que representamos imágenes en escala de grises. Para el Proyecto 3 vamos a utilizar <code>float</code>s en el intervalo [0,255] en lugar de <code>char</code>s que usamos en el proyecto 1. Esta representación es ventajosa porque permite el uso de <code>float</code> SSE intrinsics que no tienen homólogos <code>char</code>. Tenga en cuenta que las imágenes de entrada a <code>depthMap</code> 
+		La primera diferencia es el modo en que representamos imágenes en escala de grises. Para el Proyecto 3 vamos a utilizar <code>float</code>s en el intervalo [0,255] en lugar de <code>char</code>s que usamos en el proyecto 1. Esta representación es ventajosa porque permite el uso de <code>float</code> SSE intrinsics que no tienen homólogos <code>char</code>. Tenga en cuenta que las imágenes de entrada a <code>depthMap</code>
 		son todavía  .bmp. Esto se debe a que manejamos la conversión de
-		<code>unsigned char</code> a <code>float</code> por usted. 
+		<code>unsigned char</code> a <code>float</code> por usted.
 	</li>
 	<li>
-		La otra diferencia es la forma en que se calcula el desplazamiento. Ya no estamos limitados por el rango <code>unsigned char</code> por lo que vamos a utilizar desplazamiento absoluto en lugar de desplazamiento normalizado. La ecuación para el desplazamiento absoluto es sólo <code>sqrt(dx * dx + dy * 
-		dy).</code></li> 
+		La otra diferencia es la forma en que se calcula el desplazamiento. Ya no estamos limitados por el rango <code>unsigned char</code> por lo que vamos a utilizar desplazamiento absoluto en lugar de desplazamiento normalizado. La ecuación para el desplazamiento absoluto es sólo <code>sqrt(dx * dx + dy *
+		dy).</code></li>
 </ul>
 
 
@@ -79,7 +79,7 @@ En el proyecto 1, usted escribió un programa que genera un mapa de profundidad 
   El <b>único</b> archivo que necesita modificar y enviar es <code>calcDepthOptimized.c</code>. Su trabajo es implementar una versión optimizada de <code>calcDepthNaive</code> en <code>calcDepthOptimized</code>.
 </p>
 <p>
-	El esqueleto incluye una solución ingenua (no optimizada) para <code>calcDepth</code> en <code>calcDepthNaive.c</code>. Puede que le resulte útil comenzar con este archivo como base o desde cero (no dude en utilizar su propio código del proyecto 1 -sin embargo tendrá que hacer algunos cambios). Si necesita repasar sobre como funciona el algoritmo consulte las especificaciones del <a href="http://cc-3.github.io/PROJECTS/P1_PART1.html">Proyecto 1</a>. 
+	El esqueleto incluye una solución ingenua (no optimizada) para <code>calcDepth</code> en <code>calcDepthNaive.c</code>. Puede que le resulte útil comenzar con este archivo como base o desde cero (no dude en utilizar su propio código del proyecto 1 -sin embargo tendrá que hacer algunos cambios). Si necesita repasar sobre como funciona el algoritmo consulte las especificaciones del <a href="http://cc-3.github.io/PROJECTS/P1_PART1.html">Proyecto 1</a>.
 </p>
 
 <p>
@@ -93,14 +93,14 @@ Puede serle útil examinar y modificar algunos de los otros archivos para probar
     <li><code>depthMap.c</code>: Carga imágenes bitmap y llama a <tt>calcDepthOptimized()</tt> para calcular el depth map.</li>
     <li><code>utils.c</code>: Define bitmap loading, printing, y saving functions junto con otras utilidades.</li>
     <li><code>test/</code>: Contiene el conjunto de imágenes para realizar las pruebas.</li>
-</ul> 
+</ul>
 
 
 <p>
   Usted es libre de definir e implementar funciones auxiliares adicionales, pero si usted quiere que se ejecuten cuando se califique su proyecto debe incluirlas en <code>calcDepthOptimized.c</code>. <b>Los cambios que se realicen en cualquier otro archivo se sobreescribirán durante la calificación.</b>
 </p>
 
-<p>Pruebe los cambios en su código compilando sus archivos con <code>make</code> y ejecutando <code>benchmark</code> o el ejecutable <code>check</code>. 
+<p>Pruebe los cambios en su código compilando sus archivos con <code>make</code> y ejecutando <code>benchmark</code> o el ejecutable <code>check</code>.
 </p><pre class="output"><span class="input">make</span>
 <span class="input">./check</span>
 <span class="input">./benchmark</span>
@@ -126,12 +126,12 @@ Aquí está el desgloce de como se otorgarán puntos. Tenga en cuenta que no nec
 <tr>
 <td>Puntos</td>
 <td>0</td>
-<td>5</td>
 <td>14</td>
-<td>23</td>
-<td>28</td>
-<td>32</td>
-<td>35</td>
+<td>40</td>
+<td>66</td>
+<td>81</td>
+<td>92</td>
+<td>100</td>
 </tr>
 </tbody></table>
 
@@ -147,12 +147,12 @@ Aquí está el desgloce de como se otorgarán puntos. Tenga en cuenta que no nec
 	<li>
 	Unroll loops: para poder usar SSE y realizar 4 operaciones a la vez.</li>
 	<li>Puede reestructurar los bucles o cambiar el orden de algunas operaciones.</li>
-	<li>Llenar las matrices puede dar un mejor rendimiento para las matrices de tamaño especial.</li> 
+	<li>Llenar las matrices puede dar un mejor rendimiento para las matrices de tamaño especial.</li>
 </ul>
 
 <h3>Debugging and Testing</h3>
 <p>
-Hemos añadido un objetivo de depuración en el Makefile para ayudar en la depuración. 
+Hemos añadido un objetivo de depuración en el Makefile para ayudar en la depuración.
 La adición de declaraciones de impresión puede ser útil, GDB y valgrid pueden hacer que la depuración sea mucho más rápida.
 Para usar el debug target, puede ejecutar el siguiente comando:</p>
 <pre class="output"><span class="input">make debug</span></pre>
@@ -165,7 +165,7 @@ Antes de enviar, <b>asegúrese de probar su código en las máquinas del laborat
 
 <h3>Entrega</h3>
 
-<p> 
+<p>
 Debe enviar un correo a <i><font color = "blue">alexanderj@galileo.edu</font></i> indicando con quién trabajará <b>antes</b> del sábado 23 de abril, de lo contrario no se le asignará grupo en el GES.
 El proyecto debe entregarse el lunes 2 de mayo antes de las 11:55 pm en el GES. Comprima <b>sólo</b> el archivo <code>calcDepthOptimized.c</code> en un archivo <b>.zip (no .tar o .rar)</b></p>
 
