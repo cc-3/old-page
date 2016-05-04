@@ -24,7 +24,7 @@
 <ul>
   	<li>¡Empiece pronto!</li>
   	<li>Este proyecto es el mas didactico y menos abstracto de todos, pero no por eso significa que su nivel de complejidad sera menor.</li>
-	<li>Este proyecto debe realizarse individualmente; usted puede compartir su código consigo mismo unicamente.</li>
+	<li>Este proyecto debe realizarse individualmente; usted puede compartir su código con usted mismo unicamente.</li>
   	<li><strong>Asegúrese de leer todas las especificaciones del proyecto antes de iniciarlo.</strong></li>
 </ul>
 
@@ -38,8 +38,9 @@
 <h2>Background</h2>
 <p>
 	Existen tres tipos de instrucciones en MIPS. Las tipo R, las Tipo I, y las tipo J, todas del mismo tamaño, pero con un diferente formato. 
-	Recuerde que las instrucciones tipo R tiene un opcode de <code>0b000000</code> y solo existen unas cuantas instrucciones tipo J.<br>
-	Adicionalmente existe la instruccion <code>Syscall: 0x0000000c</code>
+	Recuerde que las instrucciones tipo R tiene un opcode de <code>0b000000</code>, y solo existen unas cuantas instrucciones tipo J.<br>
+	Adicionalmente implementaremos la instruccion <code>Syscall: 0x0000000c</code>, que sirve para hacer llamadas al sistema operativo. Especificamente para hacer un 
+	<code><b>Read Char</b></code> y <code><b>Print Char</b></code> en una pantalla.<br>
 	Por si necesita refrescarse, este es el formato de las instrucciones en MIPS:<br><br>
 </p>
 <div align="center">
@@ -94,7 +95,7 @@
   	</ul>
 </p>
 <p>
-	Esta es una lista de las instrucciones que su procesador debe soportar:
+	Esta es una lista de las instrucciones que su procesador debe poder ejecutar:
 	<div align="center">
 		<table border=3 cellspacing=3 cellpadding=3 class="assembler-ins">
 			<tr>
@@ -195,8 +196,14 @@
 		</table>
 	</div>
 </p>
-<h3>Entrega</h3>
-
+<p>
+	Adicionalmente, debe porder ejecutar una llamada al sistema (Syscall) para hacer un <b>Read Char</b> y un <b>Print Char</b>.
+</p>
+<h2>Entrega</h2><br>
+	La entrega de este proyecto sera individual a traves del GES el dia TBA a las 11:55 pm, y su calificacion sera <b>presencial</b>. Usted debe ir al salon especificado en las fechas designadas
+	y se le preguntara sobre su proyecto. Su nota sera basada en la explicacion que de y en el funcionamiento de su procesador. Si no conoce alguno de los modulos de su procesador, o no sabe por que un componente esta conectado donde esta, asumiremos que copio y tendra una nota de 0.
+	Dejando de lado las advertencias sobre copia, este es el ultimo proyecto, asi que muchos animos a todos y felicidades por llegar hasta este punto. Cualquier duda adicional
+	pueden escribirla a <i><font color = "#209D20">efrainh12@galileo.edu</font></i>
 
 
 </div>
