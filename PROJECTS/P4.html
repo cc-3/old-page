@@ -1,0 +1,205 @@
+<!Doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
+		<link rel="stylesheet" type="text/css" href="./CC3 2015 Proyecto 1_files/style.css">
+		 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+		<title>CC3 2016 Proyecto 4</title>
+	</head>
+
+<body>
+	<nav class="w3-topnav2 w3-center2 w3-theme2 w3-top2">
+        <a href="../index.html" title="HOME"><i class="fa fa-home w3-large2"></i></a>
+    </nav>
+
+<div class="header">
+    <h1>CC3 2016 Proyecto 4: MIPS Processor</h1>
+    <big>Auxiliar: Carlos Hermosilla</big><br>
+    <big><i>efrainh12@galileo.edu</i></big></div>
+
+<div class="content">
+
+<h2>Aclaraciones/Recomendaciones</h2>
+<ul>
+  	<li>¡Empiece pronto!</li>
+  	<li>Este proyecto es el mas didactico y menos abstracto de todos, pero no por eso significa que su nivel de complejidad sera menor.</li>
+	<li>Este proyecto debe realizarse individualmente; usted puede compartir su código consigo mismo unicamente.</li>
+  	<li><strong>Asegúrese de leer todas las especificaciones del proyecto antes de iniciarlo.</strong></li>
+</ul>
+
+
+<h2>Objetivo</h2>
+<p>
+	En este proyecto va a implementar una version simulada de un procesador MIPS utilizando Logisim. Aqui pondra en practica todo lo que ha aprendido sobre lenguaje ensamblador y
+	logica de circuitos para poder ejecutar programas compilados.
+</p>
+
+<h2>Background</h2>
+<p>
+	Existen tres tipos de instrucciones en MIPS. Las tipo R, las Tipo I, y las tipo J, todas del mismo tamaño, pero con un diferente formato. 
+	Recuerde que las instrucciones tipo R tiene un opcode de <code>0b000000</code> y solo existen unas cuantas instrucciones tipo J.<br>
+	Adicionalmente existe la instruccion <code>Syscall: 0x0000000c</code>
+	Por si necesita refrescarse, este es el formato de las instrucciones en MIPS:<br><br>
+</p>
+<div align="center">
+		<table border=3 cellspacing=3 cellpadding=3 class="assembler-ins">
+			<tr>
+				<td colspan="6" align="center">
+				Tipo R
+				</td>
+			</tr>
+			<tr>
+				<td>OPCODE: 6 Bits</td>
+				<td>RS: 5 Bits</td>
+				<td>RT: 5 Bits</td>
+				<td>RD: 5 Bits</td>
+				<td>SHAMT: 5 Bits</td>
+				<td>FUNC: 6 Bits</td>
+			</tr>
+			<tr>
+				<td colspan="6" align="center">
+					Tipo I
+				</td>
+			</tr>
+			<tr>
+				<td>OPCODE: 6 Bits</td>
+				<td>RS: 5 Bits</td>
+				<td>RT: 5 Bits</td>
+				<td colspan="3">IMMEDIATE: 16 Bits</td>
+			<tr>
+				<td colspan="6" align="center">
+					Tipo J
+				</td>
+			</tr>
+			<tr>
+				<td>OPCODE: 6 Bits</td>
+				<td colspan="5">ADDRESS: 5 Bits</td>
+			</tr>
+		</table>
+</div>
+
+<h2>Empecemos</h2>
+<p>
+	Para este proyecto no necesitamos ningun archivo adicional ni niguna makefile (Desde ahora la vida parece mas simple....).
+  	Simplemente abra logisim y seleccione File/New. <br>
+  	Debe separar su procesador en modulos, para poder dividir el trabajo en porciones mas pequeñas y para llevar un mejor orden de que es lo que falta agregar. 
+  	Esta es una lista de los modulos principales que debe implementar:
+  	<ul>
+  		<li>Memory: Contendra la memoria RAM para lectura/escritura de instrucciones y datos.</li>
+  		<li>Program Counter: Se encargara de llevar un conteo de la siguientes instruccion que toca ejecutar.</li>
+  		<li>ALU: Unidad Arimetico Logica: encargada de todos los procesos de este tipo.</li>
+  		<li>Instruction Fetcher/Decoder: para decodificar el tipo de instruccion que deben ejecutar (Tipo R, Tipo J o Tipo I).</li>
+  		<li>Jump Controller: Este modulo debe controlar cuando un programa salta a otra instruccion y cuando no.</li>
+  	</ul>
+</p>
+<p>
+	Esta es una lista de las instrucciones que su procesador debe soportar:
+	<div align="center">
+		<table border=3 cellspacing=3 cellpadding=3 class="assembler-ins">
+			<tr>
+				<td align="center">TIPO R</td>
+				<td align="center">TIPO I</td>
+				<td align="center">TIPO J</td>
+			</tr>
+			<tr>
+				<td align="center">ADD</td>
+				<td align="center">BEQ</td>
+				<td align="center">J</td>
+			</tr>
+			<tr>
+				<td align="center">ADDU</td>
+				<td align="center">BNE</td>
+				<td align="center">JAL</td>
+			</tr>
+			<tr>
+				<td align="center">AND</td>
+				<td align="center">ADDI</td>
+				<td align="center"></td>
+			</tr>
+			<tr>
+				<td align="center">JR</td>
+				<td align="center">ADDIU</td>
+				<td align="center"></td>
+			</tr>
+			<tr>
+				<td align="center">NOR</td>
+				<td align="center">SLTI</td>
+				<td align="center"></td>
+			</tr>
+			<tr>
+				<td align="center">OR</td>
+				<td align="center">SLTIU</td>
+				<td align="center"></td>
+			</tr>
+			<tr>
+				<td align="center">SLT</td>
+				<td align="center">ANDI</td>
+				<td align="center"></td>
+			</tr>
+			<tr>
+				<td align="center">SLTU</td>
+				<td align="center">ORI</td>
+				<td align="center"></td>
+			</tr>
+			<tr>
+				<td align="center">SLL</td>
+				<td align="center">XORI</td>
+				<td align="center"></td>
+			</tr>
+			<tr>
+				<td align="center">SRL</td>
+				<td align="center">LUI</td>
+				<td align="center"></td>
+			</tr>
+			<tr>
+				<td align="center">SUB</td>
+				<td align="center">LW</td>
+				<td align="center"></td>
+			</tr>
+			<tr>
+				<td align="center">SUBU</td>
+				<td align="center">SW</td>
+				<td align="center"></td>
+			</tr>
+			<tr>
+				<td align="center">DIV</td><td align="center"></td><td align="center"></td>
+			</tr>
+			<tr>
+				<td align="center">DIVU</td><td align="center"></td><td align="center"></td>
+			</tr>
+			<tr>
+				<td align="center">MFHI</td><td align="center"></td><td align="center"></td>
+			</tr>
+			<tr>
+				<td align="center">MFLO</td><td align="center"></td><td align="center"></td>
+			</tr>
+			<tr>
+				<td align="center">MULT</td><td align="center"></td><td align="center"></td>
+			</tr>
+			<tr>
+				<td align="center">MULTU</td><td align="center"></td><td align="center"></td>
+			</tr>
+			<tr>
+				<td align="center">XOR</td><td align="center"></td><td align="center"></td>
+			</tr>
+			<tr>
+				<td align="center">SRA</td><td align="center"></td><td align="center"></td>
+			</tr>
+			<tr>
+				<td align="center">SLLV</td><td align="center"></td><td align="center"></td>
+			</tr>
+			<tr>
+				<td align="center">SRLV</td><td align="center"></td><td align="center"></td>
+			</tr>
+		</table>
+	</div>
+</p>
+<h3>Entrega</h3>
+
+
+
+</div>
+
+</body>
+</html>
