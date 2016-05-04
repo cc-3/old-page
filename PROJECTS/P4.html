@@ -24,7 +24,7 @@
 <ul>
   	<li>¡Empiece pronto!</li>
   	<li>Este proyecto es el mas didactico y menos abstracto de todos, pero no por eso significa que su nivel de complejidad sera menor.</li>
-	<li>Este proyecto debe realizarse individualmente; usted puede compartir su código con usted mismo unicamente.</li>
+	<li>Este proyecto debe realizarse en parejas; usted puede compartir su código con usted mismo y con su compañero unicamente.</li>
   	<li><strong>Asegúrese de leer todas las especificaciones del proyecto antes de iniciarlo.</strong></li>
 </ul>
 
@@ -83,11 +83,12 @@
 <h2>Empecemos</h2>
 <p>
 	Para este proyecto no necesitamos ningun archivo adicional ni niguna makefile (Desde ahora la vida parece mas simple....).
-  	Simplemente abra logisim y seleccione File/New. <br>
+  	Simplemente abra logisim y seleccione <b>File/New</b>. <br>
   	Debe separar su procesador en modulos, para poder dividir el trabajo en porciones mas pequeñas y para llevar un mejor orden de que es lo que falta agregar. 
   	Esta es una lista de los modulos principales que debe implementar:
   	<ul>
   		<li>Memory: Contendra la memoria RAM para lectura/escritura de instrucciones y datos.</li>
+  		<li>Register File: Todos los registros entre los cuales se realizaran las operaciones.</li>
   		<li>Program Counter: Se encargara de llevar un conteo de la siguientes instruccion que toca ejecutar.</li>
   		<li>ALU: Unidad Arimetico Logica: encargada de todos los procesos de este tipo.</li>
   		<li>Instruction Fetcher/Decoder: para decodificar el tipo de instruccion que deben ejecutar (Tipo R, Tipo J o Tipo I).</li>
@@ -199,12 +200,20 @@
 <p>
 	Adicionalmente, debe porder ejecutar una llamada al sistema (Syscall) para hacer un <b>Read Char</b> y un <b>Print Char</b>.
 </p>
-<h2>Entrega</h2><br>
-	La entrega de este proyecto sera individual a traves del GES el dia TBA a las 11:55 pm, y su calificacion sera <b>presencial</b>. Usted debe ir al salon especificado en las fechas designadas
-	y se le preguntara sobre su proyecto. Su nota sera basada en la explicacion que de y en el funcionamiento de su procesador. Si no conoce alguno de los modulos de su procesador, o no sabe por que un componente esta conectado donde esta, asumiremos que copio y tendra una nota de 0.
-	Dejando de lado las advertencias sobre copia, este es el ultimo proyecto, asi que muchos animos a todos y felicidades por llegar hasta este punto. Cualquier duda adicional
-	pueden escribirla a <i><font color = "#209D20">efrainh12@galileo.edu</font></i>
-
+<h2>Toys</h2>
+	<p>
+		Existe una libreria para logisim llamada CS316 que agrega algunos elementos extra (Pantallas LCD, Teclado, etc) que puede usar para su proyecto. 
+		Para instalarla solo deben descargar el archivo <b>.jar</b> e importarlo en <b>Project/Load Library</b>. Esta libreria tambien contiene un Register File, tome en cuenta
+		que este componente no lo podra utilizar, usted debe crear su propio Register File. Exceptuando esto, usted es libre de utilizar cualquier otro componente para su proyecto.
+	</p>
+<h2>Entrega</h2>
+	<p>
+		La entrega de este proyecto sera en parejas a traves del GES el dia TBA a las 11:55 pm, y su calificacion sera <b>presencial</b>. Deben ir al salon especificado en 
+		las fechas designadas y se le preguntara sobre su proyecto. Su nota sera basada en la explicacion que de y en el funcionamiento de su procesador. Si no conoce alguno de 
+		los modulos de su procesador, o no sabe por que un componente esta conectado donde esta, asumiremos que copio y tendra una nota de 0.
+		Dejando de lado las advertencias sobre copia, este es el ultimo proyecto, asi que muchos animos a todos y felicidades por llegar hasta este punto. Cualquier duda adicional
+		pueden escribirla a <i><font color = "#209D20">efrainh12@galileo.edu</font></i>
+	</p>
 
 </div>
 
