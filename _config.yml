@@ -11,9 +11,9 @@ navigation:
  - title: Home
    url: /index.html
  - title: Laboratorios
-   url: /labs
+   url: /labs.html
  - title: Proyectos
-   url: /proyectos
+   url: /proyectos.html
 
 social:
    github: cc-3
