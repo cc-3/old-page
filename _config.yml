@@ -1,0 +1,18 @@
+# Site settings
+title: Estructura de Máquinas
+year: 2017
+slack_page: https://cc3-2017.slack.com
+descripcion: >
+ Pagina del curso de CC3 - Estructura de Máquinas de Universidad Galileo
+baseurl: ""
+url: "https://cc-3.github.io/"
+
+# Build settings
+markdown: kramdown
+highlighter:        rouge
+kramdown:
+  auto_ids:         true
+  footnote_nr:      1
+  entity_output:    as_char
+  toc_levels:       1..6
+  enable_coderay:   false

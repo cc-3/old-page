@@ -1,0 +1,16 @@
+<!-- Header with image -->
+<header class="bgimg w3-display-container w3-grayscale-min" id="home">
+  <div class="w3-display-bottomleft w3-center w3-padding-xlarge w3-hide-small">
+    <span class="w3-tag">Universidad Galileo</span>
+  </div>
+  <div class="w3-display-middle w3-center">
+    {% if page.title %}
+    <span class="w3-text-white" style="font-size:60px">{{page.title}}</span>
+    {% else %}
+    <span class="w3-text-white" style="font-size:60px">{{site.title}}</span>
+    {% endif %}
+  </div>
+  <div class="w3-display-bottomright w3-center w3-padding-xlarge">
+    <span class="w3-text-white">FISICC</span>
+  </div>
+</header>

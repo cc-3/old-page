@@ -1,0 +1,17 @@
+body, html {
+    height: 100%;
+    font-family: "Inconsolata", sans-serif;
+}
+.bgimg {
+    background-position: center;
+    background-size: cover;
+    background-image: url("../img/header.png");
+    min-height: 75%;
+}
+.menu {
+    display: none;
+}
+
+#about p, #prerequisitos p {
+    text-align: justify;
+}
