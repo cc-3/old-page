@@ -1,0 +1,11 @@
+---
+layout: post
+title:  "Laboratorio 0"
+date:   2017-01-01
+category: lab
+---
+
+<p class="intro"><span class="dropcap">V</span>erificar que tienen las habilidades necesarias de programación para este curso.</p>
+
+
+Una de las cosas que aconsejamos en este curso es haber llevado y aprobado CC2 “Estructura de Datos”, ya que por lo general necesitamos que tengan bastante experiencia en algún lenguaje de programación basado en C como “Java”. Muchas veces pasa que los alumnos que no tienen estas capacidades se sienten incapaces de llevar el ritmo del curso y terminan reprobándolo. Los siguientes dos problemas están diseñados para verificar que están listos para el material de CC3. 

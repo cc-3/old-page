@@ -1,7 +1,7 @@
 title: Estructura de Máquinas
 description: Página del curso de CC3 Estructura de Máquinas Universidad Galileo
 
-url: localhost:4000
+url: "localhost:4000"
 baseurl: ""
 
 markdown: kramdown
@@ -11,11 +11,6 @@ navigation:
  - title: Home
    url: /index.html
  - title: Laboratorios
-   url: /labs
+   url: /labs.html
  - title: Proyectos
-   url: /proyectos
-
-social:
-   github: cc-3
-
-google_analytics: "UA-58263416-1"
+   url: /proyectos.html
