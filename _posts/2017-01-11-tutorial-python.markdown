@@ -4,6 +4,7 @@ title:  "Tutorial de Python"
 date:   2017-01-11
 category: tutorial
 description: Aprender casi todo sobre python
+permalink: /:categories/:title.html
 ---
 
 ### Python
