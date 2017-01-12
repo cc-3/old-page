@@ -3,18 +3,16 @@ layout: post
 title:  "Laboratorio 0"
 date:   2017-01-01
 category: lab
-objetivo:
+description: >
+    En este laboratorio van a verificar si tienen las "habilidades" necesarias de programación para este curso. Crearan una cuenta de github, aprenderán a utilizar git y realizarán unos ejercicios en Java.
 ---
 
-<p class="intro"><span class="dropcap">V</span>erificar que tienen las habilidades necesarias de programación para este curso.</p>
+#### Ejercicio 1.1: Fibonacci
 
-
-### Ejercicio 1.1: Fibonacci
-
-Escriban una función que, dado un numero n, retorne el enésimo numero de la serie de Fibonacci. La función está dada por el código de abajo:
+Escriban una función que, dado un número n, retorne el enésimo número de la serie de Fibonacci. La función está dada por el código de abajo:
 
 ```java
-// Retorna el n-esimo numero de Fibonacci. Asuman que n >= 0.
+// Retorna el enesimo numero de Fibonacci. Asuman que n >= 0.
 public static int fibonacci(int n) {
 
     // Su codigo aqui
@@ -46,8 +44,9 @@ Fib7 = 13
 Fib8 = 21
 Fib9 = 34
 ```
+***
 
-### Ejercicio 1.2: Zipper
+#### Ejercicio 1.2: Zipper
 
 Escriban una función que dado dos arreglos, cada uno ordenado de menor a mayor, retorne un nuevo arreglo que contenga todos los elementos de ambos arreglos ordenados de menor a mayor. Por ejemplo, si los arreglos de entrada son los siguientes:
 
@@ -72,8 +71,9 @@ public static int[] zipper(int[] first, int[] second) {
 
 }
 ```
+***
 
-### Ejercicio 1.3: Permutación
+#### Ejercicio 1.3: Permutación
 
 Escribe una función que, dado un string de letras minúsculas, y un entero de 1 al 25, devuelva un nuevo string con el mensaje permutado la cantidad indicada de espacios.
 
