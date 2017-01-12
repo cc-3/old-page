@@ -362,6 +362,3 @@ g.greet(loud=True)   # Llama al metodo de la clase; imprime "HELLO, FRED!"
 ```
 
 Pueden leer sobre las clases en Python y su definición en la [documentación](Pueden leer sobre las clases en Python y su definición en la documentación.).
-
-
->> Esperamos hayan logrado entender un poco python con esto.
