@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Laboratorio 0"
-date:   2017-01-01
+date:   2017-01-16
 category: lab
 description: >
     En este laboratorio van a verificar si tienen las "habilidades" necesarias de programación para este curso. Crearan una cuenta de github, aprenderán a utilizar git y realizarán unos ejercicios en Java.
