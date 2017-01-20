@@ -391,3 +391,10 @@ para terminar este ejercicio de la siguiente manera:
 ~/Desktop/lab0 $ git commit -m "ejercicio 4 terminado"
 ~/Desktop/lab0 $ git push -u origin master
 ```
+***
+
+#### Que es lo que tengo que subir al GES
+
+Cuando ya hayan terminado el laboratorio ustedes tienen que subir al GES el link de su repositorio, antes tienen que agregar a su repositorio como contribudor a **cc3-grades** en **GitHub**, para eso se tienen que ir su repositorio en github > settings > collaborators > y agregan a cc3-grades
+
+![colaborador](/assets/img/labs/lab0_colaborador.png)
