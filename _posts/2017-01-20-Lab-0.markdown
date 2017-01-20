@@ -41,7 +41,7 @@ con todo esto listo podemos empezar realmente el lab.
 En este laboratorio ustedes van a crear su primer repositorio (si es que nunca habian creado uno) y van a utilizarlo con sus archivos del lab, asi que empecemos:
 
 
-Primero que nada necesitan tener todos los archivos del laboratorio y en este caso van a ser 5, que pueden descargar <a href="https://www.dropbox.com/s/6ps8a5w9r1sq17h/lab0.zip?dl=0" target="_blank">aquí</a>.
+Primero que nada necesitan tener todos los archivos del laboratorio y en este caso van a ser 5, que pueden descargar <a href="https://www.dropbox.com/s/6ps8a5w9r1sq17h/lab0.zip?dl=1" target="_blank">aquí</a>.
 
 Esto les va a bajar un archivo llamado **lab0.zip** que pueden descomprimir de la siguiente manera:
 
