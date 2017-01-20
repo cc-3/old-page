@@ -221,6 +221,14 @@ Creamos nuestro primer commit:
 ```shell
 ~/Desktop/lab0 $ git commit -m "initial commit"
 ```
+Posiblemente a ustedes les puede salir algo como esto (Si es que en la maquina que estan utilizando es primera vez que se utiliza Git):
+
+```shell
+~/Desktop/lab0 $ git config --global user.name "your name"
+~/Desktop/lab0 $ git config --global user.email "you@example.com"
+```
+
+Si les aparece configurenlo con su correo (con el que crearon su cuenta de GitHub y su nombre), si no les aparece es porque ya alguien lo habia configurado, de todas maneras ustedes lo tienen que hacer porque pueden haber problemas como que otra persona (la que ya habia configurado por primera vez) hizo commit a su repositorio.
 
 Actualizamos el repositorio remoto:
 
