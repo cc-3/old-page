@@ -158,6 +158,12 @@ Nota: 40/40
 
 Una vez mas, deben subir el ejercicio terminado a GitHub.
 
+```shell
+~ $ git add ejercicio3.py
+~ $ git commit -m "Ejericio 3 terminado"
+~ $ git push origin master
+```
+
 ***
 
 #### Ejercicio 4: Pearls Before Swine
@@ -172,8 +178,6 @@ conocimiento a la mano, ahora ustedes deben de ser capaces de vencer a Juan siem
 hasta que puedan ganar seguidamente. 
 
 Tomen un screen shot de su mejor partida y guardenla en su directorio con el nombre _**ejercicio4.png**_
-
-**Autograder**
 
 Una vez tengan el screen shot en el directorio, pueden verificar la nota del ejercicio ejecutando:
 
