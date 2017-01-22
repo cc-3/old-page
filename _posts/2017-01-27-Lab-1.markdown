@@ -75,7 +75,8 @@ letra que quieren dibujar. Luego de eso, pueden ver el patrón generado ejecutan
 
 **Responder**
 
-En el archivo ejercicio1.py, cambien los valores de las variables globales para responder a las siguientes preguntas:
+En el archivo ejercicio1.py, deben cambiar los valores de las variables globales (eso es lo único que deben hacer)  para responder 
+a las siguientes preguntas:
 
 1. ¿Cuáles 5 números decimales producen el patrón de la letra "A" mostrada arriba? ¿Cuales 5 números hexadecimales?
 2. ¿Qué letra se dibuja con 1, 1, 9, 9, 6? ¿Con 0xF8F88?
@@ -222,3 +223,5 @@ Recuerden hacer commit al terminar, y subir su respuesta final a GitHub:
 ~ $ git commit -m "Laboratorio 1 terminado"
 ~ $ git push origin master
 ```
+Y lo mas  importante, agreguen a **_cc3-grades_** como contribuidor al repositorio, de lo contrario no podremos calificar su laboratorio y
+tendran <b>0</b> en la nota. Finalmente, suban el link del repositorio al **_GES_**, esto tambien es necesario que les pongamos nota.
