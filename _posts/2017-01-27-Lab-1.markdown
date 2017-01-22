@@ -19,7 +19,7 @@ direccion URL para poder hacer push en su repositorio personal. Lo primero que d
 
 Ahora que han descargado el repositorio con todos los archivos; deben cambiar la URL remota para poder hacer push a su repositorio. Claro, antes de
 esto, deben ingresar a su cuenta de (**_GitHub_**) como lo vimos en el laboratorio anterior, crear un nuevo repositorio llamado (**_lab1_**) y 
-copiar la direccion URL que se genera. Una vez tengan esa direccion, ingresan a la carpeta (**_lab1_**) y ejecutan el siguiente comando:
+copiar la direccion URL que se genera. Una vez tengan esa dirección, ingresan a la carpeta (**_lab1_**) y ejecutan el siguiente comando:
 
 ```shell
 ~ $ git remote set-url origin su_nueva_url
@@ -64,9 +64,9 @@ siguiente patrón de bits se mira así:
   </tr>
 </table>
 
-En los archivos descargados, ustedes tienen el archivo BinaryAlphabet.class y binary.txt, estos archivos les ayudaran a visualizar el patron 
+En los archivos descargados, ustedes tienen el archivo BinaryAlphabet.class y binary.txt, estos archivos les ayudaran a visualizar el patrón 
 binario. En binary.txt, ustedes pueden escribir cinco lineas, cada una con cuatro 1's y 0's separados por espacio, que representan la 
-letra que quieren dibujar. Luego de eso, pueden ver el patron generado ejecutando:
+letra que quieren dibujar. Luego de eso, pueden ver el patrón generado ejecutando:
 
 ```shell
 ~ $ java BinaryAlphabet binary.txt
@@ -125,7 +125,7 @@ Si obtienen los 10 puntos, hagan un commit y subanlo a GitHub:
 
 #### Ejercicio 3: 1,000 $1 Bills
 
-Si les entregamos mil billetes de $1 y diez sobres. Su trabajo es encontrar una manera de poner una cantidad X de billetes de dolar en cada uno de 
+Si les entregamos mil billetes de $1 y diez sobres. Su trabajo es encontrar una manera de poner una cantidad X de billetes de dólar en cada uno de 
 los diez sobres, de modo que sin importar la cantidad que uno les pida (entre $1 y $1000), ustedes solo tienen que dar una combinación de esos 
 sobres asegurándose de dar siempre la cantidad correcta en efectivo.
 
