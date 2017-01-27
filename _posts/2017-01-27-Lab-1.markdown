@@ -11,7 +11,7 @@ permalink: /:categories/:title.html
 
 #### Empezando
 
-Antes de iniciar, hay unas recomendaciones que debemos darles. Si ustedes estan usando la maquina virtual de CCII, tomen en cuenta que varios alumnos de otras 
+Antes de iniciar, hay unas recomendaciones que debemos darles. Si ustedes estan usando la maquina virtual de CCIII, tomen en cuenta que varios alumnos de otras 
 secciones utilizan las mismas computadoras, asi que para evitar inconvenientes, <b>deben borrar todos los archivos en los que trabajaron y cerrar su cuenta de GitHub antes 
 de salir del laboratorio</b>.
 
@@ -22,8 +22,6 @@ el siguiente mensaje:
 [![GitHub Classroom](/assets/img/labs/lab1_classroom.png)](/assets/img/labs/lab1_classroom.png)
 
 Una vez hayan aceptado, pueden proceder a clonar su repositorio:
-
- Lo primero que debemos hacer es ejecutar el siguiente comando:
 
 ```shell
 ~ $ git clone https://github.com/cc-3/lab01-su_usuario.git
