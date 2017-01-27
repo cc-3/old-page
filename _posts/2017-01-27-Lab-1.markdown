@@ -26,14 +26,27 @@ Una vez hayan aceptado, pueden proceder a clonar su repositorio:
 ```shell
 ~ $ git clone https://github.com/cc-3/lab01-su_usuario.git
 ```
+Al clonar el repositorio, estan copiando todos los archivos que se encuentran en GitHub. Si para el final del laboratorio aun no han terminado, deben hacer un <b>commit</b> de su trabajo,
+hacer <b>push</b> al repositorio y <b>borrarlo de la computadora</b>. Una vez en su casa, deben volver a ejecutar el comando <b>git clone</b> para seguir trabajando en donde se quedaron.
 
-Ya que se hayan descargado todos los archivos, estaran listos para empezar a trabajar.
+Como estamos trabajando en las computadoras del lab, pueden haber varios usuarios trabajando en la misma computadora y usando la misma configuración de Git, asi que deben configurar su email 
+y su nombre localmente para este repositorio:
+
+```shell
+~ $ git config user.name "su_nombre"
+~ $ git config user.mail "su_correo"
+```
+
+Noten que si estan trabajando en su propia computadora, no es necesario hacer el paso anterior, de lo contrario, si lo es.
+
+
+Una vez hayan hecho esto, estamos listos para iniciar.
 
 ***
 
 #### Ejercicio 1: Alfabeto Binario
 
-Para este ejercicio vamos a utilizar números en su representacion binaria de 4-bits. Si tomamos una pila de 5 números binarios de 4 bits, podemos 
+Para este ejercicio vamos a utilizar números en su representación binaria de 4-bits. Si tomamos una pila de 5 números binarios de 4 bits, podemos 
 hacer patrones e imágenes. Para ayudarlos a visualizar esto, ustedes pueden pensar que los 0's  son blanco y los 1's son negro. Por ejemplo, el 
 siguiente patrón de bits se mira así:
 
@@ -59,6 +72,10 @@ siguiente patrón de bits se mira así:
     <td>0b1001</td>
   </tr>
 </table>
+
+En este caso, tenemos 5 números en representación binaria, cada uno representando una fila, estos números tambien se pueden escribir en representación decimal y hexadecimal. 
+Por ejemplo, el tercer valor de la letra <b>A</b> es 0b1111; este tambien se puede escribir en forma decimal: <b>15</b>, y en forma hexadecimal: <b>0xF</b>. Su trabajo sera 
+traducir de una representación a otra los números que forman cada una de las 5 filas de las letras.
 
 En los archivos descargados, ustedes tienen el archivo BinaryAlphabet.class y binary.txt, estos archivos les ayudaran a visualizar el patrón 
 binario. En binary.txt, ustedes pueden escribir cinco lineas, cada una con cuatro 1's y 0's separados por espacio, que representan la 
