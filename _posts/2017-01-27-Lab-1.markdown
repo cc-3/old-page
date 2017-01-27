@@ -117,8 +117,11 @@ Si todas las respuestas estan correctas en el ejercicio, entonces pueden subirl 
 #### Ejercicio 2: Cisco Binary Game
 
 Hagan click [aquí](/assets/games/binary_game.swf) para encontrar el juego, pero si en algún caso tienen problemas con el juego, pueden probar
-[este link](http://www.wordfreegames.com/game/binary-game.html). El objetivo es hacer coincidir el numero de la derecha con el representación 
-binaria sin signo de la izquierda. Esto requiere una combinación de clicking y typing. Y hay presión de tiempo para hacer las cosas mas divertidas.
+[este link](http://www.wordfreegames.com/game/binary-game.html). En caso de que ninguno de los liks funcione, intenten abrir la URL utilizando 
+ <i>Google Chrome</i>. 
+
+El objetivo es hacer coincidir el numero de la derecha con el representación binaria sin signo de la izquierda. Esto requiere una combinación de 
+clicking y typing. Y hay presión de tiempo para hacer las cosas mas divertidas.
 
 ![figura2](/assets/img/labs/lab1_fig2.png)
 
