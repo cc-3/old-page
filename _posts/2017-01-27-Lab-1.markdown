@@ -127,7 +127,7 @@ clicking y typing. Y hay presión de tiempo para hacer las cosas mas divertidas.
 
 El juego progresivamente se va volviendo mas rápido y más difícil. Vean si pueden alcanzar arriba de 20,000 puntos y llegar al nivel 5.
 
-Logren arriba de 18,000 puntos, pausen el juego, tomen un screen shot y guardenlo en su directorio de trabajo con el nombre (**_ejercicio2.png_**).
+Logren arriba de 18,000 puntos, pausen el juego, tomen un screen shot y guardenlo en su directorio de trabajo con el nombre **_ejercicio2.png_**.
 
 Para revisar si esta todo en orden, verifiquen su nota con:
 
@@ -143,7 +143,7 @@ Nota: 10/10
 Si obtienen los 10 puntos, hagan un commit y subanlo a GitHub:
 
 ```shell
-~ $ git add ejercicio2.py
+~ $ git add ejercicio2.png
 ~ $ git commit -m "Ejericio 2 terminado"
 ~ $ git push origin master
 ```
