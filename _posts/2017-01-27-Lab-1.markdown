@@ -34,7 +34,7 @@ y su nombre localmente para este repositorio:
 
 ```shell
 ~ $ git config user.name "su_nombre"
-~ $ git config user.mail "su_correo"
+~ $ git config user.email "su_correo"
 ```
 
 Noten que si estan trabajando en su propia computadora, no es necesario hacer el paso anterior, de lo contrario, si lo es.
