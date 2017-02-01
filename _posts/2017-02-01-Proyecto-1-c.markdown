@@ -1,0 +1,141 @@
+---
+layout: post
+title:  "Proyecto 1: C"
+date:   2017-02-01
+category: proyecto
+description: >
+    El objetivo de este proyecto es que ustedes puedan reforzar sus habilidades de programación en C aprendidas en clase y en las lecturas de K&amp;R, sobre todo en el manejo y gestión eficiente de la memoria (punteros, etc). En este proyecto ustedes eligen que hacer: Un juego en C o un Editor de Texto.
+permalink: /:categories/:title.html
+---
+
+### Propósito:
+
+En este proyecto ustedes deben aplicar todos los conocimientos adquiridos durante la clase sobre el lenguaje C (algoritmos y estructura de datos, desarrollo modular de aplicaciones, utilización de punteros, manejo y gestión eficiente de la memoria, etc.).
+
+En este primer proyecto ustedes van a tener la libertad de escoger entre dos diferentes opciones:
+
+1. **Hacer un videojuego**
+2. **Hacer un editor de texto**
+
+***
+
+### Opción 1: Videojuegos en C (Galaga)
+
+Si ustedes eligen realizar un **videojuego** tienen que considerar las siguientes especificaciones
+
+![Galaga](http://atariage.com/forums/uploads/monthly_02_2013/post-18-0-91173600-1360294916.png)
+
+#### Ambiente de Trabajo:
+
+Primero ustedes van a programar en **C**, no están restringidos a utilizar ANSI C pero tiene que ser **C**. La libreria que van a utilizar se llama **Allegro**, pueden utilizar otra como _OpenGL_ pero sabiendo y entendiendo de que van por su cuenta, por eso mismo les recomendamos que utilicen **_Allegro_**.
+
+Para instalar **Allegro** ustedes tienen que realizar lo que se les mostrará a continuación, pero antes deben descargar la libreria en el siguiente link: [Allegro 5.2](http://download.gna.org/allegro/allegro/5.2.2/allegro-5.2.2.zip)
+
+Cuando ya hayan descargado el archivo ustedes van a tener una carpeta comprimida en zip que se llama **allegro-5.2.2.zip** la descomprimen y lo siguiente que tienen que hacer es instalar librerias que utiliza Allegro para cargar imágenes, etc.
+
+```shell
+$ sudo apt-get update
+# instala las librerias que necesita allegro
+$ sudo apt-get install -y cmake g++ freeglut3-dev libxcursor-dev libpng12-dev libjpeg-dev libfreetype6-dev libgtk2.0-dev libasound2-dev libpulse-dev libopenal-dev libflac-dev libdumb1-dev libvorbis-dev libphysfs-dev
+```
+
+ya con eso podemos irnos a la carpeta de Allegro que descomprimimos
+
+```shell
+# En mi caso estaba en Downloads
+$ cd ~/Downloads/allegro
+```
+
+y ahora tenemos que hacer lo siguiente para instalar la libreria
+
+```shell
+$ mkdir build
+$ cd build
+$ cmake ..
+# N es la cantidad de threads que tiene su maquina, si es 8 ponen 8
+$ make -jN
+$ sudo make install
+```
+
+La documentación completa de **Allegro** la pueden encontrar [aquí](http://liballeg.org/a5docs/trunk/)
+
+#### Procedimiento
+
+Deben desarrollar un videojuego utilizando el lenguaje C, el juego a implementar es **_GALAGA_** o una variante. La única limitante es su creatividad ... ¡ah si! y el tiempo de desarrollo por lo que es muy importante que empicen lo antes posible y que estructuren bien sus ideas. **Cogito ergo sum (Pienso luego existo) - René Descartes**
+
+A más tardar el **Viernes 3 de Febrero de 2017 a las 23:00 PM** tienen que enviar un correo a **andres.cv@galileo.edu** con la seccion y los integrantes del grupo puede ser en parejas o individual **_- Choose Wisely_**.
+
+##### Información del juego
+
+En su repositorio de **GitHub** ustedes tienen que almacenar la siguiente información en el **README.MD**
+
+1. Título del juego
+2. Integrantes del grupo (parejas unicamente o individual) y el nombre del grupo
+3. Género del juego (RPG, FPS, RTS, MMOG, etc)
+4. Descripción general del juego
+5. Detalle de las pantallas
+6. Descripción del gameplay
+7. ¿Qué diferencia a su jugo de los demás?
+
+Esta información servirá para guiarlos y evitar que al momento de compilar obtengamos el error "Creativity Overflow" debido a las limitaciones de tiempo que se tienen para el proyecto. Recuerden que el objetivo del proyecto es la aplicación de los conceptos aprendidos del lenguaje C, y no del conocimiento de la libreria que vamos a utilizar, **Allegro**.
+
+No se pueden utilizar frameworks, game engines o similares (XNA, Torque, Ogre3D, Irrlicht, etc) ya que estos contienen mucha funcionalidad implementada :( por lo que desarrollar un juego ya no es tan divertido.
+
+#### Evaluación
+
+Como requisito para la revisión presencial deberán realizar todo en su repositorio de **GitHub**, tanto código como la multimedia necesaria para la ejecución del programa. También es obligatorio realizar un video de su juego donde se mire su jugabilidad y el diseño final. Es importante que se concentren en que su juego funcione bien con los features básicos antes de iniciar cualquier parte de puntos extras, no olviden lo importante que es la jugabilidad, traten de concetrarse en el funcionamiento del juego más que en conseguir imágenes chileras y perder mucho tiempo en esta parte.
+
+#### Puntos Extras
+
+**¿Cómo puedo conseguir puntos extras?** Primero como mencionamos arriba antes de venir a esta parte asegurense de que su juego funciona a la perfección, ya que no tendría sentido intentar esto si el juego no sirve. Pero si se pueden ganar puntos extra añadiendo features como:
+
+* Integración para la ejecución de partes del juego con otras plataformas (cconsola de videojuegos, celular, etc).
+* Utilización de harware adicional (webcams, wiimotes, bluetooth, etc).
+* Los gamepads y joysticks no son hardware adicional, ya que allegro provee dicha funcionalidad.
+* Opción para jugar en red. ¿Qué grupo será el primero en la historia de CCIII en implementar esto?.
+    * (nota: ya lo hizo alguien! en el 2010, ¿quién será el segundo? :P).
+    * Nivel de dificultad e implementación de inteligencia artificial.
+
+***
+
+### Opción 2: Editor de Texto en C (Mini Nano)
+
+Si escogen la opción 2 ustedes van a realizar un editor de texto básico como el **nano** de Linux pero más simple.
+
+![MiniNano](/assets/img/proj/nanoeditor.png)
+
+#### Ambiente de Trabajo
+
+Aquí practicamente solo van a utilizar C no necesitan ninguna librería pero si buenos conocimientos de C, sobre todo en punteros y manejo I/O. [Aquí](http://www.cplusplus.com/reference/clibrary/) hay buena documentación de la librerias de C pero nunca se aparten de la seccion **"C: library"** ya que tiene cosas de C++ que ustedes NO pueden utilizar y que no funcionarian de todos modos. Aquí si que hay que tomar buenas decisiones para que el programa al final realice lo que se les pide.
+
+#### Procedimiento
+
+Como todos sabemos los editores de texto tienen varias funcionalidades, pero como no queremos hacer un editor de texto completo sino que queremos ver sus habilidades en C vamos a limitar las funcionalidades de nuestro editor:
+
+
+#### Funciones a Implementar
+
+* Abrir un archivo existente (easy peasy)
+* Crear un archivo nuevo (easy)
+* Guarda el archivo actual (medium)
+* Modificar texto (hard)
+
+#### Especificaciones:
+
+**Abrir un archivo existente**: suponiendo que su editor de texto se llame
+"editor", entonces ustedes deben ser capaces de escribir "editor archivo.txt" y se debe abrir en el editor el "archivo.txt" para ser modificado.
+
+**Crear un archivo nuevo**: se debe poder escribir un archivo nuevo desde el
+editor, y poder almacenarlo.
+
+**Guarda el archivo actual**: se debe poder almacenar el archivo que esta en
+pantalla.
+
+**Modificar texto**: esta funcion es probablemente la más dificil, deben ser capaces de modificar el texto como lo hace un editor de texto que ustedes utilizan, es decir, ustedes deben ser capaces de mover el cursor, y poder modificar los caracteres que se encuentran debajo de el, ademas, si el texto no cabe en la ventana, se debe poder hacer scroll, como en cualquier editor de texto.
+
+**Restricciones**:
+Para hacer mas facil el proyecto, se aplican las siguientes restricciones, si
+su programa no tiene estas restricciones, es probable que tengan puntos extras (si superan los limites no si los disminuyen).
+
+* la cantidad maxima de filas es 1000
+* la cantidad maxima de columnas es 80
