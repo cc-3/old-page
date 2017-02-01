@@ -115,10 +115,10 @@ Como todos sabemos los editores de texto tienen varias funcionalidades, pero com
 
 #### Funciones a Implementar
 
-* Abrir un archivo existente (easy peasy)
-* Crear un archivo nuevo (easy)
-* Guarda el archivo actual (medium)
-* Modificar texto (hard)
+* Abrir un archivo existente (**easy peasy**)
+* Crear un archivo nuevo (**easy**)
+* Guarda el archivo actual (**medium**)
+* Modificar texto (**hard**)
 
 #### Especificaciones:
 
