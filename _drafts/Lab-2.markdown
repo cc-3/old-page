@@ -135,7 +135,7 @@ hola mundo
 
 ```shell
 $ ./editor
-\>\>Nombre del archivo: <span style="color=#D03422">hola.txt</span>
+>>Nombre del archivo: hola.txt
 hola mundo
 ```
 
