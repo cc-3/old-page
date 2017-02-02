@@ -116,3 +116,31 @@ $ ./bit_count 0x801
 ```
 
 Noten que el programa toma una entrada, que es el numero que va a ser analizado. Prueben con varios números para ver que su programa este correcto.
+
+#### Ejercicio 4: Abriendo archivos en C
+
+En este ejercicio vamos a iniciar con la primera parte de su proyecto (para los que decidan hacer el editor de texto). 
+
+En su carpeta de trabajo, ustedes tienen el archivo <b>editor.c</b>. Deben implementar el método main(int argc, char* argv[]) , donde <b>argc</b> es la longitud de los parámetros de con los que se 
+manda a llamar al método main, y <b>argv</b> es un areglo de <i>char*</i> (el equivalente en C a Strings) que son los parámentros en sí (tomen en cuenta que el primer elemento de argv 
+siempre es el nombre del ejecutable). 
+
+Su programa debe tener dos modos de ejecución; en el primero debe mandar como parametro el nombre del archivo a leer, y en el segundo debe leer del usuario el nombre del archivo a ejecutar.
+Asumiendo que existe en su directorio el archivo <b>hola.txt</b>, su programa se puede ejecutar de las siguientes formas:
+
+'''shell
+$ ./editor hola.txt
+hola mundo
+'''
+
+'''shell
+$ ./editor
+>>Nombre del archivo: <span style="color=#D03422">hola.txt</span>
+hola mundo
+'''
+
+Al implentar el segundo modo de ejecución, ustedes se daran cuenta que deberan manejar dinamicamente la memoria. Si aún no han leido el libro de <i>K&R</i>, probablemente querran usar Google
+para investigar un poco de la función <b>malloc()</b>. Ademas de <b>malloc</b>, que sirve para reservar memoria, existe <b>realloc</b> que sirve para (si, lo adivinaron) realocar memoria. Sin
+embargo, para este laboratorio <b>NO PUEDEN USAR realloc()</b>, por lo que deben implementar el método <b>expand(char* string, int currSize, int newSize)</b> que recibe un arreglo de caracteres
+de longitud <i>currSize</i> y la nueva longitud (asumimos que newSize > currSize), y devuelve un arreglo de caracteres de longitud <i>newSize</i> con los datos guardados en el arreglo original. 
+Deben liberar la memoria ocupada por el puntero <b>string</b> dentro de este método (probablemente deban leer un poo de la función <b>free()</b> si aun no lo han hecho).
