@@ -128,16 +128,16 @@ siempre es el nombre del ejecutable).
 Su programa debe tener dos modos de ejecución; en el primero debe mandar como parametro el nombre del archivo a leer, y en el segundo debe leer del usuario el nombre del archivo a ejecutar.
 Asumiendo que existe en su directorio el archivo <b>hola.txt</b>, su programa se puede ejecutar de las siguientes formas:
 
-'''shell
+```shell
 $ ./editor hola.txt
 hola mundo
-'''
+```
 
-'''shell
+```shell
 $ ./editor
 >>Nombre del archivo: <span style="color=#D03422">hola.txt</span>
 hola mundo
-'''
+```
 
 Al implentar el segundo modo de ejecución, ustedes se daran cuenta que deberan manejar dinamicamente la memoria. Si aún no han leido el libro de <i>K&R</i>, probablemente querran usar Google
 para investigar un poco de la función <b>malloc()</b>. Ademas de <b>malloc</b>, que sirve para reservar memoria, existe <b>realloc</b> que sirve para (si, lo adivinaron) realocar memoria. Sin
