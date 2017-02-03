@@ -6,6 +6,15 @@ category: lab
 description: >
     Para este laboratorio ustedes aprenderán como compilar y correr un programa en C, también van a realizar cosas que harán en su primer proyecto.
 ---
+
+#### First thing's first
+
+Para realizar el lab ustedes necesitan los siguientes archivos bases que se van a crear utilizando el siguiente link:
+
+[Link Repositorio](https://classroom.github.com/assignment-invitations/fa886ed6992df050fcbc03980bedc094)
+
+Cuando ya tengan esto clonen su repositorio en el lugar donde quieran trabajar
+
 #### Compilando y Corriendo un programa en C
 
 En este laboratorio, vamos a utilizar el compilador gcc desde el command line para compilar programas hechos en C. La manera mas simple de correr gcc es la siguiente:
@@ -25,6 +34,14 @@ gcc tiene varias opciones que se le pueden mandar vía command line, las cuales 
 
 ```shell
 $ gcc -o program program.c
+$ ./program
+HOLA MUNDO !!!
+```
+
+tambien pueden utilizar **make**, que si miran ese archivo hace lo mismo
+
+```shell
+$ make program
 $ ./program
 HOLA MUNDO !!!
 ```
