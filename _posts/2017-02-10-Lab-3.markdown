@@ -16,11 +16,13 @@ ejecuten los siguientes comandos:
 ```shell
 $ cd Desktop
 $ git clone https://github.com/cc-3/logout.git
-$ cd delete
+$ cd logout
 $ sudo bash logout_clean
 ```
 Deben ingresar la password del usuario 'student', que convenientemente es 'student'. El script los sacara de la sesion, pero podran volver a entrar sin problemas. 
 Una vez hecho eso estamos listos para iniciar.
+
+### Descargando los Archivos
 
 Para este laboratorio, (al igual que para los anteriores) ustedes necesitan los siguientes archivos bases que se van a crear utilizando el siguiente <a href="https://classroom.github.com/">link.</a>
 Luego de haber aceptado la invitacion, pueden <b>CLONAR SU REPOSITORIO</b> en el lugar de trabajo donde ustedes desee. 
@@ -70,9 +72,6 @@ aprender estos comandos, va a ser útil para lo que falta de este lab, y en gene
 ***
 
 
-
-
-
 #### Ejercicio 2: Debugging a buggy C program
 
 Ahora van a usar su nuevo conocimiento en gdb, para hacer un debug en un programa pequeño hecho en C. Consideren el programa ll_equal.c. Compilen y corran el programa, y experimenten con el. 
@@ -91,9 +90,9 @@ Ahora, comiencen gdb en el programa, utilizando las instrucciones en el ejercici
 
 1. ¿Qué hicieron para arreglar el error?
 
-***
 
 Solo para asegurarse, pueden ejecutar el siguiente comando para ver que todo este correctamente:
+
 ```shell
 $ make check-ej2
 gcc -g -o ll_equal.out ll_equal.c
@@ -103,6 +102,7 @@ Calificando Ejercicio: 2
 ....................
 Nota: 25/25
 ```
+***
 
 #### Ejercicio 3: Punteros y Estructuras en C
 
@@ -127,6 +127,7 @@ Checking length-zero list for cycles. There should be none, ll_has_cycle says it
 ```
 
 Y para corroborar:
+
 ```shell
 $ make check-ej3
 gcc -g -o ll_cycle.out ll_cycle.c
@@ -186,6 +187,7 @@ Congratulations! It works!
 ```
 
 Una vez mas, pueden revisar su nota ejecutando:
+
 ```shell
 $ make check-ej4
 gcc -g -o ll_lfsr.out ll_lfsr.c
@@ -197,6 +199,7 @@ Nota: 25/25
 ```
 
 o bien:
+
 ```shell
 $ make check
 gcc -g -o ll_equal.out ll_equal.c
