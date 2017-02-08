@@ -19,12 +19,10 @@ $ git clone https://github.com/cc-3/logout.git
 $ cd delete
 $ sudo bash logout_clean
 ```
-El script los sacara de la sesion, pero podran volver a entrar sin problemas. Una vez hecho eso estamos listos para iniciar.
+Deben ingresar la password del usuario 'student', que convenientemente es 'student'. El script los sacara de la sesion, pero podran volver a entrar sin problemas. 
+Una vez hecho eso estamos listos para iniciar.
 
-Para este laboratorio, (al igual que para los anteriores) ustedes necesitan los siguientes archivos bases que se van a crear utilizando el siguiente link:
-
-[Link Repositorio](https://classroom.github.com/)
-
+Para este laboratorio, (al igual que para los anteriores) ustedes necesitan los siguientes archivos bases que se van a crear utilizando el siguiente <a href="https://classroom.github.com/">link.</a>
 Luego de haber aceptado la invitacion, pueden <b>CLONAR SU REPOSITORIO</b> en el lugar de trabajo donde ustedes desee. 
 
 #### Ejercicio 1: Debugger
@@ -71,26 +69,40 @@ aprender estos comandos, va a ser útil para lo que falta de este lab, y en gene
 
 ***
 
+
+
+
+
 #### Ejercicio 2: Debugging a buggy C program
 
-Ahora van a usar su nuevo conocimiento en gdb, para hacer un debug en un programa pequeño hecho en C. Consideren el programa ll_equal.c. Compilen y corran el programa, y experimenten con el. Les dará el siguiente resultado:
+Ahora van a usar su nuevo conocimiento en gdb, para hacer un debug en un programa pequeño hecho en C. Consideren el programa ll_equal.c. Compilen y corran el programa, y experimenten con el. 
+Les dará el siguiente resultado:
 
 ```shell
-$ gcc -g -o ll_equal ll_equal.c
-$ ./ll_equal
+$ gcc -g -o ll_equal.out ll_equal.c
+$ ./ll_equal.out
 equal test 1 result = 1
 Segmentation fault
 ```
 
 Ahora, comiencen gdb en el programa, utilizando las instrucciones en el ejercicio 1. Creen un breakpoint en la función ll_equal(), y corran el programa. Cuando el debugger regrese al breakpoint, hagan un step a través de las instrucciones en la función linea por linea, y examinen los valores de las variables. Pongan atención a los punteros de a y b en la función. ¿Siempre están apuntando a la dirección correcta? Encuentren el bug y arréglenlo.
 
-**Respondan**
-
-En un archivo de texto respondan:
+**En un archivo de texto llamado ex1.txt respondan:**
 
 1. ¿Qué hicieron para arreglar el error?
 
 ***
+
+Solo para asegurarse, pueden ejecutar el siguiente comando para ver que todo este correctamente:
+```shell
+$ make check-ej2
+gcc -g -o ll_equal.out ll_equal.c
+python check.py 2
+Calificando Ejercicio: 2
+....................
+....................
+Nota: 25/25
+```
 
 #### Ejercicio 3: Punteros y Estructuras en C
 
@@ -101,7 +113,29 @@ En ll_cycle.c completen la funcion ll_has_cycle() para implementar el siguiente 
 3. Avancen tortoise 1 nodo. (¿Es necesaria una verificación de null-pointer?, ¿Por qué?)
 4. Si tortoise y hare apuntan hacia el mismo nodo, la lista es cíclica. Sino, volver al paso 2.
 
-Después de haber implementado ll_has_cycle() correctamente, el programa cuando compilan ll_cycle.c les va a decir si ll_has_cycle() saca la salida esperada.
+Después de haber implementado ll_has_cycle() correctamente, el programa cuando compilan ll_cycle.c les va a decir si ll_has_cycle() saca la salida esperada:
+
+```shell
+$ gcc -g -o ll_cycle.out ll_cycle.c
+$ ./ll_cycle.out
+Checking first list for cycles. There should be none, ll_has_cycle says it has no cycle
+Checking second list for cycles. There should be a cycle, ll_has_cycle says it has a cycle
+Checking third list for cycles. There should be a cycle, ll_has_cycle says it has a cycle
+Checking fourth list for cycles. There should be a cycle, ll_has_cycle says it has a cycle
+Checking fifth list for cycles. There should be none, ll_has_cycle says it has no cycle
+Checking length-zero list for cycles. There should be none, ll_has_cycle says it has no cycle
+```
+
+Y para corroborar:
+```shell
+$ make check-ej3
+gcc -g -o ll_cycle.out ll_cycle.c
+python check.py 3
+Calificando Ejercicio: 3
+....................
+....................
+Nota: 25/25
+```
 
 ***
 
@@ -121,8 +155,8 @@ En este ejercicio, van a implementar una función lfsr_calculate() que determina
 Si implementaron correctamente lfsr_calculate(), compilen y corran lfsr. Su salida debería de ser similar a esta:
 
 ```shell
-$ gcc -o lfsr lfsr.c 
-$ ./lfsr
+$ gcc -o ll_lfsr.out ll_lfsr.c
+$ ./lfsr.out
 My number is: 1
 My number is: 5185
 My number is: 38801
@@ -150,5 +184,50 @@ My number is: 16285
 Got 65535 numbers before cycling!
 Congratulations! It works!
 ```
-Recuerden hacer commits de sus avances periodicamente, hacer el ultimo commit antes de las 11:55 de la noche, y  subir el link de su repositorio al GES antes de esta hora. Si no hacen esto, 
-tendran una nota de 0.
+
+Una vez mas, pueden revisar su nota ejecutando:
+```shell
+$ make check-ej4
+gcc -g -o ll_lfsr.out ll_lfsr.c
+python check.py 4
+Calificando Ejercicio: 4
+....................
+....................
+Nota: 25/25
+```
+
+o bien:
+```shell
+$ make check
+gcc -g -o ll_equal.out ll_equal.c
+gcc -g -o ll_cycle.out ll_cycle.c
+gcc -g -o ll_lfsr.out ll_lfsr.c
+python check.py
+Calificando Todo:
+
+....................
+Calificando Ejercicio: 1
+....................
+Nota: 25/25
+
+....................
+Calificando Ejercicio: 2
+....................
+Nota: 25/25
+
+....................
+Calificando Ejercicio: 3
+....................
+Nota: 25/25
+
+TOTAL: 75/75
+
+```
+
+<b>Recuerden hacer commits de sus avances periodicamente, hacer el ultimo commit antes de las 11:55 de la noche, y  subir el link de su repositorio al GES antes de esta hora. Si no hacen esto, 
+tendran una nota de 0</b>.
+
+
+
+
+
