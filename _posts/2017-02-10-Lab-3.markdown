@@ -24,7 +24,8 @@ Una vez hecho eso estamos listos para iniciar.
 
 ### Descargando los Archivos
 
-Para este laboratorio, (al igual que para los anteriores) ustedes necesitan los siguientes archivos bases que se van a crear utilizando el siguiente <a href="https://classroom.github.com/">link.</a>
+Para este laboratorio, (al igual que para los anteriores) ustedes necesitan los siguientes archivos bases que se van a crear utilizando el siguiente 
+<a href="https://classroom.github.com/assignment-invitations/6ab0e3c2a315f897d10743d4415a5c7f">link.</a>
 Luego de haber aceptado la invitacion, pueden <b>CLONAR SU REPOSITORIO</b> en el lugar de trabajo donde ustedes desee. 
 
 #### Ejercicio 1: Debugger
@@ -209,17 +210,17 @@ python check.py
 Calificando Todo:
 
 ....................
-Calificando Ejercicio: 1
-....................
-Nota: 25/25
-
-....................
 Calificando Ejercicio: 2
 ....................
 Nota: 25/25
 
 ....................
 Calificando Ejercicio: 3
+....................
+Nota: 25/25
+
+....................
+Calificando Ejercicio: 4
 ....................
 Nota: 25/25
 
