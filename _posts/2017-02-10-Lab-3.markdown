@@ -150,7 +150,7 @@ En este ejercicio, van a implementar una función lfsr_calculate() que determina
 **Explicación del diagrama de arriba:**
 
 * En cada llamada a lfsr_calculate, ustedes le van a hacer un shift al registro 1 bit a la derecha
-* Este no es un shift lógico o aritmético. En el lado izquierdo, ustedes van hacer shift sobre un único bit, igual al un XOR de los bits originales en la posición 11, 13, 14 y 16
+* Este no es un shift lógico o aritmético. En el lado izquierdo, ustedes van hacer shift sobre un único bit, igual al un XOR de los bits originales en la posición 5, 3, 2 y 0
 * Las figuras que miran debajo del numero binario son XOR's, que toman 2 entradas a y b, y devuelven como salida a ^ b
 * Si implementan lfsr_calculate() correctamente, el programa debería de sacar todos los 65535 números positivos enteros de 16-bits, antes de volver a empezar de nuevo con el número que empezó.
 
