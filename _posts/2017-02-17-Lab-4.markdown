@@ -101,7 +101,7 @@ Para el primer ejercicio ustedes van a realizar una calculadura básica en lengu
 3. "* ": Multiplicación
 4. "/": División
 5. "&": And
-6. "": Or
+6. "\|": Or
 7. "^": Xor
 8. "<": Shift left logico
 9. ">": Shift right logico
@@ -114,7 +114,7 @@ Su archivo se tiene que llamar **ejercicio1.s** (tiene que estar en la carpeta d
 
 ```sh
 $ gcc -o calculadora ejercicio1.s
-$ ./calculadora 2 + 2
+$ ./calculadora 2 "+" 2
 $ echo $? # esto para obtener el resultado
 4
 ```
@@ -144,7 +144,7 @@ Su archivo se tiene que llamar **ejercicio2.s** nuevamente para compilar hay que
 
 ```sh
 $ gcc -o calculadora ejercicio2.s
-$ ./calculadora 2 + 2
+$ ./calculadora 2 "+" 2
 $ El resultado de la operacion es: 4
 ```
 
