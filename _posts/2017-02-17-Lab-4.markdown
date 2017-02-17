@@ -13,7 +13,7 @@ Ustedes van a estar trabajando con **qemu**, qemu es un emulador de "procesadore
 
 Cuando ya hayan hecho login en las computadoras del laboratorio con el usuario de FISICC, van a encontrar una carpeta en el escritorio que se llama **ARMv8_CC3** ustedes tienen que abrir esa carpeta y hacer lo siguiente:
 
-1. Agregar al **PATH** "C:\Program Files\qemu"
+1. Agregar al **PATH** "C:\Archivos de Programa\qemu"
 2. Dentro de la carpeta hay un archivo con extension .PS1 al que ustedes le tienen que dar click derecho y darle en la opción que dice **"Run with PowerShell"**.
 3. Les va a empezar a salir un monton de cosas en el shell y esto significa que está empezando la simulación.
 4. Cuando les pida Usuario y Password tienen que poner Usuario: student, Password: student
@@ -42,7 +42,7 @@ despues le dan click al boton que tiene el icono verde que dice login y les apar
 Luego cuando ya establecio la conexion les muestra la siguiente ventana ![WinSCP3](/assets/img/labs/WinSCP3.PNG)
 
 del lado izquierdo les muestra los archivos que estan en windows, y del lado derecho les muestra los archivos que estan en Ubuntu
-** para transferir un archivo** deben arrastrar de un lado al otro el archivo para que se copie (_si el archivo ya existe les saldra una venta confirmando si lo quieren sobre-escribir tengan cuidado de no copiar en la direccion equivocada_)
+**para transferir un archivo** deben arrastrar de un lado al otro el archivo para que se copie (_si el archivo ya existe les saldra una venta confirmando si lo quieren sobre-escribir tengan cuidado de no copiar en la direccion equivocada_)
 
 
 #### Instrucciones a Utilizar
