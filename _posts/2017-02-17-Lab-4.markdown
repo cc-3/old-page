@@ -1,0 +1,179 @@
+---
+layout: post
+title:  "Laboratorio 4"
+date:   2017-02-16
+category: lab
+description: >
+    En este laboratorio ustedes van a hacer un par de programas en ensamblador utilizando el Instruction Set de Armv8. Utilizaremos lo aprendido en clase
+---
+
+#### Antes de Iniciar
+
+Ustedes van a estar trabajando con **qemu**, qemu es un emulador de "procesadores" y virtualizador open source, nos va a estar sirviendo en CC3 para poder simular una arquitectura **ARMv8** para que prueben sus programas de ensamblador. En esta ocasión ustedes van a utilizar **Windows** y nosotros ya hemos instalado todo lo necesario para que puedan realizar el lab en su totalidad.para poder instalarlo en su casa podran seguir esta [guia](https://drive.google.com/file/d/0B5xlmAbvK4yAdzBrUExibUpraXc/view?usp=sharing)
+
+Cuando ya hayan hecho login en las computadoras del laboratorio con el usuario de FISICC, van a encontrar una carpeta en el escritorio que se llama **ARMv8_CC3** ustedes tienen que abrir esa carpeta y hacer lo siguiente:
+
+1. Agregar al **PATH** "C:\Program Files\qemu"
+2. Dentro de la carpeta hay un archivo con extension .PS1 al que ustedes le tienen que dar click derecho y darle en la opción que dice **"Run with PowerShell"**.
+3. Les va a empezar a salir un monton de cosas en el shell y esto significa que está empezando la simulación.
+4. Cuando les pida Usuario y Password tienen que poner Usuario: student, Password: student
+
+Esta maquina virtual solo nos proporciona una terminal por lo que para su comidad le recomendamos trabajar los archivos en su editor de preferencia en windows y copiar los archivos a ubuntu para poder probarlos.
+
+Para poder copiar archivos vamos a utilizar el programa WinSCP el cual lo pueden descargar [aqui](https://winscp.net/download/WinSCP-5.9.4-Portable.zip)
+en su versión portable
+
+Al abrir `WinSCP` les aparecera la siguiente ventana deberan llenar los datos como se describe a continuación
+
+![WinSCP1](/assets/img/labs/WinSCP1.PNG)
+
+* **File Protocol:** SCP
+* **Hostname:** localhost
+* **Port number:** 2222
+* **User name:** student
+* **Password:** student
+
+
+luego le dan click en save, les aparecera una nueva ventana a la que le deben dar click al boton de OK
+despues le dan click al boton que tiene el icono verde que dice login y les aparecera la siguiente ventana ahi deben ingresar el password(student)
+
+![WinSCP2](/assets/img/labs/WinSCP2.PNG)
+
+Luego cuando ya establecio la conexion les muestra la siguiente ventana ![WinSCP3](/assets/img/labs/WinSCP3.PNG)
+
+del lado izquierdo les muestra los archivos que estan en windows, y del lado derecho les muestra los archivos que estan en Ubuntu
+** para transferir un archivo** deben arrastrar de un lado al otro el archivo para que se copie (_si el archivo ya existe les saldra una venta confirmando si lo quieren sobre-escribir tengan cuidado de no copiar en la direccion equivocada_)
+
+
+#### Instrucciones a Utilizar
+
+Instrucciones basicas de ARMv8 que necesitaran para este laboratorio
+
+##### Aritmeticas
+  * `ADD Xd|SP, Xn|SP, Xm`
+  * `SUB Xd|SP, Xn|SP, Xm`
+  * `MUL Xd, Xn, Xm`
+  * `SDIV Xd, Xn, Xm`
+  * `ORR Xd, Xn, Xm`
+  * `AND Xd, Xn, Xm`
+
+##### Comparación y saltos
+  * `CMP Xn, Xm`
+    - Compare (extended register): alias for `SUBS XZR, Xn, Xm{, ashift #imm}`.
+  * `B.cond label` para ver cuales cond existen ver [documentacion de arm](http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.den0024a/CHDEEABE.html)
+    - Branch: conditionally jumps to program-relative label if cond is true.
+  * `BL label`
+    - Branch and Link: unconditionally jumps to pc-relative label, writing the address of the next sequential
+instruction to register X30.
+  * `B label`
+    - Branch: unconditionally jumps to pc-relative label.
+  * `ret {Xm}`
+    - Return: jumps to register Xm, with a hint to the CPU that this is a subroutine return. An assembler shall
+default to register X30 if Xm is omitted.
+
+##### Manejo de memoria
+  * LDR Xt, addr
+    - Load Register (extended): loads a doubleword from memory addressed by addr to Xt.
+  * LDRB Wt, addr
+    - Load Byte: loads a byte from memory addressed by addr, then zero-extends it to Wt.
+  * STR Xt, addr
+    - Store Register (extended): stores doubleword from Xt to memory addressed by addr
+
+
+  __NOTA__: addr debe ser en el formato `[Xn|SP, #offset ]`, ejemplo si queremos cargar el primer caracter de un string al que apunta x19 lo hacemos con `LDRB w9, [x19, #0]`
+
+
+Otra cosa importante es que ustedes pueden refrescar un poco lo visto en clase con los ejemplos que se dieron de ensamblador (que mejor que ver ejemplos no? xD) todo eso lo pueden encontrar en el repositorio de **GitHub** de CC3 llamado basicARM
+
+[https://github.com/cc-3/basicARM](https://github.com/cc-3/basicARM)
+
+
+#### GitHub Classroom
+
+Vamos a seguir utilizando github classroom, por lo que su repositorio se encuentra en el siguiente [link](https://classroom.github.com/assignment-invitations/8e2bac83b94fa9af3c62f3caadc8697b) y aqui tienen que subir todos sus archivos terminados.
+
+#### Ejercicio 1: Calculadora
+
+Para el primer ejercicio ustedes van a realizar una calculadura básica en lenguaje ensamblador que va a tener las siguientes operaciones:
+
+1. "+": Suma
+2. "-": Resta
+3. "* ": Multiplicación
+4. "/": División
+5. "&": And
+6. "": Or
+7. "^": Xor
+8. "<": Shift left logico
+9. ">": Shift right logico
+
+En este caso todas las operaciones las tienen que implementar como funciones y dado que estas son "leaf procedures", no es necesario que guarden el x30, pero si lo tienen que hacer en main ya que esta si manda a llamar a las demas funciones y el valor se puede sobreescribir. Recuerden utilizar correctamente los registros (el convenio visto en clase).
+
+![Convenio Arm](/assets/img/labs/convenio_arm.jpeg)
+
+Su archivo se tiene que llamar **ejercicio1.s** (tiene que estar en la carpeta de su repositorio) y para compilarlo tienen que utilizar **gcc**
+
+```sh
+$ gcc -o calculadora ejercicio1.s
+$ ./calculadora 2 + 2
+$ echo $? # esto para obtener el resultado
+4
+```
+
+Vean que para usar la calculadora se manda la operacion por la linea de comandos, para obtener los argumentos con los que fue llamado el programa en la linea de comandos
+en c nuestro main tendria
+`int main( int argc, char* argv[] )`
+entonces en nuestro main de ensamblador tendremos en `X0` el argc y en el `X1` tendremos el argv[] y para cargar cada posición de argv lo hacemos con `LDR X9, [X1, #offset]` _el offset es en múltiplos de 8_, algo importante es que comenzariamos en el offset 8 ya que en 0 tenemos el nombre del archivo.
+
+Algo que tienen que considerar es que lo que ustedes reciben en la linea de comandos es un string y para el caso de los operandos lo tienen que convertir a un valor entero por lo que van a necesitar utilizar la funcion atoi de C para más información sobre esto aqui hay un [link](https://www.tutorialspoint.com/c_standard_library/c_function_atoi.htm) que muestra para que funciona esta funcion.
+
+Cuando tengan terminado el ejercicio 1 recuerden que tienen que subirlo a su repositorio
+
+```sh
+$ git add ejercicio1.s
+$ git commit -m "ejercicio 1 terminado"
+$ git push -u origin master
+```
+
+#### Ejercicio 2: Calculadora (Printf)
+
+En el ejercicio anterior tuvimos que utilizar `echo $?` para poder obtener el resultado, ahora lo que tienen que hacer es modificar el ejercicio 1 para que utilice **printf** y asi desplegar el resultado de la operación de una vez, como en el ejemplo **basicWhile_printf.s** que esta en el repo con los ejemplos vistos en clase.
+
+Su calculadora tiene que desplegar el mensaje **El resultado de la operacion es:** seguido del resultado.
+
+Su archivo se tiene que llamar **ejercicio2.s** nuevamente para compilar hay que utilizar gcc
+
+```sh
+$ gcc -o calculadora ejercicio2.s
+$ ./calculadora 2 + 2
+$ El resultado de la operacion es: 4
+```
+
+Cuando tengan terminado el ejercicio 2 tambien lo tienen que subir al repositorio
+
+```sh
+$ git add ejercicio2.s
+$ git commit -m "ejercicio 2 terminado"
+$ git push -u origin master
+```
+
+#### Ejercicio 3: Factorial Recursivo y Printf
+
+Para este ejercicio lo que tienen que hacer es que dado un numero en la linea de comandos imprima cual es el factorial de ese numero
+
+Su archivo se debe llamar **ejercicio3.s**
+
+y para compilarlo nuevamente
+
+```sh
+$ gcc -o factorial ejercicio3.s
+$ ./factorial 5
+$ 120
+```
+
+Cuando tengan terminado el ejercicio 3 tambien lo tienen que subir al repositorio
+
+```sh
+$ git add ejercicio3.s
+$ git commit -m "ejercicio 3 terminado"
+$ git push -u origin master
+```
