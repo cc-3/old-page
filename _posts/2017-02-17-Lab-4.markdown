@@ -108,23 +108,19 @@ Para el primer ejercicio ustedes van a realizar una calculadura básica en lengu
 
 En este caso todas las operaciones las tienen que implementar como funciones y dado que estas son "leaf procedures", no es necesario que guarden el x30, pero si lo tienen que hacer en main ya que esta si manda a llamar a las demas funciones y el valor se puede sobreescribir. Recuerden utilizar correctamente los registros (el convenio visto en clase).
 
+**NOTA: Ustedes tienen que cargar en x0 el operando numero 1 y en x1 el operando numero 2 y devolver el resultado en x0**
+
 ![Convenio Arm](/assets/img/labs/convenio_arm.jpeg)
 
 Su archivo se tiene que llamar **ejercicio1.s** (tiene que estar en la carpeta de su repositorio) y para compilarlo tienen que utilizar **gcc**
 
 ```sh
+# Si X0=2, X1=2, y es la operacion suma
 $ gcc -o calculadora ejercicio1.s
-$ ./calculadora 2 "+" 2
+$ ./calculadora
 $ echo $? # esto para obtener el resultado
 4
 ```
-
-Vean que para usar la calculadora se manda la operacion por la linea de comandos, para obtener los argumentos con los que fue llamado el programa en la linea de comandos
-en c nuestro main tendria
-`int main( int argc, char* argv[] )`
-entonces en nuestro main de ensamblador tendremos en `X0` el argc y en el `X1` tendremos el argv[] y para cargar cada posición de argv lo hacemos con `LDR X9, [X1, #offset]` _el offset es en múltiplos de 8_, algo importante es que comenzariamos en el offset 8 ya que en 0 tenemos el nombre del archivo.
-
-Algo que tienen que considerar es que lo que ustedes reciben en la linea de comandos es un string y para el caso de los operandos lo tienen que convertir a un valor entero por lo que van a necesitar utilizar la funcion atoi de C para más información sobre esto aqui hay un [link](https://www.tutorialspoint.com/c_standard_library/c_function_atoi.htm) que muestra para que funciona esta funcion.
 
 Cuando tengan terminado el ejercicio 1 recuerden que tienen que subirlo a su repositorio
 
@@ -143,8 +139,9 @@ Su calculadora tiene que desplegar el mensaje **El resultado de la operacion es:
 Su archivo se tiene que llamar **ejercicio2.s** nuevamente para compilar hay que utilizar gcc
 
 ```sh
+# Si X0=2, X1=2, y es la operacion suma
 $ gcc -o calculadora ejercicio2.s
-$ ./calculadora 2 "+" 2
+$ ./calculadora
 $ El resultado de la operacion es: 4
 ```
 
@@ -155,25 +152,51 @@ $ git add ejercicio2.s
 $ git commit -m "ejercicio 2 terminado"
 $ git push -u origin master
 ```
+#### Ejercicio 3: Linea de comandos
 
-#### Ejercicio 3: Factorial Recursivo y Printf
-
-Para este ejercicio lo que tienen que hacer es que dado un numero en la linea de comandos imprima cual es el factorial de ese numero
-
-Su archivo se debe llamar **ejercicio3.s**
-
-y para compilarlo nuevamente
+Ahora vamos a re-utilizar la calculadora que ya tiene printf (del ejercicio anterior) y la vamos a extender para que en vez de hacer un set a los registros asi directamente podamos mandarlo por la linea de comandos y tambien ver que operacion es la que quiere el usuario de la siguiente manera:
 
 ```sh
-$ gcc -o factorial ejercicio3.s
-$ ./factorial 5
-$ 120
+$ gcc -o calculadora ejercicio3.s
+$ ./calculadora 2 "+" 2
+$ El resultado de la operacion es: 4
 ```
+
+**HINT: les va a ser util "ldrb" a la hora de ver que operador es el utilizado**
+
+Vean que para usar la calculadora se manda la operacion por la linea de comandos, para obtener los argumentos con los que fue llamado el programa en la linea de comandos
+en c nuestro main tendria
+`int main( int argc, char* argv[] )`
+entonces en nuestro main de ensamblador tendremos en `X0` el argc y en el `X1` tendremos el argv[] y para cargar cada posición de argv lo hacemos con `LDR X9, [X1, #offset]` _el offset es en múltiplos de 8_, algo importante es que comenzariamos en el offset 8 ya que en 0 tenemos el nombre del archivo.
+
+Algo que tienen que considerar es que lo que ustedes reciben en la linea de comandos es un string y para el caso de los operandos lo tienen que convertir a un valor entero por lo que van a necesitar utilizar la funcion atoi de C para más información sobre esto aqui hay un [link](https://www.tutorialspoint.com/c_standard_library/c_function_atoi.htm) que muestra para que funciona esta funcion.
 
 Cuando tengan terminado el ejercicio 3 tambien lo tienen que subir al repositorio
 
 ```sh
-$ git add ejercicio3.s
+$ git add ejercicio3s.s
 $ git commit -m "ejercicio 3 terminado"
+$ git push -u origin master
+```
+
+#### Ejercicio 4: Factorial Recursivo y Printf
+
+Para este ejercicio lo que tienen que hacer es que dado un numero en la linea de comandos imprima cual es el factorial de ese numero
+
+Su archivo se debe llamar **ejercicio4.s**
+
+y para compilarlo nuevamente
+
+```sh
+$ gcc -o factorial ejercicio4.s
+$ ./factorial 5
+$ 120
+```
+
+Cuando tengan terminado el ejercicio 4 tambien lo tienen que subir al repositorio
+
+```sh
+$ git add ejercicio4.s
+$ git commit -m "ejercicio 4 terminado"
 $ git push -u origin master
 ```
