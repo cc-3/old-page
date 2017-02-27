@@ -103,6 +103,21 @@ primero que tenemos que hacer es escoger un subset de instrucciones sobre las qu
 		<td>EOR xd, xn, imm</td>
 		<td>xd = xn ^ imm</td>
 	</tr>
+	<tr>
+		<td>MOV</td>
+		<td>MOV xd, imm {, LSL #<shift>}</td>
+		<td>xd = imm << shift_ammount (Llena con 0's lo demas)</td>
+	</tr>
+	<tr>
+		<td>MOVN</td>
+		<td>MOVN xd, imm {, LSL #\<shift\>}</td>
+		<td>xd = ~ imm << shift_ammount (Llena con 0's lo demas)</td>
+	</tr>
+	<tr>
+		<td>MOVK</td>
+		<td>MOVK xd, imm {, LSL #<shift>}</td>
+		<td>xd = imm << shift_ammount (Deja los demas bits intactos)</td>
+	</tr>
 </table>
 
 
