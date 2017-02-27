@@ -105,18 +105,18 @@ primero que tenemos que hacer es escoger un subset de instrucciones sobre las qu
 	</tr>
 	<tr>
 		<td>MOV</td>
-		<td>MOV xd, imm {, LSL #<shift>}</td>
-		<td>xd = imm << shift_ammount (Llena con 0's lo demas)</td>
+		<td>MOV xd, imm {, LSL # &lt shamt &gt }</td>
+		<td>xd = imm << shamt (Llena con 0's lo demas)</td>
 	</tr>
 	<tr>
 		<td>MOVN</td>
-		<td>MOVN xd, imm {, LSL #\<shift\>}</td>
-		<td>xd = ~ imm << shift_ammount (Llena con 0's lo demas)</td>
+		<td>MOVN xd, imm {, LSL # &lt shamt &gt}</td>
+		<td>xd = ~ imm << shamt (Llena con 0's lo demas)</td>
 	</tr>
 	<tr>
 		<td>MOVK</td>
-		<td>MOVK xd, imm {, LSL #<shift>}</td>
-		<td>xd = imm << shift_ammount (Deja los demas bits intactos)</td>
+		<td>MOVK xd, imm {, LSL # &lt shamt &gt }</td>
+		<td>xd = imm << shamt (Deja los demas bits intactos)</td>
 	</tr>
 	<tr>
 		<td>CBZ</td>
@@ -170,13 +170,13 @@ primero que tenemos que hacer es escoger un subset de instrucciones sobre las qu
 	</tr>
 	<tr>
 		<td>LDR</td>
-		<td>LDR xt,[xn,xm]my_label</td>
-		<td>Carga en xt lo que hay en la dirección xn con offset xm</td>
+		<td>LDR xt,[xn,imm]my_label</td>
+		<td>Carga en xt lo que hay en la dirección xn con offset imm</td>
 	</tr>
 	<tr>
 		<td>STR</td>
-		<td>STR xt,[xn,xm]my_label</td>
-		<td>Guarda xt en la dirección xn con offset xm</td>
+		<td>STR xt,[xn,imm]my_label</td>
+		<td>Guarda xt en la dirección xn con offset imm </td>
 	</tr>
 </table>
 
