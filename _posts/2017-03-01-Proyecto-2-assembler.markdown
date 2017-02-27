@@ -136,47 +136,102 @@ primero que tenemos que hacer es escoger un subset de instrucciones sobre las qu
 	<tr>
 		<td>CBZ</td>
 		<td>CBZ xd, my_label</td>
-		<td>Si (xd == 0), saltar a my_label</td>
+		<td>Si (xd == 0), salta a my_label</td>
 	</tr>
 	<tr>
 		<td>CBNZ</td>
 		<td>CBNZ xd, my_label</td>
-		<td>Si (xd != 0), saltar a my_label</td>
+		<td>Si (xd != 0), salta a my_label</td>
 	</tr>
 	<tr>
 		<td>B.EQ</td>
 		<td>B.EQ my_label</td>
-		<td>Si (Z == 1), saltar a my_label</td>
+		<td>Si (Z == 1), salta a my_label</td>
 	</tr>
 	<tr>
 		<td>B.NE</td>
 		<td>B.NE my_label</td>
-		<td>Si (Z == 0), saltar a my_label</td>
+		<td>Si (Z == 0), salta a my_label</td>
 	</tr>
 	<tr>
 		<td>B.HS</td>
 		<td>B.HS my_label</td>
-		<td>Si (C == 1), saltar a my_label</td>
+		<td>Si (C == 1), salta a my_label</td>
 	</tr>
 	<tr>
 		<td>B.LO</td>
 		<td>B.LO my_label</td>
-		<td>Si (C == 0), saltar a my_label</td>
+		<td>Si (C == 0), salta a my_label</td>
 	</tr>
 	<tr>
 		<td>B.MI</td>
 		<td>B.MI my_label</td>
-		<td>Si (N == 1), saltar a my_label</td>
+		<td>Si (N == 1), salta a my_label</td>
+	</tr>
+	<tr>
+		<td>B.PL</td>
+		<td>B.PL my_label</td>
+		<td>Si (N == 0), salta a my_label</td>
+	</tr>
+	<tr>
+		<td>B.VS</td>
+		<td>B.VS my_label</td>
+		<td>Si (V == 1), salta a my_label</td>
+	</tr>
+	<tr>
+		<td>B.VC</td>
+		<td>B.VC my_label</td>
+		<td>Si (V == 0), salta a my_label</td>
+	</tr>
+	<tr>
+		<td>B.HI</td>
+		<td>B.HI my_label</td>
+		<td>Si (C == 1) & (Z == 0), salta a my_label</td>
+	</tr>
+	<tr>
+		<td>B.LS</td>
+		<td>B.LS my_label</td>
+		<td>Si (C == 0) | (Z == 1), salta a my_label</td>
+	</tr>
+	<tr>
+		<td>B.GE</td>
+		<td>B.GE my_label</td>
+		<td>Si (N == V), salta a my_label</td>
+	</tr>
+	<tr>
+		<td>B.LT</td>
+		<td>B.LT my_label</td>
+		<td>Si (N != V), salta a my_label</td>
+	</tr>
+	<tr>
+		<td>B.GT</td>
+		<td>B.GT my_label</td>
+		<td>Si (Z == 0) & (N == V), salta a my_label</td>
+	</tr>
+	<tr>
+		<td>B.LE</td>
+		<td>B.LE my_label</td>
+		<td>Si (Z == 1)|(N !=V), salta a my_label</td>
+	</tr>
+	<tr>
+		<td>B.VC</td>
+		<td>B.VC my_label</td>
+		<td>Si (V == 0), salta a my_label</td>
+	</tr>
+	<tr>
+		<td>B.VC</td>
+		<td>B.VC my_label</td>
+		<td>Si (V == 0), salta a my_label</td>
 	</tr>
 	<tr>
 		<td>B</td>
 		<td>B my_label</td>
-		<td>Saltar a my_label</td>
+		<td>Salta a my_label</td>
 	</tr>
 	<tr>
 		<td>BL</td>
 		<td>BL my_label</td>
-		<td>Saltar a my_label, x30 = PC</td>
+		<td>Salta a my_label, x30 = PC</td>
 	</tr>
 	<tr>
 		<td>LDR</td>
