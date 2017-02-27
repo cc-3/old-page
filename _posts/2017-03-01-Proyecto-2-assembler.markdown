@@ -104,6 +104,21 @@ primero que tenemos que hacer es escoger un subset de instrucciones sobre las qu
 		<td>xd = xn ^ imm</td>
 	</tr>
 	<tr>
+		<td>LSL</td>
+		<td>LSL xd, xn, xm</td>
+		<td>xd = xn << xm</td>
+	</tr>
+	<tr>
+		<td>LSR</td>
+		<td>LSR xd, xn, xm</td>
+		<td>xd = xn >> xm</td>
+	</tr>
+	<tr>
+		<td>ASR</td>
+		<td>ASR xd, xn, xm</td>
+		<td>xd = xn >> xm (sign extended)</td>
+	</tr>
+	<tr>
 		<td>MOV</td>
 		<td>MOV xd, imm {, LSL #&lt;shamt&gt; }</td>
 		<td>xd = imm << shamt (Llena con 0's lo demas)</td>
