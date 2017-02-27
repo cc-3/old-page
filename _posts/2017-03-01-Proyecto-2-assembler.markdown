@@ -211,17 +211,7 @@ primero que tenemos que hacer es escoger un subset de instrucciones sobre las qu
 	<tr>
 		<td>B.LE</td>
 		<td>B.LE my_label</td>
-		<td>Si (Z == 1)|(N !=V), salta a my_label</td>
-	</tr>
-	<tr>
-		<td>B.VC</td>
-		<td>B.VC my_label</td>
-		<td>Si (V == 0), salta a my_label</td>
-	</tr>
-	<tr>
-		<td>B.VC</td>
-		<td>B.VC my_label</td>
-		<td>Si (V == 0), salta a my_label</td>
+		<td>Si (Z == 1) | (N !=V), salta a my_label</td>
 	</tr>
 	<tr>
 		<td>B</td>
@@ -247,6 +237,32 @@ primero que tenemos que hacer es escoger un subset de instrucciones sobre las qu
 		<td>STR</td>
 		<td>STR xt,[xn,imm]</td>
 		<td>Guarda xt en la dirección xn con offset imm </td>
+	</tr>
+	<tr>
+		<td>LDRB</td>
+		<td>LDRB wt,[xn,imm]</td>
+		<td>Carga en wt el byte menos significativo de la dirección xn con offset imm</td>
+	</tr>
+	<tr>
+		<td>STRB</td>
+		<td>STRB wt,[xn,imm]</td>
+		<td>Guarda el byte menos significativo de wt en la dirección xn con offset imm </td>
+	</tr>
+	<tr>
+		<td>RET</td>
+		<td>RET</td>
+		<td>Salta a la dirección especificada en x30</td>
+	</tr>
+	<tr>
+		<th colspan="3">Directivas a tomar en cuenta</th>
+	</tr>
+	<tr>
+		<td>.text</td>
+		<td colspan="2">Los siguientes caracteres son instrucciones</td>
+	</tr>
+	<tr>
+		<td>.data</td>
+		<td colspan="2">Los siguientes caracteres son datos a almacenar</td>
 	</tr>
 </table>
 
