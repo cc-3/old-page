@@ -258,12 +258,36 @@ primero que tenemos que hacer es escoger un subset de instrucciones sobre las qu
 	</tr>
 	<tr>
 		<td>.text</td>
-		<td colspan="2">Los siguientes caracteres son instrucciones</td>
+		<td colspan="2">Los siguientes carácteres son instrucciones. Las instrucciones se almacenaran la etiqueta <b>dot_text</b></td>
 	</tr>
 	<tr>
 		<td>.data</td>
-		<td colspan="2">Los siguientes caracteres son datos a almacenar</td>
+		<td colspan="2">Los siguientes carácteres son datos a almacenar. Los datos se almacenaran en la etiqueta <b>dot_data</b></td>
 	</tr>
 </table>
 
+Una vez establecido este subset de instrucciones, vamos a hablar un poco de los registros y las banderas para los saltos. 
 
+Los procesadores ARMv8 tienen 31 registros de proposito general. que van desde x0 hasta x30. Sin embargo, el registro x30 se utiliza para guardar la dirección de retorno 
+de la función. Otro registro del procesador es XZR; este registro esta alambrado directamente a tierra, asi que su valor es constante e igual a 0. Aparte de eso, existe el registro SP, 
+que es un registro aparte, y guarda la dirección del tope del stack.
+
+
+
+<table>
+	<tr>
+		<td>x0</td><td>x1</td><td>x2</td><td>x3</td><td>x4</td><td>x5</td><td>x6</td><td>x7</td>
+	</tr>
+	<tr>
+		<td>x8</td><td>x9</td><td>x10</td><td>11</td><td>x12</td><td>x13</td><td>x14</td><td>x15</td>
+	</tr>
+	<tr>
+		<td>x16</td><td>x17</td><td>x18</td><td>x19</td><td>x20</td><td>x21</td><td>x22</td><td>x23</td>
+	</tr>
+	<tr>
+		<td>x24</td><td>x25</td><td>x26</td><td>x27</td><td>x28</td><td>x29</td><td>x30</td><td> </td>
+	</tr>
+	<tr>
+		<td colspan="4">XZR</td><td colspan="4">SP</td>
+	</tr>
+</table>
