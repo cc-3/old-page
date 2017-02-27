@@ -118,6 +118,66 @@ primero que tenemos que hacer es escoger un subset de instrucciones sobre las qu
 		<td>MOVK xd, imm {, LSL #<shift>}</td>
 		<td>xd = imm << shift_ammount (Deja los demas bits intactos)</td>
 	</tr>
+	<tr>
+		<td>CBZ</td>
+		<td>CBZ xd, my_label</td>
+		<td>Si (xd == 0), saltar a my_label</td>
+	</tr>
+	<tr>
+		<td>CBNZ</td>
+		<td>CBNZ xd, my_label</td>
+		<td>Si (xd != 0), saltar a my_label</td>
+	</tr>
+	<tr>
+		<td>B.EQ</td>
+		<td>B.EQ my_label</td>
+		<td>Si (Z == 1), saltar a my_label</td>
+	</tr>
+	<tr>
+		<td>B.NE</td>
+		<td>B.NE my_label</td>
+		<td>Si (Z == 0), saltar a my_label</td>
+	</tr>
+	<tr>
+		<td>B.HS</td>
+		<td>B.HS my_label</td>
+		<td>Si (C == 1), saltar a my_label</td>
+	</tr>
+	<tr>
+		<td>B.LO</td>
+		<td>B.LO my_label</td>
+		<td>Si (C == 0), saltar a my_label</td>
+	</tr>
+	<tr>
+		<td>B.MI</td>
+		<td>B.MI my_label</td>
+		<td>Si (N == 1), saltar a my_label</td>
+	</tr>
+	<tr>
+		<td>B</td>
+		<td>B my_label</td>
+		<td>Saltar a my_label</td>
+	</tr>
+	<tr>
+		<td>BL</td>
+		<td>BL my_label</td>
+		<td>Saltar a my_label, x30 = PC</td>
+	</tr>
+	<tr>
+		<td>LDR</td>
+		<td>LDR xt,=my_label</td>
+		<td>Carga en xt la dirección de my_label</td>
+	</tr>
+	<tr>
+		<td>LDR</td>
+		<td>LDR xt,[xn,xm]my_label</td>
+		<td>Carga en xt lo que hay en la dirección xn con offset xm</td>
+	</tr>
+	<tr>
+		<td>STR</td>
+		<td>STR xt,[xn,xm]my_label</td>
+		<td>Guarda xt en la dirección xn con offset xm</td>
+	</tr>
 </table>
 
 
