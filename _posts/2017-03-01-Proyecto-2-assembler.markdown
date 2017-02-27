@@ -272,8 +272,6 @@ Los procesadores ARMv8 tienen 31 registros de proposito general. que van desde x
 de la función. Otro registro del procesador es XZR; este registro esta alambrado directamente a tierra, asi que su valor es constante e igual a 0. Aparte de eso, existe el registro SP, 
 que es un registro aparte, y guarda la dirección del tope del stack.
 
-
-
 <table>
 	<tr>
 		<td>x0</td><td>x1</td><td>x2</td><td>x3</td><td>x4</td><td>x5</td><td>x6</td><td>x7</td>
@@ -289,5 +287,23 @@ que es un registro aparte, y guarda la dirección del tope del stack.
 	</tr>
 	<tr>
 		<td colspan="4">XZR</td><td colspan="4">SP</td>
+	</tr>
+</table>
+
+Ademas de esto, los procesadores ARMv8 tienen un set de <b>banderas</b>, cada una de 1 bit unicamente. Las instrucciones que terminan en "S" modifican las banderas, y las instrucciones "B."
+evaluan las banderas para confirmar si saltan o no. Por ejemplo, si x3 tiene el valor 5 y x8 tiene el valor 6, la operacion SUBS x0,x3,x5 modificara las bandeas de la siguiente forma:
+
+<table>
+	<tr>
+		<td></td><td>Z (Zero)</td><td>N (Negative)</td><td>C (Carry)</td><td>O (Overflow)</td>
+	</tr>
+	<tr>
+		<td>Antes</td><td>1</td><td>0</td><td>1</td><td>1</td>
+	</tr>
+	<tr>
+		<td colspan="5">SUBS x0, x3, x5</td>
+	</tr>
+	<tr>
+		<td>Despues</td><td>0 (no es zero)</td><td>1 (es negativo)</td><td>0 (no carry)</td><td>0 (no overflow)</td>
 	</tr>
 </table>
