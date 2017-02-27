@@ -11,8 +11,8 @@ permalink: /:categories/:title.html
 
 ### Preambulo:
 
-El set de instrucciones ARMv8 es muy vasto (incluso tomando en cuenta que es una arquitectura RISC), y no nos daria tiempo de codificar todas las intrucciones en estas dos semanas, asi que lo
-primero que tenemos que hacer es escoger un subset de instrucciones sobre las que vamos a trabajar. Para este proyecto, las instrucciones que deberan codificar seran las siguientes:
+El set de instrucciones ARMv8 es muy vasto (incluso tomando en cuenta que es una arquitectura RISC), y no nos daría tiempo de codificar todas las instrucciones en estas dos semanas, así que lo
+primero que tenemos que hacer es escoger un subset de instrucciones sobre las que vamos a trabajar. Para este proyecto, las instrucciones que deberán codificar serán las siguientes:
 
 <table>
 	<tr>
@@ -62,6 +62,46 @@ primero que tenemos que hacer es escoger un subset de instrucciones sobre las qu
 		<td>SUBS</td>
 		<td>SUBS xd, xn, imm</td>
 		<td>xd = xn - imm (Modifica Banderas)</td>
+	</tr>
+	<tr>
+		<td>AND</td>
+		<td>AND xd, xn, xm</td>
+		<td>xd = xn & xm</td>
+	</tr>
+	<tr>
+		<td>AND</td>
+		<td>AND xd, xn, imm</td>
+		<td>xd = xn & imm</td>
+	</tr>
+	<tr>
+		<td>ANDS</td>
+		<td>ANDS xd, xn, xm</td>
+		<td>xd = xn & xm (Modifica Banderas)</td>
+	</tr>
+	<tr>
+		<td>ANDS</td>
+		<td>ANDS xd, xn, imm</td>
+		<td>xd = xn & imm (Modifica Banderas)</td>
+	</tr>
+	<tr>
+		<td>ORR</td>
+		<td>ORR xd, xn, xm</td>
+		<td>xd = xn | xm</td>
+	</tr>
+	<tr>
+		<td>ORR</td>
+		<td>ORR xd, xn, imm</td>
+		<td>xd = xn | imm</td>
+	</tr>
+	<tr>
+		<td>EOR</td>
+		<td>EOR xd, xn, xm</td>
+		<td>xd = xn ^ xm</td>
+	</tr>
+	<tr>
+		<td>EOR</td>
+		<td>EOR xd, xn, imm</td>
+		<td>xd = xn ^ imm</td>
 	</tr>
 </table>
 
