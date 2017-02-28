@@ -278,7 +278,7 @@ que es un registro aparte, y guarda la dirección del tope del stack.
 
 <table style="text-align:center;">
 	<tr>
-		<th colspan="3">Registros del procesador</th>
+		<th colspan="8">Registros del procesador</th>
 	</tr>
 	<tr>
 		<td>x0</td><td>x1</td><td>x2</td><td>x3</td><td>x4</td><td>x5</td><td>x6</td><td>x7</td>
@@ -311,7 +311,7 @@ evaluan las banderas para confirmar si saltan o no. Por ejemplo, si x3 tiene el 
 		<td colspan="5">SUBS x0, x3, x5</td>
 	</tr>
 	<tr>
-		<td>Despues</td><td>0 (no es zero)</td><td>1 (es negativo)</td><td>0 (no carry)</td><td>0 (no overflow)</td>
+		<td>Después</td><td>0 (no es zero)</td><td>1 (es negativo)</td><td>0 (no carry)</td><td>0 (no overflow)</td>
 	</tr>
 </table>
 
@@ -370,3 +370,22 @@ ensamblar, una vez para ver todas las etiquetas y codificar el área de data, y 
 Símbolos, pero deben tomar en cuenta que por cada llamada a <b>malloc</b>, deben hacer una llamada a <b>free</b>.
 
 ### Codificación:
+
+Finalmente hemos llegado al proceso de codificacion de las instrucciones. Si han llegado hasta esta parte sin al menos ojear la informacion de arriba, podria haber un ligero problema de comunicacion.
+De cualquier forma, prosigamos con el formato de las instrucciones codificadas.
+
+<table>
+	<tr>
+		<th colspan="32">ADD(S) y SUBS(S) IMMEDIATE</th>
+	</tr>
+	<tr>
+		<td colspan="1">sf</td>
+		<td colspan="1">op</td>
+		<td colspan="1">S</td>
+		<td colspan="5">10001</td>
+		<td colspan="2">shift</td>
+		<td colspan="12">imm(12)</td>
+		<td colspan="5">Rn</td>
+		<td colspan="5">Rd</td>
+	</tr>
+</table>
