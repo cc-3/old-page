@@ -9,7 +9,7 @@ description: >
 permalink: /:categories/:title.html
 ---
 
-### Preambulo:
+### Preámbulo:
 
 El set de instrucciones ARMv8 es muy vasto (incluso tomando en cuenta que es una arquitectura RISC), y no nos daría tiempo de codificar todas las instrucciones en estas dos semanas, así que lo
 primero que tenemos que hacer es escoger un subset de instrucciones sobre las que vamos a trabajar. Para este proyecto, las instrucciones que deberán codificar serán las siguientes:
@@ -266,13 +266,20 @@ primero que tenemos que hacer es escoger un subset de instrucciones sobre las qu
 	</tr>
 </table>
 
-Una vez establecido este subset de instrucciones, vamos a hablar un poco de los registros y las banderas para los saltos. 
+Las directivas <b>.text</b> y <b>.data</b> especifican secciones de memoria donde se guardaran las instrucciones y los datos de su programa (nosotros les daremos los punteros a estas areas). 
+Ademas de esto, cuando codifiquemos los datos, vamos a utilizar la directiva <b>.asciz</b>, que representa una cadena de caracteres que termina el '\0'; esto significa que ustedes deben codificar
+esa cadena de caracteres en la seccion <b>dot_data</b> y terminarla con '\0'.
+
+Una vez establecido este subset de instrucciones y las directivas, vamos a hablar un poco de los registros y las banderas para los saltos. 
 
 Los procesadores ARMv8 tienen 31 registros de proposito general. que van desde x0 hasta x30. Sin embargo, el registro x30 se utiliza para guardar la dirección de retorno 
 de la función. Otro registro del procesador es XZR; este registro esta alambrado directamente a tierra, asi que su valor es constante e igual a 0. Aparte de eso, existe el registro SP, 
 que es un registro aparte, y guarda la dirección del tope del stack.
 
 <table style="text-align:center;">
+	<tr>
+		<th colspan="3">Registros del procesador</th>
+	</tr>
 	<tr>
 		<td>x0</td><td>x1</td><td>x2</td><td>x3</td><td>x4</td><td>x5</td><td>x6</td><td>x7</td>
 	</tr>
@@ -295,7 +302,7 @@ evaluan las banderas para confirmar si saltan o no. Por ejemplo, si x3 tiene el 
 
 <table style="text-align:center;">
 	<tr>
-		<td></td><td>Z (Zero)</td><td>N (Negative)</td><td>C (Carry)</td><td>O (Overflow)</td>
+		<th></th><th>Z (Zero)</th><th>N (Negative)</th><th>C (Carry)</th><th>O (Overflow)</th>
 	</tr>
 	<tr>
 		<td>Antes</td><td>1</td><td>0</td><td>1</td><td>1</td>
@@ -307,3 +314,27 @@ evaluan las banderas para confirmar si saltan o no. Por ejemplo, si x3 tiene el 
 		<td>Despues</td><td>0 (no es zero)</td><td>1 (es negativo)</td><td>0 (no carry)</td><td>0 (no overflow)</td>
 	</tr>
 </table>
+
+Hasta aquí termina el preámbulo. Si desean leer más sobre las directivas, los registros, y codificación de instrucciones aparte de la que les proveemos nosotros, pueden utilizar este 
+<a href="https://drive.google.com/file/d/0B5xlmAbvK4yATVZQVkI2amprb28/view">link</a> al manual que también está colocado en el GES. Allí esta todo lo que necesitan para su proyecto y seguramente más.
+
+### El Proyecto:
+
+Pueden descargar los archivos base para este proyecto de GitHub Classroom utilizando este <a href="#">link</a> como en los laboratorios. En el repositorio encontraran un archivo 
+<b>ensamblador.s</b>, que contiene un esqueleto para su proyecto. El esqueleto reserva espacio en el heap para codificar hasta 1000 instrucciones en el área de texto y 1000 caracteres en el área de 
+data. Dentro de los argumentos que recibe el programa, deben enviar como parametro el nombre (o path) de un archivo de texto que contendrá las instrucciones en lenguaje ARMv8 que van a codificar.
+El programa lee cada linea del archivo, la guarda en un <b>buffer</b> de memoria temporal y la manda como parametro a la función <b>encode</b>, que ustedes deben implementar. La función encode debe leer
+la instrucción, codificarla si es necesario, y guardarla en el área que le corresponde. Veamos un ejemplo:
+
+```code
+.text
+	ADD x3, x5, x17
+.data
+	mensaje:	.asciz "Hello World from ARMv8..."
+```
+
+La primer llamada a <b>encode</b> debe recibir la primer linea: <i>.text</i> y concluir <i>esta linea indica que lo siguiente que viene es una instrucción</i>. Al leer la segunda linea: 
+<i>ADD x3, x5, x17</i>, deberá codificar la instrucción con el formato que especificaremos mas abajo, y guardarla en el área de texto. Al leer la tercer linea <i>.data</i>, su programa deberá 
+entender que la siguiente linea que va a leer la debe colocar en el área de data, y al leer la cuarta instrucción: <i>mensaje: .asciz "Hello World from ARMv8"</i>, su programa debe ir guardando 
+cada carácter en el área de data, y terminar escribiendo el carácter '\0' al final. Tomen en cuenta que por cada instrucción codificada y carácter ingresado al área de texto, ustedes deben ver
+como avanzan el puntero hacia la siguiente posición sin perder la referencia a la posición inicial. 
