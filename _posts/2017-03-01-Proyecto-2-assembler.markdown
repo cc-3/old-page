@@ -374,12 +374,22 @@ Símbolos, pero deben tomar en cuenta que por cada llamada a <b>malloc</b>, debe
 Finalmente hemos llegado al proceso de codificacion de las instrucciones. Si han llegado hasta esta parte sin al menos ojear la informacion de arriba, podria haber un ligero problema de comunicacion.
 De cualquier forma, prosigamos con el formato de las instrucciones codificadas.
 
-<table>
+<table style="text-align: center;"">
 	<tr>
-		<th colspan="32">ADD(S) y SUBS(S) IMMEDIATE</th>
+		<th colspan="32">ADD(S) y SUBS(S) IMMEDIATE (Codificacion General)</th>
 	</tr>
 	<tr>
-		<td colspan="1">sf</td>
+		<td colspan="1">31</td>
+		<td colspan="1">20</td>
+		<td colspan="1">29</td>
+		<td colspan="5">28-24</td>
+		<td colspan="2">23-22</td>
+		<td colspan="12">21-10</td>
+		<td colspan="5">9-5</td>
+		<td colspan="5">4-0</td>
+	</tr>
+	<tr>
+		<td colspan="1">1</td>
 		<td colspan="1">op</td>
 		<td colspan="1">S</td>
 		<td colspan="5">10001</td>
@@ -387,5 +397,26 @@ De cualquier forma, prosigamos con el formato de las instrucciones codificadas.
 		<td colspan="12">imm(12)</td>
 		<td colspan="5">Rn</td>
 		<td colspan="5">Rd</td>
+	</tr>
+</table>
+
+<table style="text-align: center;"">
+	<tr>
+		<th colspan="3">ADD(S) y SUBS(S) IMMEDIATE (Codificacion Especifica)</th>
+	</tr>
+	<tr>
+		<td>Instruccion</td><td>op</td><td>S</td>
+	</tr>
+	<tr>
+		<td>ADD IMMEDIATE</td><td>0</td><td>0</td>
+	</tr>
+	<tr>
+		<td>ADDS IMMEDIATE</td><td>0</td><td>1</td>
+	</tr>
+	<tr>
+		<td>SUB IMMEDIATE</td><td>1</td><td>0</td>
+	</tr>
+	<tr>
+		<td>SUBS IMMEDIATE</td><td>1</td><td>1</td>
 	</tr>
 </table>
