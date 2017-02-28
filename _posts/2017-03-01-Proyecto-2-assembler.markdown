@@ -104,19 +104,24 @@ primero que tenemos que hacer es escoger un subset de instrucciónes sobre las q
 		<td>xd = xn ^ imm</td>
 	</tr>
 	<tr>
-		<td>LSL</td>
-		<td>LSL xd, xn, xm</td>
+		<td>LSLV</td>
+		<td>LSLV xd, xn, xm</td>
 		<td>xd = xn << xm</td>
 	</tr>
 	<tr>
-		<td>LSR</td>
-		<td>LSR xd, xn, xm</td>
+		<td>LSRV</td>
+		<td>LSRV xd, xn, xm</td>
 		<td>xd = xn >> xm</td>
 	</tr>
 	<tr>
-		<td>ASR</td>
-		<td>ASR xd, xn, xm</td>
+		<td>ASRV</td>
+		<td>ASRV xd, xn, xm</td>
 		<td>xd = xn >> xm (sign extended)</td>
+	</tr>
+	<tr>
+		<td>RORV</td>
+		<td>RORV xd, xn, xm</td>
+		<td>xd = xn rotado a la derecha según xm</td>
 	</tr>
 	<tr>
 		<td>MOV</td>
@@ -579,5 +584,54 @@ De cualquier forma, prosigamos con el formato de las instrucciónes codificadas.
 	</tr>
 	<tr>
 		<td>ANDS Xd, Xn, Xm</td><td>1</td><td>1</td><td>00</td><td>0</td><td>000000</td>
+	</tr>
+</table>
+
+<br>
+<br>
+
+<table style="text-align: center;">
+	<tr>
+		<th colspan="32">LSLV, LSRV y ASRV REGISTERS (Codificación General)</th>
+	</tr>
+	<tr>
+		<td colspan="1">31</td>
+		<td colspan="1">30</td>
+		<td colspan="1">29</td>
+		<td colspan="8">28-21</td>
+		<td colspan="5">20-16</td>
+		<td colspan="6">15-10</td>
+		<td colspan="5">9-5</td>
+		<td colspan="5">4-0</td>
+	</tr>
+	<tr>
+		<td colspan="1">1</td>
+		<td colspan="1">op</td>
+		<td colspan="1">S</td>
+		<td colspan="8">11010110</td>
+		<td colspan="5">Rm</td>
+		<td colspan="6">opcode</td>
+		<td colspan="5">Rn</td>
+		<td colspan="5">Rd</td>
+	</tr>
+</table>
+<table>
+	<tr>
+		<th colspan="4">AND(S), ORR y EOR REGISTERS (Codificación Especifica)</th>
+	</tr>
+	<tr>
+		<td>Instrucción</td><td>op</td><td>S</td><td>opcode</td>
+	</tr>
+	<tr>
+		<td>LSLV Xd, Xn, Xm</td><td>0</td><td>0</td><td>001000</td>
+	</tr>
+	<tr>
+		<td>LSRV Xd, Xn, Xm</td><td>0</td><td>1</td><td>001001</td>
+	</tr>
+	<tr>
+		<td>ASRV Xd, Xn, Xm</td><td>0</td><td>0</td><td>001010</td>
+	</tr>
+	<tr>
+		<td>RORV Xd, Xn, Xm</td><td>0</td><td>0</td><td>001011</td>
 	</tr>
 </table>
