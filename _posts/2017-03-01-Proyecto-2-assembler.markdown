@@ -4,22 +4,22 @@ title:  "Proyecto 2: ArmV8 Assembler"
 date:   2017-03-01
 category: proyecto
 description: >
-    El objetivo de este proyecto es que ustedes desarrollen su habilidad trabajando en lenguaje ensamblador, y que logren entender como se codifica el set de instrucciones, en este caso ARMv8 
+    El objetivo de este proyecto es que ustedes desarrollen su habilidad trabajando en lenguaje ensamblador, y que logren entender como se codifica el set de instrucciónes, en este caso ARMv8 
     a un formato que su computadora puede entender y ejecutar.
 permalink: /:categories/:title.html
 ---
 
 ### Preámbulo:
 
-El set de instrucciones ARMv8 es muy vasto (incluso tomando en cuenta que es una arquitectura RISC), y no nos daría tiempo de codificar todas las instrucciones en estas dos semanas, así que lo
-primero que tenemos que hacer es escoger un subset de instrucciones sobre las que vamos a trabajar. Para este proyecto, las instrucciones que deberán codificar serán las siguientes:
+El set de instrucciónes ARMv8 es muy vasto (incluso tomando en cuenta que es una arquitectura RISC), y no nos daría tiempo de codificar todas las instrucciónes en estas dos semanas, así que lo
+primero que tenemos que hacer es escoger un subset de instrucciónes sobre las que vamos a trabajar. Para este proyecto, las instrucciónes que deberán codificar serán las siguientes:
 
 <table>
 	<tr>
 		<th colspan="3">Operaciones Entre Registros de 64 Bits</th>
 	</tr>
 	<tr>
-		<td>Instruccion</td>
+		<td>Instrucción</td>
 		<td>Formato</td>
 		<td>Interpretacion</td>
 	</tr>
@@ -258,7 +258,7 @@ primero que tenemos que hacer es escoger un subset de instrucciones sobre las qu
 	</tr>
 	<tr>
 		<td>.text</td>
-		<td colspan="2">Los siguientes carácteres son instrucciones. Las instrucciones se almacenaran la etiqueta <b>dot_text</b></td>
+		<td colspan="2">Los siguientes carácteres son instrucciónes. Las instrucciónes se almacenaran la etiqueta <b>dot_text</b></td>
 	</tr>
 	<tr>
 		<td>.data</td>
@@ -266,11 +266,11 @@ primero que tenemos que hacer es escoger un subset de instrucciones sobre las qu
 	</tr>
 </table>
 
-Las directivas <b>.text</b> y <b>.data</b> especifican secciones de memoria donde se guardaran las instrucciones y los datos de su programa (nosotros les daremos los punteros a estas areas). 
+Las directivas <b>.text</b> y <b>.data</b> especifican secciones de memoria donde se guardaran las instrucciónes y los datos de su programa (nosotros les daremos los punteros a estas areas). 
 Ademas de esto, cuando codifiquemos los datos, vamos a utilizar la directiva <b>.asciz</b>, que representa una cadena de caracteres que termina el '\0'; esto significa que ustedes deben codificar
 esa cadena de caracteres en la seccion <b>dot_data</b> y terminarla con '\0'.
 
-Una vez establecido este subset de instrucciones y las directivas, vamos a hablar un poco de los registros y las banderas para los saltos. 
+Una vez establecido este subset de instrucciónes y las directivas, vamos a hablar un poco de los registros y las banderas para los saltos. 
 
 Los procesadores ARMv8 tienen 31 registros de proposito general. que van desde x0 hasta x30. Sin embargo, el registro x30 se utiliza para guardar la dirección de retorno 
 de la función. Otro registro del procesador es XZR; este registro esta alambrado directamente a tierra, asi que su valor es constante e igual a 0. Aparte de eso, existe el registro SP, 
@@ -297,7 +297,7 @@ que es un registro aparte, y guarda la dirección del tope del stack.
 	</tr>
 </table>
 
-Ademas de esto, los procesadores ARMv8 tienen un set de <b>banderas</b>, cada una de 1 bit unicamente. Las instrucciones que terminan en "S" modifican las banderas, y las instrucciones "B."
+Ademas de esto, los procesadores ARMv8 tienen un set de <b>banderas</b>, cada una de 1 bit unicamente. Las instrucciónes que terminan en "S" modifican las banderas, y las instrucciónes "B."
 evaluan las banderas para confirmar si saltan o no. Por ejemplo, si x3 tiene el valor 5 y x8 tiene el valor 6, la operacion SUBS x0,x3,x5 modificara las bandeas de la siguiente forma:
 
 <table style="text-align:center;">
@@ -315,14 +315,14 @@ evaluan las banderas para confirmar si saltan o no. Por ejemplo, si x3 tiene el 
 	</tr>
 </table>
 
-Hasta aquí termina el preámbulo. Si desean leer más sobre las directivas, los registros, y codificación de instrucciones aparte de la que les proveemos nosotros, pueden utilizar este 
+Hasta aquí termina el preámbulo. Si desean leer más sobre las directivas, los registros, y codificación de instrucciónes aparte de la que les proveemos nosotros, pueden utilizar este 
 <a href="https://drive.google.com/file/d/0B5xlmAbvK4yATVZQVkI2amprb28/view">link</a> al manual que también está colocado en el GES. Allí esta todo lo que necesitan para su proyecto y seguramente más.
 
 ### El Proyecto:
 
 Pueden descargar los archivos base para este proyecto de GitHub Classroom utilizando este <a href="#">link</a> como en los laboratorios. En el repositorio encontraran el archivo 
-<b>ensamblador.s</b>, que contiene un esqueleto para su proyecto. El esqueleto reserva espacio en el heap para codificar hasta 1000 instrucciones en el área de texto y 1000 caracteres en el área de 
-data. Dentro de los argumentos que recibe el programa, deben enviar como parámetro el nombre (o path) de un archivo de texto que contendrá las instrucciones en lenguaje ARMv8 que van a codificar.
+<b>ensamblador.s</b>, que contiene un esqueleto para su proyecto. El esqueleto reserva espacio en el heap para codificar hasta 1000 instrucciónes en el área de texto y 1000 caracteres en el área de 
+data. Dentro de los argumentos que recibe el programa, deben enviar como parámetro el nombre (o path) de un archivo de texto que contendrá las instrucciónes en lenguaje ARMv8 que van a codificar.
 El programa lee cada linea del archivo, la guarda en un <b>buffer</b> de memoria temporal y la manda como parametro a la función <b>encode</b>, que ustedes deben implementar. La función encode debe leer
 la instrucción, codificarla si es necesario, y guardarla en el área que le corresponde. Veamos un ejemplo:
 
@@ -366,17 +366,17 @@ referencia a donde en toda la sección de data empieza el mensaje. Probemos ahor
 
 Ya podemos codificar nuestra instrucción LDR porque sabemos en que dirección empieza el mensaje. Pero, ¿En donde termina? Es por esto que agregamos un '\0' al final de la cadena de caracteres,
 para denotar el EOS (End of String). Para implementar la tabla de símbolos correctamente, seguramente ustedes tendrán que recorrer más de una vez todas las lineas de código del archivo a 
-ensamblar, una vez para ver todas las etiquetas y codificar el área de data, y una segunda para codificar las instrucciones en sí. Queda a su libertad como y donde implementar la tabla de 
+ensamblar, una vez para ver todas las etiquetas y codificar el área de data, y una segunda para codificar las instrucciónes en sí. Queda a su libertad como y donde implementar la tabla de 
 Símbolos, pero deben tomar en cuenta que por cada llamada a <b>malloc</b>, deben hacer una llamada a <b>free</b>.
 
 ### Codificación:
 
-Finalmente hemos llegado al proceso de codificacion de las instrucciones. Si han llegado hasta esta parte sin al menos ojear la informacion de arriba, podria haber un ligero problema de comunicacion.
-De cualquier forma, prosigamos con el formato de las instrucciones codificadas.
+Finalmente hemos llegado al proceso de codificacion de las instrucciónes. Si han llegado hasta esta parte sin al menos ojear la informacion de arriba, podria haber un ligero problema de comunicacion.
+De cualquier forma, prosigamos con el formato de las instrucciónes codificadas.
 
 <table style="text-align: center;">
 	<tr>
-		<th colspan="32">ADD(S) y SUBS(S) IMMEDIATE (Codificacion General)</th>
+		<th colspan="32">ADD(S) y SUBS(S) IMMEDIATE (Codificación General)</th>
 	</tr>
 	<tr>
 		<td colspan="1">31</td>
@@ -401,10 +401,10 @@ De cualquier forma, prosigamos con el formato de las instrucciones codificadas.
 </table>
 <table>
 	<tr>
-		<th colspan="4">ADD(S) y SUBS(S) IMMEDIATE (Codificacion Especifica)</th>
+		<th colspan="4">ADD(S) y SUBS(S) IMMEDIATE (Codificación Especifica)</th>
 	</tr>
 	<tr>
-		<td>Instruccion</td><td>op</td><td>S</td><td>shift</td>
+		<td>Instrucción</td><td>op</td><td>S</td><td>shift</td>
 	</tr>
 	<tr>
 		<td>ADD Xd, Xn, Imm</td><td>0</td><td>0</td><td>00</td>
@@ -420,9 +420,12 @@ De cualquier forma, prosigamos con el formato de las instrucciones codificadas.
 	</tr>
 </table>
 
+<br>
+<br>
+
 <table style="text-align: center;">
 	<tr>
-		<th colspan="32">ADD(S) y SUBS(S) Registers (Codificacion General)</th>
+		<th colspan="32">ADD(S) y SUBS(S) REGISTERS (Codificación General)</th>
 	</tr>
 	<tr>
 		<td colspan="1">31</td>
@@ -451,10 +454,10 @@ De cualquier forma, prosigamos con el formato de las instrucciones codificadas.
 </table>
 <table>
 	<tr>
-		<th colspan="4">ADD(S) y SUBS(S) REGISTERS (Codificacion Especifica)</th>
+		<th colspan="4">ADD(S) y SUBS(S) REGISTERS (Codificación Especifica)</th>
 	</tr>
 	<tr>
-		<td>Instruccion</td><td>op</td><td>S</td><td>shift</td><td>imm6</td>
+		<td>Instrucción</td><td>op</td><td>S</td><td>shift</td><td>imm6</td>
 	</tr>
 	<tr>
 		<td>ADD Xd, Xn, Xm</td><td>0</td><td>0</td><td>00</td><td>000000</td>
@@ -467,5 +470,61 @@ De cualquier forma, prosigamos con el formato de las instrucciones codificadas.
 	</tr>
 	<tr>
 		<td>SUBS Xd, Xn, Xm</td><td>1</td><td>1</td><td>00</td><td>000000</td>
+	</tr>
+</table>
+
+<br>
+<br>
+
+<table style="text-align: center;">
+	<tr>
+		<th colspan="32">AND(S), ORR y EOR IMMEDIATE (Codificación General)</th>
+	</tr>
+	<tr>
+		<td colspan="1">31</td>
+		<td colspan="1">30</td>
+		<td colspan="1">29</td>
+		<td colspan="5">28-24</td>
+		<td colspan="2">23-22</td>
+		<td colspan="6">21-16</td>
+		<td colspan="5">15-10</td>
+		<td colspan="5">9-5</td>
+		<td colspan="5">4-0</td>
+	</tr>
+	<tr>
+		<td colspan="1">1</td>
+		<td colspan="1">op</td>
+		<td colspan="1">S</td>
+		<td colspan="5">10010</td>
+		<td colspan="2">N</td>
+		<td colspan="6">immr</td>
+		<td colspan="5">imms</td>
+		<td colspan="5">Rn</td>
+		<td colspan="5">Rd</td>
+	</tr>
+</table>
+<table>
+	<tr>
+		<th colspan="4">AND(S), ORR y EOR IMMEDIATE (Codificación Especifica)</th>
+	</tr>
+	<tr>
+		<td>Instrucción</td><td>op</td><td>S</td><td>N</td>
+	</tr>
+	<tr>
+		<td>AND Xd, Xn, Imm</td><td>0</td><td>0</td><td>00</td>
+	</tr>
+	<tr>
+		<td>ORR Xd, Xn, Imm</td><td>0</td><td>1</td><td>00</td>
+	</tr>
+	<tr>
+		<td>EOR Xd, Xn, Imm</td><td>1</td><td>0</td><td>00</td>
+	</tr>
+	<tr>
+		<td>ANDS Xd, Xn, Imm</td><td>1</td><td>1</td><td>00</td>
+	</tr>
+	<tr>
+		<td colspan="4">
+			Explicacion adicional:
+		</td>
 	</tr>
 </table>
