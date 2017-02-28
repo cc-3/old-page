@@ -328,9 +328,9 @@ la instrucción, codificarla si es necesario, y guardarla en el área que le cor
 
 ```shell
 .text
-	ADD x3, x5, x17
+   ADD x3, x5, x17
 .data
-	mensaje:	.asciz "Hello World from ARMv8..."
+   mensaje:   .asciz "Hello World from ARMv8..."
 ```
 
 La primer llamada a <b>encode</b> debe recibir la primer linea: <i>.text</i> y concluir <i>esta linea indica que lo siguiente que viene es una instrucción</i>. Al leer la segunda linea: 
@@ -339,20 +339,21 @@ entender que la siguiente linea que va a leer la debe colocar en el área de dat
 cada carácter en el área de data, y terminar escribiendo el carácter '\0' al final. Tomen en cuenta que por cada instrucción codificada y carácter ingresado al área de texto y data, 
 ustedes deben ver como avanzan el puntero hacia la siguiente posición sin perder la referencia a la posición inicial. 
 
-### Tabla de Simbolos:
+### Tabla de Símbolos:
 
-Para poder codificar los saltos y las direcciones de memoria correctamente, ustedes deben crear una tabla de simbolos. La tabla de simbolos resuelve el siguiente problema:
+Para poder codificar los saltos y las direcciones de memoria correctamente, ustedes deben crear una tabla de símbolos. La tabla de símbolos resuelve el siguiente problema:
 
 ```shell
 .data
-	mensaje:	.asciz "Hello World from ARMv8..."
+   mensaje:   .asciz "Hello World from ARMv8..."
 .text
-	LDR x19,=mensaje
+   LDR x19,=mensaje
 ```
-Para codificar la etiqueta mensaje y colocarla en el area de data no tenemos ningun problema, pero ¿Que pasa cuando queremos cargar la direccion de esta etiqueta en x19? No tenemos ninguna 
-referencia a donde en toda la seccion de data empieza el mensaje. Probemos ahora manteniendo la tabla de simbolos:
 
-<table>
+Para codificar la etiqueta mensaje y colocarla en el área de data no tenemos ningún problema, pero ¿Qué pasa cuando queremos cargar la dirección de esta etiqueta en x19? No tenemos ninguna 
+referencia a donde en toda la sección de data empieza el mensaje. Probemos ahora manteniendo la tabla de símbolos:
+
+<table style="text-align:center;">
 	<tr>
 		<th>Etiqueta</th>
 		<th>Direccion</th>
@@ -363,7 +364,9 @@ referencia a donde en toda la seccion de data empieza el mensaje. Probemos ahora
 	</tr>
 </table>
 
-Ya podemos codificar nuestra instruccion LDR porque sabemos en que direccion empieza el mensaje. Pero, ¿En donde termina? Es por esto que agregamos un '\0' al final de la cadena de caracteres,
-para denotar el EOS (End of String). Para implementar la tabla de simbolos correctamente, seguramente ustedes tendran que recorrer mas de una vez todas las lineas de codigo del archivo a 
-ensamblar, una vez para ver todas las etiquetas y codificar el area de data, y una segunda para codificar las instrucciones en si. Queda a su libertad como y donde implementar la tabla de 
-simbolos, pero deben tomar en cuenta que por cada llamada a <b>malloc</b>, deben hacer una llamada a <b>free</b>.
+Ya podemos codificar nuestra instrucción LDR porque sabemos en que dirección empieza el mensaje. Pero, ¿En donde termina? Es por esto que agregamos un '\0' al final de la cadena de caracteres,
+para denotar el EOS (End of String). Para implementar la tabla de símbolos correctamente, seguramente ustedes tendrán que recorrer más de una vez todas las lineas de código del archivo a 
+ensamblar, una vez para ver todas las etiquetas y codificar el área de data, y una segunda para codificar las instrucciones en sí. Queda a su libertad como y donde implementar la tabla de 
+Símbolos, pero deben tomar en cuenta que por cada llamada a <b>malloc</b>, deben hacer una llamada a <b>free</b>.
+
+### Codificación:
