@@ -380,7 +380,7 @@ De cualquier forma, prosigamos con el formato de las instrucciones codificadas.
 	</tr>
 	<tr>
 		<td colspan="1">31</td>
-		<td colspan="1">20</td>
+		<td colspan="1">30</td>
 		<td colspan="1">29</td>
 		<td colspan="5">28-24</td>
 		<td colspan="2">23-22</td>
@@ -399,24 +399,73 @@ De cualquier forma, prosigamos con el formato de las instrucciones codificadas.
 		<td colspan="5">Rd</td>
 	</tr>
 </table>
+<table>
+	<tr>
+		<th colspan="4">ADD(S) y SUBS(S) IMMEDIATE (Codificacion Especifica)</th>
+	</tr>
+	<tr>
+		<td>Instruccion</td><td>op</td><td>S</td><td>shift</td>
+	</tr>
+	<tr>
+		<td>ADD Xd, Xn, Imm</td><td>0</td><td>0</td><td>00</td>
+	</tr>
+	<tr>
+		<td>ADDS Xd, Xn, Imm</td><td>0</td><td>1</td><td>00</td>
+	</tr>
+	<tr>
+		<td>SUB Xd, Xn, Imm</td><td>1</td><td>0</td><td>00</td>
+	</tr>
+	<tr>
+		<td>SUBS Xd, Xn, Imm</td><td>1</td><td>1</td><td>00</td>
+	</tr>
+</table>
 
 <table style="text-align: center;">
 	<tr>
-		<th colspan="3">ADD(S) y SUBS(S) IMMEDIATE (Codificacion Especifica)</th>
+		<th colspan="32">ADD(S) y SUBS(S) Registers (Codificacion General)</th>
 	</tr>
 	<tr>
-		<td>Instruccion</td><td>op</td><td>S</td>
+		<td colspan="1">31</td>
+		<td colspan="1">30</td>
+		<td colspan="1">29</td>
+		<td colspan="5">28-24</td>
+		<td colspan="2">23-22</td>
+		<td colspan="1">21</td>
+		<td colspan="5">22-16</td>
+		<td colspan="6">15-10</td>
+		<td colspan="5">9-5</td>
+		<td colspan="5">4-0</td>
 	</tr>
 	<tr>
-		<td>ADD IMMEDIATE</td><td>0</td><td>0</td>
+		<td colspan="1">1</td>
+		<td colspan="1">op</td>
+		<td colspan="1">S</td>
+		<td colspan="5">01011</td>
+		<td colspan="2">shift</td>
+		<td colspan="1">0</td>
+		<td colspan="5">Rm</td>
+		<td colspan="6">imm6</td>
+		<td colspan="5">Rn</td>
+		<td colspan="5">Rd</td>
+	</tr>
+</table>
+<table>
+	<tr>
+		<th colspan="4">ADD(S) y SUBS(S) REGISTERS (Codificacion Especifica)</th>
 	</tr>
 	<tr>
-		<td>ADDS IMMEDIATE</td><td>0</td><td>1</td>
+		<td>Instruccion</td><td>op</td><td>S</td><td>shift</td><td>imm6</td>
 	</tr>
 	<tr>
-		<td>SUB IMMEDIATE</td><td>1</td><td>0</td>
+		<td>ADD Xd, Xn, Xm</td><td>0</td><td>0</td><td>00</td><td>000000</td>
 	</tr>
 	<tr>
-		<td>SUBS IMMEDIATE</td><td>1</td><td>1</td>
+		<td>ADDS Xd, Xn, Xm</td><td>0</td><td>1</td><td>00</td><td>000000</td>
+	</tr>
+	<tr>
+		<td>SUB Xd, Xn, Xm</td><td>1</td><td>0</td><td>00</td><td>000000</td>
+	</tr>
+	<tr>
+		<td>SUBS Xd, Xn, Xm</td><td>1</td><td>1</td><td>00</td><td>000000</td>
 	</tr>
 </table>
