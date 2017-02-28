@@ -313,7 +313,11 @@ evaluan las banderas para confirmar si saltan o no. Por ejemplo, si x3 tiene el 
 		<td>Antes</td><td>1</td><td>0</td><td>1</td><td>1</td>
 	</tr>
 	<tr>
-		<td colspan="5">SUBS x0, x3, x5</td>
+		<td colspan="5" style="text-align:left">
+			&nbsp; &nbsp; &nbsp; MOV x3, #5
+			&nbsp; &nbsp; &nbsp; MOV x8, #6
+			&nbsp; &nbsp; &nbsp; SUBS x0, x3, x8
+		</td>
 	</tr>
 	<tr>
 		<td>Después</td><td>0 (no es zero)</td><td>1 (es negativo)</td><td>0 (no carry)</td><td>0 (no overflow)</td>
@@ -459,7 +463,7 @@ De cualquier forma, prosigamos con el formato de las instrucciónes codificadas.
 </table>
 <table>
 	<tr>
-		<th colspan="4">ADD(S) y SUBS(S) REGISTERS (Codificación Especifica)</th>
+		<th colspan="5">ADD(S) y SUBS(S) REGISTERS (Codificación Especifica)</th>
 	</tr>
 	<tr>
 		<td>Instrucción</td><td>op</td><td>S</td><td>shift</td><td>imm6</td>
@@ -568,7 +572,7 @@ De cualquier forma, prosigamos con el formato de las instrucciónes codificadas.
 </table>
 <table>
 	<tr>
-		<th colspan="4">AND(S), ORR y EOR REGISTERS (Codificación Especifica)</th>
+		<th colspan="6">AND(S), ORR y EOR REGISTERS (Codificación Especifica)</th>
 	</tr>
 	<tr>
 		<td>Instrucción</td><td>op</td><td>S</td><td>shift</td><td>N</td><td>imm6</td>
@@ -592,7 +596,7 @@ De cualquier forma, prosigamos con el formato de las instrucciónes codificadas.
 
 <table style="text-align: center;">
 	<tr>
-		<th colspan="32">LSLV, LSRV y ASRV REGISTERS (Codificación General)</th>
+		<th colspan="32">LSLV, LSRV, ASRV y RORV REGISTERS (Codificación General)</th>
 	</tr>
 	<tr>
 		<td colspan="1">31</td>
@@ -617,7 +621,7 @@ De cualquier forma, prosigamos con el formato de las instrucciónes codificadas.
 </table>
 <table>
 	<tr>
-		<th colspan="4">AND(S), ORR y EOR REGISTERS (Codificación Especifica)</th>
+		<th colspan="4">LSLV, LSRV, ASRV y RORV REGISTERS (Codificación Especifica)</th>
 	</tr>
 	<tr>
 		<td>Instrucción</td><td>op</td><td>S</td><td>opcode</td>
@@ -626,7 +630,7 @@ De cualquier forma, prosigamos con el formato de las instrucciónes codificadas.
 		<td>LSLV Xd, Xn, Xm</td><td>0</td><td>0</td><td>001000</td>
 	</tr>
 	<tr>
-		<td>LSRV Xd, Xn, Xm</td><td>0</td><td>1</td><td>001001</td>
+		<td>LSRV Xd, Xn, Xm</td><td>0</td><td>0</td><td>001001</td>
 	</tr>
 	<tr>
 		<td>ASRV Xd, Xn, Xm</td><td>0</td><td>0</td><td>001010</td>
