@@ -320,13 +320,13 @@ Hasta aquí termina el preámbulo. Si desean leer más sobre las directivas, los
 
 ### El Proyecto:
 
-Pueden descargar los archivos base para este proyecto de GitHub Classroom utilizando este <a href="#">link</a> como en los laboratorios. En el repositorio encontraran un archivo 
+Pueden descargar los archivos base para este proyecto de GitHub Classroom utilizando este <a href="#">link</a> como en los laboratorios. En el repositorio encontraran el archivo 
 <b>ensamblador.s</b>, que contiene un esqueleto para su proyecto. El esqueleto reserva espacio en el heap para codificar hasta 1000 instrucciones en el área de texto y 1000 caracteres en el área de 
-data. Dentro de los argumentos que recibe el programa, deben enviar como parametro el nombre (o path) de un archivo de texto que contendrá las instrucciones en lenguaje ARMv8 que van a codificar.
+data. Dentro de los argumentos que recibe el programa, deben enviar como parámetro el nombre (o path) de un archivo de texto que contendrá las instrucciones en lenguaje ARMv8 que van a codificar.
 El programa lee cada linea del archivo, la guarda en un <b>buffer</b> de memoria temporal y la manda como parametro a la función <b>encode</b>, que ustedes deben implementar. La función encode debe leer
 la instrucción, codificarla si es necesario, y guardarla en el área que le corresponde. Veamos un ejemplo:
 
-```code
+```shell
 .text
 	ADD x3, x5, x17
 .data
@@ -336,5 +336,34 @@ la instrucción, codificarla si es necesario, y guardarla en el área que le cor
 La primer llamada a <b>encode</b> debe recibir la primer linea: <i>.text</i> y concluir <i>esta linea indica que lo siguiente que viene es una instrucción</i>. Al leer la segunda linea: 
 <i>ADD x3, x5, x17</i>, deberá codificar la instrucción con el formato que especificaremos mas abajo, y guardarla en el área de texto. Al leer la tercer linea <i>.data</i>, su programa deberá 
 entender que la siguiente linea que va a leer la debe colocar en el área de data, y al leer la cuarta instrucción: <i>mensaje: .asciz "Hello World from ARMv8"</i>, su programa debe ir guardando 
-cada carácter en el área de data, y terminar escribiendo el carácter '\0' al final. Tomen en cuenta que por cada instrucción codificada y carácter ingresado al área de texto, ustedes deben ver
-como avanzan el puntero hacia la siguiente posición sin perder la referencia a la posición inicial. 
+cada carácter en el área de data, y terminar escribiendo el carácter '\0' al final. Tomen en cuenta que por cada instrucción codificada y carácter ingresado al área de texto y data, 
+ustedes deben ver como avanzan el puntero hacia la siguiente posición sin perder la referencia a la posición inicial. 
+
+### Tabla de Simbolos:
+
+Para poder codificar los saltos y las direcciones de memoria correctamente, ustedes deben crear una tabla de simbolos. La tabla de simbolos resuelve el siguiente problema:
+
+```shell
+.data
+	mensaje:	.asciz "Hello World from ARMv8..."
+.text
+	LDR x19,=mensaje
+```
+Para codificar la etiqueta mensaje y colocarla en el area de data no tenemos ningun problema, pero ¿Que pasa cuando queremos cargar la direccion de esta etiqueta en x19? No tenemos ninguna 
+referencia a donde en toda la seccion de data empieza el mensaje. Probemos ahora manteniendo la tabla de simbolos:
+
+<table>
+	<tr>
+		<th>Etiqueta</th>
+		<th>Direccion</th>
+	</tr>
+	<tr>
+		<td>mensaje</td>
+		<td>0x0000000040008000</td>
+	</tr>
+</table>
+
+Ya podemos codificar nuestra instruccion LDR porque sabemos en que direccion empieza el mensaje. Pero, ¿En donde termina? Es por esto que agregamos un '\0' al final de la cadena de caracteres,
+para denotar el EOS (End of String). Para implementar la tabla de simbolos correctamente, seguramente ustedes tendran que recorrer mas de una vez todas las lineas de codigo del archivo a 
+ensamblar, una vez para ver todas las etiquetas y codificar el area de data, y una segunda para codificar las instrucciones en si. Queda a su libertad como y donde implementar la tabla de 
+simbolos, pero deben tomar en cuenta que por cada llamada a <b>malloc</b>, deben hacer una llamada a <b>free</b>.
