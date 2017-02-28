@@ -524,7 +524,60 @@ De cualquier forma, prosigamos con el formato de las instrucciónes codificadas.
 	</tr>
 	<tr>
 		<td colspan="4">
-			Explicacion adicional:
+			Explicacion adicional: ########
 		</td>
+	</tr>
+</table>
+
+<br>
+<br>
+
+<table style="text-align: center;">
+	<tr>
+		<th colspan="32">AND(S), ORR y EOR REGISTERS (Codificación General)</th>
+	</tr>
+	<tr>
+		<td colspan="1">31</td>
+		<td colspan="1">30</td>
+		<td colspan="1">29</td>
+		<td colspan="5">28-24</td>
+		<td colspan="2">23-22</td>
+		<td colspan="1">21</td>
+		<td colspan="5">20-16</td>
+		<td colspan="6">15-10</td>
+		<td colspan="5">9-5</td>
+		<td colspan="5">4-0</td>
+	</tr>
+	<tr>
+		<td colspan="1">1</td>
+		<td colspan="1">op</td>
+		<td colspan="1">S</td>
+		<td colspan="5">01010</td>
+		<td colspan="2">shift</td>
+		<td colspan="1">N</td>
+		<td colspan="5">Rm</td>
+		<td colspan="6">imm6</td>
+		<td colspan="5">Rn</td>
+		<td colspan="5">Rd</td>
+	</tr>
+</table>
+<table>
+	<tr>
+		<th colspan="4">AND(S), ORR y EOR REGISTERS (Codificación Especifica)</th>
+	</tr>
+	<tr>
+		<td>Instrucción</td><td>op</td><td>S</td><td>shift</td><td>N</td><td>imm6</td>
+	</tr>
+	<tr>
+		<td>AND Xd, Xn, Xm</td><td>0</td><td>0</td><td>00</td><td>0</td><td>000000</td>
+	</tr>
+	<tr>
+		<td>ORR Xd, Xn, Xm</td><td>0</td><td>1</td><td>00</td><td>0</td><td>000000</td>
+	</tr>
+	<tr>
+		<td>EOR Xd, Xn, Xm</td><td>1</td><td>0</td><td>00</td><td>0</td><td>000000</td>
+	</tr>
+	<tr>
+		<td>ANDS Xd, Xn, Xm</td><td>1</td><td>1</td><td>00</td><td>0</td><td>000000</td>
 	</tr>
 </table>
