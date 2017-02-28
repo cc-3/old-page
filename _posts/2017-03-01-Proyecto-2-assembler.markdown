@@ -374,7 +374,7 @@ Símbolos, pero deben tomar en cuenta que por cada llamada a <b>malloc</b>, debe
 Finalmente hemos llegado al proceso de codificacion de las instrucciones. Si han llegado hasta esta parte sin al menos ojear la informacion de arriba, podria haber un ligero problema de comunicacion.
 De cualquier forma, prosigamos con el formato de las instrucciones codificadas.
 
-<table style="text-align: center;"">
+<table style="text-align: center;">
 	<tr>
 		<th colspan="32">ADD(S) y SUBS(S) IMMEDIATE (Codificacion General)</th>
 	</tr>
@@ -400,7 +400,7 @@ De cualquier forma, prosigamos con el formato de las instrucciones codificadas.
 	</tr>
 </table>
 
-<table style="text-align: center;"">
+<table style="text-align: center;">
 	<tr>
 		<th colspan="3">ADD(S) y SUBS(S) IMMEDIATE (Codificacion Especifica)</th>
 	</tr>
