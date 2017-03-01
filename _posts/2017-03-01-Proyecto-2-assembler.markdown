@@ -827,9 +827,14 @@ De cualquier forma, prosigamos con el formato de las instrucciónes codificadas.
 	</tr>
 </table>
 
+<br>
+<br>
 
-
-
-
-
-
+<table style="text-align: center;">
+	<tr>
+		<th>RET (Codificación Ultra Espeficica)</th>
+	</tr>
+	<tr>
+		<td>11010110010111110000001111000000</td>
+	</tr>
+</table>
