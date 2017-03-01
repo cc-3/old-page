@@ -69,19 +69,9 @@ primero que tenemos que hacer es escoger un subset de instrucciónes sobre las q
 		<td>xd = xn & xm</td>
 	</tr>
 	<tr>
-		<td>AND</td>
-		<td>AND xd, xn, imm</td>
-		<td>xd = xn & imm</td>
-	</tr>
-	<tr>
 		<td>ANDS</td>
 		<td>ANDS xd, xn, xm</td>
 		<td>xd = xn & xm (Modifica Banderas)</td>
-	</tr>
-	<tr>
-		<td>ANDS</td>
-		<td>ANDS xd, xn, imm</td>
-		<td>xd = xn & imm (Modifica Banderas)</td>
 	</tr>
 	<tr>
 		<td>ORR</td>
@@ -89,19 +79,9 @@ primero que tenemos que hacer es escoger un subset de instrucciónes sobre las q
 		<td>xd = xn | xm</td>
 	</tr>
 	<tr>
-		<td>ORR</td>
-		<td>ORR xd, xn, imm</td>
-		<td>xd = xn | imm</td>
-	</tr>
-	<tr>
 		<td>EOR</td>
 		<td>EOR xd, xn, xm</td>
 		<td>xd = xn ^ xm</td>
-	</tr>
-	<tr>
-		<td>EOR</td>
-		<td>EOR xd, xn, imm</td>
-		<td>xd = xn ^ imm</td>
 	</tr>
 	<tr>
 		<td>LSLV</td>
@@ -125,18 +105,28 @@ primero que tenemos que hacer es escoger un subset de instrucciónes sobre las q
 	</tr>
 	<tr>
 		<td>MOV</td>
-		<td>MOV xd, imm {, LSL #&lt;shamt&gt; }</td>
+		<td>MOV xd, imm</td>
 		<td>xd = imm << shamt (Llena con 0's lo demas)</td>
 	</tr>
 	<tr>
 		<td>MOVN</td>
-		<td>MOVN xd, imm {, LSL #&lt;shamt&gt;}</td>
+		<td>MOVN xd, imm</td>
 		<td>xd = ~ imm << shamt (Llena con 0's lo demas)</td>
 	</tr>
 	<tr>
 		<td>MOVK</td>
-		<td>MOVK xd, imm {, LSL #&lt;shamt&gt;}</td>
+		<td>MOVK xd, imm </td>
 		<td>xd = imm << shamt (Deja los demas bits intactos)</td>
+	</tr>
+	<tr>
+		<td>MOV</td>
+		<td>MOV xd, xn</td>
+		<td>xd = xn</td>
+	</tr>
+	<tr>
+		<td>MOVN</td>
+		<td>MOVN xd, xn</td>
+		<td>xd = ~ xn</td>
 	</tr>
 	<tr>
 		<td>CBZ</td>
@@ -314,9 +304,9 @@ evaluan las banderas para confirmar si saltan o no. Por ejemplo, si x3 tiene el 
 	</tr>
 	<tr>
 		<td colspan="5" style="text-align:left">
-			&nbsp; &nbsp; &nbsp; MOV x3, #5
-			&nbsp; &nbsp; &nbsp; MOV x8, #6
-			&nbsp; &nbsp; &nbsp; SUBS x0, x3, x8
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; MOV x3, #5 <br>
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; MOV x8, #6 <br>
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; SUBS x0, x3, x8
 		</td>
 	</tr>
 	<tr>
@@ -487,62 +477,6 @@ De cualquier forma, prosigamos con el formato de las instrucciónes codificadas.
 
 <table style="text-align: center;">
 	<tr>
-		<th colspan="32">AND(S), ORR y EOR IMMEDIATE (Codificación General)</th>
-	</tr>
-	<tr>
-		<td colspan="1">31</td>
-		<td colspan="1">30</td>
-		<td colspan="1">29</td>
-		<td colspan="5">28-24</td>
-		<td colspan="2">23-22</td>
-		<td colspan="6">21-16</td>
-		<td colspan="5">15-10</td>
-		<td colspan="5">9-5</td>
-		<td colspan="5">4-0</td>
-	</tr>
-	<tr>
-		<td colspan="1">1</td>
-		<td colspan="1">op</td>
-		<td colspan="1">S</td>
-		<td colspan="5">10010</td>
-		<td colspan="2">N</td>
-		<td colspan="6">immr</td>
-		<td colspan="5">imms</td>
-		<td colspan="5">Rn</td>
-		<td colspan="5">Rd</td>
-	</tr>
-</table>
-<table>
-	<tr>
-		<th colspan="4">AND(S), ORR y EOR IMMEDIATE (Codificación Especifica)</th>
-	</tr>
-	<tr>
-		<td>Instrucción</td><td>op</td><td>S</td><td>N</td>
-	</tr>
-	<tr>
-		<td>AND Xd, Xn, Imm</td><td>0</td><td>0</td><td>00</td>
-	</tr>
-	<tr>
-		<td>ORR Xd, Xn, Imm</td><td>0</td><td>1</td><td>00</td>
-	</tr>
-	<tr>
-		<td>EOR Xd, Xn, Imm</td><td>1</td><td>0</td><td>00</td>
-	</tr>
-	<tr>
-		<td>ANDS Xd, Xn, Imm</td><td>1</td><td>1</td><td>00</td>
-	</tr>
-	<tr>
-		<td colspan="4">
-			Explicacion adicional: ########
-		</td>
-	</tr>
-</table>
-
-<br>
-<br>
-
-<table style="text-align: center;">
-	<tr>
 		<th colspan="32">AND(S), ORR y EOR REGISTERS (Codificación General)</th>
 	</tr>
 	<tr>
@@ -637,5 +571,49 @@ De cualquier forma, prosigamos con el formato de las instrucciónes codificadas.
 	</tr>
 	<tr>
 		<td>RORV Xd, Xn, Xm</td><td>0</td><td>0</td><td>001011</td>
+	</tr>
+</table>
+
+<br>
+<br>
+
+<table style="text-align: center;">
+	<tr>
+		<th colspan="32">MOV, MOVN y MOVK IMMEDIATE (Codificación General)</th>
+	</tr>
+	<tr>
+		<td colspan="1">31</td>
+		<td colspan="1">30</td>
+		<td colspan="1">29</td>
+		<td colspan="6">28-23</td>
+		<td colspan="2">22-21</td>
+		<td colspan="16">20-5</td>
+		<td colspan="5">4-0</td>
+	</tr>
+	<tr>
+		<td colspan="1">1</td>
+		<td colspan="1">op</td>
+		<td colspan="1">S</td>
+		<td colspan="6">100101</td>
+		<td colspan="2">hw</td>
+		<td colspan="16">imm16</td>
+		<td colspan="5">Rd</td>
+	</tr>
+</table>
+<table>
+	<tr>
+		<th colspan="4">MOV, MOVN y MOVK IMMEDIATE (Codificación Especifica)</th>
+	</tr>
+	<tr>
+		<td>Instrucción</td><td>op</td><td>S</td><td>hw</td>
+	</tr>
+	<tr>
+		<td>MOVN Xd, imm</td><td>0</td><td>0</td><td>00</td>
+	</tr>
+	<tr>
+		<td>MOV Xd, imm</td><td>1</td><td>0</td><td>00</td>
+	</tr>
+	<tr>
+		<td>MOVK Xd, imm</td><td>1</td><td>1</td><td>00</td>
 	</tr>
 </table>
