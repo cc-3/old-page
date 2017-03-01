@@ -756,10 +756,76 @@ De cualquier forma, prosigamos con el formato de las instrucciónes codificadas.
 	</tr>
 	<tr>
 		<td>BL my_label</td><td>1</td>
+	</tr>
 </table>
 
+<br>
+<br>
 
+<table style="text-align: center;">
+	<tr>
+		<th colspan="32">LDR label (Codificación Especifica)</th>
+	</tr>
+	<tr>
+		<td colspan="8">31-24</td>
+		<td colspan="19">23-5</td>
+		<td colspan="5">4-0</td>
+	</tr>
+	<tr>
+		<td colspan="8">01011000</td>
+		<td colspan="19">imm19</td>
+		<td colspan="5">Rt</td>
+	</tr>
+</table>
 
+<br>
+<br>
+
+<table style="text-align: center;">
+	<tr>
+		<th colspan="32">LDR, STR, LDRB y STRB (Codificación General)</th>
+	</tr>
+	<tr>
+		<td colspan="2">31-30</td>
+		<td colspan="3">29-27</td>
+		<td colspan="1">26</td>
+		<td colspan="2">25-24</td>
+		<td colspan="2">23-22</td>
+		<td colspan="12">21-10</td>
+		<td colspan="5">9-5</td>
+		<td colspan="5">4-0</td>
+	</tr>
+	<tr>
+		<td colspan="2">size</td>
+		<td colspan="3">111</td>
+		<td colspan="1">V</td>
+		<td colspan="2">01</td>
+		<td colspan="2">opc</td>
+		<td colspan="12">imm12</td>
+		<td colspan="5">Rn</td>
+		<td colspan="5">Rt</td>
+	</tr>
+</table>
+<table>
+	<tr>
+		<th colspan="4"> LDR, STR, LDRB y STRB (Codificación Especifica)</th>
+	</tr>
+	<tr>
+		<td>Instrucción</td><td>size</td><td>V</td><td>opc</td>
+	</tr>
+	<tr>
+		<td>STRB Wt,[Xn,#imm]</td><td>00</td><td>0</td><td>00</td>
+	</tr>
+	<tr>
+		<td>LDRB Wt,[Xn,#imm]</td><td>00</td><td>0</td><td>01</td>
+	</tr>
+	<tr>
+		<td>STR Xt,[Xn,#imm]</td><td>11</td><td>0</td><td>00</td>
+	</tr>
+	<tr>
+		<td>LDR Xt,[Xn,#imm]</td><td>11</td><td>0</td><td>01</td>
+	</tr>
+</table>
 
 
 
