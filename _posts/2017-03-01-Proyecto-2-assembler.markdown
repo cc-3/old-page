@@ -850,7 +850,7 @@ De cualquier forma, prosigamos con el formato de las instrucciónes codificadas.
 La tradición en todos los proyectos es empezar el fin de semana antes de la entrega, pero para este proyecto no podrán hacer esto. Tienen la libertad de realizar el proyecto en el orden que 
 quieran, pero este es el orden que nosotros les sugerimos que sigan para realizar el proyecto:
 
-<table>
+<table style="text-align: center;">
 	<tr>
 		<th>
 			Fecha Inicio - Fecha Fin
@@ -861,7 +861,7 @@ quieran, pero este es el orden que nosotros les sugerimos que sigan para realiza
 	</tr>
 	<tr>
 		<td>
-			1 de Marzo - 3 de Marzon
+			1 de Marzo - 3 de Marzo
 		</td>
 		<td>
 			Leer las Instrucciones
