@@ -317,11 +317,17 @@ Hasta aquí termina el preámbulo. Si desean leer más sobre las directivas, los
 
 ### El Proyecto:
 
-Pueden descargar los archivos base para este proyecto de GitHub Classroom utilizando este <a href="#">link</a> como en los laboratorios. En el repositorio encontraran el archivo 
+Pueden clonar los archivos base para este proyecto de GitHub utilizando este comando:
+
+```shell
+	git clone https://github.com/cc-3/pj2_ensamblador.git
+```
+
+En el repositorio encontraran el archivo 
 <b>ensamblador.s</b>, que contiene un esqueleto para su proyecto. El esqueleto reserva espacio en el heap para codificar hasta 1000 instrucciónes en el área de texto y 1000 caracteres en el área de 
 data. Dentro de los argumentos que recibe el programa, deben enviar como parámetro el nombre (o path) de un archivo de texto que contendrá las instrucciónes en lenguaje ARMv8 que van a codificar.
-El programa lee cada linea del archivo, la guarda en un <b>buffer</b> de memoria temporal y la manda como parametro a la función <b>encode</b>, que ustedes deben implementar. La función encode debe leer
-la instrucción, codificarla si es necesario, y guardarla en el área que le corresponde. Veamos un ejemplo:
+El programa lee todas las lineas del archivo, la guarda en un <b>buffer</b> de memoria temporal y la manda como parametro a la función <b>encode</b>, que ustedes deben implementar. 
+La función encode debe leer las instrucciónes, codificarla, y guardarla en el área que le corresponde. Veamos un ejemplo:
 
 ```shell
 .text
@@ -832,9 +838,54 @@ De cualquier forma, prosigamos con el formato de las instrucciónes codificadas.
 
 <table style="text-align: center;">
 	<tr>
-		<th>RET (Codificación Ultra Espeficica)</th>
+		<th>RET (Codificación Ultra Especifica)</th>
 	</tr>
 	<tr>
 		<td>11010110010111110000001111000000</td>
 	</tr>
 </table>
+
+### Timeline Sugerida:
+
+La tradición en todos los proyectos es empezar el fin de semana antes de la entrega, pero para este proyecto no podrán hacer esto. Tienen la libertad de realizar el proyecto en el orden que 
+quieran, pero este es el orden que nosotros les sugerimos que sigan para realizar el proyecto:
+
+<table>
+	<tr>
+		<th>
+			Fecha Inicio - Fecha Fin
+		</th>
+		<th>
+			Actividad
+		</th>
+	</tr>
+	<tr>
+		<td>
+			1 de Marzo - 3 de Marzon
+		</td>
+		<td>
+			Leer las Instrucciones
+		</td>
+	</tr>
+</table>
+
+
+
+### Indicaciones Adicionales:
+
+Ustedes pueden ensamblar sus instrucciones y leerlas con <b>readelf</b> como vieron en clase, para ver si su codificación es correcta, pero deben tomar en cuenta que readelf muestra las direcciones
+bajas a la izquierda y altas a la derecha, y que el procesador utiliza <b>little endian</b> para la codificación.
+
+Una herramienta extra que pueden utilizar, además del manual y Google, es <a href="https://www.onlinedisassembler.com/static/home/">esta</a> pagina, donde pueden desensamblar instrucciones en 
+ARMv8 (AARCH64).
+
+Al momento de codificar los branches (saltos), no importa si son condicionales o incondicionales, siempre son relativos, lo que significa que, si el branch dice que se debe saltar a una etiqueta
+especificada 5 instrucciones adelante, el valor inmediato que ustedes codificaran es el número <b>5</b>, lo la dirección exacta de esa etiqueta.
+
+Las especificaciones del proyecto son largas, pero el proyecto en si es más largo. Empiecen desde ya para poder terminar a tiempo. Si no empiezan a trabajar hasta el fin de semana antes de la entrega, 
+no podrán conseguir mucho más que un segmentation fault en la línea 680.
+
+### Entrega:
+
+Para la entrega del proyecto, ustedes deben mandar un correo a <i>efrainh12@galileo.edu</i> especificando los integrantes del grupo (máximo dos) y su sección. Deben crear un repositorio en 
+GitHub agregar como contribuidor a cc3-grades y subir el link del repositorio al GES antes de la fecha de entrega. Si no cumplen con estos requisitos, tendrán una nota de 0 en el proyecto.
