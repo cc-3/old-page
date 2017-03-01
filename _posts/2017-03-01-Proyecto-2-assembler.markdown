@@ -119,16 +119,6 @@ primero que tenemos que hacer es escoger un subset de instrucciónes sobre las q
 		<td>xd = imm << shamt (Deja los demas bits intactos)</td>
 	</tr>
 	<tr>
-		<td>MOV</td>
-		<td>MOV xd, xn</td>
-		<td>xd = xn</td>
-	</tr>
-	<tr>
-		<td>MOVN</td>
-		<td>MOVN xd, xn</td>
-		<td>xd = ~ xn</td>
-	</tr>
-	<tr>
 		<td>CBZ</td>
 		<td>CBZ xd, my_label</td>
 		<td>Si (xd == 0), salta a my_label</td>
@@ -257,13 +247,21 @@ primero que tenemos que hacer es escoger un subset de instrucciónes sobre las q
 	</tr>
 	<tr>
 		<td>.data</td>
-		<td colspan="2">Los siguientes carácteres son datos a almacenar. Los datos se almacenaran en la etiqueta <b>dot_data</b></td>
+		<td colspan="2">La siguiente informacion son datos a almacenar en la etiqueta <b>dot_data</b></td>
+	</tr>
+	<tr>
+		<td>.asciz "STRING"</td>
+		<td colspan="2">Hay que guardar los carácteres en la etiqueta <b>dot_data</b>, deben agregar un '\0' al final</td>
+	</tr>
+	<tr>
+		<td>.space #NUM</td>
+		<td colspan="2">Hay que reservar espacio igual a la cantidad especificada en imm en la etiqueta <b>dot_data</b></td>
 	</tr>
 </table>
 
 Las directivas <b>.text</b> y <b>.data</b> especifican secciones de memoria donde se guardaran las instrucciónes y los datos de su programa (nosotros les daremos los punteros a estas areas). 
-Ademas de esto, cuando codifiquemos los datos, vamos a utilizar la directiva <b>.asciz</b>, que representa una cadena de caracteres que termina el '\0'; esto significa que ustedes deben codificar
-esa cadena de caracteres en la seccion <b>dot_data</b> y terminarla con '\0'.
+Ademas de esto, cuando codifiquemos los datos, vamos a utilizar la directiva <b>.asciz</b>, o la directiva <b>.space</b>. Tomen en cuenta que para la directiva <b>.asciz</b>, ustedes deben  
+terminar la cadena con '\0'.
 
 Una vez establecido este subset de instrucciónes y las directivas, vamos a hablar un poco de los registros y las banderas para los saltos. 
 
@@ -617,3 +615,155 @@ De cualquier forma, prosigamos con el formato de las instrucciónes codificadas.
 		<td>MOVK Xd, imm</td><td>1</td><td>1</td><td>00</td>
 	</tr>
 </table>
+
+<br>
+<br>
+
+<table style="text-align: center;">
+	<tr>
+		<th colspan="32">CBZ y CBNZ (Codificación General)</th>
+	</tr>
+	<tr>
+		<td colspan="1">31</td>
+		<td colspan="6">30-25</td>
+		<td colspan="1">24</td>
+		<td colspan="19">23-5</td>
+		<td colspan="5">4-0</td>
+	</tr>
+	<tr>
+		<td colspan="1">1</td>
+		<td colspan="6">011010</td>
+		<td colspan="1">op</td>
+		<td colspan="19">imm19</td>
+		<td colspan="5">Rt</td>
+	</tr>
+</table>
+<table>
+	<tr>
+		<th colspan="2">CBZ y CBNZ (Codificación Especifica)</th>
+	</tr>
+	<tr>
+		<td>Instrucción</td><td>op</td>
+	</tr>
+	<tr>
+		<td>CBZ Xt, my_label</td><td>0</td>
+	</tr>
+	<tr>
+		<td>CBNZ Xt, my_label</td><td>1</td>
+	</tr>
+</table>
+
+<br>
+<br>
+
+<table style="text-align: center;">
+	<tr>
+		<th colspan="32">B.cond (Codificación General)</th>
+	</tr>
+	<tr>
+		<td colspan="6">31-25</td>
+		<td colspan="1">24</td>
+		<td colspan="19">23-5</td>
+		<td colspan="1">4</td>
+		<td colspan="5">3-0</td>
+	</tr>
+	<tr>
+		<td colspan="6">0101010</td>
+		<td colspan="1">o1</td>
+		<td colspan="19">imm19</td>
+		<td colspan="1">o0</td>
+		<td colspan="5">cond</td>
+	</tr>
+</table>
+<table>
+	<tr>
+		<th colspan="4"> B.cond (Codificación Especifica)</th>
+	</tr>
+	<tr>
+		<td>Instrucción</td><td>o0</td><td>o1</td><td>cond</td>
+	</tr>
+	<tr>
+		<td>B.EQ my_label</td><td>0</td><td>0</td><td>0000</td>
+	</tr>
+	<tr>
+		<td>B.NE my_label</td><td>0</td><td>0</td><td>0001</td>
+	</tr>
+	<tr>
+		<td>B.HS my_label</td><td>0</td><td>0</td><td>0010</td>
+	</tr>
+	<tr>
+		<td>B.LO my_label</td><td>0</td><td>0</td><td>0011</td>
+	</tr>
+	<tr>
+		<td>B.MI my_label</td><td>0</td><td>0</td><td>0100</td>
+	</tr>
+	<tr>
+		<td>B.PL my_label</td><td>0</td><td>0</td><td>0101</td>
+	</tr>
+	<tr>
+		<td>B.VS my_label</td><td>0</td><td>0</td><td>0110</td>
+	</tr>
+	<tr>
+		<td>B.VC my_label</td><td>0</td><td>0</td><td>0111</td>
+	</tr>
+	<tr>
+		<td>B.HI my_label</td><td>0</td><td>0</td><td>1000</td>
+	</tr>
+	<tr>
+		<td>B.LS my_label</td><td>0</td><td>0</td><td>1001</td>
+	</tr>
+	<tr>
+		<td>B.GE my_label</td><td>0</td><td>0</td><td>1010</td>
+	</tr>
+	<tr>
+		<td>B.TL my_label</td><td>0</td><td>0</td><td>1011</td>
+	</tr>
+	<tr>
+		<td>B.GT my_label</td><td>0</td><td>0</td><td>1100</td>
+	</tr>
+	<tr>
+		<td>B.LE my_label</td><td>0</td><td>0</td><td>1101</td>
+	</tr>
+</table>
+
+<br>
+<br>
+
+<table style="text-align: center;">
+	<tr>
+		<th colspan="32">B, BL (Codificación General)</th>
+	</tr>
+	<tr>
+		<td colspan="1">31</td>
+		<td colspan="5">30-26</td>
+		<td colspan="26">25-0</td>
+	</tr>
+	<tr>
+		<td colspan="1">op</td>
+		<td colspan="5">00101</td>
+		<td colspan="26">imm26</td>
+	</tr>
+</table>
+<table>
+	<tr>
+		<th colspan="2"> B, BL (Codificación Especifica)</th>
+	</tr>
+	<tr>
+		<td>Instrucción</td><td>op</td>
+	</tr>
+	<tr>
+		<td>B my_label</td><td>0</td>
+	</tr>
+	<tr>
+		<td>BL my_label</td><td>1</td>
+</table>
+
+
+
+
+
+
+
+
+
+
