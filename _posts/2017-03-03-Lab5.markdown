@@ -15,7 +15,7 @@ uso de la herramienta que deseen para programar y transferir su codigo al sistem
 algún editor de texto de <b>CLI</b> como son <i>nano</i> o <i>vim</i>. Pueden incluso tener copias del repositorio en ambas maquinas, trabajar en una, hacer push, y hacer pull en otra para compilar.
 
 
-```
+---
 #### Ejercicio 1: Codificando Algunas Instrucciones.
 
 Abran el archivo <b>ejercicio1.s</b>. Ahí verán un poco de código en lenguaje ensamblador. Vean que en la sección de data tenemos la etiqueta <b>ARRAY</b> que reserva espacio para 24 bytes. Este 
@@ -51,7 +51,7 @@ deben hacer, es convertir esos parametros, que se reciben como cadenas de caract
 deben codificarlo a su representación en punto flotante usando el estándar IEEE 754. Una vez hayan codificado el número, deben colocarlo en el registro <b>x0</b>, y hacer una llamada a la función 
 display_number, que se encargara de desplegarlo tanto en representación hexadecimal, como el representación de punto flotante según este estándar. 
 
-Si lo han hecho bien, su output debería ser algo como esto:
+Si lo han hecho bien, su output debería ser algo como esto (-lm se utiliza para incluir la libreria math.h, que es necesaria para la función printfloat):
 
 ```shell
 $ gcc -o ejercicio2 ejercicio2.s -lm
@@ -65,5 +65,8 @@ FLOAT: -23.000000
 ```
 Noten que el valor en float no debe cambiar con respecto al valor entero, esto se debe a que la codificación que ustedes usaron, interpretada según el estándar IEEE 754 representa el mismo entero
 que recibieron, pero escrito (en sentido de bits) de una forma diferente. 
+
+El ejercicio tiene una gran cantidad de código, esto es porque desplegar la representación en punto flotante no funciona correctamente si se hace desde printf, así que la función printfloat que ocupa
+cerca de 80 líneas fue implantada para esto. No le pongan mucha importancia a esa seccion de codigo, pero asegurence de lo tocarla para que todo funcione correctamente.
 
 Una vez terminaron ambos ejercicios, deben hacer el commit final del laboratorio, y subir el link del repositorio al GES para que nosotros podamos revisarlo. 
