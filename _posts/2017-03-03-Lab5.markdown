@@ -40,8 +40,24 @@ $ ./ejercicio1
 0x00000000
 ```
 
-Por motivos obvios, no podemos ponerles el output esperado para este inciso, pero confiamos en su habilidad para codificar números e instrucciones. La codificación de las instrucciones ustedes
-pueden buscarla en las especificaciones del proyecto, o en el manual de ARMv8 que colocamos en esa página. Para la codificación el punto flotante, esta tabla les podría servir un poco:
+Por motivos obvios, no podemos ponerles el output esperado para este inciso, pero hemos incluido en archivo <b>ej1_check.o</b>, el cual, si ustedes están corriendo ubuntu sobre quemu, no 
+tendrían problemas en compilar y ejecutar. Este programa calificara la codificación de sus instrucciones:
+
+```shell
+$ gcc -o ej1_check ej1_check.o
+$ ./ej1_check
+Inciso 1: Codificacion: 0x00000000 (+0)
+Inciso 2: Codificacion: 0x00000000 (+0)
+Inciso 3: Codificacion: 0x00000000 (+0)
+Inciso 4: Codificacion: 0x00000000 (+0)
+Inciso 5: Codificacion: 0x00000000 (+0)
+Inciso 6: Codificacion: 0x00000000 (+0)
+...........................................
+Nota final: 0.00
+```
+
+La codificación de las instrucciones ustedes pueden buscarla en las especificaciones del proyecto, o en el manual de ARMv8 que colocamos en esa página. Para la codificación el 
+punto flotante, esta tabla les podría servir un poco:
 
 <table style="text-align: center">
   <tr>
