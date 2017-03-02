@@ -40,10 +40,10 @@ $ ./ejercicio1
 0x00000000
 ```
 
-Por motivos obvios, no podemos ponerles el output esperado para este inciso, pero confiamos en su habilidad para codificar números e instrucciones. La codificacion de las instrucciones ustedes
-pueden buscarla en las especificaciones del proyecto, o en el manual de ARMv8 que colocamos en esa pagina. Para la codificacion el punto flotante, esta tabla les podria servir un poco:
+Por motivos obvios, no podemos ponerles el output esperado para este inciso, pero confiamos en su habilidad para codificar números e instrucciones. La codificación de las instrucciones ustedes
+pueden buscarla en las especificaciones del proyecto, o en el manual de ARMv8 que colocamos en esa página. Para la codificación el punto flotante, esta tabla les podría servir un poco:
 
-<table>
+<table style="text-align: center">
   <tr>
     <th>31</th>
     <th colspan="4">30-23</th>
@@ -52,7 +52,7 @@ pueden buscarla en las especificaciones del proyecto, o en el manual de ARMv8 qu
   <tr>
     <td>Signo</td>
     <td colspan="4">Exponente (Bias -127)</td>
-    <td colspan="8">Mantissa</td>
+    <td colspan="8">Mantissa &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
   </tr>
 </table>
 
