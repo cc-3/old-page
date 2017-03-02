@@ -45,7 +45,7 @@ Por motivos obvios, no podemos ponerles el output esperado para este inciso, per
 
 #### Ejercicio 2: Codificando Cualquier Entero a Punto Flotante
 
-Para este ejercicio, su programa recibirá <b>N</b> cantidad de parametros, todos representando números enteros. La cantidad de argumentos (<b>argc</b>Lo) se encuentra en x0 originalmente; nosotros
+Para este ejercicio, su programa recibirá <b>N</b> cantidad de parametros, todos representando números enteros. La cantidad de argumentos (<b>argc</b>) se encuentra en x0 originalmente; nosotros
 la pasaremos a x19 para que se preserve entre llamadas a funciones, al igual que el puntero mismo a los parametros (argv), que guardaremos en x20 (pero se recibe originalmente en x1). Lo que ustedes
 deben hacer, es convertir esos parametros, que se reciben como cadenas de caracteres a números enteros (Hint: atoi), y por cada uno de esos parametros que reciban, 
 deben codificarlo a su representación en punto flotante usando el estándar IEEE 754. Una vez hayan codificado el número, deben colocarlo en el registro <b>x0</b>, y hacer una llamada a la función 
