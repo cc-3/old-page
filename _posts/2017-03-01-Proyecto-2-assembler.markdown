@@ -317,7 +317,7 @@ Hasta aquí termina el preámbulo. Si desean leer más sobre las directivas, los
 
 ### El Proyecto:
 
-Pueden clonar acceder a los archivos base desde <b<Github Classroom</b> haciendo click en este 
+Pueden clonar acceder a los archivos base desde <b>Github Classroom</b> haciendo click en este 
 <a href="https://classroom.github.com/group-assignment-invitations/6a109f71a1552bb9931d1b3dff52f4c9">link</a>.
 Tomen en cuenta que un estudiante debe crear el grupo y otro debe unirse a este. La cantidad maxima de estudiantes por grupo es dos.
 
