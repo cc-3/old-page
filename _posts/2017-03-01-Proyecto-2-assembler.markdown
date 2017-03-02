@@ -250,7 +250,7 @@ primero que tenemos que hacer es escoger un subset de instrucciónes sobre las q
 		<td colspan="2">La siguiente informacion son datos a almacenar en la etiqueta <b>dot_data</b></td>
 	</tr>
 	<tr>
-		<td>.asciz "STRING"</td>
+		<td>.asciz "STR"</td>
 		<td colspan="2">Hay que guardar los carácteres en la etiqueta <b>dot_data</b>, deben agregar un '\0' al final</td>
 	</tr>
 	<tr>
@@ -317,11 +317,10 @@ Hasta aquí termina el preámbulo. Si desean leer más sobre las directivas, los
 
 ### El Proyecto:
 
-Pueden clonar los archivos base para este proyecto de GitHub utilizando este comando:
+Pueden clonar acceder a los archivos base desde <b<Github Classroom</b> haciendo click en este 
+<a href="https://classroom.github.com/group-assignment-invitations/6a109f71a1552bb9931d1b3dff52f4c9">link</a>.
+Tomen en cuenta que un estudiante debe crear el grupo y otro debe unirse a este. La cantidad maxima de estudiantes por grupo es dos.
 
-```shell
-	git clone https://github.com/cc-3/pj2_ensamblador.git
-```
 
 En el repositorio encontraran el archivo 
 <b>ensamblador.s</b>, que contiene un esqueleto para su proyecto. El esqueleto reserva espacio en el heap para codificar hasta 1000 instrucciónes en el área de texto y 1000 caracteres en el área de 
@@ -873,6 +872,10 @@ quieran, pero este es el orden que nosotros les sugerimos que sigan para realiza
 
 ### Indicaciones Adicionales:
 
+En las instrucciones a codificar, nosotros solo enviaremos instrucciones en mayúscula, etiquetas en minúscula, registros en minúscula (<i>x</i> o <i>w</i>) y números en formato decimal 
+precedidos por el caracter <i>#</i>(aunque no es difícil darle soporte a números en formato hex y binario). Siempre existirá la coma cuando sea necesario, pero puede haber N cantidad de espacios 
+y tabs entre los caracteres de la Instrucción, así que será su trabajo ignorarlos. Tomando esto en cuenta, todas las instrucciones serán instrucciones validas escritas correctamente.
+
 Ustedes pueden ensamblar sus instrucciones y leerlas con <b>readelf</b> como vieron en clase, para ver si su codificación es correcta, pero deben tomar en cuenta que readelf muestra las direcciones
 bajas a la izquierda y altas a la derecha, y que el procesador utiliza <b>little endian</b> para la codificación.
 
@@ -887,5 +890,5 @@ no podrán conseguir mucho más que un segmentation fault en la línea 680.
 
 ### Entrega:
 
-Para la entrega del proyecto, ustedes deben mandar un correo a <i>efrainh12@galileo.edu</i> especificando los integrantes del grupo (máximo dos) y su sección. Deben crear un repositorio en 
-GitHub agregar como contribuidor a cc3-grades y subir el link del repositorio al GES antes de la fecha de entrega. Si no cumplen con estos requisitos, tendrán una nota de 0 en el proyecto.
+Para la entrega del proyecto, ustedes deben mandar un correo a <i>efrainh12@galileo.edu</i> especificando los integrantes del grupo (máximo dos) y su sección. Deben trabajar en el repositorio de 
+GitHub Classroom que les asignamos y deben subir el link del repositorio al GES antes de la fecha de entrega. Si no cumplen con estos requisitos, tendrán una nota de 0 en el proyecto.
