@@ -26,7 +26,7 @@ arreglo contendrá los 6 números o instrucciones que deben codificar. La funci�
 3. Codique la instrucción LSLV x4, x7, x11 según el formato de la arquitectura ARMv8.
 4. Codique la instrucción MOVN x4,#123 según el formato de la arquitectura ARMv8.
 5. Codifiquen el número -83.0 en notación punto flotante según el estándar IEEE 754.
-6. Codifique la instrucción ADD SP, SP, #-16 según el formato de la arquitectura ARMv8.
+6. Codifique la instrucción SUB SP, SP, #16 según el formato de la arquitectura ARMv8.
 
 
 ```shell
