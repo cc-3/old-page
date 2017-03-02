@@ -40,7 +40,21 @@ $ ./ejercicio1
 0x00000000
 ```
 
-Por motivos obvios, no podemos ponerles el output esperado para este inciso, pero confiamos en su habilidad para codificar números e instrucciones. 
+Por motivos obvios, no podemos ponerles el output esperado para este inciso, pero confiamos en su habilidad para codificar números e instrucciones. La codificacion de las instrucciones ustedes
+pueden buscarla en las especificaciones del proyecto, o en el manual de ARMv8 que colocamos en esa pagina. Para la codificacion el punto flotante, esta tabla les podria servir un poco:
+
+<table>
+  <tr>
+    <th>31</th>
+    <th colspan="4">30-23</th>
+    <th colspan="8">22-0</th>
+  </tr>
+  <tr>
+    <td>Signo</td>
+    <td colspan="4">Exponente (Bias -127)</td>
+    <td colspan="8">Mantissa</td>
+  </tr>
+</table>
 
 
 #### Ejercicio 2: Codificando Cualquier Entero a Punto Flotante
