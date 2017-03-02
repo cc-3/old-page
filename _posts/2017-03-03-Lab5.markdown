@@ -52,7 +52,7 @@ pueden buscarla en las especificaciones del proyecto, o en el manual de ARMv8 qu
   <tr>
     <td>Signo</td>
     <td colspan="4">Exponente (Bias -127)</td>
-    <td colspan="8">Mantissa &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+    <td colspan="8">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Mantissa &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td>
   </tr>
 </table>
 
