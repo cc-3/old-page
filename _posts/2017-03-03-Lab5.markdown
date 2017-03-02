@@ -1,0 +1,69 @@
+---
+layout: post
+title:  "Laboratorio 5"
+date:   2017-03-03
+category: lab
+description: >
+    Este laboratorio se trata solamente de codificar. Vamos a codificar números en punto flotan y algunas instrucciones en ARMv8.
+---
+
+#### Antes de Iniciar
+
+Esperamos que para este momento ya todos tengan acceso a un sistema operativo que corra sobre un procesador <b>ARMv8</b>. Ahora bien, para poder descargar los archivos base para el laboratorio, 
+deben hacer click en este <a href="https://classroom.github.com/assignment-invitations/10a88fef5f61e9ccac8c4a05709df777">link</a> de GitHub Classroom. Una cosa que quedara a su libertad, será el 
+uso de la herramienta que deseen para programar y transferir su codigo al sistema operativo que corre sobre ARMv8, pueden usar <i>scp</i> si lo desean, y trabajar en sublime, pueden utilizar 
+algún editor de texto de <b>CLI</b> como son <i>nano</i> o <i>vim</i>. Pueden incluso tener copias del repositorio en ambas maquinas, trabajar en una, hacer push, y hacer pull en otra para compilar.
+
+
+```
+#### Ejercicio 1: Codificando Algunas Instrucciones.
+
+Abran el archivo <b>ejercicio1.s</b>. Ahí verán un poco de código en lenguaje ensamblador. Vean que en la sección de data tenemos la etiqueta <b>ARRAY</b> que reserva espacio para 24 bytes. Este 
+arreglo contendrá los 6 números o instrucciones que deben codificar. La función <b>main</b>, en este caso, únicamente manda a llamar a la función encode, y luego a la función print_encoding. Ustedes deben implementar la función encode, en la que deben guardar en <b>ARRAY</b> los siguientes valores:
+
+1. Codifiquen el número -28.0 en notación punto flotante según el estándar IEEE 754.
+2. Codifiquen el número 60.75 en notación punto flotante según el estándar IEEE 754.
+3. Codique la instrucción LSLV x4, x7, x11 según el formato de la arquitectura ARMv8.
+4. Codique la instrucción MOVN x4,#123 según el formato de la arquitectura ARMv8.
+5. Codifiquen el número -83.0 en notación punto flotante según el estándar IEEE 754.
+6. Codifique la instrucción ADD SP, SP, #-16 según el formato de la arquitectura ARMv8.
+
+
+```shell
+$ gcc -o ejercicio1 ejercicio1.s
+$ ./ejercicio1
+0x00000000
+0x00000000
+0x00000000
+0x00000000
+0x00000000
+0x00000000
+```
+
+Por motivos obvios, no podemos ponerles el output esperado para este inciso, pero confiamos en su habilidad para codificar números e instrucciones. 
+
+
+#### Ejercicio 2: Codificando Cualquier Entero a Punto Flotante
+
+Para este ejercicio, su programa recibirá <b>N</b> cantidad de parametros, todos representando números enteros. La cantidad de argumentos (<b>argc</b>Lo) se encuentra en x0 originalmente; nosotros
+la pasaremos a x19 para que se preserve entre llamadas a funciones, al igual que el puntero mismo a los parametros (argv), que guardaremos en x20 (pero se recibe originalmente en x1). Lo que ustedes
+deben hacer, es convertir esos parametros, que se reciben como cadenas de caracteres a números enteros (Hint: atoi), y por cada uno de esos parametros que reciban, 
+deben codificarlo a su representación en punto flotante usando el estándar IEEE 754. Una vez hayan codificado el número, deben colocarlo en el registro <b>x0</b>, y hacer una llamada a la función 
+display_number, que se encargara de desplegarlo tanto en representación hexadecimal, como el representación de punto flotante según este estándar. 
+
+Si lo han hecho bien, su output debería ser algo como esto:
+
+```shell
+$ gcc -o ejercicio2 ejercicio2.s -lm
+$ ./ejercicio2 5 12 -23
+HEXADECIMAL: 0x40a00000
+FLOAT: 5.000000
+HEXADECIMAL: 0x41400000
+FLOAT: 12.000000
+HEXADECIMAL: 0xc1b80000
+FLOAT: -23.000000
+```
+Noten que el valor en float no debe cambiar con respecto al valor entero, esto se debe a que la codificación que ustedes usaron, interpretada según el estándar IEEE 754 representa el mismo entero
+que recibieron, pero escrito (en sentido de bits) de una forma diferente. 
+
+Una vez terminaron ambos ejercicios, deben hacer el commit final del laboratorio, y subir el link del repositorio al GES para que nosotros podamos revisarlo. 
