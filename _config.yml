@@ -17,3 +17,6 @@ navigation:
 
 social:
    github: cc-3
+
+gems:
+  - jemoji
