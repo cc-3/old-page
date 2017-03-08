@@ -866,6 +866,22 @@ quieran, pero este es el orden que nosotros les sugerimos que sigan para realiza
 			Leer las Instrucciones
 		</td>
 	</tr>
+	<tr>
+		<td>
+			3 de Marzo - 10 de Marzo
+		</td>
+		<td>
+			Instrucciones Tipo R codificadas
+		</td>
+	</tr>
+	<tr>
+		<td>
+			10 de Marzo - 14 de Marzo
+		</td>
+		<td>
+			Instrucciones Tipo I codificadas
+		</td>
+	</tr>
 </table>
 
 
