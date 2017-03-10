@@ -13,7 +13,7 @@ Ultimamente los auxiliares que califican sus labs han tenido problemas al ponerl
 
 #### Ejercicio 0: Subiendo mi link al GES
 
-Este ejercicio es dummy y lo unico que tienen que hacer es subir su link del repositorio de una vez al GES (no hay puntos para este ejercicio pero nos evitamos un 0 como nota), para esto aqui está como siempre el [link](a) de **GitHub Classroom**. Cuando ya tengan subido al GES su link pueden seguir con el lab :+1:.
+Este ejercicio es dummy y lo unico que tienen que hacer es subir su link del repositorio de una vez al GES (no hay puntos para este ejercicio pero nos evitamos un 0 como nota), para esto aqui está como siempre el [link](https://classroom.github.com/assignment-invitations/93bb59a2041d388fe0b6f6bdb47a18ba) de **GitHub Classroom**. Cuando ya tengan subido al GES su link pueden seguir con el lab :+1:.
 
 #### Ejercicio 1: Autograder Codificación Tipo R
 
@@ -23,6 +23,8 @@ Para este ejercicio lo que tienen que hacer es ver que tan bien van con su proye
 $ gcc -o grading_r grading_r.c
 $ ./grading_r
 ```
+
+tienen que agregar **ensambladorV2.s** al repositorio del lab06 para que nosotros podamos ver su avance.
 
 ***
 
