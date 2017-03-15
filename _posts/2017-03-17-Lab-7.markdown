@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Laboratorio 4"
-date:   2017-02-16
+title:  "Laboratorio 7"
+date:   2017-03-17
 category: lab
 description: >
     En este laboratorio ustedes van a hacer un par de programas en ensamblador utilizando el Instruction Set de Armv8. Utilizaremos lo aprendido en clase
