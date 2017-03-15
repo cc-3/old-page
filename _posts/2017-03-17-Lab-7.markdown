@@ -4,7 +4,8 @@ title:  "Laboratorio 7"
 date:   2017-03-17
 category: lab
 description: >
-	Continuando con el proyecto del ensamblador, vamos a implementar una tabla de simbolos que ustedes podran utilizar para su proyecto.
+	Continuando con el proyecto del ensamblador, Continuando con el proyecto del ensamblador, vamos a implementar una tabla de símbolos que ustedes podrán utilizar para su
+	proyecto.vamos a implementar una tabla de simbolos que ustedes podran utilizar para su proyecto.
 ---
 
 #### Setup
