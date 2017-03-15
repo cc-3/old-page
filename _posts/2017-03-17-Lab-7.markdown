@@ -1,0 +1,177 @@
+---
+layout: post
+title:  "Laboratorio 7"
+date:   2017-03-17
+category: lab
+description: >
+	Continuando con el proyecto del ensamblador, vamos a implementar una tabla de símbolos que ustedes podrán utilizar para su
+	proyecto.
+---
+
+#### Setup
+
+Como siempre, hagan click en este <a href="https://classroom.github.com/assignment-invitations/88a77252375afea24e987d342632e16a">
+link</a> para poder de clonar los archivos necesarios para su laboratorio.
+
+***
+
+#### Ejercicio 0: Revisando las instrucciones "tipo" I
+
+El los archivos que han clonado, se encuentra el archivo <b>grading_i.c</b>. Compílenlo y córranlo en la misma carpeta de su 
+proyecto, les ayudara a ver como van con la codificación de instrucciones "tipo" I. Tomen en cuenta que para ejecutar el 
+autograder, su ensamblador se debe llamar <b>ensamblador.s</b>
+
+```shell
+	$ gcc -o grading_i grading_i.c
+	$ ./grading_i
+```
+
+Tomen en cuenta que este ejercicio no vale puntos para su laboratorio, pero les ayudara a verificar como van en el proyecto, y 
+también les ayudara a confirmar si el formato de instrucciones que estamos usando (espacios, comas, tildes) es compatible con
+su ensamblador. Para estos momentos, deberían tener 80 ~ 100 en la nota del autograder.
+
+
+#### Ejercicio 1: Creando nuestra tabla de símbolos
+
+Como estamos usando GCC, tenemos la posibilidad de combinar archivos escritos en <b>C</b> y en <b>ASSEMBLER</b>, y nos vamos a 
+aprovechar de esto para el proyecto.
+
+En su repositorio tienen el archivo <b>symtab.c</b>. Este es el archivo donde crearemos su tabla de simbolos. Una tabla de 
+simbolos es un analogo a un <b>HashMap</b> en <i>java</i>; en ella asociaremos una etiqueta (<b>char*</b>) a una direccion
+de memoria (<b>long</b>).
+
+En la parte de arriba, verán las macros TABLE_LEN y MAX_LABEL_LEN, con un valor de 100 cada una. Esto representa que nuestra
+tabla de símbolos soportara un máximo de 100 etiquetas, cada una de hasta 100 caracteres. También verán la definición de 
+los elementos de la tabla (symtab_s, symtab_n y label_count).
+
+Para la tabla de símbolos, podríamos crear una nueva estructura, que contenga dos arreglos, uno de char* (si, un arreglo de
+arreglos), y uno de long. Sin embargo, dejaremos como <b>puntos extra sobre el proyecto</b> que ustedes implementen 
+la tabla de símbolos directamente en assembler, así que, para facilitar la traducción, no usaremos estructuras, sino que mantendremos 
+los dos arreglos separados (pero funcionaran como uno solo en todo momento). En general symtab_n[i] será la dirección de memoria
+de symtab_s[i].
+
+En la función <b>main()</b>, ustedes verán la llamada a initialize() y al final, la llamada a release(). 
+Su primer ejercicio consta en completar estas funciones reservando y liberando espacio para la tabla de símbolos respectivamente. 
+Tomen en cuenta que no solo deben reservar (y liberar) espacio para la cantidad de direcciones y etiquetas (TABLE_LEN); 
+también deben reservar (y liberar) espacio para cada etiqueta (MAX_LABEL_LEN). 
+
+
+
+
+
+
+Una vez terminado, pueden probar su código de la siguiente forma:
+
+```shell
+$ gcc -o symtab symtab.c
+$ ./symtab.c check_ej1
+Revisando ejercicio 1...
+No segmentation fault... Todo Bien...!
+Total: 15/15
+```
+
+Noten que este test solo verifica que la validez de la función initialize(), y no la de release(). Sin embargo, deben implementar los 
+dos métodos para evitar el problema de memory leak.
+
+***
+
+#### Ejercicio 2: Insertar en la tabla de símbolos
+
+Algo vital para su tabla de símbolos, es la capacidad de insertar tuplas de la forma (etiqueta,dirección) en la última posición. Para
+este ejercicio deben implementar la función add(char *string, long dir), en la que guardaran en la posición siguiente (label_count),
+la etiqueta y la dirección de memoria asociada a ella. <b>Hint:</b>es peligroso usar <b>=</b> para su implementación.
+
+Para probar su implementación  pueden ejecutar el siguiente código:
+
+```shell
+$ gcc -o symtab symtab.c
+$ ./symtab.c check_ej2
+Revisando ejercicio 2...
+loopcito_ debe ser igual a loopcito_
+0x0000000002200423 debe ser igual a 0x0000000002200423 (+5)
+..........
+cond debe ser igual a cond
+0x4000000000000004 debe ser igual a 0x4000000000000004 (+5)
+..........
+mensaje debe ser igual a mensaje
+0x4000000000000000 debe ser igual a 0x4000000000000000 (+5)
+..........
+label1 debe ser igual a label1
+0x0000000002244423 debe ser igual a 0x0000000002244423 (+5)
+..........
+main debe ser igual a main
+0x1122334455667788 debe ser igual a 0x1122334455667788 (+5)
+..........
+Total: 25/25
+```
+
+#### Ejercicio 3: Buscar en la tabla de símbolos
+
+Otra cosa necesaria para la tabla de símbolos es la capacidad de buscar una dirección dada una etiqueta. En <b>symtab.c</b>,
+deben implementar la función <b>search</b>, que recibe una etiqueta (char*), y devuelve una dirección de memoria asocidada (long).
+En caso no se encuentre la etiqueta en la tabla, su función debe devolver 0.
+
+Una vez terminado, pueden probar su código:
+
+```shell
+$ gcc -o symtab symtab.c
+$ ./symtab.c check_ej3
+Revisando ejercicio 3...
+Obtenido: 0x40001004, esperado 0x40001004 (+3)
+..........
+Obtenido: 0x80104000, esperado 0x80104000 (+3)
+..........
+Obtenido: 0x800b00d4, esperado 0x800b00d4 (+3)
+..........
+Obtenido: 0x88500000, esperado 0x88500000 (+3)
+..........
+Obtenido: 0x48100000, esperado 0x48100000 (+3)
+..........
+Obtenido: 0x40000100, esperado 0x40000100 (+3)
+..........
+Obtenido: 0x40001010, esperado 0x40001010 (+3)
+..........
+Obtenido: 0x40000004, esperado 0x40000004 (+3)
+..........
+Obtenido: 0x40000000, esperado 0x40000000 (+3)
+..........
+Buscando una label que no existe, devolvio 0 (+8)
+Total: 35/35
+```
+
+Ejercicio 4: Calcular el offset entre dos instrucciones
+
+En clase, en la explicación del proyecto vimos que es útil calcular a cuantas instrucciones de la instrucción que estamos codificando
+se encuentra una etiqueta. Para esto, ustedes van a implementar la función get_offset(). Esta función recibe como parametros una dirección
+de memoria (long), que prepresenta la instrucción actual que estamos codificando, y una etiqueta (char*), que representa la etiqueta a la
+que queremos saltar. Su función debe ser capaz de calcular y devolver a cuantas instrucciones arriba o abajo se encuentra la etiqueta de
+la dirección actual. Recuerden la ecuación para la distancia entre instrucciones <b>(Dir_final - Dir_inicial)/4</b>.
+
+Una vez terminado, pueden verificar su implementación corriendo el siguiente comando:
+
+```shell
+$ gcc -o symtab symtab.c
+$ ./symtab.c check_ej4
+Revisando ejercicio 4...
+Respuesta esperada: 3, Respuesta obtenida: 3 (+10)
+..........
+Respuesta esperada: -365, Respuesta obtenida: -365 (+10)
+..........
+Respuesta esperada: 0, Respuesta obtenida: 0 (+5)
+..........
+Total: 25/25
+```
+
+O bien
+
+```shell
+$ ./symtab.c check_all
+Revisando ejercicio 1... (+15)
+Revisando Ejercicio 2... (+25)
+Revisando Ejercicio 3... (+35)
+Revisando Ejercicio 4... (+25)
+Total: 100/100
+```
+
+Y listo! pueden compilar su tabla de símbolos junto con su ensamblador y utilizarla para las instrucciones B.cond. Algo a tomar en cuenta, <b>si
+no suben el link con su repositorio al GES, tendrán 0 en el laboratorio</b>.
