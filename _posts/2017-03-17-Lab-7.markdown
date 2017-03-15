@@ -104,6 +104,8 @@ main debe ser igual a main
 Total: 25/25
 ```
 
+***
+
 #### Ejercicio 3: Buscar en la tabla de símbolos
 
 Otra cosa necesaria para la tabla de símbolos es la capacidad de buscar una dirección dada una etiqueta. En <b>symtab.c</b>,
@@ -138,7 +140,9 @@ Buscando una label que no existe, devolvio 0 (+8)
 Total: 35/35
 ```
 
-Ejercicio 4: Calcular el offset entre dos instrucciones
+***
+
+#### Ejercicio 4: Calcular el offset entre dos instrucciones
 
 En clase, en la explicación del proyecto vimos que es útil calcular a cuantas instrucciones de la instrucción que estamos codificando
 se encuentra una etiqueta. Para esto, ustedes van a implementar la función get_offset(). Esta función recibe como parametros una dirección
