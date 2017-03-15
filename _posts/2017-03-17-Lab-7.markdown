@@ -78,7 +78,7 @@ dos métodos para evitar el problema de memory leak.
 
 Algo vital para su tabla de símbolos, es la capacidad de insertar tuplas de la forma (etiqueta,dirección) en la última posición. Para
 este ejercicio deben implementar la función add(char *string, long dir), en la que guardaran en la posición siguiente (label_count),
-la etiqueta y la dirección de memoria asociada a ella. <b>Hint:</b>es peligroso usar <b>=</b> para su implementación.
+la etiqueta y la dirección de memoria asociada a ella. <b>Hint: </b>es peligroso usar <b>=</b> para su implementación.
 
 Para probar su implementación  pueden ejecutar el siguiente código:
 
