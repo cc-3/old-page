@@ -721,7 +721,7 @@ De cualquier forma, prosigamos con el formato de las instrucciónes codificadas.
 		<td>B.GE my_label</td><td>0</td><td>0</td><td>1010</td>
 	</tr>
 	<tr>
-		<td>B.TL my_label</td><td>0</td><td>0</td><td>1011</td>
+		<td>B.LT my_label</td><td>0</td><td>0</td><td>1011</td>
 	</tr>
 	<tr>
 		<td>B.GT my_label</td><td>0</td><td>0</td><td>1100</td>
