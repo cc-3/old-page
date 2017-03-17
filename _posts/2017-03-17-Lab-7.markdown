@@ -63,7 +63,7 @@ Una vez terminado, pueden probar su código de la siguiente forma:
 
 ```shell
 $ gcc -o symtab symtab.c
-$ ./symtab.c check_ej1
+$ ./symtab check_ej1
 Revisando ejercicio 1...
 No segmentation fault... Todo Bien...!
 Total: 15/15
@@ -84,7 +84,7 @@ Para probar su implementación  pueden ejecutar el siguiente código:
 
 ```shell
 $ gcc -o symtab symtab.c
-$ ./symtab.c check_ej2
+$ ./symtab check_ej2
 Revisando ejercicio 2...
 loopcito_ debe ser igual a loopcito_
 0x0000000002200423 debe ser igual a 0x0000000002200423 (+5)
@@ -116,7 +116,7 @@ Una vez terminado, pueden probar su código:
 
 ```shell
 $ gcc -o symtab symtab.c
-$ ./symtab.c check_ej3
+$ ./symtab check_ej3
 Revisando ejercicio 3...
 Obtenido: 0x40001004, esperado 0x40001004 (+3)
 ..........
@@ -154,7 +154,7 @@ Una vez terminado, pueden verificar su implementación corriendo el siguiente co
 
 ```shell
 $ gcc -o symtab symtab.c
-$ ./symtab.c check_ej4
+$ ./symtab check_ej4
 Revisando ejercicio 4...
 Respuesta esperada: 3, Respuesta obtenida: 3 (+10)
 ..........
