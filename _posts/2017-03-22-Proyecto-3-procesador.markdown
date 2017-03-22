@@ -5,7 +5,8 @@ date:   2017-03-01
 category: proyecto
 description: >
     El objetivo de este proyecto es que ustedes logren implementar una versión funcional de un procesador ARMv8, con un subset de
-    instrucciones reducido, y vean realmente como una computadora interpreta las instrucciones para realizar alguna tarea. 
+    instrucciones reducido. Tambien queremos que entiendan realmente como una computadora interpreta estas instrucciones 
+    para realizar alguna tarea. 
 permalink: /:categories/:title.html
 ---
 
@@ -24,30 +25,30 @@ Su procesador debe ser capaz de ejecutar estas instrucciones como lo haría un p
 Deben asignarse un grupo en GitHub classroom dando click an este 
 <a href="https://classroom.github.com/group-assignment-invitations/6d48153b311e637dd3b352885db65dc1">link</a>, 
 y tomando en cuenta lo siguiente: <b>Deben mandar un correo con los integrantes de su grupo a efrainh12@galileo.edu antes 
-del fin de semana previo a la fecha de entrega, de lo contrario su proyecto estará calificado sobre 50 puntos.</b>.
+del fin de semana previo a la fecha de entrega, de lo contrario su proyecto estará calificado sobre 50 puntos.</b>
 
 ### Qué deben implementar:
 
 Su procesador debe estar dividido en diferentes módulos, o unidades. Cada una de ellas se encargara de una tarea. 
 Estas son las unidades que deben implementar:
 
-1. Memory Manager: Contendrá la memoria RAM para lectura/escritura de instrucciones y datos. Para facilitar la implementación,
+1. <b>Memory Manager</b>: Contendrá la memoria RAM para lectura/escritura de instrucciones y datos. Para facilitar la implementación,
    ustedes podrán tener dos memorias (una de datos y una de instrucciones), y dejaremos como puntos extra el implementar el
    procesador utilizando únicamente una memoria RAM.
 
-2. Register File: Todos los registros entre los cuales se realizaran las operaciones. (X0 ~ X30, SP, y las banderas Z,N,C,O irán
+2. <b>Register File</b>: Todos los registros entre los cuales se realizaran las operaciones. (X0 ~ X30, SP, y las banderas Z,N,C,O irán
    Aquí también).
 
-3. Program Counter: Se encargará de llevar un conteo de la siguientes instrucción que toca ejecutar.
+3. <b>Program Counter</b>: Se encargará de llevar un conteo de la siguientes instrucción que toca ejecutar.
 
-4. ALU (Unidad Arimetico Logica): encargada de todos los procesos de este tipo.
+4. <b>ALU (Unidad Arimetico Logica)</b>: encargada de todos los procesos de este tipo.
     
-5. Instruction Fetcher/Decoder: para decodificar el tipo de instrucción que deben ejecutar (Tipo R, Tipo B o Tipo I, Tipo M).
+5. <b>Instruction Fetcher/Decoder</b>: para decodificar el tipo de instrucción que deben ejecutar (Tipo R, Tipo B o Tipo I, Tipo M).
    Esta es probablemente la parte más importante y difícil de implementar, porque se encarga de controlar todos los demás bloques
    de su procesador.
     
-6. Jump Controller: Este moduló debe controlar cuando un programa salta a otra instrucción y cuando no, y debe decir a donde tiene
-   que saltar.
+6. <b>Jump Controller</b>: Este moduló debe controlar cuando un programa salta a otra instrucción y cuando no, y debe 
+decir a donde tiene que saltar.
 
 ### Toys:
 
@@ -169,9 +170,10 @@ consúltenlo antes con nosotros para asegurar que lo que quieren hacer es merece
 4. Agregar teclado y leer los datos de alguna manera
 5. Cargar el valor 0xFFFFFFFF al SP automáticamente en el primer ciclo del reloj (cuando lo estén implementado entenderán esto).
 6. Agregar pipeline
+7. Implementar RET Xd (que es la verdadera codificacion del RET)
 
-Algo muy importante; A pesar de que algunas de estas cosas se vean sencillas de hacer, no lo son del todo. Les sugerimos que antes
-de pensar en puntos extra, terminen lo requerido del proyecto. 
+Algo muy importante; A pesar de que algunas de estas cosas se vean sencillas de hacer, con excepción de la ultima, la mayoria no 
+lo son del todo. Les sugerimos que antes de pensar en puntos extra, terminen lo requerido del proyecto. 
 
 ### Set de Instrucciones:
 
