@@ -1,0 +1,95 @@
+---
+layout: post
+title:  "Laboratorio 8"
+date:   2017-03-22
+category: lab
+description: >
+    En este laboratorio ustedes van a trabajar en logisim y harán cosas que utilizarán en su proyecto 3 (PROCESADOR ARM)
+---
+
+#### Setup
+
+Como siempre, hagan click en este [link](https://classroom.github.com/assignment-invitations/ac84a88b6d420ea46c9ccb9e19c23f7c) para poder clonar los archivos necesarios para su laboratorio. Recuerden que tienen que subir este link de una vez a su GES, **si ustedes no suben el link del laboratorio van a tener un 0 como nota, sin posibilidad de cambiar ese resultado.**
+
+***
+
+#### Un poco de información de Logisim
+
+Logisim la verdad es bien intuitivo, pero igual siempre es bueno dar un poco de información de como es que funciona esto realmente y que mejor forma de hacerlo que con un ejemplo, así que comencemos creando un circuito lógico bastante básico solo para sentir que estamos poniendo compuertas y cables :joy:.
+
+* ![and](/assets/img/labs/miniand.gif) Comiencen haciendo click en el botón "AND gate". Esto va a causar que la sombra del AND gate siga al cursor por todas partes. Hagan una vez click en la ventana del main schematic para poner el AND gate.
+* ![input](/assets/img/labs/inputmini.gif) Hagan click al botón "Input Pin". Ahora, posicionen dos "inputs pins" en algún lugar a la izquierda del AND gate.
+* ![output](/assets/img/labs/outputmini.gif) Hagan click al boton "Output Pin". Después posicionen el pin en algún lugar a la derecha del AND gate. Su main schematic debería verse algo parecido a esto:
+
+![schematic1](/assets/img/labs/schematic1.gif)
+
+* ![selection](/assets/img/labs/selectionmini.gif) Hagan click al botón “Select tool”. Hagan click y arrastren para conectar los input pins de la izquierda del AND gate al AND gate. Despues la salida del AND conectenla al output pin. Deberia de verse algo como esto:
+
+![schematic2](/assets/img/labs/schematic2.gif)
+
+* ![poke](/assets/img/labs/pokemini.gif) Finalmente, hagan click a la herramienta “Poke” y traten de hacer click a los input pins en su main schematic. Observen que pasa.
+
+Ya con esto son expertos en logisim :+1: así que es hora de empezar hacer cosas más interesantes (por no decir más dificiles, aunque ningún lab ha sido difícil no ? jaja).
+
+***
+
+#### Ejercicio 1: ALU (Unidad Aritmético-Lógica)
+
+Para este ejercicio ustedes van a hacer una parte de su unidad aritmético-lógica, solo que en esta ocasión no vamos a realizar todas las operaciones ya que nos llevaría mucho tiempo, para ser exactos serán 4 y es lo necesario de conocimiento para poder terminarla por completo, estas son las operaciones:
+
+0. **AND**
+1. **OR**
+2. **SUMA**
+3. **Multiplicación**
+
+Como vamos hacer un procesador de 64 bits cada operación de las anteriores recibe 2 entradas de 64 bits y dependiendo de que operación está seleccionada hay 1 salida también de 64 bits. **Noten** que el límite que permite logisim es de 32 bits para cada componente, entonces lo que tienen que hacer es la union de 2 entradas de 32 bits para cada entrada de 64 bits y 2 salidas de 32 bits para la salida de 64 bits y lo mismo para cada operación, entonces ustedes tienen que ver como van a pegar 2 operaciones de 32 bits para producir el resultado correcto. También noten que con esta forma de trabajo podemos tener la parte alta y la parte baja y esto es una gran ventaja en algunos casos, la desventaja es que no se mira bonito pero ya saben **_ain't no free lunch_**.
+
+Como ejemplo vamos a suponer que lo maximo que nos permite logisim es 2 bits y que el procesador que vamos hacer es de 4 bits entonces si quisieramos crear la operación de **AND** hariamos lo siguiente:
+
+![and4bits](/assets/img/labs/lab8_and4bits.png)
+
+Vean que para una entrada de 4 bits se tuvieron que unir dos entradas de 2 bits y en este caso hay 2 entradas de 4 bits (4 entradas de 2 bits) a los cuales llame A_H (A High), A_L (A Low), B_H (B High), B_L (B Low), para denotar lo de parte alta y baja, lo que se tiene que hacer es el and entre la partes bajas y las altas y con esto tendriamos un output de la parte alta y de la baja las cuales son las salidas directas que tenemos que unir para formar una de 4 bits que sería el resultado final.
+
+Ahora para seleccionar que operación es la que va estar en la salida lo que tienen que utilizar es multiplexores, estos los tuvieron que haber conocido en la hoja de trabajo y durante clase, como son 4 operaciones para bits de selección solo necesitariamos 2 bits. Aqui nuevamente tienen que pegar 2 multiplixeros de 32 bits para la parte alta y baja. Para que tengan un ejemplo continuaremos con la suposición de que logisim solo nos permite como máximo 2 bits pero queremos un procesador de 4 bits, con solo 2 operaciones 1 que saque siempre 0 (a ground siempre) y la otra que haga el AND anterior entonces tendríamos algo así:
+
+![and4bits](/assets/img/labs/lab8_multiplexor.png)
+
+Cuando el bit de selección es 0 siempre sacaría 0 y cuando es 1 sacaría el resultado de la operacion "AND".
+
+Durante el laboratorio veremos como podemos crear subcircuits y esto es útil para crear un empaquetado que contendra nuestro circuito lógico y que podemos usar en todas partes y al final tener algo asi como lo siguiente:
+
+![and4bits](/assets/img/labs/lab8_ALU.png)
+
+Este ALU es completo así que ustedes no tendran todas las entradas que tiene, y tambien es de 32 bits porque es un ALU para un procesador **MIPS32** completo.
+
+Cuando crean que tengan el ALU completo pueden subir su **lab8.circ** a github por medio de un commit.
+
+***
+
+#### Ejercicio 2: Register File
+
+Para este ejercicio ustedes tienen que hacer el register file de 32 registros de 64 bits, tomando en cuenta que uno de ellos está alambrado directamente a tierra (GND). En este caso también usaremos lo de unir 2 registros de 32 bits para conformar uno de 64 bits y otra vez lo vamos a interpretar como una parte alta y parte baja.
+
+Para este ejercicio tienen que tener claro el concepto de un demultiplexor y una forma de saber que es así facilmente: un multiplexor es muchos a 1, y un demultiplexor es lo contrario 1 a muchos, para que es necesario esto ? porque realmente cuando queramos guardar algo en algun registro, lo que queremos guardar va estar llegando a todas las entradas de los demás registros pero solo cambiará el registro que tiene que cambiar si y solo si esté tiene el "enable" en 1, entonces necesitariamos un demultiplexor que tenga 1 siempre y que dependiendo la seleccion ese 1 active el registro en específico que queremos cambiar.
+
+Cuando tengan el REGFile completo se tiene que ver algo así:
+
+![and4bits](/assets/img/labs/lab8_regfile1.png)
+
+En esta imagen se ve una parte del RegFile de **MIPS32** noten que hay dos salidas, que van acompañadas de un multiplexor.
+
+![and4bits](/assets/img/labs/lab8_regfile2.png)
+
+En esta imagen se puede ver que hay un demultiplexor que es lo que controla que registro es el que acepta lo que esta en la entrada de escribir.
+
+En el laboratorio se explicará de manera más detalla cual es la función de cada una de estas partes.
+
+Si creen que ya tienen su RegFile completo, pueden subir su **lab8.circ** a github nuevamente.
+
+***
+
+### Ejercicio 3: Union ALU y RegFile
+
+Para esta última parte del laboratorio ustedes tienen que unir su Register File con el ALU, para esto tienen que conectar la salida del ALU a la entrada del Register File de escritura, y las salidas del register file, a las entradas del ALU. Algo que también vamos hacer en este ejercicio es extender nuestro ALU para valores immediate, operar cargando un immediate, para esto necesitarian un multiplexor con 1 bit de selección que escoja si en la entrada B de su ALU pasa el valor de un registro del RegFile o un valor immediate que simplemente es un input de 12 bits con sign-extend a 64 bits.
+
+Cuando crean que tienen todo listo funcionando pueden subirlo a GitHub
