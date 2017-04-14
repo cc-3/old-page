@@ -453,7 +453,7 @@ Con <b>la misma codificacion del proyecto anterior</b>, excepto por LDRB y STRB 
 		<td colspan="5">28-24</td>
 		<td colspan="2">23-22</td>
 		<td colspan="1">21</td>
-		<td colspan="5">22-16</td>
+		<td colspan="5">20-16</td>
 		<td colspan="6">15-10</td>
 		<td colspan="5">9-5</td>
 		<td colspan="5">4-0</td>
