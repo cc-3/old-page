@@ -16,11 +16,79 @@ Esperamos que haciendo este proyecto ustedes adquieran una habilidad de programa
 
 #### Comenzando
 
-Creen su repositorio de GitHub utilizando el siguiente link de **GitHub ClassRoom**: [link](#) con esto obtendran los archivos necesarios para realizar el proyecto.
+Creen su repositorio de GitHub utilizando el siguiente link de **GitHub ClassRoom**: [link](https://classroom.github.com/group-assignment-invitations/8c9be748835d3e24e225a99c9af48148) con esto primero crearan su grupo de trabajo y segundo obtendran los archivos necesarios para hacer el proyecto.
+
+#### GRUPOS
+
+Por favor tienen que llenar este [Sheet](https://docs.google.com/spreadsheets/d/1x9nlE58BtS659zv3Xj_jAL30JtowkTdbsJI62kH8WOU/edit?usp=sharing) de google docs donde indiquen los integrantes del grupo (Nombre y Carnet), Seccion, y Nombre del grupo de GitHub es necesario que hagan esto para que la calificación sea más fácil y rápida. Recuerden que si no se anotan en este Sheet tienen 0 automaticamente.
+
+#### Documentacion y Guia de Programación
 
 Si no están familiarizados con Spark, pueden leer esta [guía de programación](http://spark.apache.org/docs/latest/programming-guide.html), especialmente tienen que ponerle atención a la sección que habla de los Resilient Distributed Datasets (RDDs) y las operaciones que se pueden hacer sobre un RDD.
 
 Nota: cuando vean la guia de programación recuerden siempre ponerse en la pestaña que dice "Python"
+
+La documentación de **Spark** es la siguiente: [Docs](http://spark.apache.org/docs/latest/)
+
+#### Instalando Spark y Anaconda
+
+Como tenemos que usar diferentes herramientas (librearias de Python) vamos a utilizar **Anaconda Python**. Anaconda instala todas las librerias necesarias de Python para este proyecto asi como el interprete más reciente de Python 2.7. Para instalar Anaconda solo tienen que hacer lo siguiente en una terminal
+
+```shell
+$ wget https://repo.continuum.io/archive/Anaconda2-4.3.1-Linux-x86_64.sh
+$ bash Anaconda2-4.3.1-Linux-x86_64.sh
+```
+
+Cuando empiece el instalador ustedes le dan "yes" a todo y por ultimo tienen que hacer un source al .bashrc
+
+
+```shell
+$ source ~/.bashrc
+```
+
+Ya que tienen anaconda pueden probar lo siguiente y les deberia de dar el mismo resultado o parecido
+
+```shell
+$ python
+Python 2.7.13 |Anaconda 4.3.1 (64-bit)| (default, Dec 20 2016, 23:09:15)
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-1)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+Anaconda is brought to you by Continuum Analytics.
+Please check out: http://continuum.io/thanks and https://anaconda.org
+>>>
+```
+ya teniendo eso lo que tienen que hacer es instalar todas las librearias utilizando anaconda
+
+```shell
+$ conda install pip
+$ pip install pillow
+$ conda install -c menpo opencv3=3.1.0
+$ conda install -c menpo ffmpeg=3.1.3
+$ pip install -i https://pypi.anaconda.org/pypi/simple moviepy
+```
+
+Con esto ya tienen todo lo necesario de python ahora toca instalar Spark si es que no lo tienen aun en sus computadoras para eso tienen que hacer lo siguiente:
+
+```shell
+# descargamos spark
+$ wget http://d3kbcqa49mib13.cloudfront.net/spark-2.1.0-bin-hadoop2.7.tgz
+# hay que descomprimir el archivo
+$ tar -xzvf spark-2.1.0-bin-hadoop2.7.tgz
+# movemos la carpeta a home y le cambiamos de nombre a "spark"
+$ mv spark-2.1.0-bin-hadoop2.7 ~/spark
+# editamos el PATH en .bashrc
+$ echo export\ PATH=~/spark/bin:\$PATH >> ~/.bashrc
+# hacemos source al .bashrc
+$ source ~/.bashrc
+# listo ya tienen spark en sus computadoras con Ubuntu, para probar que funciona
+$ spark-submit
+```
+Con esto si les salio todo bien ya tendrían todo lo necesario para trabajar en el proyecto
+
+
+<img src="/assets/img/proj/python_terminal.png" style="display: block;margin: 0 auto;">
+
+<img src="/assets/img/proj/spark_submit.png" style="display: block;margin: 0 auto;">
 
 #### Background
 
@@ -28,7 +96,17 @@ Siempre han habido una gran gama de métodos de compresión de videos y esto se 
 
 #### Compresión utilizando DCT
 
-DCT ([Discrete Cosine Transformation](https://en.wikipedia.org/wiki/JPEG#Discrete_cosine_transform)) es una transformación usada en las imágenes que tienen formato JPEG y es comúnmente utilizada para diferenciar puntos de datos en términos de diferentes frecuencias, siendo así facil de descartar aquellos (puntos) que tienen una frecuencia muy alta y de esta manera podemos bajar la cantidad de espacio necesario para guardar la imagen. La idea detrás de esto es que los componentes que tienen una frecuencia muy alta en las imagenes no son reconocibles por el ojo humano debido a que se tiene una disminución de la sensibilidad en la percepción de dichas frecuencias (e.g ustedes pueden identificar una sombra de rojo como rojo, pero probablemente no tan facilmente puedan identificar el color ["American Rose"](https://en.wikipedia.org/wiki/Category:Shades_of_red) como algo distinto de rojo). Entonces, estos componentes que tienen una frecuencia alta, pueden ser descartados, y de hecho se descartan frecuentemente en la fase de post-edición, para guardar la imagen con una pequeña perdida en la calidad.
+DCT ([Discrete Cosine Transformation](https://en.wikipedia.org/wiki/JPEG#Discrete_cosine_transform)) es una transformación usada en las imágenes que tienen formato JPEG y es comúnmente utilizada para diferenciar puntos de datos en términos de diferentes frecuencias, siendo así facil de descartar aquellos (puntos) que tienen una frecuencia muy alta y de esta manera podemos bajar la cantidad de espacio necesario para guardar la imagen. La idea detrás de esto es que los componentes que tienen una frecuencia muy alta en las imagenes no son reconocibles por el ojo humano debido a que se tiene una disminución de la sensibilidad en la percepción de dichas frecuencias (e.g ustedes pueden identificar una sombra de rojo como rojo, pero probablemente no tan facilmente puedan identificar el color ["American Rose"](https://en.wikipedia.org/wiki/Category:Shades_of_red) como algo distinto de rojo). Entonces, estos componentes que tienen una frecuencia alta, pueden ser descartados, y de hecho se descartan frecuentemente en la fase de post-edición, para guardar la imagen con una pequeña perdida en la calidad. Veamos un ejemplo de una imagen no comprimida y otra si:
+
+##### Imagen No Comprimida
+
+<img src="/assets/img/proj/test1.jpg" style="display: block;margin: 0 auto;">
+
+##### Imagen Comprimida
+
+<img src="/assets/img/proj/naive_QF33_test1.jpg" style="display: block;margin: 0 auto;">
+
+Seguramente para ustedes NO hay diferencia !!!! y está comprimida en un 22% del tamaño original, para hacer imagenes JPEG (que ya estan comprimidas) no está nada mal...
 
 #### Compresión de Videos
 
@@ -149,11 +227,93 @@ image_copy[:,:,2] = Cb
 
 #### Notas Importantes
 
-* Solo vamos a aceptar que modifiquen el archivo spark_image_compressor.py. Ningún cambio se deberia de hacer a otro archivo de python del proyecto. No seguir esta instrucción es automaticamente un 0 como nota. No se van a aceptar excusas.
+* Solo vamos a aceptar que modifiquen el archivo **spark_image_compressor.py**. Ningún cambio se deberia de hacer a otro archivo de python del proyecto. No seguir esta instrucción es automaticamente un 0 como nota. No se van a aceptar excusas.
 * Si suben su proyecto utilizando **naive_compress** es decir, de forma serial y no con MapReduce, van a tener 0 como nota.
-* Solo como referencia, la solución es de aproximadamente 90 lineas de codigo. Utilizando cosas que estan en **constants.py** y **helper_functions.py** puede disminuir la cantidad de codigo que van a escribir.
+* Solo como referencia, la solución es de aproximadamente 90 lineas de codigo. Utilizando cosas que estan en **helper_functions.py** puede disminuir la cantidad de codigo que van a escribir.
+
+#### Pruebas y Check
+
+Para probar su algoritmo pueden hacerlo de 3 formas
+
+##### Utilizando Check
+
+```shell
+# ustedes deberian de cambiar threads al numero del threads que tiene su procesador
+$ spark-submit check.py --threads 8
+```
+
+lo que hace es correr su algoritmo con 100 imagenes random y guardar el resultado en un archivo de texto y compararlo con una referencia que nosotros les damos que esta en la carpeta **ref-out**, no crean que porque son random siempre van a salir valores diferentes ya que hemos puesto un **seed** de 1 para que todos siempre tengan el mismo resultado.
+
+##### Utilizando Image Diff
+
+Primero que nada para hacer esto ustedes lo que tienen que hacer es correr su programa de la siguiente manera:
+
+```shell
+# ustedes pueden cambiar input a otra imagen que este en test
+# QF lo pueden cambiar a valores de 99, 66 y 33
+# threads lo tienen que cambiar al numero de threads de su computadora
+$ spark-submit run_spark_compressor.py --input test/test1.jpg --QF 33 --threads 8
+```
+
+esto les va a generar una imagen (llamada spark_QF33_test1.jpg) en la carpeta de su proyecto y para compararla con su referencia tienen que hacer lo siguiente (en el caso de QF=33)
+
+```shell
+$ python image_diff.py --input1 ref-out/naive_QF33_test1.jpg --input2 spark_QF33_test1.jpg
+Images match
+```
+Si les sale "Images match" entonces está bien su algoritmo
 
 
-#### Test
+##### Utilizando un video
+
+Para esto realmente lo único que tienen que hacer es lo siguiente:
+
+```shell
+$ spark-submit run_spark_compressor.py --input test/video.mp4 --QF 33 --threads 8 --video
+```
+
+Si el video comprimido tiene un menor tamaño entonces están haciendo las cosas bien
+
 
 #### Entrega
+
+**FECHA: 9 Mayo de 2017 11:55 PM**<br>
+
+La entrega será por medio de **GitHub** pero tienen que subir su link de su repositorio al GES recuerden tambien llenar el **Sheet** de google docs y el grupo es de máximo 2 integrantes.
+
+Cualquier duda que tengan por **SLACK** a **andres**
+
+
+***
+
+### Parte 2: Spark y AWS EC2
+
+
+En esta parte del proyecto, vamos a utilizar el poder del Amazon Elastic Cloud EC2, para comprimir de manera más rápida. Vamos a estar utilizando entre 6 maquinas al mismo tiempo, cada una con las siguientes especificaciones:
+
+```shell
+High-CPU Extra Large Instance:
+7 GiB of memory
+20 EC2 Compute Units (8 virtual cores with 2.5 EC2 Compute Units each)
+(according to Amazon, this is approximately equivalent to a machine
+with 20 early-2006 1.7 GHz Intel Xeon Processors)
+1.65 TiB of instance storage
+64-bit platform
+I/O Performance: High
+API name: c1.xlarge
+```
+
+#### Preparando Su Cuenta
+
+
+NOTA: Tienen que tener una cuenta de AWS antes de hacer esta parte.
+Si ya tienen su cuenta de amazon pueden aplicar al AWS educate para que les acreditemos los US $100. Sigan los pasos que estan aqui:
+
+1. Ingresar a: [AWS](https://aws.amazon.com/) y hacer login con su correo de galileo.
+2. Al ingresar con su usuario, ir a "My Account" que se encuentra en la esquina superior derecha donde esta su nombre y anotar su "Account Id"
+3. Ingresar a [AWS Educate](https://www.awseducate.com) y darle "Apply Now" y en la siguiente pagina dar click donde dice "Apply for AWS Educate for Students" algo como la Figura 1 tienen que tener
+4. Si les sale algo que tienen que ingresar en algun lugar: course numbers and names o algo parecido escriban: CCIII
+
+<img src="/assets/img/proj/educate1.png" style="display: block;margin: 0 auto;">
+
+> Pendiente la demás información
