@@ -4,7 +4,7 @@ title:  "Laboratorio 11"
 date:   2017-04-28
 category: lab
 description: >
-    En este laboratorio van a apender paralelismo a nivel de threads utilizando la liberia openMP en C, paralelismo a nivel de instrucciones utilizando las instrucciones intrinsics de Intel, y deberan terminar su laboratorio de la semana pasada si aun no lo han hecho (pero si ya esta, basta con Ctrl+C, Ctrl+B).
+    En este laboratorio van a apender paralelismo a nivel de threads utilizando la liberia OpenMP en C, paralelismo a nivel de Instrucciones utilizando las instrucciones intrinsics de Intel, y deberan terminar su laboratorio de la semana pasada...
 ---
 
 #### Setup
@@ -138,8 +138,11 @@ Primero, traten de arreglar el código sin utilizar el keyword Reduction en Open
 
 Después cuando les funcione, traten de arreglarlo utilizando el keyword Reduction de OpenMP (busquenlo en google para más información). La perfomance es mejor que en el caso de arreglarlo manualmente? Por qué?
 
+***
 
 #### Parte 2: SIMD
+
+***
 
 #### Ejercicio 2.1: Conociendo la documentación
 
@@ -256,6 +259,8 @@ Para compilar su código y correrlo, corran el siguiente comando:
 $ make sum
 $ ./sum
 ```
+
+***
 
 #### Parte 3: N-Puzzle  
 
