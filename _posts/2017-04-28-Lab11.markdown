@@ -1,0 +1,267 @@
+---
+layout: post
+title:  "Laboratorio 11"
+date:   2017-04-28
+category: lab
+description: >
+    En este laboratorio van a apender paralelismo a nivel de <b>threads</b> utilizando la liberia <b>openMP</b> en C, paralelismo a nivel de instrucciones utilizando las instrucciones <b>intrinsics</b> de Intel, y deberan terminar su laboratorio de la semana pasada si aun no lo han hecho (pero si ya esta, basta con Ctrl+C, Ctrl+B).
+
+#### Setup
+
+Como siempre, hagan click en este [link](https://classroom.github.com/assignment-invitations/5b4dafc039636778b995298dc4f23593) para poder clonar los archivos necesarios para su laboratorio. Recuerden que tienen que subir este link de una vez a su GES, **si ustedes no suben el link del laboratorio van a tener un 0 como nota, sin posibilidad de cambiar ese resultado.**
+
+***
+
+#### Parte 1: OpenMP
+
+#### Referencias adicionales
+
+* [Hands On Introduction to OpenMP](http://openmp.org/mp-documents/omp-hands-on-SC08.pdf)
+* [Official OpenMP Tutorial Listing](http://openmp.org/wp/resources/#Tutorials)
+
+***
+
+#### Introducción a OpenMP
+
+**Basics**
+
+En este laboratorio vamos a tomar ventaja de los múltiples cores de las computadoras del laboratorio. OpenMP es un framework de programación paralela para C/C++ y Fortran. En los últimos años a ganado mucha atención, especialmente después de que las computadoras traen multiples cores. Es simple y tiene buena performance. En este lab vamos a ver algunas de sus características, pero los links en las referencias adicionales les dan más información y tutoriales de este framework.
+
+Hay muchos tipos de paralelismo y patrones para explotarlos. OpenMP escoge un modelo “nested fork-join”. Por defecto, un programa en OpenMP es un programa normal secuencial, excepto por las regiones que el programador explícitamente declara para que se ejecuten en paralelo. En la región paralela, el framework crea (forks) un set de threads. Estos threads ejecutan la mismas instrucciones, solo en diferentes porciones de los datos. En el final de la región paralela, el framework espera que todos los threads terminen (join) antes de dejar la región paralela y continuar secuencialmente.
+
+![fig1](/assets/img/labs/forkjoin.jpg)
+
+OpenMP usa “shared memory”, esto significa que todos los threads pueden acceder a la misma dirección de memoria. La alternativa a esto es “distributed memory”, que es preferido en los clusters donde los datos explícitamente son movidos entre direcciones. Muchos programadores encuentran el shared memory más fácil de programar desde que no se tienen que preocupar de mover sus datos, pero es mas difícil de implementar en hardware en una manera escalable. Más adelante en el lab vamos a declarar memoria local al thread (solo la puede acceder el thread que la creo) para propósitos de performance, pero el framework de provee la flexibilidad de que los threads compartan memoria sin ningún esfuerzo del programador.
+
+##### Ejemplo Hello World
+
+Para este lab, vamos a utilizar C para seguir ganando experiencia en este lenguaje. OpenMP es un framework con una interfaz en C, y no es algo que sea parte del lenguaje. La mayoría de las características de OpenMP son directivas que se le pasan al compilador. Consideren la siguiente implementación del Hello World (hello.c):
+
+```c
+int main() {
+    #pragma omp parallel
+    {
+        int thread_ID = omp_get_thread_num();
+        printf(" hello world %d\n", thread_ID);
+    }
+}
+```
+
+Este programa va a tomar el numero de threads por defecto y cada uno de ellos va imprimir “hello world” y también el numero de thread que es. El #pragma le dice al compilador que el resto de lineas es una directiva, y en este caso es omp parallel. Omp declara que es para OpenMP y parallel dice que el siguiente bloque de código (lo que esta dentro de {}) puede ejecutarse en paralelo. Pruebenlo:
+
+```shell
+$ make hello
+$ ./hello
+```
+
+Noten que los números no están numéricamente ordenados y no salen en el mismo orden si corren hello varias veces. Esto es porque con una región paralela (omp parallel), el programador garantiza que las operaciones se pueden hacer en paralelo, y no hay orden entre los threads. Tampoco ganamos nada si la variable thread_ID es local a cada thread. En general con OpenMP, las variables declaradas afuera de un bloque omp parallel tienen una copia y son compartidas a través de todos los threads, mientras que las variables declaradas dentro de un bloque omp parallel tienen una copia privada para cada thread.
+
+***
+
+#### Ejercicio 1.1: Suma de Vectores
+
+La suma de vectores es un código inherentemente paralelo, así que lo hace bueno para el primer ejercicio. La función v_add adentro de v_add.c va a retornar el arreglo que es la suma de 2 vectores x, y casilla por casilla. Un primer intento de esto puede verse así:
+
+```c
+void v_add(double* x, double* y, double* z) {
+    #pragma omp parallel
+    {
+        for(int i=0; i<ARRAY_SIZE; i++)
+            z[i] = x[i] + y[i];
+    }
+}
+```
+
+Para correr:
+
+```shell
+$ make v_add
+$ ./v_add
+```
+
+Noten que el programa automáticamente va a tomar el tiempo y va a variar el numero de threads. Van a ver que lo hace bastante mal a medida de que incrementamos el numero de threads. Este problema es que cada thread esta ejecutando todo el codigo con un bloque omp parallel, significando que si tenemos 8 threads, realmente estamos sumando los vectores 8 veces. Para ganar velocidad cuando aumentamos el numero de threads, necesitamos que cada thread haga menos trabajo y diferente, no la misma cantidad como antes.
+
+![fig2](/assets/img/labs/decomp.jpg)
+
+Su tarea es modificar v_add para que sea mas rapido. La mejor manera de hacer esto, es decrementar la cantidad de trabajo que hace cada thread. Para guiarlos en este proceso, dos funciones útiles en OpenMP son:
+
+```shell
+int omp_get_num_threads();
+int omp_get_thread_num();
+```
+
+la función omp_get_num_threads() va a retornar cuantos threads hay en un bloque omp parallel, y omp_get_thread_num() va a retornar el ID del thread.
+
+Dividan el trabajo en cada thread a través de dos diferentes métodos (escriban diferente código para cada uno de los métodos):
+
+* Primero, que cada thread se ocupe de hacer sumas adyacentes: i.e. el Thread 0 va a sumar los elementos en el index 0, Thread 1 va a sumar los elementos en el index 1, etc. Este metodo no va a ser muy eficiente. Se va encontrar con un problema conocido como “false sharing”.
+* Segundo, si hay N threads, dividan el vector en N pequeños bloques, y hagan que cada thread solo sume ese pequeño bloque como la figura de arriba.
+
+Para este ejercicio, les pedimos que manualmente dividan el trabajo a través de los threads. Sin embargo, los diseñadores de OpenMP hicieron una directiva for para automáticamente dividir el trabajo independientemente. Aquí esta la función reescrita utilizando esto. Ustedes NO van a usar esta directiva en su solución para este ejercicio (Ejercicio 1).
+
+```c
+void v_add(double* x, double* y, double* z) {
+    #pragma omp parallel
+    {
+        #pragma omp for
+        for(int i=0; i<ARRAY_SIZE; i++)
+            z[i] = x[i] + y[i];
+    }
+}
+```
+
+***
+
+#### Ejercicio 1.2: Producto punto
+
+La siguiente interesante operación es el producto punto entre 2 vectores. Implementar esto no es muy diferente de v_add, pero el reto es como sumar todos los productos en la misma variable (reduction). Todos los threads van a tratar de leer y escribir a la misma dirección simultáneamente. Una solución es usar una “critical section”. El código en una “critical section” puede ser ejecutada un thread a la vez en cualquier tiempo. Así, teniendo una “critical section” naturalmente previene que múltiples threads traten de leer y escribir a los mismos datos. Una implementación burda va a proteger la suma con una “critical section”, como (dotp.c):
+
+```c
+double dotp(double* x, double* y) {
+  double global_sum = 0.0;
+  #pragma omp parallel
+  {
+    #pragma omp for
+    for(int i=0; i<ARRAY_SIZE; i++){
+        #pragma omp critical
+        global_sum+= (x[i] * y[i]);
+    }
+  }
+  return global_sum;
+}
+```
+
+Prueben el código (make dotp y ./dotp). Noten como la performance va empeorando cuando el numero de threads aumenta. Poniendo todo el trabajo de la reducción en una critical section, hacemos que todo el trabajo se haga un thread a la vez (que no es la idea del paralelismo). Vean si pueden solucionar este problema.
+
+Primero, traten de arreglar el código sin utilizar el keyword Reduction en OpenMP. Hint: traten de reducir el numero de veces que un thread suma a la variable global_sum.
+
+Después cuando les funcione, traten de arreglarlo utilizando el keyword Reduction de OpenMP (busquenlo en google para más información). La perfomance es mejor que en el caso de arreglarlo manualmente? Por qué?
+
+
+#### Parte 2: SIMD
+
+#### Ejercicio 2.1: Conociendo la documentación
+
+Como hay una gran gama de instrucciones intrínsecas SIMD, queremos que ustedes aprendan como encontrar las que ustedes necesitar para realizar sus cosas.
+
+Esta es una manera de encontrar la información necesaria:
+
+1. Vayan a la pagina de [Intel](https://software.intel.com/sites/landingpage/IntrinsicsGuide/#)
+2. En la parte izquierda van a ver la cantidad de tecnologías diferentes
+3. Pueden buscar filtrando por tecnología y en el buscador de arriba de la página
+
+Hagan su mejor esfuerzo para interpretar la nueva sintaxis y la terminología, hechenle un vistazo, es un ejercicio facil. 
+
+***
+
+#### Ejercicio 2.2: Leyendo código SIMD
+
+En este ejercicio van a considerar loa vectorización de una multiplicación de matrices de 2x2 en precisión double:
+
+![fig1](/assets/img/labs/matmul.png)
+
+Esto lleva a la siguientes operaciones aritméticas:
+
+```shell
+C[0] += A[0]*B[0] + A[2]*B[1];
+C[1] += A[1]*B[0] + A[3]*B[1];
+C[2] += A[0]*B[2] + A[2]*B[3];
+C[3] += A[1]*B[2] + A[3]*B[3];
+```
+
+Les dimos el código sseTest.c que implementa estas operaciones en una manera SIMD.
+Las siguientes instrucciones intrínsecas fueron utilizadas:
+
+|      __m128d _mm_loadu_pd( double *p )     |  returns vector (p[0], p[1])  |
+|      __m128d _mm_load1_pd( double *p )     |  returns vector (p[0], p[0])  |
+| __m128d _mm_add_pd( __m128d a, __m128d b ) | returns vector (a0+b0, a1+b1) |
+| __m128d _mm_mul_pd( __m128d a, __m128d b ) |  returns vector (a0b0, a1b1)  |
+| void _mm_storeu_pd( double *p, __m128d a ) |    stores p[0]=a0, p[1]=a1    |
+
+Lean el código, busquen en <b>google</b> que hace cada instruncción; y solo cuando hayan entendido todo, compilenlo y córranlo:
+
+```shell
+$ make sseTest
+$ ./sseTest
+```
+
+***
+
+#### Ejercicio 2.3: Escribiendo código SIMD
+
+Para el ejercicio 2.3, van a vectorizar el siguiente código para ganar aproximadamente una mejora en velocidad de 4x sobre una implementación no tan buena que se muestra aquí:
+
+```c
+static int sum_naive(int n, int * a) {
+    int sum = 0;
+    for (int i = 0; i < n; i++) {
+        sum += a[i];
+    }
+    return sum;
+}
+```
+
+Van a encontrar las siguientes instrucciones intrínsecas útiles:
+
+|          __m128i _mm_setzero_si128( )          |         returns 128-bit zero vector         |
+|      __m128i _mm_loadu_si128( __m128i *p )     |  returns 128-bit vector stored at pointer p |
+|  __m128i _mm_add_epi32( __m128i a, __m128i b ) | returns vector (a0+b0, a1+b1, a2+b2, a3+b3) |
+| void _mm_storeu_si128( __m128i *p, __m128i a ) |     stores 128-bit vector a at pointer p    |
+
+
+comiencen con sum.c, Utilicen instrucciones SSE intrínsecas para implementar la función sum_vectorized().
+
+Para compilar su código, corran el siguiente comando:
+
+```shell
+$ make sum
+$ ./sum
+```
+
+***
+
+#### Ejercicio 2.4: Loop Unrolling
+
+Ustedes pueden obtener más mejoras en el perfomance! Cuidadosamente haciéndole unroll al código que crearon en el ejercicio anterior. Esto debería de llevarlos por un incremento de un factor de 2 en la perfomance. Como un ejemplo de loop unrolling, consideren la función sum_unrolled() que les damos:
+
+```c
+static int sum_unrolled(int n, int * a) {
+    int sum = 0;
+
+    // unrolled loop
+    for (int i = 0; i < n / 4 * 4; i += 4) {
+        sum += a[i+0];
+        sum += a[i+1];
+        sum += a[i+2];
+        sum += a[i+3];
+    }
+
+    // tail case
+    for (int i = n / 4 * 4; i < n; i++) {
+        sum += a[i];
+    }
+
+     return sum;
+}
+```
+
+Siéntanse libres de verificar el articulo de [Wikipedia](http://en.wikipedia.org/wiki/Loop_unrolling) que habla sobre loop unrolling para más información
+
+En sum.c, copien su código de sum_vectorized() en sum_vectorized_unrolled() y hagan un unroll 4 veces.
+
+Para compilar su código y correrlo, corran el siguiente comando:
+
+```shell
+$ make sum
+$ ./sum
+```
+
+#### Parte 3: N-Puzzle  
+
+Este es un bonus para los que ya terminaron el laboratorio anterior, y un recordatorio para los que no lo hicieron que el proyecto depende altamente de su 
+entendimiento de este ejercicio. Si terminaron el unico ejercicio del laboratorio anterior, solo deben copiarlo y pegarlo en su carpeta, si no lo han terminado,
+terminenlo aqui, y si no lo han empezado, haganlo y entreguenlo en este laboratorio.
+
+#### Entrega
+
+Tienen que hacer commit cuando ya hayan concluido el lab y recuerden siempre subir su laboratorio al **GES** de lo contrario tienen 0 como nota.
