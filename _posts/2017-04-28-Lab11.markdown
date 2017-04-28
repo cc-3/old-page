@@ -4,7 +4,7 @@ title:  "Laboratorio 11"
 date:   2017-04-28
 category: lab
 description: >
-    En este laboratorio van a apender paralelismo a nivel de <b>threads</b> utilizando la liberia <b>openMP</b> en C, paralelismo a nivel de instrucciones utilizando las instrucciones <b>intrinsics</b> de Intel, y deberan terminar su laboratorio de la semana pasada si aun no lo han hecho (pero si ya esta, basta con Ctrl+C, Ctrl+B).
+    En este laboratorio van a apender paralelismo a nivel de threads utilizando la liberia openMP en C, paralelismo a nivel de instrucciones utilizando las instrucciones intrinsics de Intel, y deberan terminar su laboratorio de la semana pasada si aun no lo han hecho (pero si ya esta, basta con Ctrl+C, Ctrl+B).
 
 #### Setup
 
