@@ -124,6 +124,6 @@ Your browser does not support the video tag.
 
 **FECHA: 4 Junio de 2017 11:55 PM**<br>
 
-La entrega será por medio de **GES** (serán los mismos grupos asignados de la vez pasada) Tienen que subir su archivo test_output.zip
+La entrega será por medio de **GES** (serán los mismos grupos asignados de la vez pasada) Tienen que subir su archivo test_output.txt generado y también un screenshot de la consola donde está corriendo EC2 y un screenshot de la pagina de AWS donde efectivamente se vea que están corriendo una instancia en el EC2.
 
 Cualquier duda que tengan por **SLACK**
