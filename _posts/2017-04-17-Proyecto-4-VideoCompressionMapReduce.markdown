@@ -282,38 +282,3 @@ Si el video comprimido tiene un menor tamaño entonces están haciendo las cosas
 La entrega será por medio de **GitHub** pero tienen que subir su link de su repositorio al GES recuerden tambien llenar el **Sheet** de google docs y el grupo es de máximo 2 integrantes.
 
 Cualquier duda que tengan por **SLACK** a **andres**
-
-
-***
-
-### Parte 2: Spark y AWS EC2
-
-
-En esta parte del proyecto, vamos a utilizar el poder del Amazon Elastic Cloud EC2, para comprimir de manera más rápida. Vamos a estar utilizando entre 6 maquinas al mismo tiempo, cada una con las siguientes especificaciones:
-
-```shell
-High-CPU Extra Large Instance:
-7 GiB of memory
-20 EC2 Compute Units (8 virtual cores with 2.5 EC2 Compute Units each)
-(according to Amazon, this is approximately equivalent to a machine
-with 20 early-2006 1.7 GHz Intel Xeon Processors)
-1.65 TiB of instance storage
-64-bit platform
-I/O Performance: High
-API name: c1.xlarge
-```
-
-#### Preparando Su Cuenta
-
-
-NOTA: Tienen que tener una cuenta de AWS antes de hacer esta parte.
-Si ya tienen su cuenta de amazon pueden aplicar al AWS educate para que les acreditemos los US $100. Sigan los pasos que estan aqui:
-
-1. Ingresar a: [AWS](https://aws.amazon.com/) y hacer login con su correo de galileo.
-2. Al ingresar con su usuario, ir a "My Account" que se encuentra en la esquina superior derecha donde esta su nombre y anotar su "Account Id"
-3. Ingresar a [AWS Educate](https://www.awseducate.com) y darle "Apply Now" y en la siguiente pagina dar click donde dice "Apply for AWS Educate for Students" algo como la Figura 1 tienen que tener
-4. Si les sale algo que tienen que ingresar en algun lugar: course numbers and names o algo parecido escriban: CCIII
-
-<img src="/assets/img/proj/educate1.png" style="display: block;margin: 0 auto;">
-
-> Pendiente la demás información
