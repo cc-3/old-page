@@ -1,19 +1,19 @@
 ---
 layout: post
-title:  "Laboratorio 2"
-date:   2017-02-02
+title:  "Laboratorio 1"
+date:   2018-01-26
 category: lab
 description: >
-    Para este laboratorio ustedes aprenderán como compilar y correr un programa en C, también van a realizar cosas que harán en su primer proyecto.
+    Para este laboratorio ustedes aprenderán como compilar y correr un programa en C, y se familiarizarán un poco con la sintaxis del lenguaje.
 ---
 
 #### First thing's first
 
 Para realizar el lab ustedes necesitan los siguientes archivos bases que se van a crear utilizando el siguiente link:
 
-[Link Repositorio](https://classroom.github.com/assignment-invitations/fa886ed6992df050fcbc03980bedc094)
+[Link del Repositorio](https://classroom.github.com/a/84BXaqkn)
 
-Cuando ya tengan esto clonen su repositorio en el lugar donde quieran trabajar
+Cuando ya tengan esto, clonen el repositorio generado en el lugar donde quieran trabajar
 
 #### Compilando y Corriendo un programa en C
 
@@ -30,7 +30,7 @@ $ ./a.out
 HOLA MUNDO !!!
 ```
 
-gcc tiene varias opciones que se le pueden mandar vía command line, las cuales esperamos exploren. En este lab, sin embargo, ustedes van a utilizar únicamente -o, que es usado para especificar el nombre del archivo ejecutable que gcc crea. Usando -o, ustedes van a utilizar los siguientes comandos para compilar program.c en un archivo ejecutable llamado program, y después correrlo.
+gcc tiene varias opciones que se le pueden mandar vía command line, las cuales esperamos ustedes exploren. En este lab, sin embargo, ustedes van a utilizar únicamente -o, que es usado para especificar el nombre del archivo ejecutable que gcc crea. Usando -o, ustedes van a utilizar los siguientes comandos para compilar program.c en un archivo ejecutable llamado program, y después correrlo.
 
 ```shell
 $ gcc -o program program.c
@@ -45,40 +45,6 @@ $ make program
 $ ./program
 HOLA MUNDO !!!
 ```
-
-***
-
-#### Instalando Allegro 5
-
-Para este laboratorio vamos a necesitar instalar Allegro por lo que tenemos que hacer lo siguiente: deben descargar la libreria en el siguiente link: [Allegro 5.2](http://download.gna.org/allegro/allegro/5.2.2/allegro-5.2.2.zip)
-
-Cuando ya hayan descargado el archivo ustedes van a tener una carpeta comprimida en zip que se llama **allegro-5.2.2.zip** la descomprimen y lo siguiente que tienen que hacer es instalar librerias que utiliza Allegro para cargar imágenes, etc.
-
-```shell
-$ sudo apt-get update
-# instala las librerias que necesita allegro
-$ sudo apt-get install -y cmake g++ freeglut3-dev libxcursor-dev libpng12-dev libjpeg-dev libfreetype6-dev libgtk2.0-dev libasound2-dev libpulse-dev libopenal-dev libflac-dev libdumb1-dev libvorbis-dev libphysfs-dev
-```
-
-ya con eso podemos irnos a la carpeta de Allegro que descomprimimos
-
-```shell
-# En mi caso estaba en Downloads
-$ cd ~/Downloads/allegro
-```
-
-y ahora tenemos que hacer lo siguiente para instalar la libreria
-
-```shell
-$ mkdir build
-$ cd build
-$ cmake ..
-# N es la cantidad de threads que tiene su maquina, si es 8 ponen 8
-$ make -jN
-$ sudo make install
-```
-
-La documentación completa de **Allegro** la pueden encontrar [aquí](http://liballeg.org/a5docs/trunk/)
 
 ***
 
@@ -171,9 +137,9 @@ Noten que el programa toma una entrada, que es el numero que va a ser analizado.
 
 #### Ejercicio 4: Abriendo archivos en C
 
-En este ejercicio vamos a iniciar con la primera parte de su proyecto (para los que decidan hacer el editor de texto).
+En este ejercicio vamos a abrir un archivo de texto y leer su contenido (cosa que aprendieron a hacer en Java el semestre pasado).
 
-En su carpeta de trabajo, ustedes tienen el archivo <b>editor.c</b>. Deben implementar el método main(int argc, char* argv[]) , donde <b>argc</b> es la longitud de los parámetros de con los que se
+En su carpeta de trabajo, ustedes tienen el archivo <b>lector.c</b>. Deben implementar el método main(int argc, char* argv[]) , donde <b>argc</b> es la longitud de los parámetros de con los que se
 manda a llamar al método main, y <b>argv</b> es un areglo de <i>char*</i> (el equivalente en C a Strings) que son los parámentros en sí (tomen en cuenta que el primer elemento de argv
 siempre es el nombre del ejecutable).
 
@@ -181,12 +147,12 @@ Su programa debe tener dos modos de ejecución; en el primero debe mandar como p
 Asumiendo que existe en su directorio el archivo <b>hola.txt</b>, su programa se puede ejecutar de las siguientes formas:
 
 ```shell
-$ ./editor hola.txt
+$ ./lector hola.txt
 hola mundo
 ```
 
 ```shell
-$ ./editor
+$ ./lector
 >>Nombre del archivo: hola.txt
 hola mundo
 ```
@@ -196,96 +162,3 @@ para investigar un poco de la función <b>malloc()</b>. Ademas de <b>malloc</b>,
 embargo, para este laboratorio <b>NO PUEDEN USAR realloc()</b>, por lo que deben implementar el método <b>expand(char* string, int currSize, int newSize)</b> que recibe un arreglo de caracteres
 de longitud <i>currSize</i> y la nueva longitud (asumimos que newSize > currSize), y devuelve un arreglo de caracteres de longitud <i>newSize</i> con los datos guardados en el arreglo original.
 Deben liberar la memoria ocupada por el puntero <b>string</b> dentro de este método (probablemente deban leer un poo de la función <b>free()</b> si aun no lo han hecho).
-
-***
-
-#### Ejercicio 5: Juego en C
-
-En este ejercicio solo vamos a hacer que una nave pueda moverse a lo largo de la pantalla sin ninguna verificación. Les proporcionamos el codigo base que define una serie de funciones que van a modificar. Las unicas partes que tienen que cambiar son las que tienen un comentario `su codigo aqui`.
-
-Como seguramente son nuevos en **allegro** sería de mucha ayuda que se revisen estos tutoriales en el siguiente  [link](https://wiki.allegro.cc/index.php?title=Allegro_5_API_Tutorials).
-
-
-![juego en c](/assets/img/labs/juegoc.png)
-
-
-Aqui tienen que tener ya bien el manejo de punteros y estructuras en C ya que vamos a utilizarlas.
-
-Las funciones que modificarán son las siguientes:
-
-```c
-void moverArriba(jugador_t * jugador) {
-    // su codigo aqui
-}
-
-void moverAbajo(jugador_t * jugador) {
-    // su codigo aqui
-}
-
-void moverDerecha(jugador_t * jugador) {
-    // su codigo aqui
-}
-
-void moverIzquierda(jugador_t * jugador) {
-    // su codigo aqui
-}
-```
-
-y tambien esta parte dentro del main
-
-```c
-if(ev.type == ALLEGRO_EVENT_KEY_UP) {
-    switch(ev.keyboard.keycode) {
-        case ALLEGRO_KEY_ESCAPE:
-            // su codigo aqui
-        break;
-        case ALLEGRO_KEY_UP:
-            // su codigo aqui
-        break;
-        case ALLEGRO_KEY_DOWN:
-            // su codigo aqui
-        break;
-        case ALLEGRO_KEY_LEFT:
-            // su codigo aqui
-        break;
-        case ALLEGRO_KEY_RIGHT:
-            // su codigo aqui
-        break;
-    }
-} else if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
-    switch(ev.keyboard.keycode) {
-        case ALLEGRO_KEY_UP:
-            // su codigo aqui
-        break;
-        case ALLEGRO_KEY_DOWN:
-            // su codigo aqui
-        break;
-        case ALLEGRO_KEY_LEFT:
-            // su codigo aqui
-        break;
-        case ALLEGRO_KEY_RIGHT:
-            // su codigo aqui
-        break;
-    }
-} else if(ev.type == ALLEGRO_EVENT_TIMER) {
-    if(teclas[UP])
-        // su codigo aqui
-    else if(teclas[DOWN])
-        // su codigo aqui
-    else if(teclas[LEFT])
-        // su codigo aqui
-    else if(teclas[RIGHT])
-        // su codigo aqui
-}
-```
-
-Para entender todo lo que esta arriba primero tienen que ver los tutoriales y luego ya podrían empezar a codear.
-
-Ustedes tienen que modificar el arreglo **teclas** cuando estan presionando una tecla (key down) y cuando la sueltan (key up), y tienen que realizar una accion cuando se activa el **timer** (event timer).
-
-Para compilar y probar su codigo:
-
-```shell
-$ make juego
-$ ./juego
-```
