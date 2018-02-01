@@ -7,6 +7,14 @@ description: >
     El objetivo de este lab es que aprendan a utilizar un debugger como lo es gdb y cgdb. Arreglar unos bugs en C con la ayuda de ese debugger y comprender que es útil este tipo de herramientas en un entorno de trabajo.
 ---
 
+#### First thing's first
+
+Para realizar el lab ustedes necesitan los siguientes archivos bases que se van a crear utilizando el siguiente link:
+
+[Link del Repositorio](https://classroom.github.com/a/VPbIGd0I)
+
+Cuando ya tengan esto, clonen el repositorio generado en el lugar donde quieran trabajar
+
 #### Ejercicio 1: Debugger
 
 Para este ejercicio, ustedes van a encontrar útil usar el [GDB reference card](http://users.ece.utexas.edu/~adnan/gdb-refcard.pdf). Compilen hello.c con la bandera “-g”:
