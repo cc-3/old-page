@@ -10,11 +10,9 @@ permalink: /:categories/:title.html
 
 ### Propósito:
 
-En este proyecto ustedes deben de crear un emulador el cual pueda ejecutar un subconjunto de instruccioens de RISC-V.
+En este proyecto ustedes deben de crear un emulador el cual pueda ejecutar un subconjunto de instruccioens de RISC-V. Ustedes se van a encargar de hacer un programa que decodifique y ejecute varias instrucciones de RISC-V. Considérenlo como una versión miniatura de [VENUS](http://www.kvakil.me/venus/)
 
-En este primer proyecto ustedes se van a encargar de hacer un programa que decodifique y ejecute varias instrucciones de RISC-V. Considérenlo como una versión miniatura de [VENUS](http://www.kvakil.me/venus/)
-
-Para completar este proyecto , ustedes van a encontrar útil usar el [RISC-V green card](http://inst.eecs.berkeley.edu/~cs61c/fa17/img/riscvcard.pdf)
+Para completar este proyecto , ustedes van a encontrar útil usar el [RISC-V green card](https://www.cl.cam.ac.uk/teaching/1617/ECAD+Arch/files/docs/RISCVGreenCardv8-20151013.pdf)
 ***
 
 ### Getting Started
@@ -29,7 +27,7 @@ Los archivos que ustedes necesitan modificar y enviar son:
 * *utils.c*: Este archivo puede contener varias funcioens de ayuda para la parte 1.
 * *part2.c*: Este es el archivo que necesita para modificar la parte 2.
 
-**Si ustedes agregan funciones de ayuda, por favor colocarlas en los archivos C correspondientes. Si ustedes no siguen estas recomendaciones, es posible que su código no compile y no obtenga una nota.**	
+**Si ustedes agregan funciones extras, por favor colocarlas en los archivos C correspondientes. Si ustedes no siguen estas recomendaciones, es posible que su código no compile y no obtenga una nota.**	
 
 Usted deberia consultar los siguientes archivos muy detenidamente.
 * *type.h*: Archivo C header para los tipos de datos que usted va a utilizar.
@@ -38,18 +36,18 @@ Usted deberia consultar los siguientes archivos muy detenidamente.
 * *utils.h*: Este archivo contiene el formato de las instrucciones a ser utilizadas para la parte 1.
 
 Estos son unos archivos que no es necesario que los revisen:
- * *riscv.h*: Archivo C header 
- * *riscv.c*: Archivo 
+ * *riscv.h* 
+ * *riscv.c*
 
 **Su código va a ser probado en las computadoras del laboratorio, asegúrese de probarlo en estas computadoras antes de enviarlo así esta completamente seguro de su funcionamiento.**
     
 ### El emulador de RISC-V
 
 
-Los archivos proporcionados en el kit de inicio comprenden un marco para un emulador RISC-V. Primero ustedes deberán agregar código en _part1.c_ y _utils.c_ para imprimir las instrucciones en ensamblador correspondientes al código de máquina (binario). Una vez realizaron esto, ustedes completaran el programa agregando código en el archivo _parte2.c_ para ejecutar cada instrucción (incluyendo los accesos a la memoria). Su simulador debe ser capaz de entender cada una de las instrucciones siguientes ya codificadas en código de maquina (binario), Nosotros ya les damos un marco de los tipos de instrucciones que deben ser capaz de manejar en su emulador.
+Los archivos proporcionados en el kit de inicio son la base para un emulador RISC-V. Primero ustedes deberán agregar código en _part1.c_ y _utils.c_ para imprimir las instrucciones en ensamblador correspondientes al código de máquina (binario). Una vez realizaron esto, ustedes completaran el programa agregando código en el archivo _parte2.c_ para ejecutar cada instrucción (incluyendo los accesos a la memoria). Su simulador debe ser capaz de entender cada una de las instrucciones siguientes ya codificadas en código de maquina (binario), Nosotros ya les damos una tabla de los tipos de instrucciones que deben ser capaz de manejar en su emulador.
 
 
-**Es muy importante que ustedes lean y entiendan las definiciones encontradas en types.h antes de empezar su proyecto. Si tiene alguna duda, o algo que no entienda respecto a las mismas consulte el capítulo 6 de K&R.**
+**Es muy importante que ustedes lean y entiendan las definiciones encontradas en _types.h_ antes de empezar su proyecto. Si tiene alguna duda, o encuentre algo que no entienda respecto a las mismas consulte el capítulo 6 de K&R.**
 
 
 El set de instrucciones que su emulador debe soportar esta listado a continuación. Toda la información acá es copiada desde **RISC-V green sheet** como ayuda, adicional puede utilizar la hoja proporcionada anteriormente.
@@ -57,7 +55,7 @@ El set de instrucciones que su emulador debe soportar esta listado a continuaci�
 
 <table>
 	<tr>
-		<th colspan="6">FORMATO DE UNA INSTRUCCIÓN DE TIPO R </th>
+		<th colspan="7">FORMATO DE UNA INSTRUCCIÓN DE TIPO R </th>
 	</tr>
 	<tr>
 		<td>R-TYPE</td>
@@ -297,7 +295,7 @@ El set de instrucciones que su emulador debe soportar esta listado a continuaci�
 </table>
 <table>
 	<tr>
-		<th colspan="6">FORMATO DE UNA INSTRUCCIÓN DE TIPO S </th>
+		<th colspan="7">FORMATO DE UNA INSTRUCCIÓN DE TIPO S </th>
 	</tr>
 	<tr>
 		<td>S-TYPE</td>
@@ -349,7 +347,7 @@ El set de instrucciones que su emulador debe soportar esta listado a continuaci�
 </table>
 <table>
 	<tr>
-		<th colspan="6">FORMATO DE UNA INSTRUCCIÓN DE TIPO SB </th>
+		<th colspan="9">FORMATO DE UNA INSTRUCCIÓN DE TIPO SB </th>
 	</tr>
 	<tr>
 		<td>SB-TYPE</td>
@@ -399,7 +397,7 @@ El set de instrucciones que su emulador debe soportar esta listado a continuaci�
 </table>
 <table>
 	<tr>
-		<th colspan="6">FORMATO DE UNA INSTRUCCIÓN DE TIPO U </th>
+		<th colspan="4">FORMATO DE UNA INSTRUCCIÓN DE TIPO U </th>
 	</tr>
 	<tr>
 		<td>U-TYPE</td>
@@ -433,7 +431,7 @@ El set de instrucciones que su emulador debe soportar esta listado a continuaci�
 </table>
 <table>
 	<tr>
-		<th colspan="6">FORMATO DE UNA INSTRUCCIÓN DE TIPO UJ </th>
+		<th colspan="7">FORMATO DE UNA INSTRUCCIÓN DE TIPO UJ </th>
 	</tr>
 	<tr>
 		<td>UJ-TYPE</td>
@@ -476,12 +474,12 @@ Al igual que la arquitectura RISC-V normal, el sistema RISC-V que está implemen
 
 ### Framework Code
 
-El marco de trabajo que les fue proporcionado funciona de la siguiente manera:
+El código base que les fue proporcionado funciona de la siguiente manera:
 
 
 1.  Lee los programas en código de máquina que se encuentran en la memoria (Empezando en la dirección 0x01000). Para "ejecutar" el programa este es pasado como un parámetro en la línea de comandos. Cada programa tiene 1 MiB de memoria y la unidad mínima de direccionamiento son los bytes.
 2. Todos los registros de RISC-V son inicializados en 0 y el program counter (PC) hacia la dirección 0x01000. Las únicas excepciones a las inicializaciones son el stack pointer (está en 0xEFFFF) y el global pointer (está en 0x03000). En el contexto de su emulador, el global pointer esta referenciado a la parte estática de su memoria. Los registros y el program counter son manejados por el _Processor struct_ definido en _types.h_.
-3. Se crearon bandera con las cuales se puede manejar la interacción del programa con el usuario. Dependiendo de la opción especificada en la línea de comandos, el simulador mostrará un dissassembly dump (-d) o ejecutar el programa. Más información en las opciones de línea de comandos abajo. 
+3. Se definieron banderas con las cuales puede manejar la interacción con el usuario. Dependiendo de la opción especificada en la linea de comandos, el simulador mostrará un dissassembly dump (-d) o se ejecutará el programa. Más información sobre las opciones de linea de comandos más adelante. 
 
 Lo que prosigue es que entra al flujo de simulación principal, el cual ejecuta una única instrucción repetitivamente hasta que la simulación se completa. La ejecución de una instrucción realiza las siguientes tareas:
 
@@ -494,7 +492,7 @@ Lo que prosigue es que entra al flujo de simulación principal, el cual ejecuta 
 
 * _-i_ corre el simulador en modo interactivo, es decir que se ejecutará una instrucción a la vez al presionar Enter. Cada instrucción es mostrada en su forma desensamblada.
 * _-t_ corre el simulador en modo rastreo, en donde cada instrucción es ejecutada y es mostrada al usuario.
-* _-r_ indica al simulador 	que imprima el contenido de los 32 registros después de que es ejecutada cada instrucción. Esta opción es más útil cuando se combina con la opción _-i_.
+* _-r_ indica al simulador que imprima el contenido de los 32 registros después de que es ejecutada cada instrucción. Esta opción es más útil cuando se combina con la opción _-i_.
 * _-d_ indica al simulador que desensamble el programa completo y que termine sin ejecutarlo.
 
 
@@ -513,7 +511,7 @@ Para cuando ustedes hayan termina la implementación de todos los métodos, el s
 
 **Su primera tarea es implementar un desensamblador al completar el método _decode_instruction() en el archivo _part1.c_ junto a otras funciones.**
 
-El objetivo de esta parte, dada una instrucción en código de máquina ustedes deberán traducirla a su instrucción en lenguaje ensamblador RISC-V (e.g. `add x1, x2, x3` ).  Para esta parte, ustedes no harán referencia a los registros por nombre sino por su numero (como esta definido en **RISC-V Green Card**).  Mire las constantes definidas en _utils.h_ cuando imprima las instrucciones. Más detalles sobre los requisitos están a continuación.
+El objetivo de esta parte, dada una instrucción en código de máquina ustedes deberán traducirla a su instrucción en lenguaje ensamblador RISC-V (e.g. `add x1, x2, x3` ).  Para esta parte, ustedes no harán referencia a los registros por nombre sino por su número (como esta definido en **RISC-V Green Card**).  Cuando Imprima las instrucciones revise las constantes definidas en _util.h_ ya que estas le pueden ser de ayuda. Más detalles sobre los requisitos a continuación.
 
 1. Imprime el nombre de la instrucción. Si la instrucción tiene argumentos, imprima un tab (\t).
 2. Imprime todos los argumentos, en el siguiente orden y formato dado en la columna de **INSTRUCCIÓN** de la tabla anterior.
@@ -523,7 +521,7 @@ El objetivo de esta parte, dada una instrucción en código de máquina ustedes 
 	*	Todos los inmediatos deben mostrarse como un número decimal con signo.
 	*	Los corrimientos (e.g. para `sll`) se imprimen como números decimales sin signo (e.g. 0 a 31).
 3. Imprime un salto de línea (\n) al final de cada instrucción.
-4. Se estará utilizando un autograder para calificar esta tarea. Si tu output difiere del nuestro debido a errores de formato, no recibirá crédito.
+4. Se estará utilizando un autograder para calificar esta tarea. Si su output difiere del nuestro debido a errores de formato, no recibirá crédito.
 5. Nosotros les proveemos ciertas pruebas. Sin embargo, dado que estas pruebas solo cubren un subconjunto de todos los escenarios posibles, aprobar estas pruebas no significa que su código esté libre de errores. Ustedes deberán identificar todos los casos y probarlos.
 
 Para implementar la funcionalidad, deben de completar lo siguiente:
