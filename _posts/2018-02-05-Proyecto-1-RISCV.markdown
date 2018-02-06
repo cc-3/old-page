@@ -289,7 +289,7 @@ El set de instrucciones que su emulador debe soportar esta listado a continuaci√
 	<td><font color="#ff0000"> ecall</font></td>	
 		<td>0x0</td>
 		<td>0x000</td>
-		<td rowspan="3">(Transfiere el control al Sistema Operativo) <br><font color="#0000ff">a0</font> = <font color="#ff00ff">1</font> imprime el valor contenido en <font color="#0000ff">a1</font> como entero. </br><br> <font color="#0000ff">a0</font> = <font color="#ff00ff"> 10</font>  es exit o un indicador de final de c√≥digo. <br>
+		<td rowspan="3">(Transfiere el control al Sistema Operativo) <br><font color="#0000ff">a0</font> = <font color="#ff00ff">1</font> imprime el valor contenido en <font color="#0000ff">a1</font> como entero. <br><font color="#0000ff">a0</font> = <font color="#ff00ff"> 10</font>  es exit o un indicador de final de c√≥digo.<br>
 	</td>
 		 </tr>
 </table>
@@ -299,7 +299,7 @@ El set de instrucciones que su emulador debe soportar esta listado a continuaci√
 	</tr>
 	<tr>
 		<td>S-TYPE</td>
-		<td><font color="#ff00ff">imm[11:]</font></td>
+		<td><font color="#ff00ff">imm[11:5]</font></td>
 		<td><font color="#0000ff">rs2</font></td>
 		<td><font color="#0000ff">rs1</font></td>
 		<td><font color="#ff0000">funct3</font></td>
@@ -386,13 +386,13 @@ El set de instrucciones que su emulador debe soportar esta listado a continuaci√
 		<td><font color="#ff0000">beq</font> <font color="#0000ff">rs1</font>, <font color="#0000ff">rs2</font>, <font color="#ff00ff">offset</font></td>
 		<td>0x0</td>
 		<td></td>
-		<td>if(<font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] == <font color="#ff0000">R</font>[<font color="#0000ff">rs2</font>]) <br> <font color="#ff0000">PC</font><- <font color="#ff0000">PC</font> + {<font color="#ff00ff">offset</font>, 1b'0}</br></td>
+		<td>if(<font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] == <font color="#ff0000">R</font>[<font color="#0000ff">rs2</font>]) <br> <font color="#ff0000">PC</font><- <font color="#ff0000">PC</font> + {<font color="#ff00ff">offset</font>, 1b'0}</td>
 	</tr>
 	<tr>
 		<td><font color="#ff0000">bne</font>  <font color="#0000ff">rs1</font>, <font color="#0000ff">rs2</font>, <font color="#ff00ff">offset</font></td>
 		<td>0x1</td>
 		<td></td>
-		<td>if(<font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] != <font color="#ff0000">R</font>[<font color="#0000ff">rs2</font>]) <br> <font color="#ff0000">PC</font><- <font color="#ff0000">PC</font> + {<font color="#ff00ff">offset</font>, 1b'0}</br></td>
+		<td>if(<font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] != <font color="#ff0000">R</font>[<font color="#0000ff">rs2</font>]) <br> <font color="#ff0000">PC</font><- <font color="#ff0000">PC</font> + {<font color="#ff00ff">offset</font>, 1b'0}</td>
 	</tr>
 </table>
 <table>
@@ -426,7 +426,8 @@ El set de instrucciones que su emulador debe soportar esta listado a continuaci√
 		<td><font color="#ff0000">lui</font> <font color="#0000ff">rd</font>, <font color="#ff00ff">offset</font></td>
 		<td></td>
 		<td></td>
-		<td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]<- {<font color="#ff00ff">offset</font>, 12b'0}</br></td>
+		<td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]<- {<font color="#ff00ff">offset</font>, 12b'0}
+	</td>
 	</tr>
 </table>
 <table>
@@ -466,7 +467,7 @@ El set de instrucciones que su emulador debe soportar esta listado a continuaci√
 		<td><font color="#ff0000">jal</font> <font color="#0000ff">rd</font>, <font color="#ff00ff">imm</font></td>
 		<td></td>
 		<td></td>
-		<td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]<- <font color="#ff0000">PC</font> + <font color="#00ff00">4</font> <br><font color="#ff0000">PC</font><- <font color="#ff0000">PC</font> + {<font color="#ff00ff">imm</font>, 1b'0}</br></td>
+		<td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]<- <font color="#ff0000">PC</font> + <font color="#00ff00">4</font> <br><font color="#ff0000">PC</font><- <font color="#ff0000">PC</font> + {<font color="#ff00ff">imm</font>, 1b'0}</td>
 	</tr>
 </table>
 
