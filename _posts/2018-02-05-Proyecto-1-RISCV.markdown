@@ -1,5 +1,3 @@
-
-
 ---
 layout: post
 title:  "Proyecto 1: Desensamblador de RISCV"
@@ -22,12 +20,9 @@ Para completar este proyecto , ustedes van a encontrar útil usar el [RISC-V gre
 ### Getting Started
 Antes de comenzar asegúrese que usted **leyó y comprendió** todas las instrucciones del proyecto. 
 
-Para este proyecto ustedes van a necesitar obtener los archivos de **proj1**, realice un pull desde los archivos del repositorio. Los siguientes comandos van a crear un folder que va a contener el código base en el directorio llamado **_proj1_**. Recuerde correr los comandos en la terminal de la computadora donde va a trabajar.
-```shell
-$ mkdir proj1
-$ cd proj1
-$ git clone https://github.com/61c-teach/fa17-proj1-starter.git
-```
+Para este proyecto ustedes van a necesitar obtener los archivos de **pj-2018**, ingrese al siguiente link de Github Classroom y cree su equipo.
+[Github Classroom: Archivos base de proyecto](https://classroom.github.com/g/tHSVtq8v)
+
 Los archivos que ustedes necesitan modificar y enviar son:
 
 * *part1.c*: Este es el archivo que necesita para modificar la parte 1.
