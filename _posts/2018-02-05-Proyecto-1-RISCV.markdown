@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Proyecto 1: Desensamblador de RISCV"
-date:   2017-02-05
+date:   2018-02-05
 category: proyecto
 description: >
     El objetivo de este proyecto es que ustedes puedan reforzar sus habilidades de programación en C aprendidas en clase y en las lecturas de K&amp;R y se familiarice con algunos de los detalles de RISC-V que lo prepararan para el resto del curso.
