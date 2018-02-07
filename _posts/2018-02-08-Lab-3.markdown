@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Laboratorio 3"
-date:   2018-02-06
+date:   2018-02-07
 category: lab
 description: >
     El objetivo del laboratorio es que inicie a programar y ejecutar código con el ensamblador de la arquitectura RISC-V utilizando el simulador online `venus`,
