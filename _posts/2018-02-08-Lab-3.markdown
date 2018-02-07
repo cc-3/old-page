@@ -1,0 +1,127 @@
+---
+layout: post
+title:  "Laboratorio 3"
+date:   2018-02-06
+category: lab
+description: >
+    El objetivo del laboratorio es que inicie a programar y ejecutar código con el ensamblador de la arquitectura RISC-V utilizando el simulador online `venus`,
+    comprendiendo como traducir codigo de C a RISC-V asi como escribir funciones para dicha arquitectura.
+    
+---
+
+Bienvenido al laboratorio 3. Al final de este lab, deberías tener una idea de cómo:
+
+- Practicar la ejecución y el debugging de código ensamblador RISC-V
+- Escribir funciones de RISC-V con el procedimiento correcto de llamado de funciones.
+- Tener una idea de cómo traducir código de C a RISC-V.
+
+# Setup
+Para realizar el lab ustedes necesitan ingresar al siguiente [Link de Github Classroom](https://classroom.github.com/a/k7XqomoR) donde se creara su repositorio que contendrá los archivos base necesarios, luego clone este repositorio en donde usted desea trabajar:
+
+```
+git clone url_repoositorio
+```
+
+donde `url_repositorio` seria algo similar a _https://github.com/cc-3/lab03-2018-suUser_. Cuando ya tengan esto se habrá creado una carpeta `lab03-2018-suUser`.
+
+# Entrega
+Cuando complete cada ejercicio debe realizar `commit` y `push` con los cambios que haya hecho en los archivos correspondientes de éste. Al finalizar el laboratorio debe enviar en el GES el link de su repositorio. **En la asignación del laboratorio se indica la fecha y hora de entrega.**
+
+# Introducción a Ensamblador con RISC-V Simulator
+
+Los siguientes ejercicios usan un simulador de RISC-V desarrollado por Keyhan Vakil. El simulador es llamado Venus y puede ser encontrado online [aquí](https://kvakil.github.io/venus/).
+
+Lo Escencial de Assembly/Venus:
+
+- Introduce tu código en la pestaña "Editor".
+- Los programas comienzan a ejecutarse en la primera línea independientemente de la etiqueta. Eso significa que la función main debe ir de primero.
+- Los programas terminan con un `ecall` con argumento 10. Esto produce que el programa termine su ejecución. Las instrucciones ecall son análogas a las "System Calls" y nos permiten hacer cosas cómo imprimir hacia la consola o solicitar secciones de memoria del heap.
+- Las etiquetas terminan con dos puntos (:).
+- Los comentarios comienzan con un numeral (#).
+- **NO** puedes escribir más de una instrucción por línea.
+- Cuando hayas terminado de editar, haz click en la pestaña "Simulator" para preparar la ejecución.
+- **NO ACTUALICES LA PÁGINA WEB.** El editor no guarda tu código, una actualización borrará todo en el editor.
+
+## Ejercicios
+### Ejercicio 1: Familiarizarte con Venus
+Lo primero:
+
+1. Pega los contenidos del archivo `lab3_ex1.s` dentro del editor.
+2. Haz click en la pestaña "Simulator". Esto preparará el código que escribiste para la ejecución. Si haces click de nuevo en la pestaña "Editor", tu simulación será reiniciada.
+3. En el simulador, para ejecutar la siguiente instrucción, haz click en el botón "step".
+4. Para deshacer una instrucción, haz click en el botón "prev".
+5. Para ejecutar el programa completo, haz click en el botón "run".
+6. Para reiniciar el programa desde el comienzo, haz click en el botón "reset".
+7. Los contenidos de todos los 32 registros se encuentran en el lado derecho, y la salida de la consola se encuentra abajo.
+8. Para ver los contenidos de la memoria, haz click en la pestaña "Memory" en la derecha. Puedes navegar hacia diferentes porciones de tu memoria utilizando el menú desplegable que se encuentra abajo.
+
+**Tarea:** Pega el contenido del archivo `lab3_ex1.s` en Venus y Escribe tus respuestas a las siguientes preguntas en un archivo llamado `preguntas_ej1.txt` y ademas toma un screenshot de la simulación y guardalo como `screenshot_ej1.png`. 
+Algunas de las preguntas necesitarán que ejecutes el código RISC-V utilizando la pestaña "Simulator" de Venus.
+
+1. ¿Qué significan las directivas `.data`, `.word`, `.text` (i.e. motivo de utilización)? **Hint:** piensa sobre las 4 secciones de memoria.
+2. Ejecuta el programa completo. ¿Qué número retornó el programa? ¿Qué representa este número?
+3. ¿En qué dirección está n guardado en la memoria? **Hint:** Mira los contenidos de los registros.
+4. Sin utilizar la pestaña "Edit", haz que el programa calcule el treceavo número de fibonacci (0-indexedo) modificando manualmente el valor de algún registro. Puedes encontrar útil ejecutar el código paso por paso. Si prefieres ver los valores cómo decimales, cambia la opción "Display Settings" que se encuentra abajo.
+
+### Ejercicio 2: Traduciendo de C a RISC-V
+Abre los archivos `lab3_ex2_c.c` y `lab3_ex2_assembly.s`. El código ensamblador que se provee (archivo `.s`) es una traducción del programa dado en C a RISC-V. Tu tarea es encontrar y explicar por medio de comentarios los siguientes componentes de este archivo ensamblador.
+
+**Hint:** En RISC-V se comenta con `#`.
+
+- El registro que representa a la variable `k`.
+- Los registros actuando cómo punteros hacia los arreglos `source` y `dest`.
+- El código ensamblador para el ciclo que se encuentra en el código en C.
+- Cómo los punteros son manipulados en el código ensamblador.
+
+
+### Ejercicio 3: Factorial
+En este ejercicio, usted implemetará una función `factorial` en RISC-V la cual tiene un solo parámetro entero `n` y retorna `n!`. Para facilitarle el trabajo le proveemos un archivo `factorial.s` que contiene el inicio de la solución que usted debe completar. Usted solo necesitará agregar instrucciones debajo de la etiqueta `factorial`, el argumento que será pasado a la función está localizado en la etiqueta `n`. Tiene la libertad de resolver el problema de forma recursiva o iterativa.
+
+Debe asegurarse que su función retorna correctamente:
+```
+3! = 6
+7! = 5040
+8! = 40320
+```
+
+### Ejercicio 4: llamada de funciones con map en RISC-V
+
+Este ejercicio utiliza el archivo `list_map.s`
+
+En este ejercicio, usted completará la implementación de `map` para linked-list en RISC-V. Nuestra función será simplificada a solo modificar los valores de la lista en lugar de crear y retornar una nueva lista con los valores modificados.
+
+Nuestro procedimiento `map` tomará dos parámetros, el primero será la dirección del head node de la linked-list la cual contiene como valores enteros de 32 bits. En C la estructura del nodo sería definida de la siguiente forma:
+
+```c
+struct node {
+  int value;
+  struct node* next;
+};
+```
+
+El segundo parámetro será la **dirección de una función** que toma un `int` como argumento y retorna un `int`. Se utilizará la instrucción `jalr` de RISC-V para llamar a esta función en cada uno de los valores de la lista de nodos.
+
+Nuestra función `map` recorrerá la lista recursivamente, aplicando la función a cada uno de los valores de la lista y almacenando el valor retornado en el nodo correspondiente. En C la función sería algo como esto:
+
+```c
+void map(struct node *head, int (*f)(int))
+{
+  if(!head) { return; }
+  head->value = f(head->value);
+  map(head->next,f);
+}
+```
+
+Si usted nunca ha visto declaraciones del tipo `int (*f)(int)`, no se preocupe mucho por ello. Basicamente eso significa que `f` es un puntero a una función la cual en C puede ser usada exactamente cómo cualquier otra función.
+
+Usted podra encontrar util revisar el [RISC-V green card](http://inst.eecs.berkeley.edu/~cs61c/fa17/img/riscvcard.pdf) para completar este ejercicio.
+
+Existen exactamente nueve (9) lugares (8 en `map` y 1 en `main`) en el código proporcionado donde dice `"YOUR_INSTRUCTION_HERE"`.
+
+**Tarea:** Remplace estos comentarios con instrucciones para la implementación del `map`, y para proporcionar un ejemplo del uso se utilizará la función `square` como el argumento de la función `map`. Hay comentarios en el código que explican qué debe lograr cada instrucción. Cuando usted haya completado estas instrucciones, al ejecutar el código usted obtendrá el siguiente output:
+
+```
+9 8 7 6 5 4 3 2 1 0
+81 64 49 36 25 16 9 4 1 0
+```
+La primera línea es la lista original, y la segunda línea es la lista modificada luego de aplicar la función `map`.
