@@ -50,7 +50,7 @@ Los archivos proporcionados en el kit de inicio son la base para un emulador RIS
 **Es muy importante que ustedes lean y entiendan las definiciones encontradas en _types.h_ antes de empezar su proyecto. Si tiene alguna duda, o encuentre algo que no entienda respecto a las mismas consulte el capítulo 6 de K&R.**
 
 
-El set de instrucciones que su emulador debe soportar esta listado a continuación. Toda la información acá es copiada desde **RISC-V green sheet** como ayuda, adicional puede utilizar la hoja proporcionada anteriormente.
+El set de instrucciones que su emulador debe soportar esta listado a continuación. Toda la información acá es copiada desde [RISC-V green card](http://inst.eecs.berkeley.edu/~cs61c/fa17/img/riscvcard.pdf) como ayuda, adicional puede utilizar la hoja proporcionada anteriormente.
 
 
 <table>
