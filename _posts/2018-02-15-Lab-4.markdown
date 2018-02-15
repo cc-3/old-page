@@ -1,0 +1,65 @@
+---
+layout: post
+title:  "Laboratorio 4"
+date:   2018-02-15
+category: lab
+description: >
+    En este laboratorio practicaremos llamadas a funciones en ensamblador.
+---
+
+Bienvenido al laboratorio 4. En este laboratorio practicaremos llamadas a funciones. Este laboratorio tiene solo dos ejercicios para que pueda terminar rapido y prepararse para su examen :)
+
+# Setup
+Para realizar el lab ustedes necesitan ingresar al siguiente [Link de Github Classroom](https://classroom.github.com/a/Vv0lKA_Y) donde se creara su repositorio que contendrá los archivos base necesarios, luego clone este repositorio en donde usted desea trabajar:
+
+```
+git clone url_repoositorio
+```
+
+donde `url_repositorio` seria algo similar a _https://github.com/cc-3/lab04-2018-suUser_. Cuando ya tengan esto se habrá creado una carpeta `lab03-2018-suUser`.
+
+# Entrega
+Cuando complete cada ejercicio debe realizar `commit` y `push` con los cambios que haya hecho en los archivos correspondientes de éste. Al finalizar el laboratorio debe enviar en el GES el link de su repositorio. **En la asignación del laboratorio se indica la fecha y hora de entrega.**
+
+# Introducción a Ensamblador con RISC-V Simulator
+
+Los siguientes ejercicios usan un simulador de RISC-V desarrollado por Keyhan Vakil. El simulador es llamado Venus y puede ser encontrado online [aquí](https://kvakil.github.io/venus/).
+
+Lo esencial de Assembly/Venus:
+
+- Introduce tu código en la pestaña "Editor".
+- Los programas comienzan a ejecutarse en la primera línea independientemente de la etiqueta. Eso significa que la función main debe ir de primero.
+- Los programas terminan con un `ecall` con argumento 10. Esto produce que el programa termine su ejecución. Las instrucciones ecall son análogas a las "System Calls" y nos permiten hacer cosas cómo imprimir hacia la consola o solicitar secciones de memoria del heap.
+- Las etiquetas terminan con dos puntos (:).
+- Los comentarios comienzan con un numeral (#).
+- **NO** puedes escribir más de una instrucción por línea.
+- Cuando hayas terminado de editar, haz click en la pestaña "Simulator" para preparar la ejecución.
+- **NO ACTUALICES LA PÁGINA WEB.** El editor no guarda tu código, una actualización borrará todo en el editor.
+
+## Ejercicios
+
+### Ejercicio 1
+Usaremos el archivo `rec1.s`, copie y pegue el contenido de este archivo en su simulador Venus para empezar a trabajar.
+
+Pruebe el programa, cambie algunos valores que se envian como argumentos y responda:
+
+1. Qué hace la función 'rec'?
+
+2. Las llamadas a funciones tienen seis partes. Qué partes identifica en la función 'rec'? Agregue comentarios al programa indicando dónde está cada parte. Responda en un comentario, por qué no están presentes las seis partes?
+
+3. Qué se guarda en el stack al inicio de 'rec'? Por qué solo eso se guarda?
+
+4. Qué hace cada uno de los ecall que aparecen en el programa?
+
+**Entregable:** rec1.s con comentarios que respondan las cuatro preguntas
+
+### Ejercicio 2: Hanoi
+El juego de torres de Hanoi es un ejemplo clásico de recursión, si nunca lo ha jugado antes lea un poco sobre este antes de comenzar.
+
+Usaremos el archivo `hanoi2.c`. Compile y ejecute este archivo. Relacione lo que se está imprimiendo con las instrucciones del juego.
+
+Su tarea en este ejercicio es traducir el programa de C a RISCV. Escriba una función llamada `hanoi` que reciba los mismos argumentos que el programa original, en los registros a0-a3. Su programa de ensamblador debe imprimir lo mismo que el programa en C imprimiría.
+
+**Entregable:** hanoi2.s con su función hanoi, y un main que permita probar el funcionamiento de esta.
+
+Hint: en el ejercicio 1 probamos los ecall para que podamos imprimir correctamente aquí
