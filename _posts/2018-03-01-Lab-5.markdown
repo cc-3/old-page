@@ -113,9 +113,7 @@ _Si dos unos en una fila o dos zeros en una fila ya han sido vistos, siempre sac
 
 * Nosotros les vamos a dar un circuito ya empezado de Logisim
 
-```shell
-$ cp
-```
+[Circuito base](https://drive.google.com/file/d/0B6TRsDuz4XayNjZ5Qkw5MUE0bFU/view)
 
 * Noten que la parte de arriba del circuito se mira casi igual como nuestro circuito adder anterior, pero ahora hay un bloque FSMLogic en vez de un bloque adder. El FSMLogic es el circuito logico combinacional para el FSM. Nosotros hicimos el bit de output, ya que es el mas dificil de simplificar e implementar. Ustedes tienen que completar el circuito completando (valga la redundancia) StateBitOne y StateBitZero.
 
