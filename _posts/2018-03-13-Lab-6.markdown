@@ -1,0 +1,129 @@
+---
+layout: post
+title:  "Laboratorio 6"
+date:   2018-03-13
+category: lab
+description: >
+    Con este laboratorio seguiremos trabajando con logisim y aprenderemos a utilizar funciones mas avanzadas.
+---
+
+#### Ejercicio 1: Splitters
+
+Esta es una herramienta fundamental para este laboratorio, para aprender a usarla deben construir un circuito que manipule un numero de 8 bits.
+
+1. Creen un subcircuito con el nombre "Ex1".
+2. Agreguen un input de 8 bits y etiquetenlo como "In".
+3. Agreguen un output de un bit y otro output de 8 bits, etiquetenlos como "Out1" y "Out2" respectivamente.
+4. Dirijanse al folder de wiring y seleccionen el splitter. El splitter tomara una entrada de varios bits y separara cada uno de estos bits. Tambien puede ser utilizada de manera inversa, ingresan varios bits y tenemos un bus de datos de salida.
+5. Configuren su splitter y cambien el Bit Width a 8 bits y el Fan Out a 3 bits. Se deberia ver de la siguiente manera.
+
+![fig1](/assets/img/labs/splitter.gif)
+
+6. Ahora tienen que seleccionar que bits seran los que salgan en cada brazo del splitter, seleccionen los bits 1, 2 y 6 para que salgan en el brazo de enmedio (recuerden que el bit 0 es el bit menos significativo y el bit 7 es el mas significativo). Los demas bits dejenlos en el default.
+7. Conecten "In" a su splitter, agreguen una compuerta AND de 2 entradas y conecten los brazos de los extremos del spliter a sus entradas y luego conecten la salida del AND a "Out1".
+8. Interpreten la entrada como un numero en la forma Signo-magnitud, ahora coloquen lo necesario para que "Out2" sea el negativo de la entrada en la forma Signo-magnitud.
+9. Necesitaran otro splitter para combinar la entrada de 8 bits a un solo bus de datos. Coloquen otro splitter con las propiedades necesarias: Bit Width 8 bits y Fan Out 3. Jueguen con la apariencia y la orientacion del splitter para que se vea de la mejor manera!
+
+Recuerden subir su ejercicio terminado al repo de git!
+
+***
+
+#### Ejercicio 2: Rotate Right
+
+Con el conocimiento que ya tienen acerca de los splitters y los multiplexores del lab pasado deberian estar listos para implementar la rotacion de bits.
+
+La rotacion hacia la derecha rotara cierta cantidad de bits de un input A hacia la derecha por B bits. Por ejemplo si tenemos A->0b10110101011**10011** y B->0b0101 (5 en decimal), la salida del rotate sera 0b**10011**10110101011. Noten que los 5 bits rotaron del final del numero al principio, mientras que lo demas solo se corrio a la derecha. La operacion seria algo como "R = A >> B | A << (16 - B)".
+
+Para este ejercicio deben implementar el subcircuito llamado "rotr" con las siguientes entradas:
+* A, un numero de 16 bits, este numero es al que se le aplicara la rotacion.
+* B, un numero de 4 bits.
+
+Tu solucion deberia mostrar los B bits de A rotados. No esta permitido el uso de los shifts logicos de logisim, por lo que ustedes deben implementar sus propios shifts.
+
+**HINT: antes de comenzar deben pensar cuidadosamente en como descomponer una sola operacion (rotate) en varios bloques y luego unirlo todo.**
+
+**HINT 2: solo por que se les dio una ecuacion para hacer la funcion rotate no quiere decir que esa sea la unica manera de hacerlo, recuerden lo efectivo que es usar splitters!!!**
+
+**Tip: usar splitters con muchas salidas puede verse desordenado y puede confundirlos, a veces es bueno utilizar dos spliters, por ejemplo si tenemos un splitter de 1 a 16 podrian hacer un Fan out de 4 y luego a cada brazo de ese splitter colocarle otro splitter que tengo un Fan Out de 4.**
+
+Recuerden subir sus avances al repo de git!!
+
+***
+
+#### Funciones Avanzadas de Logisim
+
+Aqui les dejaremos un par de funciones utiles de logisim.
+
+#### Tunel
+
+Los tuneles son como un cableado invisible que conecta dos o mas puntos. Los tuneles estan agrupados por etiquetas con nombres, dichos tuneles van cableados a alguna salida o entrada.
+
+![fig2](/assets/img/labs/tunnels1.png)
+
+El circuito con tuneles anterior seria exactamente lo mismo que el siguiente circuito:
+
+![fig3](/assets/img/labs/tunnels2.png)
+
+Deben tener cuidado con que cable es el que conectan a algun tunel ya que puede haber problemas como en el caso siguiente:
+
+![fig4](/assets/img/labs/tunnels3.png)
+
+Este error se veria de la siguiente manera si estuviera cableado sin tuneles:
+
+![fig5](/assets/img/labs/tunnels4.png)
+
+Les recomendamos que usen tuneles en logisim ya que esto hace que sus circuitos se vean mucho mas ordenados y ademas faciles de debuggear.
+
+#### Extenders
+
+Para cambiar el tamaño de un cable se deben usar extenders. Por ejemplo, considere la siguiente implementacion en la que extienden la cantidad de bits de un cable mediante un splitter:
+
+![fig6](/assets/img/labs/extend1.png)
+
+Mientras que esta implementacion es muchisimo mas facil y sensilla, ademas de que es menos propensa a errores.
+
+![fig7](/assets/img/labs/extend2.png)
+
+Ahora consideren la siguiente implementacion para pasar de un cable de 8 bits a uno de 4, si se pueden dar cuenta, esta implementacion descarga 4 bits.
+
+![fig8](/assets/img/labs/extend3.png)
+
+A pesar de que su nombre es Extender, este tambien puede hacer la funcion de reducir.
+
+![fig9](/assets/img/labs/extend4.png)
+
+***
+
+#### Ejercicio 3: ALU
+
+En este ejercicio ustedes deben implementar un ALU de 32 bits. Para ello utilicen el archivo lab6ALU.circ.
+
+Como un recordatorio, un ALU es un bloque fundamental al momento de construir un CPU, el ALU se encarga de las operaciones aritmeticas y logicas. La operacion que el ALU ejecutara viene dada por un opcode el cual lo da la instruccion que el procesador este ejecutando. El ALU esta remarcado en el siguiente diagrama:
+
+![fig10](/assets/img/labs/alu.png)
+
+Deben implementar un ALU de 8 operaciones, shift left logical, shift right logical, shift right arithmetic, rotate left, rotate right, and, or y xor. El ALU tiene que tener dos entrdas de 32 bits cada una y una salida (por supuesto de 32 bits). Recuerden que logisim tiene ya implementadas todas estas operaciones por lo que no tienen que implementarlas ustedes!
+
+***HINT: vean en la carpeta "Arithmetic" para encontrar un shifter, el cual deberia ser muy util para las operaciones que ustedes van a implementar.***
+
+***HINT 2: Recuerden las funciones avanzadas de logisim, usen tuneles para mover las salidas del bloque de todas las operaciones posibles al bloque en el cual seleccionen el resultado que quieren. Dividir el trabajo es ya de por si un hint. 
+
+La funcion seleccionada sera determinada por el valor de un opcode que esta a continuacion:
+
+|Opcode |       Operacion         |
+|:-----:|:-----------------------:|
+|  000  |   Shift left logical    |
+|  001  |   Shift right logical   |
+|  010  |  Shift right arithmetic |
+|  011  |       Rotate left       |
+|  100  |       Rotate right      |
+|  101  |          And            |
+|  110  |          Or             |
+|  111  |          Xor            |
+
+Pongan 2 diferentes entradas y vayan cambiando el opcode para ver el resultado de las distintas operaciones del ALU.
+
+Recuerden subir sus avances a Git!
+ 
+
+
