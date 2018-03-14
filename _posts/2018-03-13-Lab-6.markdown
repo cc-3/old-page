@@ -32,7 +32,7 @@ Recuerden subir su ejercicio terminado al repo de git!
 
 Con el conocimiento que ya tienen acerca de los splitters y los multiplexores del lab pasado deberian estar listos para implementar la rotacion de bits.
 
-La rotacion hacia la derecha rotara cierta cantidad de bits de un input A hacia la derecha por B bits. Por ejemplo si tenemos A->0b10110101011**10011** y B->0b0101 (5 en decimal), la salida del rotate sera 0b**10011**10110101011. Noten que los 5 bits rotaron del final del numero al principio, mientras que lo demas solo se corrio a la derecha. La operacion seria algo como "R = A >> B \| A << (16 - B)".
+La rotacion hacia la derecha rotara cierta cantidad de bits de un input A hacia la derecha por B bits. Por ejemplo si tenemos A->0b10110101011**10011** y B->0b0101 (5 en decimal), la salida del rotate sera 0b**10011**10110101011. Noten que los 5 bits rotaron del final del numero al principio, mientras que lo demas solo se corrio a la derecha. La operacion seria algo como `R = A >> B | A << (16 - B)`.
 
 Para este ejercicio deben implementar el subcircuito llamado "rotr" con las siguientes entradas:
 * A, un numero de 16 bits, este numero es al que se le aplicara la rotacion.
