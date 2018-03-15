@@ -96,7 +96,7 @@ A pesar de que su nombre es Extender, este tambien puede hacer la funcion de red
 
 #### Ejercicio 3: ALU
 
-En este ejercicio ustedes deben implementar un ALU de 32 bits. Para ello utilicen el archivo lab6ALU.circ.
+En este ejercicio ustedes deben implementar un ALU de 32 bits. Para ello utilicen el archivo <a href='https://drive.google.com/file/d/1pSy4YOIBhTEndB994RnmZ8SiAsSZtfoq/view?usp=sharing'>lab6ALU.circ</a>.
 
 Como un recordatorio, un ALU es un bloque fundamental al momento de construir un CPU, el ALU se encarga de las operaciones aritmeticas y logicas. La operacion que el ALU ejecutara viene dada por un opcode el cual lo da la instruccion que el procesador este ejecutando. El ALU esta remarcado en el siguiente diagrama:
 
@@ -123,7 +123,6 @@ La funcion seleccionada sera determinada por el valor de un opcode que esta a co
 
 Pongan 2 diferentes entradas y vayan cambiando el opcode para ver el resultado de las distintas operaciones del ALU.
 
-Recuerden subir sus avances a Git!
- 
+Una vez terminen pongan todos sus archivos <b>.circ</b> en una carpeta, comprimanla en un <b>.zip</b> y subanla al <b>GES</b>.
 
 
