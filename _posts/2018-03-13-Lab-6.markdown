@@ -24,8 +24,6 @@ Esta es una herramienta fundamental para este laboratorio, para aprender a usarl
 8. Interpreten la entrada como un numero en la forma Signo-magnitud, ahora coloquen lo necesario para que "Out2" sea el negativo de la entrada en la forma Signo-magnitud.
 9. Necesitaran otro splitter para combinar la entrada de 8 bits a un solo bus de datos. Coloquen otro splitter con las propiedades necesarias: Bit Width 8 bits y Fan Out 3. Jueguen con la apariencia y la orientacion del splitter para que se vea de la mejor manera!
 
-Recuerden subir su ejercicio terminado al repo de git!
-
 ***
 
 #### Ejercicio 2: Rotate Right
