@@ -46,8 +46,6 @@ Tu solucion deberia mostrar los B bits de A rotados. No esta permitido el uso de
 
 **Tip: usar splitters con muchas salidas puede verse desordenado y puede confundirlos, a veces es bueno utilizar dos spliters, por ejemplo si tenemos un splitter de 1 a 16 podrian hacer un Fan out de 4 y luego a cada brazo de ese splitter colocarle otro splitter que tengo un Fan Out de 4.**
 
-Recuerden subir sus avances al repo de git!!
-
 ***
 
 #### Funciones Avanzadas de Logisim
