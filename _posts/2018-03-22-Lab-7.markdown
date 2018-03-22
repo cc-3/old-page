@@ -1,0 +1,46 @@
+
+---
+layout: post
+title:  "Laboratorio 6"
+date:   2018-03-22
+category: lab
+description: >
+    Con este laboratorio seguiremos trabajando con logisim y es para poner en practica pipelining.
+---
+
+#### Ejercicio 1: Pipelining
+
+Para este laboratorio se asume que los registros están inicializados en ceros. Los archivos a utilizar en este laboratorio estan en el siguiente: <a href='https://drive.google.com/open?id=1YOD9DhIIF7QYJhk3Sf93dQN39LftjF0n'>link</a>
+
+Considere el siguiente circuito en logisim de 2 entradas. Su siguiente estado se calcula multiplicando las entradas y sumándolo al estado actual.
+
+![fig1](/assets/img/labs/exercise1.png)
+
+Supongamos que el delay de propagación del bloque de suma es de 50ns, el delay de propagación del bloque de multiplicación es de 55ns y el  delay clk-to-q de un  registro es 5ns. 
+
+1. Calcule la frecuencia máxima de reloj a la que este circuito puede operar. Asuma que el tiempo de configuración del registro no importa, y que los input vienen desde los registros cronometrados que reciben los datos desde una fuente externa.
+
+Ustedes buscaran mejorar el performance de este circuito, para que opere a una velocidad alta de reloj.  Para ello, van a dividir la multiplicación y la suma en dos diferentes fases de pipeline.
+
+* En la primera etapa de pipeline, se realizara la multiplicación de dos inputs.
+*  En la segunda etapa de pipeline, se realizara la suma del producto y el estado actual
+
+Para comprobar que su solución es correcta, se considera la secuencia de outputs del circuito de la figura, si los outputs de su circuito con pipelined corresponden con los outputs del circuito non-pipelined su implementación es correcta.
+
+<b>Ejemplo</b> 
+Si para alguna secuencia de entrada el circuito non-pipelined emite [3, 5, 1, 2, 4, ...], la secuencia correcta que debe devolver el circuito con pipelined es [0, 3 , 5, 1, 2, 4, ...] para la misma secuencia de entrada del circuito non-pipelined.
+
+Para su conveniencia y con el fin de estandarizar la forma de evaluación, se les provee un punto de partida en el archivo **pipeline.circ** y **ROMdata**.
+
+* En **_pipeline.circ_**,  el sub-circuito sin pipeline esta configurado exactamente como la figura mostrada anteriormente. El circuito principal esta configurado para que produzca como output la siguiente secuencia [3, 5, 1, 2, 4, -1, 0, 0, ...] en la versión sin pipeline del circuito. _También es un práctico ejemplo de cómo usar la memoria desde un archivo._
+* El  bloque de **ROM** debe ser inicializado con la data correspondiente, pero si no tiene salida o son ceros, haga click derecho y seleccione "Load image..." y seleccione **_ROMdata_**
+
+Tomar en cuenta que se necesita un registro para mantener el valor intermedio entre las etapas del pipeline. Esto es un tema general con pipeliens.
+
+1. Completar el sub-circuito **_Pipelined_**. Usted necesitará agregar un registro para dividir la multiplicación y la sumatoria dentro de dos etapas separadas de pipeline.
+2. Calcular la frecuencia máxima de reloj para la versión pipelined del circuito.
+3. Cuando se hablo de pipelining, se discutió que si una operación depende de un output previo, se dificulta realizar un pipeline con ellos usualmente es necesario insertar una "burbuja" (o varias) para asegurar que el output de la primera operación esta listo para ser el input de la segunda. Explique porque en este circuito no es necesario insertar "burbujas" en el proceso.
+
+***
+
+Una vez terminen pongan todos sus archivos <b>.circ</b> en una carpeta, comprimanla en un <b>.zip</b> y subanla al <b>GES</b>.
