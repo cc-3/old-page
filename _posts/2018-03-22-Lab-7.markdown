@@ -1,7 +1,6 @@
-
 ---
 layout: post
-title:  "Laboratorio 6"
+title:  "Laboratorio 7"
 date:   2018-03-22
 category: lab
 description: >
