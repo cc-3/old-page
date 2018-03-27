@@ -31,7 +31,7 @@ Finalmente las dos indicaciones más importantes:
 
 Utilizaremos Github Classroom. No necesitan crear su propio repo ni agregar a cc3-grades, solo hacen click en el link, crean su grupo y listo. Sobre este repo harán sus commit y push.
 
-<!--- PENDIENTE: COLOCAR LINK --->
+[ARCHIVOS BASE](https://classroom.github.com/g/DbO-uyrW)
 
 # Register File
 
