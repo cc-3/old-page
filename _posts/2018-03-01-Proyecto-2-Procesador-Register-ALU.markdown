@@ -109,7 +109,7 @@ Valor de switch | Instrucción
 1 |	srl: Result = (unsigned) X >> Y
 2 |	add: Result = X + Y
 3 |	and: Result = X & Y
-4 |	or: Result = X | Y
+4 |	or: Result = X \| Y
 5 |	xor: Result = X^Y
 6 |	slt: Result = (X < Y) ? 1 : 0 Signed
 7 |	mult: Result = X\*Y[31:0]
