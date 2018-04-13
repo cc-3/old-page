@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "Proyecto 2: Procesador: Register file y ALU"
+title:  "Proyecto 2: Procesador de RISC-V completo"
 date:   2018-04-12
 category: proyecto
 description: >
-    Parte introductoria del proyecto 2
+    Instrucciones para completar proyecto 2. Procesador de RISC-V con pipeline de dos etapas.
 permalink: /:categories/:title.html
 ---
 
