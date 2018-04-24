@@ -167,6 +167,24 @@ Los cables rojos significan que algo está mal conectado. Algunos casos pueden n
 
 Logisim tiene algunas herramientas de análisis combinacional (nos puede construir mapas de Karnaugh o circuitos completos con solo darle una tabla :D). Esta herramienta les puede ser útil en algún momento de sus vidas, pero la recomendación es no usarla en CC3. Recuerden que durante los exámenes tendrán que hacer mapas o circuitos sin acceso a su computadora.
 
+# Probando el proyecto
+
+Probaremos el proyecto de forma manual, cargando instrucciones a su memoria y comprobando el resultado que estas nos dan.
+
+Para obtener las instrucciones a probar, escribiremos código de RISC-V y lo ensamblaremos en algún simulador como Venus. El código debería realizar algo fácilmente visible, por ejemplo, escribir en los registros que podemos observar desde afuera del Register File. 
+
+Una vez que generemos el código de máquina, lo cargaremos a la unidad de memoria que encontramos en run.circ e iniciaremos la ejecución. Debemos ubicar este componente:
+
+![Memoria de instrucciones](/assets/img/proj/inst_mem.png)
+
+Hacemos clic en el módulo, luego en el panel de la izquierda seleccionamos la opción "(Click to edit)" donde dice "Contents". Esto abrirá un editor hexadecimal con la opción para cargar un archivo previamente creado. Aquí cargamos el archivo que contenga lo que Venus nos generó.
+
+![Cargando el archivo](/assets/img/proj/file_select.png)
+
+Una vez que cargamos este código, hacemos andar al reloj (deberíamos hacerle clic para que haga solo un ciclo a la vez, y poder observar bien). Cuando el reloj empiece a andar, todo el CPU empezará a ejecutar instrucciones.
+
+Recuerden que podemos hacer doble clic sobre un componente usando la herramienta Poke (mano) para ver cuál es su contenido o estado actual. Debemos comparar el resultado de nuestro CPU con el resultado del simulador Venus.
+
 # Entrega
 
 La entrega se realizará en la fecha indicada en el GES (domingo). **No se contestan dudas por ningún medio el día anterior y el día de la entrega; no dejen el proyecto a última hora.**
