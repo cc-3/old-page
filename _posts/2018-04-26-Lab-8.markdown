@@ -1,0 +1,85 @@
+---
+layout: post
+title:  "Laboratorio 7"
+date:   2018-04-26
+category: lab
+description: >
+    En este laboratorio utilizaremos las instrucciones que Intel provee para SIMD (SSE/AVX).
+---
+
+Descarga los archivos necesarios <a href="https://classroom.github.com/a/khOAsA7Y">aqui</a>.
+
+### Ejercicio 1:
+En este lab vamos a utilizar las instrucciones SIMD (Single Instruction, Multiple Data) para paralelizar ciertas operaciones en nuestros programas y optimizar el tiempo de ejecucion un poco. Dado el gran numero de instrucciones SIMD, lo primero que debemos aprender es como encontrar la instruccion adecuada para la operacion que deseemos realizar.
+
+Esta es una forma de encontrar la informacion necesaria:
+
+* Ve a [este sitio](https://software.intel.com/en-us/isa-extensions). Tambien puede acceder a esta pagina buscando "Intel Intrinsics" en Google.
+* Haz click en el hipervinculo que dice "Intel Intrinsics Guide, y podras ver un listado bastante completo de las instruccion SIMD de Intel.
+* Este [otro link](https://software.intel.com/en-us/node/524201), tambien te pueden ayudar a responder las preguntas que haremos a continuacion.
+
+Utiliza la informacion proporcionada anteriormente para interpretar la nueva sintaxis y terminologia. Encuentra las intrucciones SIMD que de 128-bits que realizan las siguientes operaciones:
+
+* Cuatro divisiones de punto flotante con presicion simple "Four floating point divisions in single precision (i.e. float)"
+* Diesiseis operaciones de maximo sobre enteros de 8 bits con signo "Sixteen max operations over signed 8-bit integers (i.e. char)"
+* Shift right aritmetico sobre ocho enteros de 16 bits con signo "Arithmetic shift right of eight signed 16-bit integers (i.e. short)"
+
+Una vez tengas las respuestas, modifica las macros en el archivo questions.c, seleccionando la respuesta adecuada para cada pregunta.
+
+### Ejercicio 2:
+Para este ejercicio vamos a vectorizar/SIMDizar (sea o no un termino valido) el siguiente codigo para alcanzar una reduccion de hasta 4x en el tiempo de ejecucion de este pedazo de codigo:
+<pre>
+   static int sum_naive(int n int *a) {
+        int sum = 0;
+        for (int i = 0; i < n; i++);{ 
+             sum+=a[i];
+        }
+        return sum;
+  }
+</pre>
+
+Es muy probable que las siguientes instrucciones te resulten utiles:
+
+Syntax | Function
+---|---
+__m128i _mm_setzero_si128( ) | returns 128-bit zero vector
+__128 _mm_loadu_si128( __m128i *p ) | returns 128-bit vector stored at pointer p
+__m128i _mm_add_epi32( __m128i a, __m128i b ) | returns vector ( a0+b0, a1+b1, a2+b2, a3+b3 )
+void _mm_storeu_si128( __m128i *p, __m128i a ) | stores 128-bit vector a at pointer p
+
+Modifica el archivo sum.c. Utiliza las instrucciones SSE para implementar la funcion sum_vectorized(). Para compilar y correr su codigo, utilizen el siguiente comando:
+<pre>
+     make sum
+     ./sum
+</pre>
+
+Ahora vamos un poco mas alla, haciendo un unrolling de nuestra funcion empleando las instrucciones SIMD en el codigo que implementaron anteriormente. Este proceso deberia duplicar la velocidad de ejecucion de su programa. Como un ejemplo de loop unrolling, pueden tomar la siguiente funcion que les proveemos llamada sum_unrolled():
+<pre>
+ static int sum_unrolled(int n, int *a)
+   {
+      int sum = 0;
+
+      // unrolled loop
+      for (int i = 0; i < n / 4 * 4; i += 4)
+      {
+         sum += a[i+0];
+         sum += a[i+1];
+         sum += a[i+2];
+         sum += a[i+3];
+      }
+
+      // tail case
+      for (int i = n / 4 * 4; i < n; i++)
+      {
+         sum += a[i];
+      }
+
+      return sum;
+   }
+ </pre>
+ 
+En el archivo sum.c, copien la funcion sum_vectorized() en sum_vectorized_unrolled() y apliquen un loop unrolling de 4. Para compilar y correr su codigo, utilicen el comando anterior:
+<pre>
+     make sum
+     ./sum
+</pre>
