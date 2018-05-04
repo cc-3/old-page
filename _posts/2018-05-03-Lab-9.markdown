@@ -40,8 +40,8 @@ Para este lab, vamos a utilizar C para seguir ganando experiencia en este lengua
 Este programa va a tomar el numero de threads por defecto y cada uno de ellos va imprimir “hello world” y también el numero de thread que es. El #pragma le dice al compilador que el resto de lineas es una directiva, y en este caso es omp parallel. Omp declara que es para OpenMP y parallel dice que el siguiente bloque de código (lo que esta dentro de {}) puede ejecutarse en paralelo. Pruebenlo:
 
 <pre>
-    $ make hello
-    $ ./hello
+    gcc hello.c -fopenmp
+    ./a.out
 </pre>
 
 Noten que los números no están numéricamente ordenados y no salen en el mismo orden si corren hello varias veces. Esto es porque con una región paralela (omp parallel), el programador garantiza que las operaciones se pueden hacer en paralelo, y no hay orden entre los threads. Tampoco ganamos nada si la variable thread_ID es local a cada thread. En general con OpenMP, las variables declaradas afuera de un bloque omp parallel tienen una copia y son compartidas a través de todos los threads, mientras que las variables declaradas dentro de un bloque omp parallel tienen una copia privada para cada thread.
@@ -59,7 +59,7 @@ La suma de vectores es un código inherentemente paralelo, así que lo hace buen
     }
 </pre>
 
-Pueden correr esto (make v_add seguido de ./v_add) y el framework de prueba automáticamente va a tomar el tiempo y va a variar el numero de threads. Van a ver que lo hace bastante mal a medida de que incrementamos el numero de threads. Este problema es que cada thread esta ejecutando todo el codigo con un bloque omp parallel, significando que si tenemos 8 threads, realmente estamos sumando los vectores 8 veces. Para ganar velocidad cuando aumentamos el numero de threads, necesitamos que cada thread haga menos trabajo y diferente, no la misma cantidad como antes.
+Pueden correr esto (gcc v_add.c -fopenmp, despues ./a.out) y el framework de prueba automáticamente va a tomar el tiempo y va a variar el numero de threads. Van a ver que lo hace bastante mal a medida de que incrementamos el numero de threads. Este problema es que cada thread esta ejecutando todo el codigo con un bloque omp parallel, significando que si tenemos 8 threads, realmente estamos sumando los vectores 8 veces. Para ganar velocidad cuando aumentamos el numero de threads, necesitamos que cada thread haga menos trabajo y diferente, no la misma cantidad como antes.
 
 Su tarea es modificar v_add para que sea mas rapido. La mejor manera de hacer esto, es decrementar la cantidad de trabajo que hace cada thread. Para guiarlos en este proceso, dos funciones útiles en OpenMP son:
 
@@ -108,7 +108,7 @@ La siguiente operación es el producto punto entre 2 vectores. Implementar esto 
     }
 </pre>
 
-Prueben el código (make dotp y ./dotp). Noten como el desempeno va empeorando cuando el numero de threads aumenta. Poniendo todo el trabajo de la reducción en una critical section, hacemos que todo el trabajo se haga un thread a la vez (que no es la idea del paralelismo). Vean si pueden solucionar este problema.
+Prueben el código (gcc dotp.c -fopenmp, seguido de ./a.out). Noten como el desempeno va empeorando cuando el numero de threads aumenta. Poniendo todo el trabajo de la reducción en una critical section, hacemos que todo el trabajo se haga un thread a la vez (que no es la idea del paralelismo). Vean si pueden solucionar este problema.
 
 Primero, traten de arreglar el código sin utilizar el keyword Reduction en OpenMP. Hint: traten de reducir el numero de veces que un thread suma a la variable global_sum.
 
