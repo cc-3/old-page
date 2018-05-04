@@ -1,0 +1,119 @@
+---
+layout: post
+title:  "Laboratorio 9"
+date:   2018-04-26
+category: lab
+description: >
+    En este laboratorio utilizaremos OpenMP para paralelizar tareas.
+---
+
+# Referencias y Documentación:
+
+* [Hands On Introduction to OpenMP](http://www.openmp.org/wp-content/uploads/omp-hands-on-SC08.pdf)
+* [Official OpenMP Tutorial Listing](http://www.openmp.org/resources/#Tutorials)
+* [Getting Started](https://software.intel.com/en-us/articles/getting-started-with-openmp)
+
+# Archivos base
+
+[Descarga aquí](https://classroom.github.com/a/5-fY6bn8)
+
+# Introducción a OpenMP
+En este laboratorio vamos a tomar ventaja de los múltiples cores de las computadoras del laboratorio. OpenMP es un framework de programación paralela para C/C++ y Fortran. En los últimos años a ganado mucha atención, especialmente después de que las computadoras traen multiples cores. Es simple y tiene buen desempeno. En este lab vamos a ver algunas de sus características, pero los links en las referencias adicionales les dan más información y tutoriales de este framework.
+
+Hay muchos tipos de paralelismo y patrones para explotarlos. OpenMP escoge un modelo “nested fork-join”. Por defecto, un programa en OpenMP es un programa normal secuencial, excepto por las regiones que el programador explícitamente declara para que se ejecuten en paralelo. En la región paralela, el framework crea (forks) un set de threads. Estos threads ejecutan la mismas instrucciones, solo en diferentes porciones de los datos. En el final de la región paralela, el framework espera que todos los threads terminen (join) antes de dejar la región paralela y continuar secuencialmente.
+
+OpenMP usa “shared memory”, esto significa que todos los threads pueden acceder a la misma dirección de memoria. La alternativa a esto es “distributed memory”, que es preferido en los clusters donde los datos explícitamente son movidos entre direcciones. Muchos programadores encuentran el shared memory más fácil de programar desde que no se tienen que preocupar de mover sus datos, pero es mas difícil de implementar en hardware en una manera escalable. Más adelante en el lab vamos a declarar memoria local al thread (solo la puede acceder el thread que la creo) para propósitos de performance, pero el framework de provee la flexibilidad de que los threads compartan memoria sin ningún esfuerzo del programador.
+
+# Ejemplo: Hello World
+Para este lab, vamos a utilizar C para seguir ganando experiencia en este lenguaje. OpenMP es un framework con una interfaz en C, y no es algo que sea parte del lenguaje. La mayoría de las características de OpenMP son directivas que se le pasan al compilador. Consideren la siguiente implementación del Hello World (hello.c):
+
+<pre>
+    int main() {
+      #pragma omp parallel
+      {
+        int thread_ID = omp_get_thread_num();
+        printf(" hello world %d\n", thread_ID);
+      }
+    }
+</pre>
+
+Este programa va a tomar el numero de threads por defecto y cada uno de ellos va imprimir “hello world” y también el numero de thread que es. El #pragma le dice al compilador que el resto de lineas es una directiva, y en este caso es omp parallel. Omp declara que es para OpenMP y parallel dice que el siguiente bloque de código (lo que esta dentro de {}) puede ejecutarse en paralelo. Pruebenlo:
+
+<pre>
+    $ make hello
+    $ ./hello
+</pre>
+
+Noten que los números no están numéricamente ordenados y no salen en el mismo orden si corren hello varias veces. Esto es porque con una región paralela (omp parallel), el programador garantiza que las operaciones se pueden hacer en paralelo, y no hay orden entre los threads. Tampoco ganamos nada si la variable thread_ID es local a cada thread. En general con OpenMP, las variables declaradas afuera de un bloque omp parallel tienen una copia y son compartidas a través de todos los threads, mientras que las variables declaradas dentro de un bloque omp parallel tienen una copia privada para cada thread.
+
+# Suma de vectores
+La suma de vectores es un código inherentemente paralelo, así que lo hace bueno para el primer ejercicio. La función v_add adentro de v_add.c va a retornar el arreglo que es la suma de 2 vectores x, y casilla por casilla. Un primer intento de esto puede verse así:
+
+<pre>
+    void v_add(double* x, double* y, double* z) {
+      #pragma omp parallel
+      {
+        for(int i = 0; i < ARRAY_SIZE; i++)
+          z[i] = x[i] + y[i];
+      }
+    }
+</pre>
+
+Pueden correr esto (make v_add seguido de ./v_add) y el framework de prueba automáticamente va a tomar el tiempo y va a variar el numero de threads. Van a ver que lo hace bastante mal a medida de que incrementamos el numero de threads. Este problema es que cada thread esta ejecutando todo el codigo con un bloque omp parallel, significando que si tenemos 8 threads, realmente estamos sumando los vectores 8 veces. Para ganar velocidad cuando aumentamos el numero de threads, necesitamos que cada thread haga menos trabajo y diferente, no la misma cantidad como antes.
+
+Su tarea es modificar v_add para que sea mas rapido. La mejor manera de hacer esto, es decrementar la cantidad de trabajo que hace cada thread. Para guiarlos en este proceso, dos funciones útiles en OpenMP son:
+
+<pre>
+    int omp_get_num_threads();
+    int omp_get_thread_num();
+</pre>
+
+La función omp_get_num_threads() va a retornar cuantos threads hay en un bloque omp parallel, y omp_get_thread_num() va a retornar el ID del thread.
+
+Dividan el trabajo en cada thread a través de dos diferentes métodos (escriban diferente código para cada uno de los métodos):
+
+* Primero, que cada thread se ocupe de hacer sumas adyacentes: i.e. el Thread 0 va a sumar los elementos en el index 0, Thread 1 va a sumar los elementos en el index 1, etc. Este metodo no va a ser muy eficiente. Se va encontrar con un problema conocido como “false sharing”.
+* Segundo, si hay N threads, dividan el vector en N pequeños bloques, y hagan que cada thread solo sume ese pequeño bloque.
+
+Para este ejercicio, les pedimos que manualmente dividan el trabajo a través de los threads. Sin embargo, los diseñadores de OpenMP hicieron una directiva for para automáticamente dividir el trabajo independientemente. Aquí esta la función reescrita utilizando esto. Ustedes NO van a usar esta directiva en su solución para este ejercicio.
+
+<pre>
+    void v_add(double* x, double* y, double* z) {
+      #pragma omp parallel
+      {
+        #pragma omp for
+        for(int i = 0; i < ARRAY_SIZE; i++)
+          z[i] = x[i] + y[i];
+      }
+    }
+</pre>
+
+#  Producto punto
+La siguiente operación es el producto punto entre 2 vectores. Implementar esto no es muy diferente de v_add, pero el reto es como sumar todos los productos en la misma variable (reduction). Todos los threads van a tratar de leer y escribir a la misma dirección simultáneamente. Una solución es usar una “critical section”. El código en una “critical section” puede ser ejecutada un thread a la vez en cualquier tiempo. Así, teniendo una “critical section” naturalmente previene que múltiples threads traten de leer y escribir a los mismos datos. Una implementación burda va a proteger la suma con una “critical section”, como (dotp.c):
+
+<pre>
+    double dotp(double* x, double* y) {
+      double global_sum = 0.0;
+      #pragma omp parallel
+      {
+          double private_sum = 0.0;
+        #pragma omp for
+              for(int i=0; i < ARRAY_SIZE; i++)
+                  private_sum += x[i] * y[i];
+
+        #pragma omp critical
+            global_sum += private_sum;
+      }
+      return global_sum;
+    }
+</pre>
+
+Prueben el código (make dotp y ./dotp). Noten como el desempeno va empeorando cuando el numero de threads aumenta. Poniendo todo el trabajo de la reducción en una critical section, hacemos que todo el trabajo se haga un thread a la vez (que no es la idea del paralelismo). Vean si pueden solucionar este problema.
+
+Primero, traten de arreglar el código sin utilizar el keyword Reduction en OpenMP. Hint: traten de reducir el numero de veces que un thread suma a la variable global_sum.
+
+Después cuando les funcione, traten de arreglarlo utilizando el keyword Reduction de OpenMP (los links siguientes los ayudarán). El desempeno es mejor que en el caso de arreglarlo manualmente? Por qué? **Responda estas preguntas en un comentario al final de su solución**
+
+Links útiles
+* [Reduction](https://msdn.microsoft.com/en-us/library/88b1k8y5.aspx)
+* [Más reduction](https://stackoverflow.com/questions/13290245/reduction-with-openmp)
