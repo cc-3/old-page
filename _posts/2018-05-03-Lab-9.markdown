@@ -112,7 +112,7 @@ Prueben el código (make dotp y ./dotp). Noten como el desempeno va empeorando c
 
 Primero, traten de arreglar el código sin utilizar el keyword Reduction en OpenMP. Hint: traten de reducir el numero de veces que un thread suma a la variable global_sum.
 
-Después cuando les funcione, traten de arreglarlo utilizando el keyword Reduction de OpenMP (los links siguientes los ayudarán). El desempeno es mejor que en el caso de arreglarlo manualmente? Por qué? **Responda estas preguntas en un comentario al final de su solución**
+Después cuando les funcione, traten de arreglarlo utilizando el keyword Reduction de OpenMP (los links siguientes los ayudarán). El desempeno es mejor que en el caso de arreglarlo manualmente? Por qué?
 
 Links útiles
 * [Reduction](https://msdn.microsoft.com/en-us/library/88b1k8y5.aspx)
