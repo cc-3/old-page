@@ -9,7 +9,7 @@ description: >
 
 #### Setup
 
-Como siempre, hagan click en este [link](https://classroom.github.com/g/6AKvWaT3) para poder clonar los archivos necesarios para iniciar. Recuerden que tienen que subir su link al GES para poder tener su nota.
+Como siempre, hagan click en este [link](https://classroom.github.com/g/7-3CKK2U) para poder clonar los archivos necesarios para iniciar. Recuerden que tienen que subir su link al GES para poder tener su nota.
 
 ***
 
