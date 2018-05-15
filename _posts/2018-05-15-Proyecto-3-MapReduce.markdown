@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Proyecto 3: Map Reduce"
-date:   2017-04-19
+date:   2018-05-15
 category: proyecto
 description: >
     En proyecto van a convertir breadth-first-search (un algoritmo que visto en grafos al final de CC2) en un formato compatible con el framework de MapReduce (i.e. una función map y una función reduce) para resolver un puzzle.
