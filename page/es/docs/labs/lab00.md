@@ -13,52 +13,52 @@
 
 ## Ejercicio 1: Cuenta de GitHub
 
-Por favor lee las siguientes instrucciones cuidadosamente antes de seguir con el laboratorio. La mayor parte de los problemas que tienen los estudiantes durante este laboratorio se pueden prevenir siguiendo atentamente los pasos que se indican.
+Por favor lean las siguientes instrucciones cuidadosamente antes de seguir con el laboratorio. La mayor parte de los problemas que tienen los estudiantes durante este laboratorio se pueden prevenir siguiendo atentamente los pasos que se indican.
 
-Para este curso necesitaremos que uses **git**, un _sistema de control de versiones distribuido_. Los sistemas de control de versiones son las mejores herramientas para compartir y almacenar código a comparación de mandar correos con archivos adjuntos, utilizar memorias flash, o incluso compartir documentos mediante DropBox o Google Docs.
+Para este curso necesitaremos que utilicen **git**, un _sistema de control de versiones distribuido_. Los sistemas de control de versiones son las mejores herramientas para compartir y almacenar código a comparación de mandar correos con archivos adjuntos, utilizar memorias flash, o incluso compartir documentos mediante DropBox o Google Docs.
 
-Vamos a estar usando **GitHub** para tener repositorios privados en donde van a _almacenar_ su código remotamente. Si la oración anterior no te dijo nada, no te preocupes vamos a guiarte en el proceso más adelante. Pero primero, necesitas crear una cuenta de **GitHub**.
+Vamos a estar usando **GitHub** para tener repositorios privados en donde van a _almacenar_ su código remotamente. Si la oración anterior no te dijo nada, no te preocupes vamos a guiarlos en el proceso más adelante. Pero primero, necesitan crear una cuenta de **GitHub**.
 
 ¿Por qué GitHub? GitHub ahora le permite a todas las cuentas gratuitas tener repositorios privados ilimitados con algunas limitaciones que no van a ser ningún problema para nosotros.
 
 ### GitHub y Primer Repositorio
 
-Navega a la siguiente página: [github.com](https://github.com/)
+Naveguen a la siguiente página: [github.com](https://github.com/)
 
-1. Si no tienes una cuenta de GitHub todavía, crea una en el siguiente [link](https://github.com/join/).
-2. Crea un repositorio privado vacío, llamado lab0_git
-    * Primero haz click en el siguiente [link](https://github.com/new/)
-    * Luego llena los campos como se muestra la siguiente imagen
+1. Si no tienen una cuenta de GitHub todavía, creen una en el siguiente [link](https://github.com/join/).
+2. Creen un repositorio privado vacío, llamado lab0_git
+    * Primero hagan click en el siguiente [link](https://github.com/new/)
+    * Luego llenen los campos como se muestra en la siguiente imagen
 
 ![crear repo](/img/labs/lab00/repo_es.png)
 
 ### Configurando git
 
-Ahora que ya hemos creado nuestro repositorio, vamos a configurar git para que sepa quien eres. Abre una terminal <kbd>ctrl</kbd><kbd>alt</kbd><kbd>t</kbd> y ejecuta los siguientes comandos listados abajo, reemplazando **TU_NOMBRE** con tu nombre y apellido (entre comillas) y **TU_CORREO** con la dirección de correo que utilizaste para registrarte en GitHub.
+Ahora que ya hemos creado nuestro repositorio, vamos a configurar git para que sepa quien eres. Abran una terminal <kbd>ctrl</kbd><kbd>alt</kbd><kbd>t</kbd> y ejecuten los siguientes comandos listados abajo, reemplazando **NOMBRE** con su nombre y apellido (entre comillas) y **CORREO** con la dirección de correo que utilizarón para registrarse en GitHub.
 
 ```shell
-git config --global user.name "TU_NOMBRE"
+git config --global user.name "NOMBRE"
 ```
 
 ```shell
-git config --global user.email "TU_CORREO"
+git config --global user.email "CORREO"
 ```
 
 ## Ejercicio 2: git y Remotes
 
 Primero, algunas definiciones rápidas:
 
-* Un **remote** es la página web host o servidor que va a almacenar tu código remotamente en vez de tener únicamente tu código de forma local en tu propia computadora. Puedes pensar en esto de igual manera a como se almacena un archivo en DropBox o Google Drive pero con el poder que nos da git.
+* Un **remote** es la página web host o servidor que va a almacenar su código remotamente en vez de tener únicamente el código de forma local en su propia computadora. Pueden pensar en esto de igual manera a como se almacena un archivo en DropBox o Google Drive pero con el poder que nos da git.
 
-* Un **branch** es una secuencia (por aparte) de diferentes cambios a tu código. Puedes pensar en los _branches_ como diferentes versiones de tu codigo, que en algún punto fueron lo mismo. La siguiente figura muestra a que nos referimos como branches.
+* Un **branch** es una secuencia (por aparte) de diferentes cambios a su código. Pueden pensar en los _branches_ como diferentes versiones de su codigo, que en algún punto fueron lo mismo. La siguiente figura muestra a que nos referimos como branches.
 
 ![branch](/img/labs/lab00/branch.svg)
 <p align="center">_(créditos de imagen: BitBucket)_</p>
 
-A lo largo de este curso, estarás trabajando en dos diferentes "_computadoras_" que generalmente tendran diferentes versiones de tu código en algún tiempo. Estas dos son: tu computadora personal y tu remote de GitHub (tus repositorios privados de GitHub). Es esencial que entiendas la diferencia entre estas dos y como puedes compartir código entre ellas.
+A lo largo de este curso, estarán trabajando en dos diferentes "_computadoras_" que generalmente tendran diferentes versiones de su código en algún tiempo. Estas dos son: su computadora personal y su remote de GitHub (sus repositorios privados de GitHub). Es esencial que entiendan la diferencia entre estas dos y como pueden compartir código entre ellas.
 
-1. Tu **computadora personal** es la que te servirá para hacer todo el trabajo (laboratorios y proyectos) que necesites hacer durante el curso, nada nuevo aquí.
-2. Tu cuenta de GitHub y los **remotes** te servirán para muchos propósitos, pero la principal razón es para tener un backup o copia de respaldo, de tal manera que si algo malo le sucede a tu computadora (esperamos no <i class="em em-wink"></i>), puedas recuperar tu código en vez de empezar desde cero nuevamente. Conceptualmente, puedes pensar en los remotes de GitHub como otra computadora que únicamente almacena tu código y nada más. Siempre debes subir tus cambios hacia GitHub haciendo _push_ al remote (es decir actualizarás los archivos en GitHub) y también descargarás los cambios de GitHub haciendo _pull_ (actualizando los archivos en tu computadora personal).
+1. Su **computadora personal** es la que les servirá para hacer todo el trabajo (laboratorios y proyectos) que necesiten hacer durante el curso, nada nuevo aquí.
+2. Su cuenta de GitHub y los **remotes** les servirán para muchos propósitos, pero la principal razón es para tener un backup o copia de respaldo, de tal manera que si algo malo le sucede a sus computadoras (esperamos no <i class="em em-wink"></i>), puedan recuperar su código en vez de empezar de cero nuevamente. Conceptualmente, pueden pensar en los remotes de GitHub como otra computadora que únicamente almacena su código y nada más. Siempre deben subir sus cambios hacia GitHub haciendo _push_ al remote (es decir actualizando los archivos en GitHub) y también pueden descargar los cambios de GitHub haciendo _pull_ (actualizando los archivos en su computadora personal).
 
 ### Obteniendo los Archivos
 
@@ -86,6 +86,7 @@ ls
 Lo cual desplegará lo siguiente:
 
 ```shell
+autograder  ex3.txt  ex4.txt  LICENSE  submit
 ```
 
 ### Haciendo push hacia GitHub
@@ -157,7 +158,7 @@ Vamos a utilizar números de 4 bits. Si apilamos cinco números de 4 bits uno en
 2. ¿Cuáles son los cinco digitos en hexadecimal (separados por una coma) que producen el patrón de arriba?
 3. ¿Qué letra se dibuja con los siguientes números en decimal: 1,1,9,9,6?
 4. ¿Qué letra se dibuja con el siguiente numero en hexadecimal: 0xF8F88?
-5. ¿Cuál es el numero en hexadecimal para dibujar la letra B?
+5. ¿Cuál es el numero en hexadecimal para dibujar la letra b (minúscula)?
 6. ¿Utilizarías cinco dígitos hexadecimales para dibujar la letra N? Contesta Si o No
 
 En los archivos del laboratorio vas a encontrar un archivo de texto `ex3.txt` con lo siguiente:
@@ -211,8 +212,53 @@ git push -u origin master
 
 ## Calificación
 
-Si ya completaste el laboratorio puedes subirlo para calificación
+Todos los laboratorios y proyectos de este curso tendrán autograders y podrán saber su nota al terminarlo. Este proceso que van a ver a continuación lo tienen que seguir siempre para poder obtener su nota.
+
+### Generando Token
+
+Para que podamos calificar su laboratorio es necesario que generen un token único para subir los archivos y que sean calificados, este token es de uso personal no lo compartan. Para generar el token solo tiene que ir al siguiente [link](https://cc-3.github.io/Autograders/).
+
+* Tienen que hacer click en _generate token_
+![Crear Token](/img/labs/lab00/token1.png)
+
+> **NOTA**: Necesitan usar una cuenta de google para esto
+
+* Luego copien y peguen el código generado en algún lugar y guardenlo
+
+![Copiar Token](/img/labs/lab00/token2.png)
+
+Si por alguna razón pierden el token, pueden volver a generarlo en el mismo link de arriba, pero recuerden que es personal y no lo tienen que compartir con nadie.
+
+### Subiendo el laboratorio
+
+Ya que tienen el token generado pueden subir su laboratorio para que sea calificado y obtener su nota. Lo único que tienen que hacer para esto es ejecutar el siguiente comando en la terminal (siempre estando en la carpeta del laboratorio):
 
 ```shell
-./submit
+./submit TOKEN
+```
+
+> **NOTA**: Tienen que reemplazar TOKEN por el token que generaron.
+
+Lo cual, si nada sale mal <i class="em em---1"></i>, les dará la nota que sacaron en el laboratorio y lo guardará en nuestra base de datos.
+
+```shell
+   ___       __                        __
+  / _ |__ __/ /____  ___ ________ ____/ /__ ____
+ / __ / // / __/ _ \/ _ `/ __/ _ `/ _  / -_) __/
+/_/ |_\_,_/\__/\___/\_, /_/  \_,_/\_,_/\__/_/
+                   /___/
+
+Lab: lab0_git
+
+zipping source files...
+getting server url...
+waiting for results...
+
+Exercise              Grade  Message
+------------------  -------  ---------
+2. git and Remotes       20  passed
+3. Binary Alphabet       40  passed
+4. 1000 $1 Bills         40  passed
+
+=> Score 100.00/100
 ```
