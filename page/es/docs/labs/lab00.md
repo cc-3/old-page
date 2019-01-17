@@ -99,7 +99,7 @@ Ahora vamos a hacer _push_ del código hacia el repositorio privado de GitHub qu
 git remote add origin https://github.com/USUARIO/lab0_git.git
 git push -u origin master
 ```
-> **NOTA**: En caso hayas olvidado cambiar USUARIO por tu usuario de GITHUB, debes usar el comando. <br>
+> **NOTA**: En caso hayas olvidado cambiar USUARIO por tu usuario de GitHub, debes usar el comando. <br>
 `git remote set-url origin https://github.com/USUARIO/lab0_git.git`
 
 Ahora que tenemos nuestro laboratorio almacenado en GitHub (puedes verificar esto navegando hacia https://github.com/USUARIO/lab00_git.git), podemos agregar un archivo y hacer algunos _commits_. Vamos a crear un archivo llamado `hello.sh` en la carpeta del laboratorio ejecutando los siguientes commandos en la terminal:
@@ -223,7 +223,7 @@ Para que podamos calificar su laboratorio es necesario que generen un token úni
 * Tienen que hacer click en _generate token_
 ![Crear Token](/img/labs/lab00/token1.png)
 
-> **NOTA**: Necesitan usar una cuenta de google para esto
+> **NOTA**: Necesitan usar una cuenta de galileo para esto
 
 * Luego copien y peguen el código generado en algún lugar y guardenlo
 
