@@ -94,12 +94,13 @@ autograder  ex3.txt  ex4.txt  LICENSE  submit
 
 Ahora vamos a hacer _push_ del código hacia el repositorio privado de GitHub que creamos anteriormente, ejecutando los siguientes comandos, pero estando en la carpeta que acabamos de crear `lab0_git`:
 
+> **NOTA**: Tienes que cambiar USUARIO por tu usuario de GitHub.
 ```shell
 git remote add origin https://github.com/USUARIO/lab0_git.git
 git push -u origin master
 ```
-
-> **NOTA**: _Tienes que cambiar USUARIO por tu usuario de GitHub_.
+> **NOTA**: En caso hayas olvidado cambiar USUARIO por tu usuario de GITHUB, debes usar el comando. <br>
+`git remote set-url origin https://github.com/USUARIO/lab0_git.git`
 
 Ahora que tenemos nuestro laboratorio almacenado en GitHub (puedes verificar esto navegando hacia https://github.com/USUARIO/lab00_git.git), podemos agregar un archivo y hacer algunos _commits_. Vamos a crear un archivo llamado `hello.sh` en la carpeta del laboratorio ejecutando los siguientes commandos en la terminal:
 
