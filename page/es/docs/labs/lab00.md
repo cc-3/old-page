@@ -72,6 +72,7 @@ cd lab0_git
 Luego descarga los archivos base de la siguiente manera:
 
 ```shell
+git init
 git remote add lab0-starter https://github.com/cc-3/lab0_git.git
 git fetch lab0-starter
 git merge lab0-starter/master -m "agregando codigo base, lab 0"
