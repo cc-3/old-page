@@ -17,7 +17,7 @@ Por favor lean las siguientes instrucciones cuidadosamente antes de seguir con e
 
 Para este curso necesitaremos que utilicen **git**, un _sistema de control de versiones distribuido_. Los sistemas de control de versiones son las mejores herramientas para compartir y almacenar código a comparación de mandar correos con archivos adjuntos, utilizar memorias flash, o incluso compartir documentos mediante DropBox o Google Docs.
 
-Vamos a estar usando **GitHub** para tener repositorios privados en donde van a _almacenar_ su código remotamente. Si la oración anterior no te dijo nada, no te preocupes vamos a guiarlos en el proceso más adelante. Pero primero, necesitan crear una cuenta de **GitHub**.
+Vamos a estar usando **GitHub** para tener repositorios privados en donde van a _almacenar_ su código remotamente. Si la oración anterior no les dijo nada, no se preocupes, vamos a guiarlos en el proceso más adelante. Pero primero, necesitan crear una cuenta de **GitHub**.
 
 ¿Por qué GitHub? GitHub ahora le permite a todas las cuentas gratuitas tener repositorios privados ilimitados con algunas limitaciones que no van a ser ningún problema para nosotros.
 
@@ -28,13 +28,13 @@ Naveguen a la siguiente página: [github.com](https://github.com/)
 1. Si no tienen una cuenta de GitHub todavía, creen una en el siguiente [link](https://github.com/join/).
 2. Creen un repositorio privado vacío, llamado lab0_git
     * Primero hagan click en el siguiente [link](https://github.com/new/)
-    * Luego llenen los campos como se muestra en la siguiente imagen
+    * Luego llenen los campos, como se muestra en la siguiente imagen
 
 ![crear repo](/img/labs/lab00/repo_es.png)
 
 ### Configurando git
 
-Ahora que ya hemos creado nuestro repositorio, vamos a configurar git para que sepa quien eres. Abran una terminal <kbd>ctrl</kbd><kbd>alt</kbd><kbd>t</kbd> y ejecuten los siguientes comandos listados abajo, reemplazando **NOMBRE** con su nombre y apellido (entre comillas) y **CORREO** con la dirección de correo que utilizarón para registrarse en GitHub.
+Ahora que ya hemos creado nuestro repositorio, vamos a configurar git para que sepa quiénes son. Abran una terminal <kbd>ctrl</kbd><kbd>alt</kbd><kbd>t</kbd> y ejecuten los siguientes comandos listados abajo, reemplazando **NOMBRE** con su nombre y apellido (entre comillas) y **CORREO** con la dirección de correo que utilizarón para registrarse en GitHub.
 
 ```shell
 git config --global user.name "NOMBRE"
