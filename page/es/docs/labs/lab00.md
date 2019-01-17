@@ -65,8 +65,8 @@ A lo largo de este curso, estarán trabajando en dos diferentes "_computadoras_"
 Crea una carpeta llamada `lab0_git` en algún directorio de tu preferencia.
 
 ```shell
-mkdir lab00_git
-cd lab00_git
+mkdir lab0_git
+cd lab0_git
 ```
 
 Luego descarga los archivos base de la siguiente manera:
