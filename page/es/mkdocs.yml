@@ -1,0 +1,43 @@
+# General Info
+site_name: Estructura de Máquinas
+site_description: Grandes Ideas en Arquitectura de Computadora
+site_author: CC-3
+site_url: https://cc-3.github.io/
+
+# Repository
+edit_uri: edit/master/page/docs
+repo_name: cc-3/MachineStructures
+repo_url: https://github.com/cc-3/MachineStructures
+
+# Copyright
+copyright: 'CC-3'
+
+# Theme Configuration
+theme:
+  name: material
+  language: es
+  custom_dir: ../assets
+
+
+# Customization
+extra:
+  social:
+    - type: github
+      link: https://github.com/cc-3/MachineStructures
+
+extra_css:
+  - stylesheets/emoji.css
+  - stylesheets/kbd.css
+
+# Extensions
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
+
+nav:
+  - Inicio: index.md
+  - Laboratorios:
+    - Lab 0: labs/lab00.md
