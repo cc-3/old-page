@@ -227,13 +227,17 @@ Para que podamos calificar su laboratorio es necesario que generen un token úni
 * Tienen que hacer click en _generate token_
 ![Crear Token](/img/labs/lab00/token1.png)
 
-> **NOTA**: Necesitan usar una cuenta de galileo para esto
+> **NOTA**: Necesitan usar una cuenta de @galileo.edu para esto
 
 * Luego copien y peguen el código generado en algún lugar y guardenlo
 
 ![Copiar Token](/img/labs/lab00/token2.png)
 
 Si por alguna razón pierden el token, pueden volver a generarlo en el mismo link de arriba, pero recuerden que es personal y no lo tienen que compartir con ¡¡¡**nadie**!!!.
+
+Algo muy importante que tienen que tener en cuenta es que en este curso, como en cualquier otro, no se permite el PLAGIO, si utilizan el laboratorio de otro compañero y hacen submit con su token solo para sacar una "buena nota" nos daremos cuenta de esto porque tendremos una copia siempre de los archivos que utilizan gracias a GitHub classroom.
+
+> **NOTA**: NO SE COPIEN, EN SERIO NO LO HAGAN !!!! <i class="em em-angry"></i>
 
 ### Subiendo el laboratorio
 
