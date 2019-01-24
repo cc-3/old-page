@@ -4,12 +4,12 @@
 
 * Aprender cómo compilar y ejecutar un programa en C.
 * Examinar diferentes tipos de control de flujo en C.
-* Introducirlos al depurador de C
+* Introducirlos al debugger (depurador) de C
 * Conseguir experiencia práctica utilizando GBD para depurar programas en C.
 * Ganar más confianza al trabajar con punteros.
 
 ## Preparación
-Visiten este [link](https://classroom.github.com/a/R92ylAB1). Aquí encontrarán todos los archivos necesarios para completar este lab. En esta página, encontrarán un botón que dice "Accept assignment". Al presionar este botón, se creará automáticamente un repositorio en Github llamado www.github.com/cc-3/lab1-c-gdb-<USUARIO>. Noten que el "dueño" de este repositorio es un usuario llamado `cc-3`, y el usuario de ustedes es únicamente el sufijo del nombre del repo. De esta forma, nos encargamos de tener acceso siempre a su código, en caso existan copias o cualquier otro tipo de trampa. Sepan de una vez que, si encontramos plagio o cualquier otro tipo de trampa en sus laboratorios, su nota será AUTOMÁTICAMENTE 0,  sin posibilidad de cambiarla. De repetirse nuevamente este acontecimiento, el staff del curso organizará una reunión con ustedes y sus directores de carrera para contarles lo ocurrido.
+Visiten este [link](https://classroom.github.com/a/R92ylAB1). Aquí encontrarán todos los archivos necesarios para completar este lab. En esta página, encontrarán un botón que dice "Accept assignment". Al presionar este botón, se creará automáticamente un repositorio en Github llamado "www.github.com/cc-3/lab1-c-gdb-USUARIO". Noten que el "dueño" de este repositorio es un usuario llamado `cc-3`, y el usuario de ustedes es únicamente el sufijo del nombre del repo. De esta forma, nos encargamos de tener acceso siempre a su código, en caso existan copias o cualquier otro tipo de trampa. Sepan de una vez que, si encontramos plagio o cualquier otro tipo de trampa en sus laboratorios, su nota será AUTOMÁTICAMENTE 0,  sin posibilidad de cambiarla. De repetirse nuevamente este acontecimiento, el staff del curso organizará una reunión con ustedes y sus directores de carrera para contarles lo ocurrido y sancionarlos conforme al reglamento de la universidad.
 
 Después de realizar esto, en la máquina virtual (o sus propias computadoras) abran una terminal en el directorio que prefieran, y ejecuten el siguiente comando:
 ```shell
@@ -26,7 +26,7 @@ Esto compila el archivo `program.c` y crea un archivo ejecutable llamado `a.out`
 ```shell
 ./a.out
 ```
-El archivo ejecutable es `a.out`, así que, ¿Qué rayos es eso de punto y diagonal? La respuesta: cuando quieren ejecutar un ejecutable, es necesario preponer una ruta de archivo para distinguirlo de un comando como `python`. El punto se refiere al "directorio actual". De paso, dos puntos (..) se referirían al directorio que está un nivel arriba.
+El archivo ejecutable es `a.out`, así que, ¿Qué rayos es eso de punto y diagonal? La respuesta: cuando quieren ejecutar un ejecutable, es necesario preponer una ruta de archivo para distinguirlo de un comando como `python` (no se utiliza `./python`). El punto se refiere al "directorio actual". De paso, dos puntos (..) se referirían al directorio que está un nivel arriba.
 
 `gcc` tiene varias opciones (o argumentos) de línea de comandos, los cuales les recomendamos explorar. En este laboratorio, vamos a estar usando solamente -o,  que se usa para especificar el nombre del ejecutable que `gcc` genera. Usando -o, se utilizarían estos comandos para compilar `program.c` en un archivo llamado `program`, y ejecutarlo. Eso nos sirve si no queremos que todos nuestros archivos ejecutables se llamen `a.out`.
 
@@ -58,9 +58,9 @@ Hay múltiples combinaciones de valores en las macros que consiguen este resulta
 
 ## Ejercicio 2: _Debugger_ (depurador)
 ### ¿Qué es un _debugger_?
-Esta sección es para los estudiantes que no están familiarizados con los _debuggers_. Un **debugger**, como sugiere el nombre, es un programa específicamente diseñado para ayudarlos a encontrar _bugs_, o errores lógicos, u otros errores en el código (nota: si quieren saber por qué se les llama _bugs_ a los errores, vean [aquí](https://www.quora.com/Why-are-errors-in-software-codes-called-bugs)). Distintos debuggers tienen distintas características, pero es normal que todos los debuggers sean capaces de hacer las siguientes cosas:
+Este párrafo es para los estudiantes que no están familiarizados con los _debuggers_. Un **debugger**, como sugiere el nombre, es un programa específicamente diseñado para ayudarlos a encontrar _bugs_, o errores lógicos, u otros errores en el código (nota: si quieren saber por qué se les llama _bugs_ a los errores, vean [aquí](https://www.quora.com/Why-are-errors-in-software-codes-called-bugs)). Distintos debuggers tienen distintas características, pero es normal que todos los debuggers sean capaces de hacer las siguientes cosas:
   1. Poner un **breakpoint** en el programa. Un Breakpoint es una línea específica en su código en donde quisieran que se detenga la ejecución del programa, para que puedan ver lo que está pasando alrededor.
-  2. **Step** línea a línea por el programa. El código siempre se ejecuta línea a línea, pero pasa muy rápido como para que sepamos qué línea produce algún error. Ser capaces de ejecutar línea a línea el programa les permite observar **exactamente** qué esta causando un bug en el programa.
+  2. Ejecución por **Steps** (línea a línea) por el programa. El código siempre se ejecuta línea a línea, pero pasa muy rápido como para que sepamos qué línea produce algún error. Ser capaces de ejecutar línea a línea el programa les permite observar **exactamente** qué esta causando un bug en el programa.
 Para este ejercicio, necesitarán la [GDB reference card](http://inst.eecs.berkeley.edu/~cs61c/resources/gdb5-refcard.pdf). GDB quiere decir "GNU De-Bugger". Compilen hello.c con la bandera "-g":
 ```shell
 gcc -g -o hello hello.c
@@ -79,6 +79,7 @@ Si cgdb no funciona, gdb se puede usar para completar los ejercicios (utilicen `
 Escriban `help` adentro de gdb para averiguar cómo hacer estas cosas, o usen la reference card.
 
 **Si encuentran un mensaje de error que dice:** `printf.c: No such file or directory`. Probablemente entraron a una función `printf`. Si siguen ejecutando paso a paso, pareciera que nunca avanzaran en el código. CGDB está dando el error porque no tienen el archivo en el que se define la función `printf`. Esto es algo molesto, y para librarse de esto, usen el comando `finish` para ejecutar el programa hasta que termine la función printf. Y la **próxima vez**, utilicen el comando `next` para saltar sobre la linea que usa `printf`.
+
 **Nota: CGDB vs GDB**.
 
 en este ejercicio, usamos cgdb para depurar nuestros programas. cgdb es idéntico a gdb, excepto que tiene unas características extra que hacen más cómodo el trabajo. Todos los comandos de la hoja de referencia funcionan también en gdb.
@@ -89,14 +90,14 @@ En cgdb, pueden presionar `ESC`para ir a la ventana del código (arriba), y usar
   1. 
   
 ## Ejercicio 3: Depurando un problema con fallas usando GDB
-Ahora, usarán su nuevo conocimiento para depurar un pequeño programa. Vean el programa `ll_equal.c`. Compilen y ejecuten el programa, y analicen un poco lo que hace. Así como está, preoducirá un resultado como el siguiente:
+Ahora, usarán su nuevo conocimiento para depurar un pequeño programa. Vean el programa `ll_equal.c`. Compilen y ejecuten el programa, y analicen un poco lo que hace. Así como está, producirá un resultado como el siguiente:
 ```shell
 $ gcc -g -o ll_equal ll_equal.c
 $ ./ll_equal
 equal test 1 result = 1
 Segmentation fault
 ```
-**Averigüen qué produce la falla de segmentación**.
+**Averigüen qué produce el segmentation fault (falla de segmentación)**.
 
 Ejecuten gdb en el programa, siguiendo las instrucciones aprendidas en los ejercicios anteriores. Les recomendamos añadir un breakpoint en la función `ll_equal()`. Cuando el debugger pare en el breakpoint, ejecuten paso a paso el programa, para que puedan descifrar qué es lo que provoca el error.
 
@@ -126,6 +127,9 @@ Pueden ver [esta discusión de stackoverflow](https://stackoverflow.com/question
 (Pista: si están creando un archivo de texto que contiene su input, van bien!)
 
 (pista 2: Recuerden que es posible ejecutar programas con **argumentos (incluyendo símbolos de redirección) desde CGDB!**
+
+Esperamos que hayan comprendido cómo utilizar redirección, y cómo es que esto les ayuda a evitar varios problemas al usar CGDB. Nunca tengan miedo de usar un _debugger_! tal vez no es muy agradable visualmente, pero siempre estará para ayudarlos.
+
 Este ejercicio no vale puntos :-) pero es importante conocer sobre estas cosas para que puedan utilizarlo en el futuro (los siguientes laboratorios y proyectos podrían necesitar de este conocimiento)
 
 ## Ejercicio 5: Punteros y estructuras en C
@@ -144,4 +148,3 @@ Aquí hay un [Articulo](https://en.wikipedia.org/wiki/Cycle_detection#Floyd.27s_
 A propósito, los punteros se llaman `tortoise` y `hare` porque el puntero "tortoise (tortuga)" se incrementa lentamente (como una tortuga, que se mueve muy lento) y el puntero  "hare (liebre)" se incrementa rápidamente (más rápido que una tortuga, como una liebre, o conejo, que se mueve muy rápido).
 
 Para finalizar, la parábola de [la tortuga y la liebre](http://read.gov/aesop/025.html) es relevante siempre, especialmente en este curso. Escribir sus programas en C a paso lento pero seguro (ayudándose de programas como CGDB) es lo que ler hará ganar la carrera.
-----fin-----
