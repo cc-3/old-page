@@ -75,14 +75,19 @@ Si cgdb no funciona, gdb se puede usar para completar los ejercicios (utilicen `
   1. poniendo un breakpoint en el main.
   2. usando el comando run de gdb.
   3. usando el comanndo single-step de gdb.
+
 Escriban `help` adentro de gdb para averiguar cómo hacer estas cosas, o usen la reference card.
 
 **Si encuentran un mensaje de error que dice:** `printf.c: No such file or directory`. Probablemente entraron a una función `printf`. Si siguen ejecutando paso a paso, pareciera que nunca avanzaran en el código. CGDB está dando el error porque no tienen el archivo en el que se define la función `printf`. Esto es algo molesto, y para librarse de esto, usen el comando `finish` para ejecutar el programa hasta que termine la función printf. Y la **próxima vez**, utilicen el comando `next` para saltar sobre la linea que usa `printf`.
-**Nota: CGDB vs GDB**
+**Nota: CGDB vs GDB**.
+
 en este ejercicio, usamos cgdb para depurar nuestros programas. cgdb es idéntico a gdb, excepto que tiene unas características extra que hacen más cómodo el trabajo. Todos los comandos de la hoja de referencia funcionan también en gdb.
 En cgdb, pueden presionar `ESC`para ir a la ventana del código (arriba), y usar `i` para regresar a la ventana de comandos (abajo), similar a `vim`. La ventana de comandos es donde se introducen los comandos de gdb.
+  
 **Preguntas**
+
   1. 
+  
 ## Ejercicio 3: Depurando un problema con fallas usando GDB
 Ahora, usarán su nuevo conocimiento para depurar un pequeño programa. Vean el programa `ll_equal.c`. Compilen y ejecuten el programa, y analicen un poco lo que hace. Así como está, preoducirá un resultado como el siguiente:
 ```shell
@@ -91,10 +96,14 @@ $ ./ll_equal
 equal test 1 result = 1
 Segmentation fault
 ```
-**Averigüen qué produce la falla de segmentación**
+**Averigüen qué produce la falla de segmentación**.
+
 Ejecuten gdb en el programa, siguiendo las instrucciones aprendidas en los ejercicios anteriores. Les recomendamos añadir un breakpoint en la función `ll_equal()`. Cuando el debugger pare en el breakpoint, ejecuten paso a paso el programa, para que puedan descifrar qué es lo que provoca el error.
+
 Pista: Analicen el valor de los punteros `a` y `b` in la función (despliegenlos!). ¿están siempre apuntando a la dirección correcta?
+
 pista 2: vean el código fuente en `main` para ver la estructura de los nodos, y ver exactamente qué está pasando como argumento a `ll_equal`.
+
 Después de corregir el problema, compilen nuevamente y ejecuten el código. ¿Notan la diferencia?
 
 ## Ejercicio 4: "Debuggeando" un programa en C que requiere interacción del usuario
@@ -111,8 +120,11 @@ $ cgdb int_hello
 Vamos a aprender acerca de una herramienta que nos ayudará a evitar este problema. El propósito de este ejercicio es que no tengan miedo de usar un debugger incluso cuando el programa requiera de interacción con el usuario.
 
 Resulta que es posible enviar texto a [stdin](https://en.wikipedia.org/wiki/Standard_streams#Standard_input_.28stdin.29), el flujo de datos que es leído por la función `fgets` en este programa, con unos caracteres especiales desde la línea de comandos. Echen un vistazo a la "redirección" en [esta página](https://www.cs.bu.edu/teaching/c/file-io/intro), y vean si pueden descifrar cómo enviar texto al programa sin escribirlo textualmente mientras el programa está en ejecución (lo cual, como ya saben, no funciona bien en CGDB).
+
 Pueden ver [esta discusión de stackoverflow](https://stackoverflow.com/questions/19467865/how-to-use-redirection-in-c-for-file-input) para más inspiración.
+
 (Pista: si están creando un archivo de texto que contiene su input, van bien!)
+
 (pista 2: Recuerden que es posible ejecutar programas con **argumentos (incluyendo símbolos de redirección) desde CGDB!**
 Este ejercicio no vale puntos :-) pero es importante conocer sobre estas cosas para que puedan utilizarlo en el futuro (los siguientes laboratorios y proyectos podrían necesitar de este conocimiento)
 
