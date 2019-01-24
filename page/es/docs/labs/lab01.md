@@ -187,7 +187,7 @@ Aquí tendrán que responder las siguientes preguntas de opción múltiple (no t
 Después de responder estas preguntas, no olviden hacer el submit y push de este archivo hacia github:
 ```shell
 $ git add ex2.txt
-$ git commit =m "Ejercicio 2 terminado"
+$ git commit -m "Ejercicio 2 terminado"
 $ git push -u origin master
 ``` 
 
@@ -212,8 +212,8 @@ Después de corregir el problema, compilen nuevamente y ejecuten el código. ¿N
 Al finalizar, no olviden subir el archivo modificado a su repositorio remoto:
 
 ```shell
-$ git add ex2.txt
-$ git commit =m "Ejercicio 2 terminado"
+$ git add ll_equal.c
+$ git commit -m "Ejercicio 2 terminado"
 $ git push -u origin master
 ``` 
 
@@ -272,7 +272,7 @@ Si su código presenta errores, entonces ya son capaces de utilizar CGDB para po
 
 ```shell
 $ git add ll_cycle.c
-$ git commit =m "LAB01 terminado"
+$ git commit -m "LAB01 terminado"
 $ git push -u origin master
 ``` 
 
