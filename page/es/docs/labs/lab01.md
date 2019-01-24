@@ -147,4 +147,4 @@ Aquí hay un [Articulo](https://en.wikipedia.org/wiki/Cycle_detection#Floyd.27s_
 
 A propósito, los punteros se llaman `tortoise` y `hare` porque el puntero "tortoise (tortuga)" se incrementa lentamente (como una tortuga, que se mueve muy lento) y el puntero  "hare (liebre)" se incrementa rápidamente (más rápido que una tortuga, como una liebre, o conejo, que se mueve muy rápido).
 
-Para finalizar, la parábola de [la tortuga y la liebre](http://read.gov/aesop/025.html) es relevante siempre, especialmente en este curso. Escribir sus programas en C a paso lento pero seguro (ayudándose de programas como CGDB) es lo que ler hará ganar la carrera.
+Para finalizar, la parábola de [la tortuga y la liebre](http://read.gov/aesop/025.html) es relevante siempre, especialmente en este curso. Escribir sus programas en C a paso lento pero seguro (ayudándose de programas como CGDB) es lo que les hará ganar la carrera.
