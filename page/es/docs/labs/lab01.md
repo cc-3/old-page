@@ -58,7 +58,7 @@ Hay múltiples combinaciones de valores en las macros que consiguen este resulta
 
 ## Ejercicio 2: _Debugger_ (depurador)
 ### ¿Qué es un _debugger_?
-Esta sección es para los estudiantes que no están familiaricados con los _debuggers_. Un **debugger**, como sugiere el nombre, es un programa específicamente diseñado para ayudarlos a encontrar _bugs_, o errores lógicos, u otros errores en el código (nota: si quieren saber por qué se les llama _bugs_ a los errores, vean [aquí](https://www.quora.com/Why-are-errors-in-software-codes-called-bugs)). Distintos debuggers tienen distintas características, pero es normal que todos los debuggers sean capaces de hacer las siguientes cosas:
+Esta sección es para los estudiantes que no están familiarizados con los _debuggers_. Un **debugger**, como sugiere el nombre, es un programa específicamente diseñado para ayudarlos a encontrar _bugs_, o errores lógicos, u otros errores en el código (nota: si quieren saber por qué se les llama _bugs_ a los errores, vean [aquí](https://www.quora.com/Why-are-errors-in-software-codes-called-bugs)). Distintos debuggers tienen distintas características, pero es normal que todos los debuggers sean capaces de hacer las siguientes cosas:
   1. Poner un **breakpoint** en el programa. Un Breakpoint es una línea específica en su código en donde quisieran que se detenga la ejecución del programa, para que puedan ver lo que está pasando alrededor.
   2. **Step** línea a línea por el programa. El código siempre se ejecuta línea a línea, pero pasa muy rápido como para que sepamos qué línea produce algún error. Ser capaces de ejecutar línea a línea el programa les permite observar **exactamente** qué esta causando un bug en el programa.
 Para este ejercicio, necesitarán la [GDB reference card](http://inst.eecs.berkeley.edu/~cs61c/resources/gdb5-refcard.pdf). GDB quiere decir "GNU De-Bugger". Compilen hello.c con la bandera "-g":
@@ -129,5 +129,19 @@ Pueden ver [esta discusión de stackoverflow](https://stackoverflow.com/question
 Este ejercicio no vale puntos :-) pero es importante conocer sobre estas cosas para que puedan utilizarlo en el futuro (los siguientes laboratorios y proyectos podrían necesitar de este conocimiento)
 
 ## Ejercicio 5: Punteros y estructuras en C
+En ll_cycle.c, completen la función ll_has_cycle(), de modo que implemente el siguiente algoritmo para comprobar si una _linked list_ simple tiene un ciclo:
+  1. Comiencen con dos punteros apuntando al principio de la lista. Llamaremos al primero `tortoise` (tortuga) y al segundo `hare` (liebre).
+  2. _Avancen_ el puntero `hare` dos nodos hacia adelante. Si no se puede debido a punteros _null_, hemos llegado al final de la lista. Por lo tanto, la lista no tiene un ciclo.
+  3. Ahora, avancen `tortoise` un nodo. (Revisar si llega a ser un puntero nulo es innecesario. ¿por qué?)
+  4. Si la tortuga y la liebre apuntan al mismo nodo, la lista es cíclica. Si no, regresen al paso 2.
+  
+Después de implementar correctamente la función `ll_has_cycle()`, el programa que se obtiene después de compilar `ll_cycle.c` mostrará si el resultado de su función está correcto, conforme a lo que esperaba como salida.
 
+Pista: hay dos formas comunes en que los estudiantes resuelven esta función, y la diferencia principal está en la forma en que deciden codificar el criterio de cómo finalizar. Si lo hacen de una forma, tendrían que tomar en cuenta un caso especial en el principio. Si lo hacen de otra forma, tendrían que tener unas pruebas extra de NULL, lo cual esta bien también. Les decimos esto para que no se preocupen de la "limpieza" de su código, si no les ayuda, simplemente ignoren esta pista. El punto de este ejercicio es asegurarse de que entiendan como usar punteros.
+
+Aquí hay un [Articulo](https://en.wikipedia.org/wiki/Cycle_detection#Floyd.27s_Tortoise_and_Hare) del algoritmo y por qué funciona. No se preocupen de entender completamente todo (no hay examen de esto).
+
+A propósito, los punteros se llaman `tortoise` y `hare` porque el puntero "tortoise (tortuga)" se incrementa lentamente (como una tortuga, que se mueve muy lento) y el puntero  "hare (liebre)" se incrementa rápidamente (más rápido que una tortuga, como una liebre, o conejo, que se mueve muy rápido).
+
+Para finalizar, la parábola de [la tortuga y la liebre](http://read.gov/aesop/025.html) es relevante siempre, especialmente en este curso. Escribir sus programas en C a paso lento pero seguro (ayudándose de programas como CGDB) es lo que ler hará ganar la carrera.
 ----fin-----
