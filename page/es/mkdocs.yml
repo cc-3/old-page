@@ -41,3 +41,4 @@ nav:
   - Inicio: index.md
   - Laboratorios:
     - Lab 0: labs/lab00.md
+    - Lab 1: labs/lab01.md
