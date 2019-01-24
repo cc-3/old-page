@@ -40,5 +40,5 @@ markdown_extensions:
 nav:
   - Inicio: index.md
   - Laboratorios:
-    - Lab 0: labs/lab00.md
-    - Lab 1: labs/lab01.md
+    - Lab 0 Git: labs/lab00.md
+    - Lab 1 C y GDB: labs/lab01.md
