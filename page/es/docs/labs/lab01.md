@@ -123,66 +123,66 @@ Aquí tendrán que responder las siguientes preguntas de opción múltiple (no t
 
   1. Cómo se le dan **argumentos desde la línea de comandos** a un programa al utilizar gdb?
   
-    a. args _arglist_   
-    b. run _arglist_    
-    c. gdb args   
-    d. Ninguna de las anteriores
+  a. args _arglist_   
+  b. run _arglist_    
+  c. gdb args   
+  d. Ninguna de las anteriores
     
   2. Cómo se añade un _breakpoint_ que solo ocurre cuando se cumplen **ciertas condiciones** (por ejemplo, ciertas variables alcanzan cierto valor)?
   
-    a. expr _cond_
-    b. cond break expr
-    c. break ... if _expr_
-    d. Ninguna de las anteriores
+  a. expr _cond_    
+  b. cond break expr    
+  c. break ... if _expr_    
+  d. Ninguna de las anteriores
   
   3. Con qué comando se ejecuta la **siguiente línea del código en C** después de parar en un breakpoint?
     
-    a. run
-    b. s
-    c. c
-    d. n
+  a. run    
+  b. s    
+  c. c    
+  d. n    
   
   4. Si la siguiente línea de código es una llamada a función, se ejecutaría _toda_ la función si se utiliza el comando de la pregunta #3 (si no, es momento de cambiarla!). Cómo se le indica a gdb, que quieren debuggear el código **adentro de la función**? (Si tuvieron que cambiar la respuesta #3, esa respuesta muy probablemente aplica aquí)
     
-    a. run
-    b. s
-    c. c
-    d. n
+  a. run    
+  b. s    
+  c. c    
+  d. n    
     
   5. Cómo se reanuda la ejecución del programa después de parar en un breakpoint?
     
-    a. run
-    b. s
-    c. c
-    d. n
+  a. run    
+  b. s    
+  c. c    
+  d. n    
 
   6. Cómo podemos ver el valor de una variable (o expresión) en gdb?
     
-    a. display _expr_
-    b. signal _expr_
-    c. print _expr_
-    d. next _expr_
+  a. display _expr_   
+  b. signal _expr_    
+  c. print _expr_   
+  d. next _expr_    
     
   7. Qué comando de gdb se usa para desplegar el valor de una variable **después de cada paso**?
     
-    a. display _expr_
-    b. signal _expr_
-    c. print _expr_
-    d. next _expr_
+  a. display _expr_   
+  b. signal _expr_    
+  c. print _expr_   
+  d. next _expr_    
     
   8. Cómo se imprime una lista de **todas las variables y su valor** en la función actual?
     
-    a. display all
-    b. display
-    c. print all
-    d. print
+  a. display all    
+  b. display    
+  c. print all    
+  d. print    
 
   9. Cómo salimos de gdb?
     
-    a. end
-    b. quit
-    c. exit
-    d. finish
+  a. end    
+  b. quit   
+  c. exit   
+  d. finish   
 
 Después de responder estas preguntas, no olviden hacer el submit y push de este archivo hacia github:
 ```shell
