@@ -253,7 +253,7 @@ Después de implementar correctamente la función `ll_has_cycle()`, el programa 
 
 Pista: Hay dos formas comunes en que los estudiantes resuelven esta función, y la diferencia principal está en la forma en que deciden codificar el criterio de cómo finalizar. Si lo hacen de una forma, tendrían que tomar en cuenta un caso especial en el principio. Si lo hacen de otra forma, tendrían que tener unas pruebas extra de NULL, lo cual esta bien también. Les decimos esto para que no se preocupen de la "limpieza" de su código, si no les ayuda, simplemente ignoren esta pista. El punto de este ejercicio es asegurarse de que entiendan como usar punteros.
 
-Aquí hay un [Articulo](https://en.wikipedia.org/wiki/Cycle_detection#Floyd.27s_Tortoise_and_Hare) del algoritmo y por qué funciona. No se preocupen de entender completamente todo (no hay examen de esto).
+Aquí hay un [Artículo](https://en.wikipedia.org/wiki/Cycle_detection#Floyd.27s_Tortoise_and_Hare) del algoritmo y por qué funciona. No se preocupen de entender completamente todo (no hay examen de esto).
 
 A propósito, los punteros se llaman `tortoise` y `hare` porque el puntero "tortoise (tortuga)" se incrementa lentamente (como una tortuga, que se mueve muy lento) y el puntero  "hare (liebre)" se incrementa rápidamente (más rápido que una tortuga, como una liebre, o conejo, que se mueve muy rápido).
 
