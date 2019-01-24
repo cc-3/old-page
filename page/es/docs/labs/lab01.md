@@ -56,6 +56,13 @@ Go BEARS!
 
 Hay múltiples combinaciones de valores en las macros que consiguen este resultado, El reto para ustedes en este ejercicio es: Consideren el **mínimo** número de distintos valores que las constantes `v0` a `v3` puedan tener que aún den el mismo resultado correcto. Como ejemplo, el máximo teórico es cuatro (cuando todos son diferentes uno de otro).
 
+Cuando ya hayan logrado esto, pueden actualizar el archivo en su repositorio en github, de esta manera:
+```shell
+$ git add eccentric.c
+$ git commit -m "Ejercicio 1 terminado"
+$ git push -u origin master
+```
+
 ## Ejercicio 2: _Debugger_ (depurador)
 ### ¿Qué es un _debugger_?
 Este párrafo es para los estudiantes que no están familiarizados con los _debuggers_. Un **debugger**, como sugiere el nombre, es un programa específicamente diseñado para ayudarlos a encontrar _bugs_, o errores lógicos, u otros errores en el código (nota: si quieren saber por qué se les llama _bugs_ a los errores, vean [aquí](https://www.quora.com/Why-are-errors-in-software-codes-called-bugs)). Distintos debuggers tienen distintas características, pero es normal que todos los debuggers sean capaces de hacer las siguientes cosas:
@@ -85,10 +92,96 @@ Escriban `help` adentro de gdb para averiguar cómo hacer estas cosas, o usen la
 en este ejercicio, usamos cgdb para depurar nuestros programas. cgdb es idéntico a gdb, excepto que tiene unas características extra que hacen más cómodo el trabajo. Todos los comandos de la hoja de referencia funcionan también en gdb.
 En cgdb, pueden presionar `ESC`para ir a la ventana del código (arriba), y usar `i` para regresar a la ventana de comandos (abajo), similar a `vim`. La ventana de comandos es donde se introducen los comandos de gdb.
   
+Para este ejercicio, encontrarán un archivo de texto llamado ex2.txt, con el siguiente formato:
+
+```shell
+1:
+2:
+3:
+4:
+5:
+6:
+7:
+8:
+9:
+```
+Aquí tendrán que responder las siguientes preguntas de opción múltiple (no tengan miedo de probar las opciones en CGDB antes de responder, lo recomendamos!) con el siguiente formato (tienen que cambiar la letra en el ejemplo por la letra de la respuesta que ustedes consideren correcta):
+
+```shell
+1:e
+2:f
+3:g
+4:h
+5:i
+6:j
+7:k
+8:l
+9:m
+```
+ 
 **Preguntas**
 
-  1. 
+  1. Cómo se le dan **argumentos desde la línea de comandos** a un programa al utilizar gdb?
+    a. args _arglist_
+    b. run _arglist_
+    c. gdb args
+    d. Ninguna de las anteriores
+    
+  2. Cómo se añade un _breakpoint_ que solo ocurre cuando se cumplen **ciertas condiciones** (por ejemplo, ciertas variables alcanzan cierto valor)?
+    a. expr _cond_
+    b. cond break expr
+    c. break ... if _expr_
+    d. Ninguna de las anteriores
   
+  3. Con qué comando se ejecuta la **siguiente línea del código en C** después de parar en un breakpoint?
+    a. run
+    b. s
+    c. c
+    d. n
+  
+  4. Si la siguiente línea de código es una llamada a función, se ejecutaría _toda_ la función si se utiliza el comando de la pregunta #3 (si no, es momento de cambiarla!). Cómo se le indica a gdb, que quieren debuggear el código **adentro de la función**? (Si tuvieron que cambiar la respuesta #3, esa respuesta muy probablemente aplica aquí)
+    a. run
+    b. s
+    c. c
+    d. n
+    
+  5. Cómo se reanuda la ejecución del programa después de parar en un breakpoint?
+    a. run
+    b. s
+    c. c
+    d. n
+
+  6. Cómo podemos ver el valor de una variable (o expresión) en gdb?
+    a. display _expr_
+    b. signal _expr_
+    c. print _expr_
+    d. next _expr_
+    
+  7. Qué comando de gdb se usa para desplegar el valor de una variable **después de cada paso**?
+    a. display _expr_
+    b. signal _expr_
+    c. print _expr_
+    d. next _expr_
+    
+  8. Cómo se imprime una lista de **todas las variables y su valor** en la función actual?
+    a. display all
+    b. display
+    c. print all
+    d. print
+
+  9. Cómo salimos de gdb?
+    a. end
+    b. quit
+    c. exit
+    d. finish
+
+Después de responder estas preguntas, no olviden hacer el submit y push de este archivo hacia github:
+```shell
+$ git add ex2.txt
+$ git commit =m "Ejercicio 2 terminado"
+$ git push -u origin master
+``` 
+
 ## Ejercicio 3: Depurando un problema con fallas usando GDB
 Ahora, usarán su nuevo conocimiento para depurar un pequeño programa. Vean el programa `ll_equal.c`. Compilen y ejecuten el programa, y analicen un poco lo que hace. Así como está, producirá un resultado como el siguiente:
 ```shell
@@ -106,6 +199,14 @@ Pista: Analicen el valor de los punteros `a` y `b` in la función (despliegenlos
 pista 2: vean el código fuente en `main` para ver la estructura de los nodos, y ver exactamente qué está pasando como argumento a `ll_equal`.
 
 Después de corregir el problema, compilen nuevamente y ejecuten el código. ¿Notan la diferencia?
+
+Al finalizar, no olviden subir el archivo modificado a su repositorio remoto:
+
+```shell
+$ git add ex2.txt
+$ git commit =m "Ejercicio 2 terminado"
+$ git push -u origin master
+``` 
 
 ## Ejercicio 4: "Debuggeando" un programa en C que requiere interacción del usuario
 Veamos qué pasa cuando, a un programa que requiere interacción del usuario, lo ejecutamos con gdb. Primero, ejecuten el programa en `interactive_hello.c` para hablar con un programa muy amigable :).
@@ -146,5 +247,26 @@ Pista: hay dos formas comunes en que los estudiantes resuelven esta función, y 
 Aquí hay un [Articulo](https://en.wikipedia.org/wiki/Cycle_detection#Floyd.27s_Tortoise_and_Hare) del algoritmo y por qué funciona. No se preocupen de entender completamente todo (no hay examen de esto).
 
 A propósito, los punteros se llaman `tortoise` y `hare` porque el puntero "tortoise (tortuga)" se incrementa lentamente (como una tortuga, que se mueve muy lento) y el puntero  "hare (liebre)" se incrementa rápidamente (más rápido que una tortuga, como una liebre, o conejo, que se mueve muy rápido).
+
+Al finalizar, compilen y ejecuten el archivo, y verifiquen que el resultado de su código, el cual debería ser mas o menos igual a este:
+```shell
+$ gcc -g -o ll_cycle ll_cycle.c
+$ ./ll_cycle
+Checking first list for cycles. There should be none, ll_has_cycle says it has no cycle
+Checking second list for cycles. There should be a cycle, ll_has_cycle says it has a cycle
+Checking third list for cycles. There should be a cycle, ll_has_cycle says it has a cycle
+Checking fourth list for cycles. There should be a cycle, ll_has_cycle says it has a cycle
+Checking fifth list for cycles. There should be none, ll_has_cycle says it has no cycle
+Checking length-zero list for cycles. There should be none, ll_has_cycle says it has no cycle
+```
+Si su código presenta errores, entonces ya son capaces de utilizar CGDB para poder encontrarlos y corregirlos. Finalmente, pueden subir el archivo a github:
+
+```shell
+$ git add ll_cycle.c
+$ git commit =m "LAB01 terminado"
+$ git push -u origin master
+``` 
+
+Ya con todos los ejercicios completados, no olviden ejecutar `./submit TOKEN` Para poder ver su nota.
 
 Para finalizar, la parábola de [la tortuga y la liebre](http://read.gov/aesop/025.html) es relevante siempre, especialmente en este curso. Escribir sus programas en C a paso lento pero seguro (ayudándose de programas como CGDB) es lo que les hará ganar la carrera.
