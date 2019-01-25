@@ -23,7 +23,7 @@ git clone link_al_lab
 
 Para este inciso, su trabajo es completar el archivo **bit_ops.c** de manera que las funciones cumplan con su función. Para ello deberán utilizar las operaciones de bits básicas: and (&), or (\|), xor (^), not (~) y los corrimientos a la derecha (\>\>) y a la izquierda (<<). Deben evitar el uso de bucles o condicionales.
 
-¡¡¡¡No usar loops o condicionales!!!! Eso significa que MIENTRAS realicen el ejercicio no tienen el derecho de escribir las palabras: if, else, while, for, switch o algo de índole similar. Por favor no traten de engañarnos, todo el personal involucrado (esperamos) saben cómo se miran todas estas palabras, entonces si las encontramos, ![YOU SHALL NOT PASS](https://github.com/cc-3/lab02-C-MM/ImágenesLab02/YouShallNotPassGIF.gif).
+¡¡¡¡No usar loops o condicionales!!!! Eso significa que MIENTRAS realicen el ejercicio no tienen el derecho de escribir las palabras: if, else, while, for, switch o algo de índole similar. Por favor no traten de engañarnos, todo el personal involucrado (esperamos) saben cómo se miran todas estas palabras, entonces si las encontramos, ![YOU SHALL NOT PASS](https://github.com/cc-3/lab02-C-MM/blob/master/Im%C3%A1genesLab02/YouShallNotPassGIF.gif).
 
 **NOTA IMPORTANTE:** Considerar que _n_ es un valor que inicia en la posición cero, contando desde la derecha, por lo que el bit que se encuentre hasta la derecha es el bit cero.
 
@@ -59,7 +59,7 @@ Ahora deben de subirlo al autograder XD.
 En este ejercicio deben de implementar una función que compute la siguiente iteración de un registro de corrimiento de retroalimentación lineal (LFSR por sus siglas en inglés). ¡Algunas aplicaciones que utilizan LFSRs son: televisión digital, teléfonos con acceso múltiple por división de código, Ethernet, USB 3.0 y mucho más! Esta función deberá generar números pseudo-aleatorios utilizando operadores binarios. Para un poco de información adicional, pueden visitar el siguiente [link de Wikipedia](https://es.wikipedia.org/wiki/LFSR). En el archivo 'lfsr.c' deben de completar la función _lfsr_calculate()_ de manera que realice lo siguiente:
 
 ### Diagrama del Hardware (Explicación Más Abajo)
-![LFSR](https://github.com/cc-3/lab02-C-MM/ImágenesLab02/LFSR.png)
+![LFSR](https://github.com/cc-3/lab02-C-MM/blob/master/Im%C3%A1genesLab02/LFSR.png)
 
 ### Explicación del Diagrama de Arriba
 * En cada llamada de _lfsr_calculate()_, deben de correr el contenido del registro un bit hacia la derecha.
