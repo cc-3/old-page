@@ -23,7 +23,7 @@ git clone link_al_lab
 
 Para este inciso, su trabajo es completar el archivo **bit_ops.c** de manera que las funciones cumplan con su función. Para ello deberán utilizar las operaciones de bits básicas: and (&), or (\|), xor (^), not (~) y los corrimientos a la derecha (\>\>) y a la izquierda (<<). Deben evitar el uso de bucles o condicionales.
 
-¡¡¡¡No usar loops o condicionales!!!! Eso significa que MIENTRAS realicen el ejercicio no tienen el derecho de escribir las palabras: if, else, while, for, switch o algo de índole similar. Por favor no traten de engañarnos, todo el personal involucrado (esperamos) saben cómo se miran todas estas palabras, entonces si las encontramos, ![YOU SHALL NOT PASS](https://github.com/cc-3/lab02-C-MM/blob/master/Im%C3%A1genesLab02/YouShallNotPassGIF.gif).
+¡¡¡¡No usar loops o condicionales!!!! Eso significa que MIENTRAS realicen el ejercicio no tienen el derecho de **escribir** las palabras: if, else, do, while, for, switch o algo de índole similar. Por favor no traten de engañarnos, todo el personal involucrado (esperamos) saben cómo se miran todas estas palabras, entonces si las encontramos, ![YOU SHALL NOT PASS](https://github.com/cc-3/lab02-C-MM/blob/master/Im%C3%A1genesLab02/YouShallNotPassGIF.gif).
 
 **NOTA IMPORTANTE:** Considerar que _n_ es un valor que inicia en la posición cero, contando desde la derecha, por lo que el bit que se encuentre hasta la derecha es el bit cero.
 
@@ -102,7 +102,7 @@ Congratulations! It works!
 ##Ejercicio 3: Manejo de Memoria
 Este ejercicio requiere de los archivos: vector.h, vector-test.c y vector.c, en donde les proveemos con la base para la implementación de un arreglo de longitud variable. Este inciso busca que se familiaricen con el uso de los "structs" de C, así como el manejo de memoria en este lenguaje. En otras palabras, no se preocupen por los detalles prácticos de esta estructura de datos un tanto extraña. Sólo no lo hagan.
 
-**Su trabajo es completar las funciones** _vector-new()_, _vector_get()_, _vector_delete()_ **y** _vector_set()_ **en** _vector.c_ **de manera que** _vector-test.c_ **corra sin errores de manejo de memoria.**
+**Su trabajo es completar las funciones** _vector_new()_, _vector_get()_, _vector_delete()_ **y** _vector_set()_ **en** _vector.c_ **de manera que** _vector-test.c_ **corra sin errores de manejo de memoria.**
 
 ###¿Cómo funciona un _vector_t_?
 * Posee un _int size_ que indica cuántos elementos posee actualmente. En otras palabras, el _size_ es igual al índice de la última posición que ha sido alterada del vector. Por ejemplo, si se tiene un vector con un _size_ de 5 y se altera su ducentécimo bit (índice iniciando en cero),  su tamaño se verá actualizado a 201. La longitud por defecto del vector _vector_new_ es de 1.
@@ -112,7 +112,6 @@ Este ejercicio requiere de los archivos: vector.h, vector-test.c y vector.c, en 
 Es momento de revisar el código de _vector.c_ si no lo han hecho. Aquí hay comentarios complementarios que describen cómo deberían de correr las funciones. Recuerden que los usuarios de su estructura de datos _vector_t_ deben asumir que todas las entradas al vector son 0, a menos que hayan sido definidas de otra manera por ellos. Tengan esto en mente, porque _malloc_ no hace esto por ustedes.
 
 ###¿Qué deben hacer?**
-* Observen las funciones nombradas, creativamente, _bad_vector_new()_ y _also_bad_vector_new()_ e indiquen por qué son malas maneras de inicializar un _struct_ en C.
 * Completen _vector_new_, la versión correcta. Hay exactamente seis (6) espacios para que escriban una expresión en C, indicados con el comentario que dice _/\* YOUR CODE HERE \*/_. Escriban una _expresión_ en estos sitios. Esto significa no más de una línea de código. Existen comentarios adicionales que describen qué debería de suceder en la línea de código inferior a cada división.
 * Terminen _vector_get()_ de la misma manera en que lo hicieron para la función anterior: de manera respetuosa, dispuesto a aprender, con mente abierta y conscientes de qué es lo que están escribiendo, ya que esta es la mejor forma de programar.
 * Complementen _vector_delete()_. Una solución satisfactoria no debería de llevar más de dos líneas de código.
