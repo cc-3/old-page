@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# call autograder submit script
+python autograder/submit.py $@
