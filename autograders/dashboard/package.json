@@ -1,8 +1,7 @@
 {
-  "name": "login",
-  "version": "0.1.0",
+  "name": "dashboard",
+  "version": "1.0.0",
   "private": true,
-  "homepage": "https://cc-3.github.io/Autograders",
   "dependencies": {
     "axios": "^0.18.0",
     "firebase": "^5.7.3",
@@ -17,8 +16,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "deploy": "gh-pages -d build"
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": "react-app"
