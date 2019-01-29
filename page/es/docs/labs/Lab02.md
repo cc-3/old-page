@@ -2,16 +2,16 @@
 
 ## Objetivos
 
-* Manipular los bits de números.
-	* Aprendan a controlar sus nuevos poderes.
+* Manipular los bits de números binarios.
+	* Aprendan a utilizar sus nuevos poderes.
 * Practicar trabajar con la asignación de memoria de manera dinámica (esa cosa de _malloc_).
 	* Aprovechar toda la memoria no utilizada.
 * Pensar cómo el manejo de memoria dinámica los puede hacer mejores personas.
-	* Son bromas. Perdón, pero sólo los puede volver mejores programadores.
+	* Son bromas, pero sólo los puede volver mejores programadores.
 
 ## Preparación
 De primero, deben de descargar todos los archivos que necesitarán para completar este laboratorio, estos se encuentran [aquí](https://github.com/cc-3/lab02-C-MM.git). Recuerden que deben aceptar la asignación y se les creará automáticamente un repositorio con una extensión que termine con su usuario.
-Recuerden que este será público para que se pueda revisar por copia o plagio. Esto será sancionado acorde al reglamento de la universidad.
+Recuerden que este será revisado en búsqueda de copia o plagio, así que no lo hagan. De lo contrario, será sancionado acorde al reglamento de la universidad.
 
 Ahora, ya pueden ejecutar en la terminal el comando que les descargará los archivos base en el directorio a su elección:
 ```shell
@@ -23,7 +23,7 @@ git clone link_al_lab
 
 Para este inciso, su trabajo es completar el archivo **bit_ops.c** de manera que las funciones cumplan con su función. Para ello deberán utilizar las operaciones de bits básicas: and (&), or (\|), xor (^), not (~) y los corrimientos a la derecha (\>\>) y a la izquierda (<<). Deben evitar el uso de bucles o condicionales.
 
-¡¡¡¡No usar loops o condicionales!!!! Eso significa que MIENTRAS realicen el ejercicio no tienen el derecho de **escribir** las palabras: if, else, do, while, for, switch o algo de índole similar. Por favor no traten de engañarnos, todo el personal involucrado (esperamos) saben cómo se miran todas estas palabras, entonces si las encontramos, ![YOU SHALL NOT PASS](https://github.com/cc-3/lab02-C-MM/blob/master/Im%C3%A1genesLab02/YouShallNotPassGIF.gif).
+¡¡¡¡No usar loops o condicionales!!!! Eso significa que mientras realicen el ejercicio no tienen el derecho de **escribir** las palabras: if, else, do, while, for, switch o algo de índole similar (sí, en comentarios tampoco). Por favor no traten de engañarnos, todo el personal involucrado (esperamos) saben cómo se miran todas estas palabras, entonces si encontramos una de ellas... ![YOU SHALL NOT PASS](https://github.com/cc-3/lab02-C-MM/blob/master/Im%C3%A1genesLab02/YouShallNotPassGIF.gif).
 
 **NOTA IMPORTANTE:** Considerar que _n_ es un valor que inicia en la posición cero, contando desde la derecha, por lo que el bit que se encuentre hasta la derecha es el bit cero.
 
@@ -52,11 +52,11 @@ $ make bit_ops
 $ ./bit_ops
 ```
 Lo cual imprimirá el resultado de algunas pruebas.
-
-Ahora deben de subirlo al autograder XD.
+Acuérdense de realizar el proceso de "hacerle push" al archivo a su GitHub.
 
 ## Ejercicio 2: Registro de Corrimiento con Retroalimentación Lineal
-En este ejercicio deben de implementar una función que compute la siguiente iteración de un registro de corrimiento de retroalimentación lineal (LFSR por sus siglas en inglés). ¡Algunas aplicaciones que utilizan LFSRs son: televisión digital, teléfonos con acceso múltiple por división de código, Ethernet, USB 3.0 y mucho más! Esta función deberá generar números pseudo-aleatorios utilizando operadores binarios. Para un poco de información adicional, pueden visitar el siguiente [link de Wikipedia](https://es.wikipedia.org/wiki/LFSR). En el archivo 'lfsr.c' deben de completar la función _lfsr_calculate()_ de manera que realice lo siguiente:
+En este ejercicio deben de implementar una función que compute la siguiente iteración de un registro de corrimiento de retroalimentación lineal (LFSR por sus siglas en inglés). ¡Algunas aplicaciones que utilizan LFSRs son: televisión digital, teléfonos con acceso múltiple por división de código, Ethernet, USB 3.0 y mucho más! Esta función deberá generar números pseudo-aleatorios utilizando operadores binarios. Para un poco de información adicional, pueden visitar el siguiente [link de Wikipedia](https://es.wikipedia.org/wiki/LFSR). 
+En el archivo 'lfsr.c' deben de completar la función _lfsr_calculate()_ de manera que realice lo siguiente:
 
 ### Diagrama del Hardware (Explicación Más Abajo)
 ![LFSR](https://github.com/cc-3/lab02-C-MM/blob/master/Im%C3%A1genesLab02/LFSR.png)
@@ -98,20 +98,21 @@ My number is: 16285
 Got 65535 numbers before cycling!
 Congratulations! It works!
 ```
+De nuevo, recuérdense de hacer el push.
 
-##Ejercicio 3: Manejo de Memoria
+## Ejercicio 3: Manejo de Memoria
 Este ejercicio requiere de los archivos: vector.h, vector-test.c y vector.c, en donde les proveemos con la base para la implementación de un arreglo de longitud variable. Este inciso busca que se familiaricen con el uso de los "structs" de C, así como el manejo de memoria en este lenguaje. En otras palabras, no se preocupen por los detalles prácticos de esta estructura de datos un tanto extraña. Sólo no lo hagan.
 
 **Su trabajo es completar las funciones** _vector_new()_, _vector_get()_, _vector_delete()_ **y** _vector_set()_ **en** _vector.c_ **de manera que** _vector-test.c_ **corra sin errores de manejo de memoria.**
 
-###¿Cómo funciona un _vector_t_?
+### ¿Cómo funciona un _vector_t_?
 * Posee un _int size_ que indica cuántos elementos posee actualmente. En otras palabras, el _size_ es igual al índice de la última posición que ha sido alterada del vector. Por ejemplo, si se tiene un vector con un _size_ de 5 y se altera su ducentécimo bit (índice iniciando en cero),  su tamaño se verá actualizado a 201. La longitud por defecto del vector _vector_new_ es de 1.
 * Tiene un _int \*data_, un arreglo dinámico de enteros que contiene los valores de los componentes del vector. Si se altera el ducentécimo elemento de un vector _v_ a 8 entonces el elemento modificado (de nuevo, iniciando en cero) de _v->data_ debería evaluar a 8. El valor de un vector _vector_new_ es 0 por defecto.
 * El valor de cualquier componente de algún vector que no ha sido explícitamente editado es 0. Si se deseara conocer el valor en la quinta posición de un vector, pero sólo se ha alterado el valor de los primeras dos, la interrogante tendría como respuesta 0. Además, si se quisiera el contenido en la séptima posición de un vector de longitud igual a 5, también sería 0. **NO** devolvería un error.
 
 Es momento de revisar el código de _vector.c_ si no lo han hecho. Aquí hay comentarios complementarios que describen cómo deberían de correr las funciones. Recuerden que los usuarios de su estructura de datos _vector_t_ deben asumir que todas las entradas al vector son 0, a menos que hayan sido definidas de otra manera por ellos. Tengan esto en mente, porque _malloc_ no hace esto por ustedes.
 
-###¿Qué deben hacer?**
+### ¿Qué deben hacer?**
 * Completen _vector_new_, la versión correcta. Hay exactamente seis (6) espacios para que escriban una expresión en C, indicados con el comentario que dice _/\* YOUR CODE HERE \*/_. Escriban una _expresión_ en estos sitios. Esto significa no más de una línea de código. Existen comentarios adicionales que describen qué debería de suceder en la línea de código inferior a cada división.
 * Terminen _vector_get()_ de la misma manera en que lo hicieron para la función anterior: de manera respetuosa, dispuesto a aprender, con mente abierta y conscientes de qué es lo que están escribiendo, ya que esta es la mejor forma de programar.
 * Complementen _vector_delete()_. Una solución satisfactoria no debería de llevar más de dos líneas de código.
