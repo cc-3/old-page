@@ -1,0 +1,229 @@
+/* BREADCRUMB */
+.breadcrumb {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+}
+
+.breadcrumb:first-child {
+  padding-left: 32px;
+}
+
+/** CARDS **/
+.card-title  {
+  text-transform: uppercase;
+  font-weight: bold !important;
+  font-family: 'Oswald', sans-serif;
+}
+
+.card-title > small {
+  font-weight: bold !important;
+  color: white;
+}
+
+.card-content {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+/** CONSOLE */
+.console {
+  background: #212121;
+  color: #eee;
+  font-family: 'Anonymous Pro', monospace;
+  font-size: 1.5em;
+  width: 100%;
+  min-height: 70vh;
+  overflow: scroll;
+  padding: 12px;
+}
+
+/** NOT FOUND **/
+.notfound {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 12vw;
+  margin-bottom: 48px;
+}
+
+/** STICKY CONTAINER */
+.sticky-wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-left: 300px;
+}
+
+@media only screen and (max-width : 992px) {
+  .sticky-wrap {
+    padding-left: 0;
+  }
+}
+
+.sticky-content {
+  background: #fefefe;
+  flex: 1 0 auto;
+  width: 100%;
+  ::after {
+    content: '\00a0';
+    display: block;
+    height: 0;
+    visibility: hidden;
+  }
+}
+
+.cc-3-container {
+  padding: 2%;
+}
+
+/** FOOTER */
+.cc-3-footer {
+  background: #212121 !important;
+}
+
+.cc-3-copyright {
+  background: url('/img/bg.jpg') !important;
+  font-family: 'Oswald', sans-serif;
+}
+
+.cc-3-icon {
+  color: #ffa000 !important;
+  font-size: 20px;
+}
+
+.cc-3-footer-link {
+  color: #ffa000 !important;
+}
+
+.cc-3-footer-link:hover {
+  color: #ffb300 !important;
+}
+
+.cc-3-footer-icon {
+  display: inline-block;
+  margin-right: 12px;
+}
+
+/** LOGIN */
+.cc-3-login {
+  height: 100vh;
+  background: url('/img/login.jpg');
+}
+
+.cc-3-login-box {
+  background: #fff;
+  border-radius: 12px;
+  max-width: 300px;
+  z-index: 1;
+  position: absolute !important;
+  top: 50%;
+  left: 50%;
+  right: 0;
+  transform: translate(-50%, -50%);
+  padding: 12px;
+  border: 1px solid #212121;
+  width: 300px !important;
+}
+
+.cc-3-login-btn {
+  display: block;
+  width: 100%;
+  margin: 12px 0;
+  text-transform: none;
+  font-family: 'Oswald', sans-serif;
+  border-radius: 5px !important;
+  font-weight: 600;
+}
+
+.cc-3-login-btn.google {
+  background: #db3236;
+}
+
+.cc-3-login-btn.github {
+  background: #212121;
+}
+
+/** NAVBAR */
+.cc-3-navbar {
+  background: url('/img/bg.jpg');
+}
+
+.name, .email {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.subheader {
+  font-weight: bold !important;
+}
+
+.cc-3-brand-logo {
+  font-family: 'Fredoka One', sans-serif;
+}
+
+/** NAVLINK */
+.cc-3-active-link {
+  background-color: #ffa000 !important;
+  color: white !important;
+}
+
+.cc-3-active-link i {
+  color: white !important;
+}
+
+.cc-3-nav-hov:hover {
+  background-color: #ffa000 !important;
+  color: white !important;
+  cursor: pointer;
+}
+
+.cc-3-nav-hov:hover {
+  color: #ffa000 !important;
+}
+
+.cc-3-nav-hov:hover i {
+  color: white !important;
+}
+
+.cc-3-link {
+  font-weight: bold !important;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.cc-3-link:hover {
+  background-color: #ffa000 !important;
+  color: white !important;
+  cursor: pointer;
+}
+
+/** PANEL */
+.cc-3-panel {
+  border: 1px solid #212121;
+}
+
+/** PROGRESS BAR*/
+.cc-3-progress {
+  margin: 0;
+  background: #f9a825;
+  height: 6px;
+}
+
+.cc-3-progress > div {
+  background: #ffd95a !important;
+}
+
+/** SEARCH BAR */
+input[type="search"] {
+  color: #fff;
+}
+
+input[type="search"]:focus {
+  border-bottom: 1px solid #212121 !important;
+  border-top: 1px solid #212121 !important;
+}
+
+/** QUESTIONS */
+.question {
+  margin-top: 28px;
+}
+
+.question > h6 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.5em;
+}

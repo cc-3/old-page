@@ -1,0 +1,26 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import './style.css';
+import { auth } from './firebase';
+import { history, AppRouter } from './router';
+
+
+let hasRendered = false;
+const renderApp = () => {
+  if (!hasRendered) {
+    hasRendered = true;
+    ReactDOM.render(<AppRouter />, document.getElementById('root'));
+  }
+};
+
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    if (history.location.pathname === '/login')
+      history.push('/dashboard');
+    renderApp();
+  } else {
+    history.push('/login');
+    renderApp();
+  }
+});
