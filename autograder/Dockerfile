@@ -26,6 +26,6 @@ ADD . /opt/autograder
 WORKDIR /opt/autograder
 
 EXPOSE 80
-EXPOSE 443
+EXPOSE 5000
 
 CMD ["/usr/bin/supervisord"]
