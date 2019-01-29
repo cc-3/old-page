@@ -29,15 +29,15 @@ def missing_files(files):
     return jsonify({'status': 'error', 'msg': 'missing some files: ' + files})
 
 
-def queue_error():
+def queue_error(url):
     return jsonify({
         'status': 'error',
-        'msg': 'your last upload is still being reviewed, please wait until it\'s over and try again'
+        'msg': 'your last submit is still being reviewed (%s)...\n\nplease wait until it\'s over and try again' % url
     })
 
 
 def ok(url):
     return jsonify({
         'status': 'ok',
-        'msg': 'Your grade will be ready soon, you can check your status here %s',
+        'msg': 'Your grade will be ready soon, you can check the status here %s' % url,
     })

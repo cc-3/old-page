@@ -29,7 +29,16 @@ url = 'https://cc-3.github.io/autograders/%s'
 
 # gets db info
 def in_queue(token, repo):
-    return True
+    dir = 'labs' if repo.startswith('lab') else 'projs'
+    student_ref = '%s/%s/%s' % (dir, token, repo)
+    queue_ref = 'queue/%s-%s' % (repo, token)
+    result = False
+    info = firebase.database().reference(student_ref).get()
+    queue = firebase.database().reference(queue_ref).get()
+    if info is not None and queue is not None:
+        grading = info.get('grading')
+        result = result or (grading and queue)
+    return result
 
 
 # saves status in firebase db
@@ -38,7 +47,7 @@ def save_to_db(token, repo):
     student_ref = '%s/%s/%s' % (dir, token, repo)
     queue_ref = 'queue/%s-%s' % (repo, token)
     info = {'grading': True, 'timestamp': Firebase.get_timestamp()}
-    firebase.database().reference(queue_ref).set(info)
+    firebase.database().reference(queue_ref).set(True)
     firebase.database().reference(student_ref).set(info)
 
 
@@ -52,8 +61,10 @@ def grade():
                 if 'file' in request.files:
                     if 'repo' in request.form:
                         repo = request.form['repo'].strip()
+                        print(repo)
                         if (repo != '') and (repo in valid_repos):
-                            if not in_queue(repo, token):
+                            route = 'labs' if repo.startswith('lab') else 'projects'
+                            if not in_queue(token, repo):
                                 # save zip fil
                                 filename = '%s-%s.zip' % (repo, token)
                                 request.files['file'].save(filename)
@@ -61,12 +72,11 @@ def grade():
                                 # remove local file
                                 remove(filename)
                                 # save info in db
-                                save_to_db(repo, token, filename)
+                                save_to_db(token, repo)
                                 # all ok
-                                route = 'labs' if repo.startswith('lab') else 'projects'
                                 return response.ok(url % route)
                             # delte tmp dir
-                            return response.queue_error()
+                            return response.queue_error(url % route)
                         return response.invalid_repo_name(repo)
                     return response.no_repo_name()
                 return response.no_file()
