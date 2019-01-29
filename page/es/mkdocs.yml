@@ -42,3 +42,4 @@ nav:
   - Laboratorios:
     - Lab 0 Git: labs/lab00.md
     - Lab 1 C y GDB: labs/lab01.md
+    - Lab 2 C Avanzado y Manejo de Memoria: labs/Lab02.md
