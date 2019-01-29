@@ -61,21 +61,7 @@ def get_server():
     if DEBUG:
         return DEBUG_URL
     # get from github
-    link = "https://raw.githubusercontent.com/cc-3/MachineStructures/master/URL"
-    try:
-        return requests.get(link).text.strip()
-    except requests.exceptions.ConnectionError:
-        print('')
-        print('could not get server url, try again...')
-        sys.exit(1)
-    except requests.exceptions.Timeout:
-        print('')
-        print('request time exceed while getting server url, try again later...')
-        sys.exit(1)
-    except Exception:
-        print('')
-        print('an unexpected exception occurs while getting server url, try again...')
-        sys.exit(1)
+    return 'http://mooc.turing.galileo.edu'
 
 
 # submit code
@@ -88,19 +74,14 @@ def submit(token):
     try:
         info = {'repo': NAME, 'token': token}
         url = get_server()
-        print('waiting for results...')
+        print('waiting for response...')
         print('')
         f = open(filename, 'rb')
         r = requests.post(url, files={'file': f}, data=info)
         f.close()
         if r.status_code == 200:
             json = r.json()
-            if json['status'] == 'ok':
-                print(json['msg'])
-                print('')
-                print('=> Score %.2f/100' % json['grade'])
-            else:
-                print(json['msg'])
+            print(json['msg'])
         else:
             msg = ' '.join(requests.status_codes._codes[500][0].split('_')).title()
             print('server return status code: %d (%s)' % (r.status_code, msg))

@@ -22,12 +22,22 @@ def invalid_repo_name(name):
 
 
 def unexpected_exception():
-    return jsonify({'status': 'error', 'msg': 'unexpected exception'})
+    return jsonify({'status': 'error', 'msg': 'unexpected exception, internal server error'})
 
 
 def missing_files(files):
     return jsonify({'status': 'error', 'msg': 'missing some files: ' + files})
 
 
-def result(grade, msg=''):
-    return jsonify({'status': 'ok', 'grade': grade, 'msg': msg})
+def queue_error():
+    return jsonify({
+        'status': 'error',
+        'msg': 'your last upload is still being reviewed, please wait until it\'s over and try again'
+    })
+
+
+def ok(url):
+    return jsonify({
+        'status': 'ok',
+        'msg': 'Your grade will be ready soon, you can check your status here %s',
+    })

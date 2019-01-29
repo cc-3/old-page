@@ -7,6 +7,7 @@ from glob import glob
 from flask import Flask
 from subprocess import run
 from flask_cors import CORS
+from datetime import datetime
 from tabulate import tabulate
 from termcolor import colored
 from .firebase import Firebase
@@ -36,6 +37,11 @@ def extract_to(file, to):
     zip_ref = zipfile.ZipFile(file, 'r')
     zip_ref.extractall(to)
     zip_ref.close()
+
+
+# creates a UTC timestamp
+def get_timestamp():
+    return datetime.utcnow().isoformat()[0:19]
 
 
 # join paths

@@ -78,9 +78,9 @@ export default class Info extends React.Component {
       });
     }
     if (this.props.loading)
-      return <Emoji text={'loading...'}/>
+      return <Emoji text={'Loading...'}/>
     else
-      return <Emoji text={'Not Fount...'} />
+      return <Emoji text={'Empty'} />
   }
 
   render() {
