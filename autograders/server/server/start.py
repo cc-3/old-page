@@ -65,7 +65,6 @@ def grade():
                 if 'file' in request.files:
                     if 'repo' in request.form:
                         repo = request.form['repo'].strip()
-                        print(repo)
                         if (repo != '') and (repo in valid_repos):
                             route = 'labs' if repo.startswith('lab') else 'projects'
                             if not in_queue(token, repo):

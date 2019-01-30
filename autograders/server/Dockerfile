@@ -9,7 +9,7 @@ RUN apt-get update && apt-get upgrade -y && \
     supervisor nginx -y && \
     echo "daemon off;" >> /etc/nginx/nginx.conf && \
     rm -f /etc/nginx/sites-enabled/default && \
-    mkdir -p /home/.aws
+    mkdir -p /root/.aws
 
 # Python 3 requirements
 COPY requirements.txt /
@@ -25,8 +25,8 @@ COPY config/autograders.conf /etc/nginx/sites-enabled
 COPY config/key.json /
 
 # AWS S3 Bucket credentials
-COPY config/config /home/.aws/
-COPY config/credentials /home/.aws/
+COPY config/config /root/.aws/
+COPY config/credentials /root/.aws/
 
 # SSL certificate
 COPY config/cc3.key /etc/ssl/cc3.key
