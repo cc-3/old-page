@@ -1,5 +1,5 @@
+import boto3
 import response
-from os import remove
 from os import environ
 from flask import Flask
 from flask import request
@@ -25,6 +25,10 @@ valid_repos = [
 
 # dashboard url
 url = 'https://cc-3.github.io/autograders/%s'
+
+
+# AWS S3 bucket
+bucket = boto3.client('s3')
 
 
 # gets db info
@@ -67,10 +71,9 @@ def grade():
                             if not in_queue(token, repo):
                                 # save zip fil
                                 filename = '%s-%s.zip' % (repo, token)
-                                request.files['file'].save(filename)
+                                file = request.files['file']
                                 # TODO: save to bucket files
-                                # remove local file
-                                remove(filename)
+                                bucket.upload_fileobj(file.stream, environ['S3_BUCKET'], filename)
                                 # save info in db
                                 save_to_db(token, repo)
                                 # all ok

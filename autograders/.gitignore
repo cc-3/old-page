@@ -103,5 +103,8 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-# firebase admin key
-server/key.json
+# credentials
+server/config/key.json
+server/config/credentials
+server/config/cc3.key
+server/config/cc3.pem

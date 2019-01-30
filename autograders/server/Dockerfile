@@ -3,35 +3,47 @@ FROM ubuntu:18.04
 LABEL maintainer="CC-3 Machine Structures <cc3.staff@gmail.com>"
 
 # General dependencies
-RUN apt-get update && apt-get upgrade -y
-RUN apt-get install build-essential git -y
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install --no-install-recommends build-essential \
+    python3-dev python3-pip python3-setuptools libssl-dev libffi-dev \
+    supervisor nginx -y && \
+    echo "daemon off;" >> /etc/nginx/nginx.conf && \
+    rm -f /etc/nginx/sites-enabled/default && \
+    mkdir -p /home/.aws
 
-# Python 3
-RUN apt-get install python3-dev python3-pip libssl-dev libffi-dev -y
+# Python 3 requirements
 COPY requirements.txt /
-RUN pip3 install -r requirements.txt
-RUN rm -f requirements.txt
+RUN pip3 install -r requirements.txt && rm -f requirements.txt
 
 # Supervisor
-RUN apt-get install supervisor -y
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Setup Nginx
-RUN apt-get install nginx -y
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf
-COPY config/autograders.conf /etc/nginx/sites-available
-RUN ln -s /etc/nginx/sites-available/autograders.conf /etc/nginx/sites-enabled
-RUN rm -f /etc/nginx/sites-enabled/default
+COPY config/autograders.conf /etc/nginx/sites-enabled
 
-# Setup App
-COPY key.json /
-ENV FIREBASE_DB='https://cc-3-autograders.firebaseio.com/'
+# Firebase credentials
+COPY config/key.json /
+
+# AWS S3 Bucket credentials
+COPY config/config /home/.aws/
+COPY config/credentials /home/.aws/
+
+# SSL certificate
+COPY config/cc3.key /etc/ssl/cc3.key
+COPY config/cc3.pem /etc/ssl/cc3.pem
+
+# Environment vars
 ENV FIREBASE_KEY=/key.json
+ENV FIREBASE_DB='https://test-autograders.firebaseio.com/'
+ENV S3_BUCKET='autograders'
+
+# Setup project
 ADD server /opt/server
 WORKDIR /opt/server
 
 # production
-EXPOSE 80
+EXPOSE 443
+
 # dev
 EXPOSE 5000
 
