@@ -5,7 +5,7 @@ LABEL maintainer="CC-3 Machine Structures <cc3.staff@gmail.com>"
 # General dependencies
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install --no-install-recommends build-essential \
-    python3-dev python3-pip python3-setuptools libssl-dev libffi-dev \
+    python3-dev python3-pip python3-setuptools python3-wheel libssl-dev libffi-dev \
     supervisor nginx -y && \
     echo "daemon off;" >> /etc/nginx/nginx.conf && \
     rm -f /etc/nginx/sites-enabled/default && \
