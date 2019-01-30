@@ -27,7 +27,7 @@ export const getDate = (utc, format=false) => {
   const date = moment(moment.utc(utc, 'YYYY-MM-DDTHH:mm:ss').toDate()).local();
   if (!format)
     return date.toDate();
-  return date.format('YYYY/MM/DD, hh:mm:ss A');
+  return date.format('YYYY/MM/DD, HH:mm:ss');
 };
 
 export const getSearch = () => {

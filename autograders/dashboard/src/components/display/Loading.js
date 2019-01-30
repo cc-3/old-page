@@ -1,11 +1,11 @@
 import React from 'react';
 
 
-const Loading = ({ loading }) => {
+const Loading = ({ loading, color }) => {
   if (loading) {
     return (
       <div title="Grading..." className="right preloader-wrapper active" style={{width: 14, height: 14}}>
-        <div className="spinner-layer spinner-green-only">
+        <div className={`spinner-layer spinner-${color}-only`}>
           <div className="circle-clipper left">
             <div className="circle"></div>
           </div><div className="gap-patch">
