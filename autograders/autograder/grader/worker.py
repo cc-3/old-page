@@ -63,7 +63,7 @@ class Worker(threading.Thread):
                             }
                         },
                         command="python3 check.py",
-                        mem_limit='100m',
+                        mem_limit='200m',
                         working_dir='/autograder'
                     )
                     logger.info('starting container %s', item)
