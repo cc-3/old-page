@@ -31,7 +31,7 @@ export default class Info extends React.Component {
   };
 
   getGrade = (info) => {
-    const { grade, timestamp } = info;
+    const { grade, timestamp, checking } = info;
     const date = timestamp ? getDate(timestamp, true) : '-';
     const style = {color: grade ? (grade > 60 ? '#43a047' : '#e53935') : '#1e88e5'};
     return (
@@ -40,6 +40,7 @@ export default class Info extends React.Component {
           <h5>Score: <span style={style}>{grade ? grade : 'pending'}</span></h5>
           <p><small>Last Submit</small></p>
           <p style={{fontWeight: 'bold'}}>{date}</p>
+          { checking ? (<p><small>currently being reviewed</small></p>) : null}
         </div>
       </div>
     );
