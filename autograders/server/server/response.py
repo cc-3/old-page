@@ -25,10 +25,6 @@ def unexpected_exception():
     return jsonify({'status': 'error', 'msg': 'unexpected exception, internal server error'})
 
 
-def missing_files(files):
-    return jsonify({'status': 'error', 'msg': 'missing some files: ' + files})
-
-
 def queue_error(url):
     return jsonify({
         'status': 'error',

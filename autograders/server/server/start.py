@@ -50,9 +50,9 @@ def save_to_db(token, repo):
     dir = 'labs' if repo.startswith('lab') else 'projs'
     student_ref = '%s/%s/%s' % (dir, token, repo)
     queue_ref = 'queue/%s-%s' % (repo, token)
-    info = {'grading': True, 'timestamp': Firebase.get_timestamp()}
     firebase.database().reference(queue_ref).set(True)
-    firebase.database().reference(student_ref).set(info)
+    firebase.database().reference(student_ref + '/grading').set(True)
+    firebase.database().reference(student_ref + '/timestamp').set(Firebase.get_timestamp())
 
 
 # API method
