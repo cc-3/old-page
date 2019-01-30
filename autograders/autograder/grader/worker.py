@@ -49,6 +49,8 @@ class Worker(threading.Thread):
                 utils.copy_files(utils.join('files', repo), tmp)
                 utils.copy_file(utils.join('grader', 'utils.py'), tmp)
                 # create docker container
+                dir = 'labs' if repo.startswith('lab') else 'projs'
+                self.firebase.database().reference('%s/%s/%s/checking' % (dir, token, repo)).set(True)
                 try:
                     logger.info('creating container with name %s', item)
                     container = self.client.containers.create(
@@ -87,10 +89,10 @@ class Worker(threading.Thread):
                         logger.error('could not delete file %s from bucket (%s: %s)', item, type(e).__name__, str(e))
                         continue
                     logger.info('storing results in firebase db...')
-                    dir = 'labs' if repo.startswith('lab') else 'projs'
                     self.firebase.database().reference('%s/%s/%s/grade' % (dir, token, repo)).set(result['grade'])
                     self.firebase.database().reference('%s/%s/%s/console' % (dir, token, repo)).set(result['output'])
-                    self.firebase.database().reference('%s/%s/%s/grading' % (dir, token, repo)).set(False)
+                    self.firebase.database().reference('%s/%s/%s/grading' % (dir, token, repo)).delete()
+                    self.firebase.database().reference('%s/%s/%s/checking' % (dir, token, repo)).delete()
                     self.firebase.database().reference('queue/%s' % (item.strip('.zip'))).delete()
                     logger.info('reading results...')
                 except docker.errors.ImageNotFound as e:
