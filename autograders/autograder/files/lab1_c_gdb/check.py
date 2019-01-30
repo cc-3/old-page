@@ -127,3 +127,4 @@ def lab1_c_gdb():
 if __name__ == '__main__':
     resource.setrlimit(resource.RLIMIT_AS, (BYTES, BYTES))
     lab1_c_gdb()
+    utils.fix_ownership()

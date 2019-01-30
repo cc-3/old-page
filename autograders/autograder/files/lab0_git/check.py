@@ -151,3 +151,4 @@ def lab0_git():
 
 if __name__ == '__main__':
     lab0_git()
+    utils.fix_ownership()

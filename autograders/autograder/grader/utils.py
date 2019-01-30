@@ -10,6 +10,7 @@ from os import environ
 from glob import glob
 from Crypto import Random
 from subprocess import run
+from subprocess import PIPE
 from tabulate import tabulate
 from Crypto.Cipher import AES
 from distutils.dir_util import copy_tree
@@ -46,10 +47,6 @@ def write_json(data, filename):
     f = open(filename, 'w')
     f.write(json.dumps(data))
     f.close()
-    # fix ownership
-    statinfo = os.stat(os.getcwd())
-    if (os.geteuid() == 0):
-        os.chown(filename, statinfo.st_uid, statinfo.st_gid)
 
 
 # reads a json
@@ -72,16 +69,6 @@ def extract_to(file, to, delete=False):
 # join paths
 def join(*args):
     return os.path.join(*args)
-
-
-# removes a directory
-def delete_dir(dir):
-    shutil.rmtree(dir)
-
-
-# removes a file
-def delete_file(f):
-    os.remove(f)
 
 
 # creates a temp directory
@@ -115,6 +102,28 @@ def ls(dir='.', files=[]):
     return files
 
 
+# fix ownership
+def fix_ownership():
+    # fix ownership
+    statinfo = os.stat(os.getcwd())
+    for f in ls():
+        if (os.geteuid() == 0):
+            os.chown(f, statinfo.st_uid, statinfo.st_gid)
+    for f in os.listdir(os.getcwd()):
+        if os.path.isdir(f):
+            os.chown(f, statinfo.st_uid, statinfo.st_gid)
+
+
+# removes a directory
+def delete_dir(dir):
+    shutil.rmtree(dir)
+
+
+# removes a file
+def delete_file(f):
+    os.remove(f)
+
+
 # expected files
 def expected_files(files, dir='.'):
     dirfiles = ls(dir=dir)
@@ -127,7 +136,7 @@ def expected_files(files, dir='.'):
 
 # executes a shell command
 def execute(cmd=[], shell=True, dir='.', timeout=5):
-    return run(cmd, shell=shell, capture_output=True, cwd=dir, timeout=timeout)
+    return run(cmd, shell=shell, stdout=PIPE, stderr=PIPE, cwd=dir, timeout=timeout)
 
 
 # makes a target
