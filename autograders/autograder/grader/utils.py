@@ -1,47 +1,72 @@
 import os
 import re
+import json
+import base64
 import shutil
+import hashlib
 import zipfile
 import tempfile
+from os import environ
 from glob import glob
-from flask import Flask
+from Crypto import Random
 from subprocess import run
-from flask_cors import CORS
-from datetime import datetime
 from tabulate import tabulate
-from termcolor import colored
-from .firebase import Firebase
+from Crypto.Cipher import AES
 from distutils.dir_util import copy_tree
 
 
-# gets server app
-def get_app(name='CC-3 Autograders'):
-    app = Flask(name)
-    CORS(app)
-    return app
+# encrypt a string
+def encrypt(raw):
+    def pad(s):
+        return s + (16 - len(s) % 16) * chr(16 - len(s) % 16)
+    rawkey = environ['AUTOGRADERS_KEY']
+    key = hashlib.sha256(rawkey.encode()).digest()
+    raw = pad(raw)
+    iv = Random.new().read(AES.block_size)
+    cipher = AES.new(key, AES.MODE_CBC, iv)
+    return base64.b64encode(iv + cipher.encrypt(raw)).decode()
 
 
-# creates firebase app
-def create_firebase(key, config):
-    return Firebase(key, config)
+# decrypt an encrypted string
+def decrypt(enc):
+    def unpad(s):
+        if (type(s[-1]) == int):
+            return s[0: -s[-1]]
+        return s[0: -ord(s[-1])]
+    enc = base64.b64decode(enc)
+    iv = enc[:16]
+    rawkey = environ['AUTOGRADERS_KEY']
+    key = hashlib.sha256(rawkey.encode()).digest()
+    cipher = AES.new(key, AES.MODE_CBC, iv)
+    return unpad(cipher.decrypt(enc[16:])).decode()
 
 
-# gets firebase app
-def firebase():
-    from .settings import FIREBASE
-    return FIREBASE
+# writes json
+def write_json(data, filename):
+    f = open(filename, 'w')
+    f.write(json.dumps(data))
+    f.close()
+    # fix ownership
+    statinfo = os.stat(os.getcwd())
+    if (os.geteuid() == 0):
+        os.chown(filename, statinfo.st_uid, statinfo.st_gid)
 
 
-# extracs a zip file to a directory:
-def extract_to(file, to):
+# reads a json
+def read_json(filename):
+    f = open(filename, 'r')
+    text = f.read()
+    f.close()
+    return json.loads(text)
+
+
+# extracts a zip file to a directory:
+def extract_to(file, to, delete=False):
     zip_ref = zipfile.ZipFile(file, 'r')
     zip_ref.extractall(to)
     zip_ref.close()
-
-
-# creates a UTC timestamp
-def get_timestamp():
-    return datetime.utcnow().isoformat()[0:19]
+    if delete:
+        os.remove(file)
 
 
 # join paths
@@ -74,9 +99,25 @@ def copy_files(dirfrom, dirto):
                 shutil.copy2(f, dirto)
 
 
+# copy file to a dir
+def copy_file(filename, dirto):
+    if os.path.exists(filename):
+        shutil.copy2(filename, dirto)
+
+
+# lists all files in dir
+def ls(dir='.', files=[]):
+    for e in glob(os.path.join(dir, '*')):
+        if os.path.isdir(e):
+            ls(dir=e, files=files)
+        else:
+            files.append(e)
+    return files
+
+
 # expected files
-def expected_files(files, dir):
-    dirfiles = os.listdir(dir)
+def expected_files(files, dir='.'):
+    dirfiles = ls(dir=dir)
     not_found = []
     for f in files:
         if f not in dirfiles:
@@ -90,8 +131,8 @@ def execute(cmd=[], shell=True, dir='.', timeout=5):
 
 
 # makes a target
-def make(target='', dir='.'):
-    return execute('make %s' % target, dir=dir)
+def make(target=''):
+    return execute('make %s' % target, dir='.')
 
 
 # parses a form
@@ -110,22 +151,22 @@ def parse_form(f):
 # passed message
 def passed(*args):
     if len(args) > 0:
-        return colored('passed', 'green') + ': ' + args[0]
-    return colored('passed', 'green')
+        return 'passed: ' + args[0]
+    return 'passed'
 
 
 # failed message
 def failed(*args):
     if len(args) > 0:
-        return colored('failed', 'red') + ': ' + args[0]
-    return colored('failed', 'red')
+        return 'failed: ' + args[0]
+    return 'failed'
 
 
 # incomplete message
 def incomplete(*args):
     if len(args) > 0:
-        return colored('imcomplete', 'yellow') + ': ' + args[0]
-    return colored('incomplete', 'yellow')
+        return 'incomplete: ' + args[0]
+    return 'incomplete'
 
 
 # creates a compilation error msg
@@ -136,6 +177,10 @@ def create_error(filename, msg):
 
 
 # creates a pretty result report
-def report(table, headers):
-    headers = [colored(header, 'white', attrs=['bold']) for header in headers]
-    return tabulate(table, headers=headers)
+def report(table):
+    return tabulate(table, headers=['Exercise', 'Grade', 'Message'])
+
+
+# writes autograder result
+def write_result(grade, msg):
+    write_json({'grade': grade, 'output': msg}, 'output.json')
