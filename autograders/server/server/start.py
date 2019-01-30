@@ -24,7 +24,7 @@ valid_repos = [
 
 
 # dashboard url
-url = 'https://cc-3.github.io/autograders/%s'
+url = 'https://dashboard.cc-3.site/%s'
 
 
 # AWS S3 bucket
