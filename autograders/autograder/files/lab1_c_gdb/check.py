@@ -3,8 +3,8 @@ import resource
 import subprocess
 
 
-# 10 MiB
-BYTES = 10 * 1024 * 1024
+# 195 MiB of memory
+BYTES = 195 * 1024 * 1024
 
 
 def check_eccentric():
@@ -32,8 +32,9 @@ def check_eccentric():
         return (round(grade), utils.passed() if wrong == 0 else utils.incomplete('some answers are wrong...'), '')
     except subprocess.TimeoutExpired:
         return (0, utils.failed('TIMEOUT'), '')
-    except Exception:
-        return (0, utils.failed('memory limit exceeded'))
+    except Exception as e:
+        print(e)
+        return (0, utils.failed('memory limit exceeded'), '')
 
 
 def check_cgdb():
@@ -65,11 +66,11 @@ def check_equal():
         grade = 0
         if expected == output:
             grade += 25
-        return (grade, utils.passed() if grade == 25 else utils.failed('Failed some tests...'), '')
+        return (grade, utils.passed() if grade == 25 else utils.failed('failed some tests...'), '')
     except subprocess.TimeoutExpired:
         return (0, utils.failed('TIMEOUT'), '')
     except Exception:
-        return (0, utils.failed('memory limit exceeded'))
+        return (0, utils.failed('memory limit exceeded'), '')
 
 
 def check_ll_cycle():
@@ -90,7 +91,7 @@ def check_ll_cycle():
     except subprocess.TimeoutExpired:
         return (0, utils.failed('TIMEOUT'), '')
     except Exception:
-        return (0, utils.failed('memory limit exceeded'))
+        return (0, utils.failed('memory limit exceeded'), '')
 
 
 def lab1_c_gdb():
