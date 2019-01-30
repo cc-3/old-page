@@ -14,6 +14,7 @@ const renderApp = () => {
   }
 };
 
+// auth state handler
 auth.onAuthStateChanged((user) => {
   if (user) {
     if (history.location.pathname === '/login')

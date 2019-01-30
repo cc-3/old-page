@@ -5,12 +5,12 @@ import 'firebase/database';
 
 // app configuration
 const config = {
-  apiKey: "AIzaSyAjppGwDnI4fjPvwzQHY9jJp044sBU_sCE",
-  authDomain: "test-autograders.firebaseapp.com",
-  databaseURL: "https://test-autograders.firebaseio.com",
-  projectId: "test-autograders",
-  storageBucket: "",
-  messagingSenderId: "477763975259"
+  apiKey: "AIzaSyDEVdqQMsO2ulwiw93wUGOYUtzEfFAZncs",
+  authDomain: "autograders-cc3.firebaseapp.com",
+  databaseURL: "https://autograders-cc3.firebaseio.com",
+  projectId: "autograders-cc3",
+  storageBucket: "autograders-cc3.appspot.com",
+  messagingSenderId: "1077556258829"
 };
 
 // app initialization
@@ -27,7 +27,7 @@ const database = firebase.database();
 
 // sign in
 const signIn = () => {
-  auth.signInWithRedirect(provider).then(() => {
+  auth.signInWithPopup(provider).then(() => {
     window.M.toast({html: 'Logged In'});
   }).catch((err) => {
     window.M.toast({html: err});
