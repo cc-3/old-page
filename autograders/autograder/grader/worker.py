@@ -89,8 +89,14 @@ class Worker(threading.Thread):
                         logger.error('could not delete file %s from bucket (%s: %s)', item, type(e).__name__, str(e))
                         continue
                     logger.info('storing results in firebase db...')
-                    self.firebase.database().reference('%s/%s/%s/grade' % (dir, token, repo)).set(result['grade'])
-                    self.firebase.database().reference('%s/%s/%s/console' % (dir, token, repo)).set(result['output'])
+                    grade_ref = self.firebase.database().reference('%s/%s/%s/grade' % (dir, token, repo))
+                    grade = grade_ref.get()
+                    # keep best grade
+                    if grade is None or grade <= result['grade']:
+                        grade = result['grade']
+                        console = result['output']
+                        grade_ref.set(grade)
+                        self.firebase.database().reference('%s/%s/%s/console' % (dir, token, repo)).set(console)
                     self.firebase.database().reference('%s/%s/%s/grading' % (dir, token, repo)).delete()
                     self.firebase.database().reference('%s/%s/%s/checking' % (dir, token, repo)).delete()
                     self.firebase.database().reference('queue/%s' % (item.strip('.zip'))).delete()

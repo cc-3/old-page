@@ -1,5 +1,6 @@
 import docker
 import logging
+from time import sleep
 from os import environ
 from queue import Queue
 from grader import Worker
@@ -18,6 +19,9 @@ consoleHandler = logging.StreamHandler()
 consoleHandler.setFormatter(format)
 rootLogger.addHandler(consoleHandler)
 rootLogger.setLevel(logging.INFO)
+
+# SECONDS TO WAIT BEFORE REQUESTS TO AWS
+WAIT = 10
 
 # num workers
 NUM_WORKERS = 4
@@ -54,8 +58,13 @@ def main():
         pool.append(worker)
     # master worker
     logger.info('starting master worker')
+    wait = False
     while True:
         try:
+            # wait some seconds
+            if wait:
+                sleep(WAIT)
+            wait = True
             # search for items in bucket
             logger.info('searching for pending files...')
             items = []
