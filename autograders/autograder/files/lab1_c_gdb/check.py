@@ -59,7 +59,7 @@ def check_equal():
             return (0, utils.failed('compilation error'), task.stderr.decode().strip())
         task = utils.execute('./test_ll_equal', timeout=1)
         if task.returncode != 0:
-            return (0, utils.failed('cuntime error'), task.stderr.decode().strip())
+            return (0, utils.failed('runtime error'), task.stderr.decode().strip())
         output = task.stdout.decode().strip()
         expected = 'OK\nOK\n'
         expected = expected.strip()
