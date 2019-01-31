@@ -1,9 +1,11 @@
-from .. import utils
+import utils
+import resource
+import subprocess
 
-#Aquí no sé qué va... #:( 
-__ALL__ = []
 
-lab2_expected = ['bit_ops.c', 'lfsr.c', 'vector.c']
+# 195 MiB of memory
+BYTES = 195 * 1024 * 1024
+
 
 def check_bit_ops(dir):
 
@@ -30,9 +32,9 @@ def check_bit_ops(dir):
         else:
             return (0, utils.failed('Using ternary operator'), "")
     else:
-        return (0, utils.failed('Using if command'), "") 
+        return (0, utils.failed('Using if command'), "")
 
-    try: 
+    try:
         grade = 0
         task = utils.make(target='test_bits_ops', dir=dir)
         if task.returncode != 0:
@@ -70,6 +72,7 @@ def check_bit_ops(dir):
     except Exception:
         return(0, utils.failed("Exception Error"), "")
 
+
 def check_lfsr(dir):
     try:
         grade = 0
@@ -91,6 +94,7 @@ def check_lfsr(dir):
     except Exception:
         return(0, utils.failed("Exception error"), "")
 
+
 def check_vector(dir):
     #Falta verificar que el heap esté vacío al final -> 10
     try:
@@ -101,7 +105,7 @@ def check_vector(dir):
         task = utils.execute('./test_vector', dir=dir, timeout = 1)
         if task.returncode != 0:
             return (0, utils.failed('Runtime error'), task.stderr.decode().strip())
-        
+
         out = task.stdout.decode().strip()
         out31 = out[:1]
         out32 = out[1:]
@@ -113,7 +117,7 @@ def check_vector(dir):
             grade += 15
         else:
             msg.append("vector_new, vector_delete and ")
-        
+
         if out32 == expected:
             grade +=15
         else:
@@ -127,3 +131,13 @@ def check_vector(dir):
             return(grade, utils.incomplete(msg + "not working"), "")
     except Exception:
         return(0, utils.failed("Exception error"), "")
+
+
+def lab2_c_mm():
+    pass
+
+
+if __name__ == '__main__':
+    resource.setrlimit(resource.RLIMIT_AS, (BYTES, BYTES))
+    lab2_c_mm()
+    utils.fix_ownership()

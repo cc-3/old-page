@@ -13,6 +13,7 @@ from subprocess import run
 from subprocess import PIPE
 from tabulate import tabulate
 from Crypto.Cipher import AES
+from pycparser import c_parser
 from distutils.dir_util import copy_tree
 
 
@@ -141,7 +142,7 @@ def execute(cmd=[], shell=True, dir='.', timeout=5):
 
 # makes a target
 def make(target=''):
-    return execute('make %s' % target, dir='.')
+    return execute('make %s' % target)
 
 
 # parses a form
@@ -155,6 +156,24 @@ def parse_form(f):
             vals = line.split(':')
             lookup[vals[0].strip()] = vals[1].strip()
     return lookup
+
+
+# parses a c c99 file
+def parse_c(filename):
+    make(target=filename + '_conv.c')
+    f = open(filename + '_conv.c', 'r')
+    text = ''
+    p = re.compile(r'(\w)*#.*')
+    for line in f:
+        line = line.strip()
+        if line == '':
+            continue
+        if p.search(line):
+            continue
+        text += line + '\n'
+    f.close()
+    parser = c_parser.CParser()
+    return parser.parse(text)
 
 
 # passed message
