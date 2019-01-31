@@ -14,13 +14,13 @@ const Dashboard = () => (
       <Row>
         <Col>
           <Row>
-            <Col size="s12 m3">
+            <Col size="s12 m4 l3">
               <Card title="Labs" color="red" to="/labs"/>
             </Col>
-            <Col size="s12 m3">
+            <Col size="s12 m4 l3">
               <Card title="Projects" color="green" to="/projects"/>
             </Col>
-            <Col size="s12 m3">
+            <Col size="s12 m4 l3">
               <Card title="Token" color="blue" modal trigger="token"/>
             </Col>
             <Col size="m12 l6">

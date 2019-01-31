@@ -8,7 +8,7 @@ const Card = ({ title, subtitle='', color='red', to, modal=false, trigger='' }) 
       <div className="card-image">
         <Link to={to}>
           <div className={`${color}`} style={{minHeight: 200}}></div>
-          <span className="card-title">{title} {subtitle}</span>
+          <span className="card-title title">{title} {subtitle}</span>
         </Link>
       </div>
     </div>
@@ -16,7 +16,7 @@ const Card = ({ title, subtitle='', color='red', to, modal=false, trigger='' }) 
     <div className="card">
       <div className="card-image modal-trigger" href={`#${trigger}`} style={{cursor: 'pointer'}}>
         <div className={`${color}`} style={{minHeight: 200}}></div>
-        <span className="card-title">{title} {subtitle}</span>
+        <span className="card-title title">{title} {subtitle}</span>
       </div>
     </div>
 );
