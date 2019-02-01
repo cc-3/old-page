@@ -142,7 +142,7 @@ def execute(cmd=[], shell=False, dir='.', timeout=5):
 
 # makes a target
 def make(target=''):
-    return execute('make %s' % target)
+    return execute(cmd=['make', target])
 
 
 # parses a form

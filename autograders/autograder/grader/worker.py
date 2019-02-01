@@ -3,7 +3,6 @@ import logging
 import threading
 import traceback
 from . import utils
-from requests.exceptions import ReadTimeout
 
 
 logger = logging.getLogger('worker')
