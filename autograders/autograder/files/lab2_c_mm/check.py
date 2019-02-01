@@ -5,9 +5,10 @@ from pycparser import c_ast
 
 
 # 195 MiB of memory
-BYTES = 500 * 1024 * 1024
+BYTES = 195 * 1024 * 1024
 
 
+# C loop visitor
 class LoopVisitor(c_ast.NodeVisitor):
 
     def __init__(self):
@@ -25,7 +26,11 @@ class LoopVisitor(c_ast.NodeVisitor):
         self.found = True
         self.generic_visit(node)
 
+    def reset(self):
+        self.found = False
 
+
+# C free call visitor
 class FreeCall(c_ast.NodeVisitor):
 
     def __init__(self):
@@ -40,14 +45,13 @@ class FreeCall(c_ast.NodeVisitor):
         self.count = 0
 
 
+# checks bit ops
 def check_ex1():
     try:
+        # compile
         task = utils.make(target='bit_ops')
         if task.returncode != 0:
             return (0, utils.failed('compilation error'), task.stderr.decode().strip())
-        task = utils.execute('./bit_ops', timeout=1)
-        if task.returncode != 0:
-            return (0, utils.failed('runtime error'), task.stderr.decode().strip())
         # check loops
         v = LoopVisitor()
         # flip_bit
@@ -62,6 +66,10 @@ def check_ex1():
         v.visit(utils.find_func(utils.parse_c('ex1/set_bit'), 'set_bit'))
         if v.found:
             return (0, utils.failed('[set_bit] don\'t use loops please... ¯\\_(⊙︿⊙)_/¯'), '')
+        # run tests
+        task = utils.execute('./bit_ops', timeout=1)
+        if task.returncode != 0:
+            return (0, utils.failed('runtime error'), task.stderr.decode().strip())
         # Output
         output = task.stdout.decode().strip()
         expected = 'OK\nOK\nOK\nOK\nOK\nOK\nOK\nOK\nOK\nOK\nOK\nOK\nOK\nOK\nOK\nOK\nOK\nOK\nOK'
@@ -89,20 +97,23 @@ def check_ex1():
         return (0, utils.failed('memory limit exceeded'), '')
 
 
+# checks lfsr calculate
 def check_ex2():
     try:
+        # compile
         task = utils.make(target='lfsr')
         if task.returncode != 0:
             return (0, utils.failed('compilation error'), task.stderr.decode().strip())
-        task = utils.execute('./lfsr', timeout=1)
-        if task.returncode != 0:
-            return (0, utils.failed('runtime error'), task.stderr.decode().strip())
         # check loops
         v = LoopVisitor()
         # flip_bit
         v.visit(utils.find_func(utils.parse_c('ex2/lfsr_calculate'), 'lfsr_calculate'))
         if v.found:
             return (0, utils.failed('don\'t use loops please... ¯\\_(⊙︿⊙)_/¯'), '')
+        # run tests
+        task = utils.execute('./lfsr', timeout=1)
+        if task.returncode != 0:
+            return (0, utils.failed('runtime error'), task.stderr.decode().strip())
         # Output
         output = task.stdout.decode().strip()
         f = open('ex2.expected', 'r')
@@ -119,28 +130,13 @@ def check_ex2():
         return (0, utils.failed('memory limit exceeded'), '')
 
 
+# checks vector
 def check_ex3():
     try:
+        # compile
         task = utils.make(target='vector')
         if task.returncode != 0:
             return (0, utils.failed('compilation error'), task.stderr.decode().strip())
-        task = utils.execute('./vector', timeout=1)
-        if task.returncode != 0:
-            return (0, utils.failed('runtime error'), task.stderr.decode().strip())
-        # Output
-        output = task.stdout.decode().strip().split('\n')
-        f = open('ex3.expected', 'r')
-        expected = f.read().strip().split('\n')
-        f.close()
-        grade = 0
-        wrong = 0
-        for (exp, out) in zip(expected, output):
-            exp = exp.strip()
-            out = out.strip()
-            if exp == out:
-                grade += (100 / 3) / 17
-            else:
-                wrong += 1
         # check for free calls
         v = FreeCall()
         ast = utils.parse_c('ex3/vector')
@@ -159,6 +155,24 @@ def check_ex3():
         v.visit(utils.find_func(ast, 'vector_set'))
         if v.count == 0:
             return (0, utils.failed('[vector_set] don\'t forget to call free... ¯\\_(⊙︿⊙)_/¯'), '')
+        # run tests
+        task = utils.execute('./vector', timeout=1)
+        if task.returncode != 0:
+            return (0, utils.failed('runtime error'), task.stderr.decode().strip())
+        # Output
+        output = task.stdout.decode().strip().split('\n')
+        f = open('ex3.expected', 'r')
+        expected = f.read().strip().split('\n')
+        f.close()
+        grade = 0
+        wrong = 0
+        for (exp, out) in zip(expected, output):
+            exp = exp.strip()
+            out = out.strip()
+            if exp == out:
+                grade += (100 / 3) / 17
+            else:
+                wrong += 1
         # grade
         if wrong == 17:
             return (0, utils.failed('all tests failed'), '')
@@ -207,4 +221,3 @@ if __name__ == '__main__':
     resource.setrlimit(resource.RLIMIT_AS, (BYTES, BYTES))
     lab2_c_mm()
     utils.fix_ownership()
-    print(utils.read_json('output.json')['output'])
