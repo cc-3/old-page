@@ -34,7 +34,7 @@ COPY config/cc3.pem /etc/ssl/cc3.pem
 
 # Environment vars
 ENV FIREBASE_KEY=/key.json
-ENV FIREBASE_DB='https://test-autograders.firebaseio.com/'
+ENV FIREBASE_DB='https://autograders-cc3.firebaseio.com/'
 ENV S3_BUCKET='autograders'
 
 # Setup project
