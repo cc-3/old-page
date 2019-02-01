@@ -136,7 +136,7 @@ def expected_files(files, dir='.'):
 
 
 # executes a shell command
-def execute(cmd=[], shell=True, dir='.', timeout=5):
+def execute(cmd=[], shell=False, dir='.', timeout=5):
     return run(cmd, shell=shell, stdout=PIPE, stderr=PIPE, cwd=dir, timeout=timeout)
 
 
