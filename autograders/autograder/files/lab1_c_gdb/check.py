@@ -12,7 +12,7 @@ def check_eccentric():
         task = utils.make(target='test_eccentric')
         if task.returncode != 0:
             return (0, utils.failed('compilation error'), task.stderr.decode().strip())
-        task = utils.execute('./test_eccentric', timeout=1)
+        task = utils.execute(cmd=['./test_eccentric'], timeout=5)
         if task.returncode != 0:
             return (0, utils.failed('runtime error'), task.stderr.decode().strip())
         # Output
@@ -57,7 +57,7 @@ def check_equal():
         task = utils.make(target='test_ll_equal')
         if task.returncode != 0:
             return (0, utils.failed('compilation error'), task.stderr.decode().strip())
-        task = utils.execute('./test_ll_equal', timeout=1)
+        task = utils.execute(cmd=['./test_ll_equal'], timeout=5)
         if task.returncode != 0:
             return (0, utils.failed('runtime error'), task.stderr.decode().strip())
         output = task.stdout.decode().strip()
@@ -78,7 +78,7 @@ def check_ll_cycle():
         task = utils.make(target='test_ll_cycle')
         if task.returncode != 0:
             return (0, utils.failed('Compilation error'), task.stderr.decode().strip())
-        task = utils.execute('./test_ll_cycle', timeout=1)
+        task = utils.execute(cmd=['./test_ll_cycle'], timeout=5)
         if task.returncode != 0:
             return (0, utils.failed('Runtime error'), task.stderr.decode().strip())
         output = task.stdout.decode().strip()

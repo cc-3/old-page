@@ -83,7 +83,7 @@ def check_ex1():
         if v.found:
             return (0, utils.failed('[set_bit] don\'t use loops/conds please... ¯\\_(⊙︿⊙)_/¯'), '')
         # run tests
-        task = utils.execute('./bit_ops', timeout=1)
+        task = utils.execute(cmd=['./bit_ops'], timeout=5)
         if task.returncode != 0:
             return (0, utils.failed('runtime error'), task.stderr.decode().strip())
         # Output
@@ -127,7 +127,7 @@ def check_ex2():
         if v.found:
             return (0, utils.failed('don\'t use loops/conds please... ¯\\_(⊙︿⊙)_/¯'), '')
         # run tests
-        task = utils.execute('./lfsr', timeout=1)
+        task = utils.execute(cmd=['./lfsr'], timeout=5)
         if task.returncode != 0:
             return (0, utils.failed('runtime error'), task.stderr.decode().strip())
         # Output
@@ -172,7 +172,7 @@ def check_ex3():
         if v.count == 0:
             return (0, utils.failed('[vector_set] don\'t forget to call free... ¯\\_(⊙︿⊙)_/¯'), '')
         # run tests
-        task = utils.execute('./vector', timeout=1)
+        task = utils.execute(cmd=['./vector'], timeout=5)
         if task.returncode != 0:
             return (0, utils.failed('runtime error'), task.stderr.decode().strip())
         # Output
