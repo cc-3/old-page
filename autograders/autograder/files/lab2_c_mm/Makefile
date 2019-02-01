@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Wall -Itests/include -std=c99
+CFLAGS=-Wall -Itests/include -fPIC -std=c99
 
 EX1_SRC=\
 	ex1/flip_bit.c \
