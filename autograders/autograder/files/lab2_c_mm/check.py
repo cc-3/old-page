@@ -224,6 +224,7 @@ def lab2_c_mm():
         grade += ex1_result[0]
         grade += ex2_result[0]
         grade += ex3_result[0]
+        grade = round(grade)
         grade = min(grade, 100)
         report = utils.report(table)
         if errors != '':
