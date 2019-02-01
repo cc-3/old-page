@@ -3,6 +3,7 @@ import logging
 import threading
 import traceback
 from . import utils
+from requests.exceptions import ReadTimeout
 
 
 logger = logging.getLogger('worker')
@@ -69,7 +70,21 @@ class Worker(threading.Thread):
                     logger.info('starting container %s', item)
                     container.start()
                     logger.info('wating for container %s', item)
-                    container.wait()
+                    try:
+                        container.wait(timeout=300)
+                    except ReadTimeout:
+                        logger.info('killing %s container from history TIMEOUT', item)
+                        self.client.kill(container)
+                        grade_ref = self.firebase.database().reference('%s/%s/%s/grade' % (dir, token, repo))
+                        grade = grade_ref.get()
+                        # keep best grade
+                        if grade is None or grade == 0:
+                            grade_ref.set(0)
+                            self.firebase.database().reference('%s/%s/%s/console' % (dir, token, repo)).set('TIMEOUT')
+                        self.firebase.database().reference('%s/%s/%s/grading' % (dir, token, repo)).delete()
+                        self.firebase.database().reference('%s/%s/%s/checking' % (dir, token, repo)).delete()
+                        self.firebase.database().reference('queue/%s' % (item.strip('.zip'))).delete()
+                        continue
                     logger.info('removing %s container from history', item)
                     container.remove(v=True, force=True)
                     logger.info('reading tests output json')
