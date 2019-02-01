@@ -9,7 +9,7 @@ BYTES = 195 * 1024 * 1024
 
 
 # C loop visitor
-class LoopVisitor(c_ast.NodeVisitor):
+class LoopCondVisitor(c_ast.NodeVisitor):
 
     def __init__(self):
         self.found = False
@@ -19,6 +19,22 @@ class LoopVisitor(c_ast.NodeVisitor):
         self.generic_visit(node)
 
     def visit_DoWhile(self, node):
+        self.found = True
+        self.generic_visit(node)
+
+    def visit_Goto(self, node):
+        self.found = True
+        self.generic_visit(node)
+
+    def visit_If(self, node):
+        self.found = True
+        self.generic_visit(node)
+
+    def visit_Switch(self, node):
+        self.found = True
+        self.generic_visit(node)
+
+    def visit_TernaryOp(self, node):
         self.found = True
         self.generic_visit(node)
 
@@ -53,19 +69,19 @@ def check_ex1():
         if task.returncode != 0:
             return (0, utils.failed('compilation error'), task.stderr.decode().strip())
         # check loops
-        v = LoopVisitor()
+        v = LoopCondVisitor()
         # flip_bit
         v.visit(utils.find_func(utils.parse_c('ex1/flip_bit'), 'flip_bit'))
         if v.found:
-            return (0, utils.failed('[flip_bit] don\'t use loops please... ¯\\_(⊙︿⊙)_/¯'), '')
+            return (0, utils.failed('[flip_bit] don\'t use loops/conds please... ¯\\_(⊙︿⊙)_/¯'), '')
         # get_bit
         v.visit(utils.find_func(utils.parse_c('ex1/get_bit'), 'get_bit'))
         if v.found:
-            return (0, utils.failed('[get_bit] don\'t use loops please... ¯\\_(⊙︿⊙)_/¯'), '')
+            return (0, utils.failed('[get_bit] don\'t use loops/conds please... ¯\\_(⊙︿⊙)_/¯'), '')
         # set_bit
         v.visit(utils.find_func(utils.parse_c('ex1/set_bit'), 'set_bit'))
         if v.found:
-            return (0, utils.failed('[set_bit] don\'t use loops please... ¯\\_(⊙︿⊙)_/¯'), '')
+            return (0, utils.failed('[set_bit] don\'t use loops/conds please... ¯\\_(⊙︿⊙)_/¯'), '')
         # run tests
         task = utils.execute('./bit_ops', timeout=1)
         if task.returncode != 0:
@@ -105,11 +121,11 @@ def check_ex2():
         if task.returncode != 0:
             return (0, utils.failed('compilation error'), task.stderr.decode().strip())
         # check loops
-        v = LoopVisitor()
+        v = LoopCondVisitor()
         # flip_bit
         v.visit(utils.find_func(utils.parse_c('ex2/lfsr_calculate'), 'lfsr_calculate'))
         if v.found:
-            return (0, utils.failed('don\'t use loops please... ¯\\_(⊙︿⊙)_/¯'), '')
+            return (0, utils.failed('don\'t use loops/conds please... ¯\\_(⊙︿⊙)_/¯'), '')
         # run tests
         task = utils.execute('./lfsr', timeout=1)
         if task.returncode != 0:
