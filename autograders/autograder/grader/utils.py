@@ -6,6 +6,7 @@ import shutil
 import hashlib
 import zipfile
 import tempfile
+import pycparser
 from os import environ
 from glob import glob
 from Crypto import Random
@@ -13,7 +14,6 @@ from subprocess import run
 from subprocess import PIPE
 from tabulate import tabulate
 from Crypto.Cipher import AES
-from pycparser import c_parser
 from distutils.dir_util import copy_tree
 
 
@@ -165,14 +165,14 @@ def parse_c(filename):
     text = ''
     p = re.compile(r'(\w)*#.*')
     for line in f:
-        line = line.strip()
+        line = line.strip('\n')
         if line == '':
             continue
         if p.search(line):
             continue
         text += line + '\n'
     f.close()
-    parser = c_parser.CParser()
+    parser = pycparser.c_parser.CParser()
     return parser.parse(text)
 
 
@@ -212,3 +212,11 @@ def report(table):
 # writes autograder result
 def write_result(grade, msg):
     write_json({'grade': grade, 'output': msg}, 'output.json')
+
+
+# finds a specific function in the ast
+def find_func(ast, name):
+    for f in ast.ext:
+        if type(f) == pycparser.c_ast.FuncDef and f.decl.name == name:
+            return f
+    return None

@@ -1,0 +1,17 @@
+Calling vector_new()
+Calling vector_delete()
+vector_new() again
+These should all return 0 (vector_get()): 0 0 0
+Doing a bunch of vector_set()s
+These should be equal:
+98 = 98
+15 = 15
+65 = 65
+-123 = -123
+21 = 21
+43 = 43
+0 = 0
+0 = 0
+0 = 0
+3 = 3
+Test complete.

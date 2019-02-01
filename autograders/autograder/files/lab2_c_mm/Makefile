@@ -40,7 +40,7 @@ $(OBJ): %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(CONV): %_conv.c: %.c
-	$(CC) $(CFLAGS) -fpreprocessed -dD -E $< > $@
+	$(CC) $(CFLAGS) -Itests/fake -E $< > $@
 
 .PHONY: clean
 

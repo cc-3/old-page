@@ -1,7 +1,6 @@
 #ifndef LFSR_H
 #define LFSR_H
 
-#include <stdint.h>
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
