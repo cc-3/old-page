@@ -6,6 +6,7 @@ import Card from '../display/Card';
 import Content from '../layout/Content';
 import BarPlot from '../display/BarPlot';
 import Container from '../layout/Container';
+import ReactResizeDetector from 'react-resize-detector';
 
 
 const Dashboard = () => (
@@ -15,19 +16,29 @@ const Dashboard = () => (
         <Col>
           <Row>
             <Col size="s12 m4 l3">
-              <Card title="Labs" color="red" to="/labs"/>
+              <ReactResizeDetector handleWidth>
+                <Card title="Labs" color="red" to="/labs"/>
+              </ReactResizeDetector>
             </Col>
             <Col size="s12 m4 l3">
-              <Card title="Projects" color="green" to="/projects"/>
+              <ReactResizeDetector handleWidth>
+                <Card title="Projects" color="green" to="/projects"/>
+              </ReactResizeDetector>
             </Col>
             <Col size="s12 m4 l3">
-              <Card title="Token" color="blue" modal trigger="token"/>
+              <ReactResizeDetector handleWidth>
+                <Card title="Token" color="blue" modal trigger="token"/>
+              </ReactResizeDetector>
             </Col>
             <Col size="m12 l6">
-              <BarPlot dir="labs" title="Labs" color="#8e24aa" />
+              <ReactResizeDetector handleWidth>
+                <BarPlot dir="labs" title="Labs"/>
+              </ReactResizeDetector>
             </Col>
             <Col size="m12 l6">
-              <BarPlot dir="projs" title="Projects" color="#fdd835 " />
+              <ReactResizeDetector handleWidth>
+                <BarPlot dir="projs" title="Projects"/>
+              </ReactResizeDetector>
             </Col>
           </Row>
         </Col>

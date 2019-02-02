@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import "react-vis/dist/style.css";
-
 import './style.css';
 import { auth } from './firebase';
 import { history, AppRouter } from './router';
