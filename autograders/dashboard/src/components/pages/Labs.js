@@ -5,6 +5,7 @@ import Content from '../layout/Content';
 import SearchBar from '../layout/SearchBar';
 import Container from '../layout/Container';
 
+import { auth } from '../../firebase';
 import { attach, dettach, getSearch } from '../../utils';
 
 
@@ -12,7 +13,8 @@ export default class Labs extends React.Component {
 
   state = {
     loading: true,
-    data: {}
+    data: {},
+    uid: undefined
   };
 
   handleLabs = (labs) => {
@@ -20,11 +22,12 @@ export default class Labs extends React.Component {
   };
 
   componentWillMount() {
-    attach('/labs', this.handleLabs, true);
+    this.setState({uid: auth.currentUser.uid});
+    attach(`/labs/${auth.currentUser.uid}`, this.handleLabs);
   }
 
   componentWillUnmount() {
-    dettach('/labs', this.handleLabs, true);
+    dettach(`/labs/${this.state.uid}`, this.handleLabs);
   }
 
   render() {

@@ -40,6 +40,7 @@
   min-height: 70vh;
   overflow: scroll;
   padding: 12px;
+  line-height: 1.15;
 }
 
 /** NOT FOUND **/
@@ -111,10 +112,11 @@
 .cc-3-login {
   height: 100vh;
   background: url('/img/login.jpg');
+  background-size: cover;
 }
 
 .cc-3-login-box {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 12px;
   max-width: 300px;
   z-index: 1;
@@ -165,7 +167,7 @@
 
 /** NAVLINK */
 .cc-3-active-link {
-  background-color: #ffa000 !important;
+  background-color: #00acc1 !important;
   color: white !important;
 }
 
@@ -174,13 +176,13 @@
 }
 
 .cc-3-nav-hov:hover {
-  background-color: #ffa000 !important;
+  background-color: #00acc1 !important;
   color: white !important;
   cursor: pointer;
 }
 
 .cc-3-nav-hov:hover {
-  color: #ffa000 !important;
+  color: #00acc1 !important;
 }
 
 .cc-3-nav-hov:hover i {
@@ -193,7 +195,7 @@
 }
 
 .cc-3-link:hover {
-  background-color: #ffa000 !important;
+  background-color: #00acc1 !important;
   color: white !important;
   cursor: pointer;
 }

@@ -7,6 +7,7 @@ import Content from '../layout/Content';
 import SearchBar from '../layout/SearchBar';
 import Container from '../layout/Container';
 
+import { auth } from '../../firebase';
 import { attach, dettach, getSearch } from '../../utils';
 
 
@@ -14,7 +15,8 @@ export default class Projects extends React.Component {
 
   state = {
     data: {},
-    loading: true
+    loading: true,
+    uid: undefined
   };
 
   handleProjs = (projs) => {
@@ -22,11 +24,12 @@ export default class Projects extends React.Component {
   };
 
   componentWillMount() {
-    attach('/projs', this.handleProjs, true);
+    this.setState({uid: auth.currentUser.uid});
+    attach(`/projs/${auth.currentUser.uid}`, this.handleProjs);
   }
 
   componentWillUnmount() {
-    dettach('/projs', this.handleProjs, true);
+    dettach(`/projs/${this.state.uid}`, this.handleProjs);
   }
 
   render() {

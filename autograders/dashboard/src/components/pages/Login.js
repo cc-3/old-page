@@ -8,7 +8,7 @@ export default class Login extends React.Component {
   render() {
     return (
       <div className="cc-3-login">
-        <div className="card-panel z-depth-2 cc-3-login-box">
+        <div className="card-panel cc-3-login-box">
           <div className="center">
             <img src="/img/logo.png" alt="Autograders" className="responsive-img" />
           </div>

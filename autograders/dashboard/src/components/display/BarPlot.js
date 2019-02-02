@@ -1,6 +1,7 @@
 import React from 'react';
 import { BarChart } from 'react-easy-chart';
 
+import { auth } from '../../firebase';
 import { attach, dettach } from '../../utils';
 
 
@@ -9,6 +10,7 @@ class BarPlot extends React.Component {
   state = {
     data: [],
     width: 300,
+    uid: undefined
   };
 
   handleData = (data) => {
@@ -26,11 +28,12 @@ class BarPlot extends React.Component {
   };
 
   componentWillMount() {
-    attach(`/${this.props.dir}`, this.handleData, true);
+    this.setState({uid: auth.currentUser.uid});
+    attach(`/${this.props.dir}/${auth.currentUser.uid}`, this.handleData);
   }
 
   componentWillUnmount() {
-    dettach(`/${this.props.dir}`, this.handleData, true);
+    dettach(`/${this.props.dir}/${this.state.uid}`, this.handleData);
   }
 
   render() {

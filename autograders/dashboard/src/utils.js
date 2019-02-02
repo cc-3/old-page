@@ -2,7 +2,7 @@ import moment from 'moment';
 import queryString from 'query-string';
 
 import { history } from './router';
-import { database, auth } from './firebase';
+import { database } from './firebase';
 
 
 export const getRandomEmoji = () => {
@@ -35,12 +35,10 @@ export const getSearch = () => {
   return queryString.parse(q).s ? queryString.parse(q).s : '';
 };
 
-export const attach = (path, callback, user=false) => {
-  let dbpath = user ? `${path}/${auth.currentUser.uid}` : path;
-  return database.ref(dbpath).on('value', snap => callback(snap.val()));
+export const attach = (path, callback) => {
+  return database.ref(path).on('value', snap => callback(snap.val()));
 };
 
-export const dettach = (path, callback, user=false) => {
-  let dbpath = user ? `${path}/${auth.currentUser.uid}` : path;
-  return database.ref(dbpath).on('value', snap => callback(snap.val()));
+export const dettach = (path, callback) => {
+  return database.ref(path).on('value', snap => callback(snap.val()));
 }
