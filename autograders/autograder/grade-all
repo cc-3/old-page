@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+{
+  printf "   ___       __                        __       \n"
+  printf "  / _ |__ __/ /____  ___  _______ ____/ /__ ____\n"
+  printf " / __ / // / __/ _ \/ _ \\/ __/ _ \\/ _  / -_) __/\n"
+  printf "/_/ |_\\_,_/\\__/\\___/\\_, /_/  \\_,_/\\_,_/\\__/_/\n"
+  printf "                   /___/\n\n"
+  printf "             Machine Structures\n"
+  printf "     Great Ideas in Computer Architecture\n\n"
+  printf "grades lab: $1\n\n"
+
+  python grade.py -i A.csv -l cc3/A.yml -r "$1" -o A -d "$2" -m -c
+  python grade.py -i B.csv -l cc3/B.yml -r "$1" -o B -d "$2" -m
+  python grade.py -i C.csv -l cc3/C.yml -r "$1" -o C -d "$2" -m
+}

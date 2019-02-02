@@ -3,22 +3,32 @@ import sys
 import yaml
 import argparse
 import numpy as np
+from grader import utils
+from grader import Bucket
 from random import randint
+from grader import Firebase
+from tabulate import tabulate
 from datetime import datetime
 from collections import Counter
 import matplotlib.pyplot as plt
-from grader.utils import report
-from grader.settings import FIREBASE as fb
 
 
-TITLE = '''   ___       __                        __
-  / _ |__ __/ /____  ___ ________ ____/ /__ ____
- / __ / // / __/ _ \/ _ `/ __/ _ `/ _  / -_) __/
-/_/ |_\_,_/\__/\___/\_, /_/  \_,_/\_,_/\__/_/
-                   /___/
+firebase = Firebase(os.environ['FIREBASE_KEY'], os.environ['FIREBASE_DB'])
+bucket = Bucket(os.environ['S3_BUCKET'], os.environ['S3_BACKUP'])
 
-               Machine Structures
-      Great Ideas in Computer Architecture'''
+
+# gets result from firebase
+def get_result(token, repo):
+    dir = 'labs' if repo.startswith('lab') else 'projs'
+    return firebase.database().reference('%s/%s/%s' % (dir, token, repo)).get()
+
+
+# gets firebase uid
+def get_user_id(email):
+    try:
+        return firebase.auth().get_user_by_email(email).uid
+    except Exception:
+        return None
 
 
 # loads students list
@@ -33,10 +43,17 @@ def decode_timestamp(timestamp):
 
 
 # gets assignment grade
-def get_grade(token, repo, due_date):
-    result = fb.get_result(token, repo)
+def get_grade(token, repo, due_date, moss):
+    result = get_result(token, repo)
     if result is None:
-        return (0, 'Creo token pero no subio laboratorio al autograder')
+        return (0, 'No subio laboratorio al autograder')
+    if moss:
+        filename = '%s-%s' % (repo, token)
+        bucket.download_backup(filename + '.zip', os.path.join('moss', filename + '.zip'))
+        dir = os.path.join('moss', filename)
+        if not os.path.exists(dir):
+            os.system('mkdir %s' % dir)
+        utils.extract_to(os.path.join('moss', filename + '.zip'), dir, delete=True)
     if 'timestamp' in result:
         sub_date = decode_timestamp(result['timestamp'])
         if sub_date > due_date:
@@ -45,7 +62,7 @@ def get_grade(token, repo, due_date):
 
 
 # compute statistics
-def statistics(data, show=False):
+def statistics(data, output, show=False):
     print('getting statistics...')
     grades = [e[3] for e in data]
     mean = sum(grades) / len(grades)
@@ -81,7 +98,7 @@ def statistics(data, show=False):
         plt.ylabel('Frequency')
         plt.title(title.lower().capitalize())
         figure.tight_layout()
-        plt.savefig('histogram.png', bbox_inches='tight')
+        plt.savefig('./results/%s-plot.png' % output, bbox_inches='tight')
 
     # plot history
     hist('Results (mean %.2f)' % mean, grades)
@@ -90,7 +107,7 @@ def statistics(data, show=False):
 def grade(args):
     students = load(args.list)
     inpt = open(args.input, 'r', encoding='latin-1')
-    out = open(args.output, 'w', encoding='latin-1')
+    out = open('./results/' + args.output + '-GES.csv', 'w', encoding='latin-1')
     due_date = decode_timestamp(args.due)
     start = False
     data = []
@@ -109,25 +126,28 @@ def grade(args):
             id = line[0]
             id2 = line[1].strip('\'')
             title = line[2]
-            uid = fb.get_user_id(students[id2])
+            uid = get_user_id(students[id2])
             if uid is None:
                 data.append((id, id2, title, 0, 'No creo token y no subio laboratorio al autograder'))
                 out.write(fmt % data[-1])
             else:
-                data.append((id, id2, title, *get_grade(uid, args.repo, due_date)))
+                data.append((id, id2, title, *get_grade(uid, args.repo, due_date, args.moss)))
                 out.write(fmt % data[-1])
     inpt.close()
     out.close()
-    statistics(data, show=args.show)
-    print('printing results...')
+    statistics(data, args.output, show=args.show)
+    print('printing results... (%s)' % args.output)
     print()
-    print(report(data, headers=['Id', 'Id2', 'Name', 'Grade', 'Comment']))
+    results = tabulate(data, headers=['Id', 'Id2', 'Name', 'Grade', 'Comment'])
+    print(results)
+    with open('./results/%s-info.txt' % args.output, 'w') as f:
+        f.write(results)
     print()
     if args.show:
         print('showing statistics...')
         plt.show()
     print()
-    print(' => all done')
+    print(' => all done (%s)' % args.output)
 
 
 if __name__ == '__main__':
@@ -135,12 +155,12 @@ if __name__ == '__main__':
     parser.add_argument('--input', '-i', type=str, help='GES .csv input file', required=True)
     parser.add_argument('--list', '-l', type=str, help='students list .yml file', required=True)
     parser.add_argument('--repo', '-r', type=str, help='repository name, e.g lab0_git', required=True)
-    parser.add_argument('--output', '-o', type=str, default='out.csv', help='output file')
+    parser.add_argument('--output', '-o', type=str, default='out', help='output name without extension')
     parser.add_argument('--due', '-d', type=str, help='assignment due date (UTC) (yyyy-mm-ddThh:mm:ss)', required=True)
+    parser.add_argument('--moss', '-m', help='use moss', action='store_true')
+    parser.add_argument('--clean', '-c', help='clean old results', action='store_true')
     parser.add_argument('--show', '-s', help='show histogram plot', action='store_true')
     args = parser.parse_args()
-    print(TITLE)
-    print()
     # error handling
     if not os.path.exists(args.input):
         print('file %s does not exists')
@@ -156,6 +176,11 @@ if __name__ == '__main__':
     except Exception:
         print('invalid due date %s, format expected: yyyy-mm-ddThh:mm:ss' % args.due)
         sys.exit(1)
-    if not args.output.endswith('.csv'):
-        args.output = args.output + '.csv'
+    if args.clean:
+        os.system('rm -rf moss')
+        os.system('rm -rf results')
+    if not os.path.exists('results'):
+        os.system('mkdir results')
+    if args.moss and not os.path.exists('moss'):
+        os.system('mkdir moss')
     grade(args)
