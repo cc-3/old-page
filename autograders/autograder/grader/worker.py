@@ -91,12 +91,11 @@ class Worker(threading.Thread):
                     logger.info('storing results in firebase db...')
                     grade_ref = self.firebase.database().reference('%s/%s/%s/grade' % (dir, token, repo))
                     grade = grade_ref.get()
-                    # keep best grade
-                    if grade is None or grade <= result['grade']:
-                        grade = result['grade']
-                        console = result['output']
-                        grade_ref.set(grade)
-                        self.firebase.database().reference('%s/%s/%s/console' % (dir, token, repo)).set(console)
+                    # keep the best grade
+                    if grade is None or grade < result['grade']:
+                        grade_ref.set(result['grade'])
+                    # always save last console output
+                    self.firebase.database().reference('%s/%s/%s/console' % (dir, token, repo)).set(result['output'])
                     self.firebase.database().reference('%s/%s/%s/grading' % (dir, token, repo)).delete()
                     self.firebase.database().reference('%s/%s/%s/checking' % (dir, token, repo)).delete()
                     self.firebase.database().reference('queue/%s' % (item.strip('.zip'))).delete()
