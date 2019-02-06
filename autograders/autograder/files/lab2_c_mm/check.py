@@ -131,10 +131,14 @@ def check_ex2():
         if task.returncode != 0:
             return (0, utils.failed('runtime error'), task.stderr.decode().strip())
         # Output
-        output = task.stdout.decode().strip().lower()
-        expected = 'congratulations! it works!'
-        if expected in output:
+        output = task.stdout.decode().strip()
+        f = open('ex2.expected', 'r')
+        expected = f.read().strip()
+        f.close()
+        if output == expected:
             return (100 / 3, utils.passed(), '')
+        elif 'congratulations! it works!' in output.lower():
+            return (0, utils.failed('Please use the correct indexes...'), '')
         else:
             return (0, utils.failed('LFSR not working correctly...'), '')
     except subprocess.TimeoutExpired:
