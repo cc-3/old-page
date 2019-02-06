@@ -3,17 +3,17 @@ FROM ubuntu:18.04
 LABEL maintainer="CC-3 Machine Structures <cc3.staff@gmail.com>"
 
 # General dependencies
-RUN apt-get update && apt-get upgrade -y && \
+RUN sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list && \
+    apt-get update && apt-get upgrade -y && \
     apt-get install --no-install-recommends build-essential make \
     python3-dev python3-pip python3-setuptools python3-wheel -y && \
     pip3 install tabulate pycrypto psutil pycparser && \
-    apt-get --purge remove openjdk* && \
-    echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections && \
-    echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" > /etc/apt/sources.list.d/webupd8team-java-trusty.list && \
-    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886 && \
+    echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
+    add-apt-repository -y ppa:webupd8team/java && \
     apt-get update && \
-    apt-get install -y --no-install-recommends oracle-java8-installer oracle-java8-set-default && \
-    apt-get clean all && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get install -y oracle-java8-installer && \
+    apt-get install -y oracle-java8-set-default && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /var/cache/oracle-jdk8-installer
 
 CMD ["/usr/bin/bash"]
