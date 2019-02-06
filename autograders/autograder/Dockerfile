@@ -5,7 +5,7 @@ LABEL maintainer="CC-3 Machine Structures <cc3.staff@gmail.com>"
 # General dependencies
 RUN sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list && \
     apt-get update && apt-get upgrade -y && \
-    apt-get install --no-install-recommends build-essential make \
+    apt-get install --no-install-recommends build-essential make software-properties-common \
     python3-dev python3-pip python3-setuptools python3-wheel -y && \
     pip3 install tabulate pycrypto psutil pycparser && \
     echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
