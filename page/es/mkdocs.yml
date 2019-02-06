@@ -29,6 +29,10 @@ extra_css:
   - stylesheets/emoji.css
   - stylesheets/kbd.css
 
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML
+  - js/latex.js
+
 # Extensions
 markdown_extensions:
   - admonition
@@ -40,6 +44,7 @@ markdown_extensions:
 nav:
   - Inicio: index.md
   - Laboratorios:
-    - Lab 0 Git: labs/lab00.md
-    - Lab 1 C y GDB: labs/lab01.md
-    - Lab 2 C y MM: labs/lab02.md
+    - 'Lab 0: Git': labs/lab00.md
+    - 'Lab 1: C y GDB': labs/lab01.md
+    - 'Lab 2: C y MM': labs/lab02.md
+    - 'Lab 3: RISC-V': labs/lab03.md
