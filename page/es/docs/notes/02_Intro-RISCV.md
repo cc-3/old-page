@@ -18,8 +18,9 @@ Estos son algunos de los términos más importantes de este tema:
 - RISC-V es la quinta versión de procesadores RISC diseñador por Berkeley
 - De licencia libre
 - Los registros son ¡muy! rápidos (y caros) y se encuentran dentro del procesador
+- Tiene un formato rigido: *operacion registro_destino registro_fuente1 registro_fuente2*
 - Esta es la distribución de registros utilizada en procesadores RISC-V (nombrados del x0 al x31):
-- 
+
 | Registros| Nombre | Función |
 |-----|----|---|
 | x0  | ZERO | Alambrado a tierra. x0 siempre contiene el valor 0x00000000 |
@@ -34,3 +35,32 @@ Estos son algunos de los términos más importantes de este tema:
 | x12-x17   | a2-a7  | Function Arguments: Registros utilizados para enviar argumentos en las llamadas a funciones |
 | x18-x27   | s2-s11  | Saved Registers: Registros *seguros* de propósito general, se debe conservar su valor entre llamadas |
 | x28-x31   | t3-t6  | Temporaries: Registros de proposito general que no se conservan en llamadas a funciones |
+
+## Algunos Ejemplos en RISC-V
+
+#### Convertir un ciclo a Ensamblador en RISC-V
+
+~~~C
+int a[20];
+int sum = 0;
+for(int i = 0; i <20;i++){
+    sum+=a[i];
+}
+~~~
+
+~~~Assembler
+# Asumimos A = x8
+    addi x5, x0, 0      # sum = 0
+    addi x6, x0, 0      # i = 0
+    addi x28, x0, 20    # x28 = 20
+Condition:
+    blt x6, x28, For    # Evaluamos la condición antes de empezar el ciclo
+    j EndFor            # Si es falsa terminamos el ciclo
+For:
+    lw x7, 0(x8)
+    add x5, x5, x7      # sum+=A[i]
+    addi x8, x8, 4      # A++ ¿Por qué +4?
+    addi x6, x6, 1      # i++
+    j Condition
+EndFor:
+~~~
