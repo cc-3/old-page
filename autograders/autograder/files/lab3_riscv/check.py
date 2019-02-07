@@ -1,10 +1,6 @@
 import utils
-import resource
 import subprocess
 from random import randint
-
-# 195 MiB of memory
-BYTES = 195 * 1024 * 1024
 
 
 # checks ex1.txt
@@ -112,8 +108,8 @@ def check_ex3():
         grade = 0
         wrong = []
         # factorial of 3
-        test1 = ['vsim', './ex3/factorial.s', '-notitle', '<<<', '3']
-        task = utils.execute(cmd=test1, timeout=5)
+        test1 = ['vsim', '-notitle', './ex3/factorial.s']
+        task = utils.execute(cmd=test1, input=b'3', timeout=5)
         if task.returncode != 0:
             return (0, utils.failed('runtime error'), task.stderr.decode().strip())
         output = task.stdout.decode().strip()
@@ -123,8 +119,8 @@ def check_ex3():
         else:
             wrong.append('3')
         # factorial of 7
-        test2 = ['vsim', './ex3/factorial.s', '-notitle', '<<<', '7']
-        task = utils.execute(cmd=test2, timeout=5)
+        test2 = ['vsim', '-notitle', './ex3/factorial.s']
+        task = utils.execute(cmd=test2, input=b'7', timeout=5)
         if task.returncode != 0:
             return (0, utils.failed('runtime error'), task.stderr.decode().strip())
         output = task.stdout.decode().strip()
@@ -134,8 +130,8 @@ def check_ex3():
         else:
             wrong.append('7')
         # factorial of 8
-        test3 = ['vsim', './ex3/factorial.s', '-notitle', '<<<', '8']
-        task = utils.execute(cmd=test3, timeout=5)
+        test3 = ['vsim', '-notitle', './ex3/factorial.s']
+        task = utils.execute(cmd=test3, input=b'8', timeout=5)
         if task.returncode != 0:
             return (0, utils.failed('runtime error'), task.stderr.decode().strip())
         output = task.stdout.decode().strip()
@@ -162,8 +158,8 @@ def check_ex4():
         label = 'ms_ex3_fake_label_%s:' % ('0x%08x' % randint(0, 65535))
         replace = 's/square:/%s/g' % label
         utils.execute(cmd=['sed', '-i', '-e', replace, './ex4/list_map.s'])
-        utils.execute(cmd=['printf', "'\nsquare:\naddi a0, a0, 1\njr ra\n'", '>>', './ex4/list_map.s'])
-        test = ['vsim', './ex4/list_map.s', '-notitle']
+        utils.execute(cmd='printf \'\nsquare:\naddi a0, a0, 1\njr ra\n\' >> ./ex4/list_map.s', shell=True)
+        test = ['vsim', '-notitle', './ex4/list_map.s']
         task = utils.execute(cmd=test, timeout=5)
         if task.returncode != 0:
             return (0, utils.failed('runtime error'), task.stderr.decode().strip())
@@ -197,7 +193,7 @@ def lab3_riscv():
         table.append(('4. List Map', *ex4_result[0: 2]))
         errors = ''
         errors += utils.create_error('factorial.s', ex3_result[2])
-        errors += utils.create_error('list_map.s', ex4_result[2])
+        errors += '\n' + utils.create_error('list_map.s', ex4_result[2])
         grade = 0
         grade += ex1_result[0]
         grade += ex2_result[0]
@@ -214,6 +210,5 @@ def lab3_riscv():
 
 
 if __name__ == '__main__':
-    resource.setrlimit(resource.RLIMIT_AS, (BYTES, BYTES))
     lab3_riscv()
     utils.fix_ownership()
