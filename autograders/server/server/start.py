@@ -20,7 +20,8 @@ firebase = Firebase(environ['FIREBASE_KEY'], environ['FIREBASE_DB'])
 valid_repos = [
     'lab0_git',
     'lab1_c_gdb',
-    'lab2_c_mm'
+    'lab2_c_mm',
+    'lab3_riscv'
 ]
 
 
