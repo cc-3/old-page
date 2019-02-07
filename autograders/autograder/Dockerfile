@@ -14,7 +14,7 @@ RUN sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list && \
     apt-get install -y oracle-java8-installer && \
     apt-get install -y oracle-java8-set-default && \
     curl $(curl -S https://api.github.com/repos/andrescv/V-Sim/releases/latest | grep 'browser_download_url' | cut -d '"' -f 4) -L -o vsim.jar && \
-    mv vsim.jar /opt && printf '#!/bin/bash\njava -jar /opt/vsim.jar $@' > '/usr/bin/vsim' && chmod +x usr/bin/vsim && \
+    mv vsim.jar /opt && printf '#!/bin/bash\njava -Xmx50m -jar /opt/vsim.jar $@' > '/usr/bin/vsim' && chmod +x usr/bin/vsim && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /var/cache/oracle-jdk8-installer
 
