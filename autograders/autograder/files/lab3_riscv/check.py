@@ -50,7 +50,7 @@ def check_ex1():
 # checks ex2.txt
 def check_ex2():
     grade = 0
-    lookup = utils.parse_form('./ex1/ex2.txt')
+    lookup = utils.parse_form('./ex2/ex2.txt')
     wrong = []
     # question 1
     ans1 = lookup.get('1')
