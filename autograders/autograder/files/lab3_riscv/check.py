@@ -28,7 +28,7 @@ def check_ex1():
         wrong.append('q3')
     # question 4
     ans4 = lookup.get('4')
-    if ans4 is not None and (ans4.lower() == '0x10000008' or ans4.lower() == '10000008'):
+    if ans4 is not None and (ans4.lower() == '0x10000000' or ans4.lower() == '10000000'):
         grade += 1
     else:
         wrong.append('q4')
@@ -92,7 +92,7 @@ def check_ex2():
         wrong.append('q4')
     # question 5
     ans5 = lookup.get('5')
-    if ans4 is not None and ans5 == 'b':
+    if ans4 is not None and ans5.lower() == 'b':
         grade += 1
     else:
         wrong.append('q5')
