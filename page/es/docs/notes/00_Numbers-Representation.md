@@ -8,21 +8,22 @@
 
 - Para convertir un número binario a decimal multiplicamos cada bit, empezando por el bit menos significativo, por potencias de 2.
 - Por convención consideraremos el bit menos significativo como el bit más a la derecha del número binario (así como el dígito de menor valor es el que eta más a la derecha en un numero decimal).
-### Ejemplo 
+### Ejemplo
 Representar el número 0b10011011 en base 10. Asuma que se encuentra en notación sin signo.
-$1 {\color{red}\times 2^7} + 0 {\color{red}\times 2^6} + 0  {\color{red}\times 2^5} + 1 {\color{red}\times 2^4} + 1 {\color{red}\times 2^3} +0 {\color{red}\times 2^2} + 1{\color{red}\times 2^1} + 1 {\color{red}\times 2^0}$
-$=128 + 0 +0+16+8+0+2+1=155$
+$$1 {\color{red}\times 2^7} + 0 {\color{red}\times 2^6} + 0  {\color{red}\times 2^5} + 1 {\color{red}\times 2^4} + 1 {\color{red}\times 2^3} +0 {\color{red}\times 2^2} + 1{\color{red}\times 2^1} + 1 {\color{red}\times 2^0}$$
+$$=128 + 0 +0+16+8+0+2+1=155$$
 
 Entonces 0b10011011 = 155
 
 ## Conversión de decimal a binario
 
-Para hacer la conversión de decimal a binario, hay que dividir el número decimal entre dos y anotar en una columna a la derecha el resto (un 0 si el resultado de la división es par y un 1 si es impar). 
+Para hacer la conversión de decimal a binario, hay que dividir el número decimal entre dos y anotar en una columna a la derecha el resto (un 0 si el resultado de la división es par y un 1 si es impar).
 
 ### Ejemplo
 Representar en numero 109 en base binaria, en su notación sin signo.
+
 | N | N/2 | N%2 |
-|-----|----|---|
+|:-----:|:----:|:---:|
 | 109 | 54 | 1 |
 | 54  | 27 | 0 |
 | 27  | 13 | 1 |
@@ -53,9 +54,10 @@ Noten que terminamos la division cuando **N/2** es 0. El número binario resulta
 	0110 corresponde a **6** en hexadecimal.
 	1011 corresponde a **B** en hexadecimal.
 	0011 corresponde a **3** en hexadecimal (notar que se le agregó dos ceros).
-	
+
 	Entonces 0b11101101101101 = 0x3B6D.
 - Para convertir un número decimal a hexadecimal seguimos un procedimiento similar al empleado para convertir un número decimal a binario, excepto que el dividendo debe cambiarse por 16.
+
 ## Representación de números con signo
 
 Hasta el momento, solo se han tratado números binarios que representan números enteros positivos. Pero tambien necesitamos una forma de representar en binario números como el -6, -100, etc.
@@ -75,7 +77,7 @@ Hay varias cosas que deben notarse con respecto de esta representación. Estas s
 
 - La cantidad de números que se pueden representar con la misma cantidad de bits disminuye. En los ejemplos anteriores se utilizan 8 bits, pero como el bit más significativo es de signo, el número positivo más grande que podemos representar el $2^7-1=127$ en comparación con $2^8 -1=255$ si no se usara signo.
 - Hay dos "0". ¿Cómo se interpreta 0b10000000?
-- Sumar y restar requiere más trabajo; más adelante verán que se necesitan circuitos más complejos para realizar estas operaciones. 
+- Sumar y restar requiere más trabajo; más adelante verán que se necesitan circuitos más complejos para realizar estas operaciones.
 
 ### 2. Complemento a uno
 
@@ -98,7 +100,7 @@ Representar el número -101 en complemento a dos.
 
 101= 0b01100101 que en complemento a uno es  0b10011010, luego, es necesario sumare 1 a numero anterior:
  0b10011010 +1 = 0b10011001
- 
+
 Con complemento a dos:
 - Eliminamos el segundo cero
 - Simplificamos las sumas y restas de gran manera: *a+b* siempre utiliza el mismo algoritmo, independientemente de si *a* y *b* son positivos o negativos. *a-b* es lo mismo que sumar *a*  con el complemento a 2 de *b*

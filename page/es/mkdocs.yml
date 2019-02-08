@@ -48,3 +48,7 @@ nav:
     - 'Lab 1: C y GDB': labs/lab01.md
     - 'Lab 2: C y MM': labs/lab02.md
     - 'Lab 3: RISC-V': labs/lab03.md
+  - Notas:
+    - 'Números': notes/00_Numbers-Representation.md
+    - 'C': notes/01_C.md
+    - 'RISC-V': notes/02_Intro-RISCV.md
