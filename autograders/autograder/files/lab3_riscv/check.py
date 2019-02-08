@@ -92,7 +92,7 @@ def check_ex2():
         wrong.append('q4')
     # question 5
     ans5 = lookup.get('5')
-    if ans4 is not None and ans5.lower() == 'b':
+    if ans5 is not None and ans5.lower() == 'b':
         grade += 1
     else:
         wrong.append('q5')
