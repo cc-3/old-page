@@ -21,7 +21,8 @@ valid_repos = [
     'lab0_git',
     'lab1_c_gdb',
     'lab2_c_mm',
-    'lab3_riscv'
+    'lab3_riscv',
+    'proj1_c_riscv'
 ]
 
 
