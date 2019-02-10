@@ -97,7 +97,7 @@ Los únicos archivos que pueden modificar son:
 * `part2.c`: Este es el archivo que van a modificar en la parte 2 del proyecto.
 
 
-**Ustedes <span style="color: red">NO</span> pueden crear otros archivos ni crear archivos de cabecera `.h`. Si necesitan agregar funciones de ayuda, por favor colóquenlas en los archivos C correspondientes (`utils.c`). Si ustedes no siguen estas recomendaciones, su código no va a compilar en el autograder y obtendrán 0 como nota**.
+**Ustedes <span style="color: red">NO</span> pueden crear otros archivos ni crear archivos de cabecera `.h`. Si necesitan agregar funciones de ayuda, por favor colóquenlas en los archivos C correspondientes (`utils.c`, `part1.c`, `part2.c`). Si ustedes no siguen estas recomendaciones, su código no va a compilar en el autograder y obtendrán 0 como nota**.
 
 
 Otros archivos que necesitan consultar detenidamente para entender el proyecto:
