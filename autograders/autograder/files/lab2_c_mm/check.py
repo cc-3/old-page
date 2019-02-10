@@ -135,12 +135,14 @@ def check_ex2():
         f = open('ex2.expected', 'r')
         expected = f.read().strip()
         f.close()
-        if output == expected:
-            return (100 / 3, utils.passed(), '')
-        elif 'congratulations! it works!' in output.lower():
-            return (0, utils.failed('Please use the correct indexes...'), '')
-        else:
-            return (0, utils.failed('LFSR not working correctly...'), '')
+        for line1, line2 in zip(output.split('\n'), expected.split('\n')):
+            line1 = line1.strip()
+            line2 = line2.strip()
+            if line1 != line2 and 'congratulations! it works!' in output.lower():
+                return (0, utils.failed('Please use the correct indexes...'), '')
+            if line1 != line2:
+                return (0, utils.failed('LFSR not working correctly...'), '')
+        return (100 / 3, utils.passed(), '')
     except subprocess.TimeoutExpired:
         return (0, utils.failed('TIMEOUT'), '')
     except Exception as e:
