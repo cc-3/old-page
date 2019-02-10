@@ -71,11 +71,16 @@ export default class Console extends React.Component {
       return (
         <pre className="console">
           {this.title}
-          {this.state.console.console}
+          Repo: <span className="orange-text">{`${this.props.match.params.id}`}</span>
           {`
 
+Best Score: `}<span className={this.state.console.grade > 60 ? 'green-text' : 'red-text'}>{`${this.state.console.grade}`}</span>/100
+          {`
 
-=> Score ${this.state.console.grade}/100`}
+Last Output:
+
+`}
+          <span className="cyan-text text-lighten-4">{this.state.console.console}</span>
         </pre>
       );
     }
