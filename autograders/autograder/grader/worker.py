@@ -71,6 +71,9 @@ class Worker(threading.Thread):
                     logger.info('wating for container %s', item)
                     container.wait()
                     logger.info('removing %s container from history', item)
+                    logs = container.logs().decode().strip()
+                    if logs != '':
+                        logger.error('unexpected exception: ' + logs)
                     container.remove(v=True, force=True)
                     logger.info('reading tests output json')
                     result = utils.read_json(utils.join(tmp, 'output.json'))
