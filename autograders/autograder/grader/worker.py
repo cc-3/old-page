@@ -101,7 +101,7 @@ class Worker(threading.Thread):
                     self.firebase.database().reference('%s/%s/%s/console' % (dir, token, repo)).set(result['output'])
                     self.firebase.database().reference('%s/%s/%s/grading' % (dir, token, repo)).delete()
                     self.firebase.database().reference('%s/%s/%s/checking' % (dir, token, repo)).delete()
-                    self.firebase.database().reference('queue/%s' % (item.strip('.zip'))).delete()
+                    self.firebase.database().reference('queue/%s' % (item.split('.')[0].strip())).delete()
                     logger.info('reading results...')
                 except docker.errors.ImageNotFound as e:
                     logger.error('could not create container (%s: %s)', type(e).__name__, str(e))
