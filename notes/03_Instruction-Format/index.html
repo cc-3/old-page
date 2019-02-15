@@ -13,7 +13,7 @@
         <meta name="description" content="Grandes Ideas en Arquitectura de Computadora">
       
       
-        <link rel="canonical" href="https://cc-3.github.io/notes/02_Intro-RISCV/">
+        <link rel="canonical" href="https://cc-3.github.io/notes/03_Instruction-Format/">
       
       
         <meta name="author" content="CC-3">
@@ -42,7 +42,7 @@
     
     
       
-        <title>RISC-V - Estructura de Máquinas</title>
+        <title>RISC V Instruction Formats - Estructura de Máquinas</title>
       
     
     
@@ -101,7 +101,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#introduccion-a-risc-v" tabindex="1" class="md-skip">
+      <a href="#risc-v-instruction-formats" tabindex="1" class="md-skip">
         Saltar a contenido
       </a>
     
@@ -127,7 +127,7 @@
                 Estructura de Máquinas
               </span>
               <span class="md-header-nav__topic">
-                RISC-V
+                RISC V Instruction Formats
               </span>
             
           
@@ -374,12 +374,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
     
     <label class="md-nav__link" for="nav-4">
       Notas
@@ -419,76 +417,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        RISC-V
-      </label>
-    
-    <a href="./" title="RISC-V" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../02_Intro-RISCV/" title="RISC-V" class="md-nav__link">
       RISC-V
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#que-es-risc-v" title="¿Qué es RISC-V?" class="md-nav__link">
-    ¿Qué es RISC-V?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#algunos-ejemplos-en-risc-v" title="Algunos Ejemplos en RISC-V" class="md-nav__link">
-    Algunos Ejemplos en RISC-V
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#convertir-un-ciclo-a-ensamblador-en-risc-v" title="Convertir un ciclo a Ensamblador en RISC-V" class="md-nav__link">
-    Convertir un ciclo a Ensamblador en RISC-V
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#partes-de-un-ciclo" title="Partes de un Ciclo" class="md-nav__link">
-    Partes de un Ciclo
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -518,35 +451,36 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#que-es-risc-v" title="¿Qué es RISC-V?" class="md-nav__link">
-    ¿Qué es RISC-V?
+  <a href="#formato-r" title="Formato R" class="md-nav__link">
+    Formato R
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#algunos-ejemplos-en-risc-v" title="Algunos Ejemplos en RISC-V" class="md-nav__link">
-    Algunos Ejemplos en RISC-V
+  <a href="#formato-i" title="Formato I" class="md-nav__link">
+    Formato I
   </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#convertir-un-ciclo-a-ensamblador-en-risc-v" title="Convertir un ciclo a Ensamblador en RISC-V" class="md-nav__link">
-    Convertir un ciclo a Ensamblador en RISC-V
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#partes-de-un-ciclo" title="Partes de un Ciclo" class="md-nav__link">
-    Partes de un Ciclo
+  <a href="#formato-s" title="Formato S" class="md-nav__link">
+    Formato S
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formato-j" title="Formato J" class="md-nav__link">
+    Formato J
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formato-b" title="Formato B" class="md-nav__link">
+    Formato B
   </a>
   
 </li>
@@ -567,171 +501,149 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/cc-3/MachineStructures/edit/master/page/es/docs/notes/02_Intro-RISCV.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/cc-3/MachineStructures/edit/master/page/es/docs/notes/03_Instruction-Format.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="introduccion-a-risc-v">Introducción a RISC V<a class="headerlink" href="#introduccion-a-risc-v" title="Permanent link">&para;</a></h1>
-<p>Estos son algunos de los términos más importantes de este tema:
-- ISA (probablemente uno de los términos mas importantes del curso): Es el <em>pegamento que une el hardware con el software</em>. <em>Una especie de "contrato" que nos dice lo que sí podemos hacer porque tiene un soporte por el hardware</em>. El <strong>ISA</strong> o <strong>Instruction Set Architecture</strong> es el set de instrucciones reales soportadas por el procesador sobre el que estamos trabajando.
-- RISC: Reduced Instruction Set Computer
-    - Un ejemplo de procesadores RISC son los procesadores MIPS, ARM y RISC-V.
-    - Este tipo de procesadores utiliza muchos regitros (32 registros de 32 bits cada uno, por ejemplo)
-    - Se caracteriza por tener pocas instrucciones, siendo todas de un tamaño fijo (32 bits, por ejemplo)
-    - Existen pocas instrucciones para acceder a memoria, (2 basicamente: <strong>lw</strong> y <strong>sw</strong>)
-    - La base de los procesadores RISC es soportar pocas instrucciones, pero hacerlas muy eficientemente
-- CISC: Complex Instruction Set Computer
-    - x86 x86_64 (Intel)
-    - Este tipo de procesadores utiliza pocos regitros
-    - Soporta una cantidad de instrucciones mucho mayor a los procesadores RISC, y muchas de estas instrucciones no son de un tamaño fijo
-    -  La base de los procesadores CISC es soportar la mayor cantidad de instrucciones posibles para darle multiples opciones a los desarrolladores </p>
-<h2 id="que-es-risc-v">¿Qué es RISC-V?<a class="headerlink" href="#que-es-risc-v" title="Permanent link">&para;</a></h2>
+                <h1 id="risc-v-instruction-formats">RISC V Instruction Formats<a class="headerlink" href="#risc-v-instruction-formats" title="Permanent link">&para;</a></h1>
 <ul>
-<li>RISC-V es la quinta versión de procesadores RISC diseñador por Berkeley</li>
-<li>De licencia libre</li>
-<li>Los registros son ¡muy! rápidos (y caros) y se encuentran dentro del procesador</li>
-<li>Tiene un formato rigido: <em>operacion registro_destino registro_fuente1 registro_fuente2</em></li>
-<li>Esta es la distribución de registros utilizada en procesadores RISC-V (nombrados del x0 al x31):</li>
+<li><strong>Gran idea:</strong> almacenar los programas en la computadora (Programa almacenado)
+¡Lectura recomendada: https://es.wikipedia.org/wiki/John_von_Neumann !</li>
+<li>
+<p>Nacen dos grandes arquitecturas:</p>
+<ol>
+<li>Harvard (instrucciones y datos separados)</li>
+<li>Von Neumann (programas y datos en una memoria en común)</li>
+</ol>
+</li>
+<li>
+<p>Program counter: alambrado a un sumador para moverse de 4 en 4 (que es el tamaño de instruccción) ó cuando hay saltos.</p>
+</li>
+<li>¿qué pasa con los programas que se distriuyen en forma binaria?</li>
+<li>6 tipos básicos de instrucciones:<ol>
+<li>R: operaciones aritméticas con dos registros</li>
+<li>I: operaciones con valores inmediatos</li>
+<li>S: para stores</li>
+<li>B: para branch's</li>
+<li>U: para upper immediate (20 bits)</li>
+<li>J: para jump</li>
+</ol>
+</li>
 </ul>
+<h2 id="formato-r">Formato R<a class="headerlink" href="#formato-r" title="Permanent link">&para;</a></h2>
+<p>32 bits dividido en 6 campos (7, 5,5,3,5,7 bits respectivamente)
+funct7 | rs2 | rs1 | funct3 | rd | opcode
+-- | --|--|--|--|--|
+7 bits | 5 bits|5 bits | 3 bits | 5 bits | 7 bits</p>
+<ul>
+<li>el opcode nos especifica parcialmente que instrucción es</li>
+<li>funct7 + funct3: combinado con el opcode, decriben que operación hacer.</li>
+<li>Las tipo I y las R tienen el mismo funct3</li>
+</ul>
+<h2 id="formato-i">Formato I<a class="headerlink" href="#formato-i" title="Permanent link">&para;</a></h2>
+<p>imm | rs1 | funct3 | rd | opcode
+-- |--|--|--|--|
+12 bits | 5 bits | 3 bits | 5 bits | 7 bits
+- imm puede tener valores en el rango [-2048, 2047]
+- Las instrucciones <strong>load</strong> son tipo I</p>
+<h2 id="formato-s">Formato S<a class="headerlink" href="#formato-s" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Registros</th>
-<th>Nombre</th>
-<th>Función</th>
+<th>imm[5:11]</th>
+<th>rs2</th>
+<th>rs1</th>
+<th>function3</th>
+<th>imm[0:4]</th>
+<th>opcode</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>x0</td>
-<td>ZERO</td>
-<td>Alambrado a tierra. x0 siempre contiene el valor 0x00000000</td>
+<td>7 bits</td>
+<td>5 bits</td>
+<td>5 bits</td>
+<td>3 bits</td>
+<td>5 bits</td>
+<td>7 bits</td>
 </tr>
 <tr>
-<td>x1</td>
-<td>RA</td>
-<td>Return Address: Contiene la dirección de retorno de la función actual</td>
+<td>- A pesar de que en assembler los <strong>loads</strong> y <strong>stores</strong> son similares, en lenguaje de máquina son dos tipos diferentes de instrucciones. Esto se debe a que los <strong>stores</strong> no tienen registro destino</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 <tr>
-<td>x2</td>
-<td>SP</td>
-<td>Stack Pointer: Es un puntero a la cabeza del Stack</td>
-</tr>
-<tr>
-<td>x3</td>
-<td>GP</td>
-<td>Global Pointer: Es un puntero a la sección global de Data</td>
-</tr>
-<tr>
-<td>x4</td>
-<td>TP</td>
-<td>Thread Pointer: No lo utiilizaremos en este curso, pero cabe mencionar su existencia</td>
-</tr>
-<tr>
-<td>x5-x7</td>
-<td>t0-t2</td>
-<td>Temporaries: Registros de proposito general que no se conservan en llamadas a funciones</td>
-</tr>
-<tr>
-<td>x8</td>
-<td>s0/fp</td>
-<td>Saved Register (Frame Pointer): Registro <em>seguro</em>, se debe conservar su valor entre llamadas. El frame pointer contiene la dirección justo antes de la llamada a una función. Sirve para regresar el stack a su posición original al regresar de una función</td>
-</tr>
-<tr>
-<td>x9</td>
-<td>s1</td>
-<td>Saved Register: Registro <em>seguro</em> de propósito general, se debe conservar su valor entre llamadas</td>
-</tr>
-<tr>
-<td>x10-x11</td>
-<td>a0-a1</td>
-<td>Function Arguments &amp; Return Values: Registros utilizados para enviar argumentos en las llamadas a funciones. Tambien son usados como valor de retorno de las funciones</td>
-</tr>
-<tr>
-<td>x12-x17</td>
-<td>a2-a7</td>
-<td>Function Arguments: Registros utilizados para enviar argumentos en las llamadas a funciones</td>
-</tr>
-<tr>
-<td>x18-x27</td>
-<td>s2-s11</td>
-<td>Saved Registers: Registros <em>seguros</em> de propósito general, se debe conservar su valor entre llamadas</td>
-</tr>
-<tr>
-<td>x28-x31</td>
-<td>t3-t6</td>
-<td>Temporaries: Registros de proposito general que no se conservan en llamadas a funciones</td>
+<td>- La razón por la que los 5 bits menos significativos del valor inmediato están donde estan, es para mantener rs1 y rs2 en las mismas posiciones</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<h2 id="algunos-ejemplos-en-risc-v">Algunos Ejemplos en RISC-V<a class="headerlink" href="#algunos-ejemplos-en-risc-v" title="Permanent link">&para;</a></h2>
-<h4 id="convertir-un-ciclo-a-ensamblador-en-risc-v">Convertir un ciclo a Ensamblador en RISC-V<a class="headerlink" href="#convertir-un-ciclo-a-ensamblador-en-risc-v" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="mi">20</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span><span class="mi">20</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-    <span class="n">sum</span><span class="o">+=</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-<span class="p">}</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span># Asumimos A = x8
-    addi x5, x0, 0      # sum = 0
-    addi x6, x0, 0      # i = 0
-    addi x28, x0, 20    # x28 = 20
-Condition:
-    blt x6, x28, For    # Evaluamos la condición antes de empezar el ciclo
-    j EndFor            # Si es falsa terminamos el ciclo
-For:
-    lw x7, 0(x8)
-    add x5, x5, x7      # sum+=A[i]
-    addi x8, x8, 4      # A++ ¿Por qué +4?
-    addi x6, x6, 1      # i++
-    j Condition
-EndFor:
-</pre></div>
-
-<h2 id="partes-de-un-ciclo">Partes de un Ciclo<a class="headerlink" href="#partes-de-un-ciclo" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Inicialización: fuera del ciclo</li>
-<li>Condición: para go to step, while y for queremos queremos un true para seguir. False para detenernos</li>
-<li>Instrucciones: ¿qué me pide el problema?</li>
-<li>Step: un pequeño cambio entre una iteración y otra, se relaciona con la condición.</li>
-</ol>
-<h1 id="funciones">Funciones<a class="headerlink" href="#funciones" title="Permanent link">&para;</a></h1>
-<p>Entre llamadas a funciones, pueden haber muchos valores que se sobreescriben. Una solución simple a este problema es guardar estos valores en el Stack. Antes de hacer una llamada a una función, el <strong>caller</strong> debe almacenar valores como los argumentos recibidos (si es que recibio alguno), su <strong>return address</strong>, y los valores que desee preservar en registros seguros (guardando el contenido actual de estos registros antes de sobreescribirlo).</p>
-<p>Es importante mencionar que, cualquier espacio reservado en el stack al inicio de una función, debe ser <em>liberado</em> antes de retornar de ella. Esto garantiza que cuando se regrese a la función anterior, el stack quedará en la misma posición de antes de ejecutar la función.</p>
-<h2 id="ejemplo-funcion">Ejemplo Función<a class="headerlink" href="#ejemplo-funcion" title="Permanent link">&para;</a></h2>
-<p>La siguiente función en C
-<div class="codehilite"><pre><span></span><span class="kt">int</span> <span class="nf">sum</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">){</span>
-    <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div></p>
-<p>Se traduce a</p>
-<div class="codehilite"><pre><span></span>function_sum:
-    add a0, a0, a1  #los argumentos vienen en a0 y a1, y el valor de retorno se devuelve en a0
-    jr ra           #sabemos que ra tiene la dirección de retorno
-</pre></div>
-
-<p>Ahora veamos como se codifica la llamada a esta función
-<div class="codehilite"><pre><span></span>    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
-</pre></div></p>
-<div class="codehilite"><pre><span></span>    addi a0, zero, 1    #int x = 1
-    addi a1, zero, 1    #int y = 1
-    addi sp, sp, -12    #reservamos espacio en el stack para las variables y el return address
-    sw ra, 0(sp)        #
-    sw s0, 4(sp)        #guardamos los registros en el stack
-    sw s1, 8(sp)        #
-    add s0, a0, zero
-    add s1, a1, zero    #guardamos los valores de las variables el registros seguros para no perderlos
-    jal function_sum    #saltamos a la funcion
-    add t0, zero, a0    #nuestro valor de retorno esta en a0, lo pasamos a cualquier otro registro
-    add a0, zero, s0    #restauramos nuestra variable x en a0
-    add a1, zero, s1    #restauramos nuestra variable y en a1
-    lw ra, 0(sp)        #
-    lw s0, 4(sp)        #restauramos los registros seguros y el return address
-    lw s1, 8(sp)        #
-    addi sp, sp, 12     #regresamos el stack a la posición original
-</pre></div>
+<h2 id="formato-j">Formato J<a class="headerlink" href="#formato-j" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>imm[20]</th>
+<th>imm[10:1]</th>
+<th>imm[11]</th>
+<th>imm[19:12]</th>
+<th>rd</th>
+<th>opcode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 bits</td>
+<td>10 bits</td>
+<td>1 bits</td>
+<td>8 bits</td>
+<td>5 bits</td>
+<td>7 bits</td>
+</tr>
+</tbody>
+</table>
+<h2 id="formato-b">Formato B<a class="headerlink" href="#formato-b" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>imm[12]</th>
+<th>imm[10:5]</th>
+<th>rs2</th>
+<th>rs1</th>
+<th>func3</th>
+<th>imm[4:1]</th>
+<th>imm[11]</th>
+<th>opcode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 bit</td>
+<td>6 bits</td>
+<td>5 bits</td>
+<td>5 bits</td>
+<td>3 bits</td>
+<td>4 bits</td>
+<td>1 bit</td>
+<td>7 bits</td>
+</tr>
+<tr>
+<td>- El valor inmediato representa la cantidad de <strong>halfwords</strong> (2 bytes) que se van a saltar, en representación complemento a 2. Se utilizan <strong>halfwords</strong> y no <strong>words</strong> para mantener compatibilidad con la versión reducida de de RISC-V que utiliza instrucciones de 16 bits.</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
                 
                   
                 
@@ -748,27 +660,6 @@ EndFor:
       
         
 <footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid">
-        
-          <a href="../01_C/" title="C" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-            </div>
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Anterior
-                </span>
-                C
-              </span>
-            </div>
-          </a>
-        
-        
-      </nav>
-    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
