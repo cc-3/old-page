@@ -13,7 +13,7 @@
         <meta name="description" content="Grandes Ideas en Arquitectura de Computadora">
       
       
-        <link rel="canonical" href="https://cc-3.github.io/notes/03_Functions-And-Instruction-Format/">
+        <link rel="canonical" href="https://cc-3.github.io/notes/04_CALL/">
       
       
         <meta name="author" content="CC-3">
@@ -38,20 +38,20 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.0.1">
     
     
       
-        <title>Funciones - Estructura de Máquinas</title>
+        <title>CALL - Estructura de Máquinas</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.572ca0f0.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.982221ab.css">
       
       
     
     
-      <script src="../../assets/javascripts/modernizr.8c900955.js"></script>
+      <script src="../../assets/javascripts/modernizr.1f0bcf2b.js"></script>
     
     
       
@@ -66,6 +66,9 @@
       <link rel="stylesheet" href="../../stylesheets/emoji.css">
     
       <link rel="stylesheet" href="../../stylesheets/kbd.css">
+    
+    
+      
     
     
   </head>
@@ -101,7 +104,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#funciones" tabindex="1" class="md-skip">
+      <a href="#compiling-assembling-linking-and-loading-call" tabindex="1" class="md-skip">
         Saltar a contenido
       </a>
     
@@ -122,22 +125,19 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           
-            
-              <span class="md-header-nav__topic">
-                Estructura de Máquinas
-              </span>
-              <span class="md-header-nav__topic">
-                Funciones
-              </span>
-            
+            <span class="md-header-nav__topic">
+              Estructura de Máquinas
+            </span>
+            <span class="md-header-nav__topic">
+              CALL
+            </span>
           
         </div>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
         
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
           
-            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
-            
 <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
@@ -160,7 +160,6 @@
     </div>
   </div>
 </div>
-          
         
       </div>
       
@@ -171,20 +170,18 @@
 
   
 
-
-  <a href="https://github.com/cc-3/MachineStructures/" title="Ir al repositorio" class="md-source" data-md-source="github">
-    
-      <div class="md-source__icon">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#__github" width="24" height="24"></use>
-        </svg>
-      </div>
-    
-    <div class="md-source__repository">
-      cc-3/MachineStructures
+<a href="https://github.com/cc-3/MachineStructures/" title="Ir al repositorio" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
     </div>
-  </a>
-
+  
+  <div class="md-source__repository">
+    cc-3/MachineStructures
+  </div>
+</a>
           </div>
         </div>
       
@@ -220,20 +217,18 @@
 
   
 
-
-  <a href="https://github.com/cc-3/MachineStructures/" title="Ir al repositorio" class="md-source" data-md-source="github">
-    
-      <div class="md-source__icon">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#__github" width="24" height="24"></use>
-        </svg>
-      </div>
-    
-    <div class="md-source__repository">
-      cc-3/MachineStructures
+<a href="https://github.com/cc-3/MachineStructures/" title="Ir al repositorio" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
     </div>
-  </a>
-
+  
+  <div class="md-source__repository">
+    cc-3/MachineStructures
+  </div>
+</a>
     </div>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -329,6 +324,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab05/" title="5: Logisim" class="md-nav__link">
+      5: Logisim
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -374,10 +381,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Notas
@@ -425,6 +434,83 @@
   </li>
 
         
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        CALL
+      </label>
+    
+    <a href="./" title="CALL" class="md-nav__link md-nav__link--active">
+      CALL
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#notas-importantes-multiplicacion-y-division" title="Notas Importantes: Multiplicación y División" class="md-nav__link">
+    Notas Importantes: Multiplicación y División
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interpretacion-vs-traduccion" title="Interpretación vs Traducción" class="md-nav__link">
+    Interpretación vs Traducción
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ventajas-de-traduccion" title="Ventajas de Traducción" class="md-nav__link">
+    Ventajas de Traducción
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ventajas-de-interpretacion" title="Ventajas de Interpretación" class="md-nav__link">
+    Ventajas de Interpretación
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -451,9 +537,36 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#ejemplo-funcion" title="Ejemplo Función" class="md-nav__link">
-    Ejemplo Función
+  <a href="#notas-importantes-multiplicacion-y-division" title="Notas Importantes: Multiplicación y División" class="md-nav__link">
+    Notas Importantes: Multiplicación y División
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interpretacion-vs-traduccion" title="Interpretación vs Traducción" class="md-nav__link">
+    Interpretación vs Traducción
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ventajas-de-traduccion" title="Ventajas de Traducción" class="md-nav__link">
+    Ventajas de Traducción
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ventajas-de-interpretacion" title="Ventajas de Interpretación" class="md-nav__link">
+    Ventajas de Interpretación
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -473,87 +586,37 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/cc-3/MachineStructures/edit/master/page/es/docs/notes/03_Functions-And-Instruction-Format.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/cc-3/MachineStructures/edit/master/page/es/docs/notes/04_CALL.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="funciones">Funciones<a class="headerlink" href="#funciones" title="Permanent link">&para;</a></h1>
-<p>Entre llamadas a funciones, pueden haber muchos valores que se sobreescriben. Una solución simple a este problema es guardar estos valores en el Stack. Antes de hacer una llamada a una función, el <strong>caller</strong> debe almacenar valores como los argumentos recibidos (si es que recibio alguno), su <strong>return address</strong>, y los valores que desee preservar en registros seguros (guardando el contenido actual de estos registros antes de sobreescribirlo).</p>
-<p>Es importante mencionar que, cualquier espacio reservado en el stack al inicio de una función, debe ser <em>liberado</em> antes de retornar de ella. Esto garantiza que cuando se regrese a la función anterior, el stack quedará en la misma posición de antes de ejecutar la función.</p>
-<h2 id="ejemplo-funcion">Ejemplo Función<a class="headerlink" href="#ejemplo-funcion" title="Permanent link">&para;</a></h2>
-<p>La siguiente función en C
-<div class="codehilite"><pre><span></span><span class="kt">int</span> <span class="nf">sum</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">){</span>
-    <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div></p>
-<p>Se traduce a</p>
-<div class="codehilite"><pre><span></span>function_sum:
-    add a0, a0, a1  #los argumentos vienen en a0 y a1, y el valor de retorno se devuelve en a0
-    jr ra           #sabemos que ra tiene la dirección de retorno
-</pre></div>
-
-<p>Ahora veamos como se codifica la llamada a esta función
-<div class="codehilite"><pre><span></span>    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
-</pre></div></p>
-<div class="codehilite"><pre><span></span>    addi a0, zero, 1    #int x = 1
-    addi a1, zero, 1    #int y = 1
-    addi sp, sp, -12    #reservamos espacio en el stack para las variables y el return address
-    sw ra, 0(sp)        #
-    sw s0, 4(sp)        #guardamos los registros en el stack
-    sw s1, 8(sp)        #
-    add s0, a0, zero
-    add s1, a1, zero    #guardamos los valores de las variables el registros seguros para no perderlos
-    jal function_sum    #saltamos a la funcion
-    add t0, zero, a0    #nuestro valor de retorno esta en a0, lo pasamos a cualquier otro registro
-    add a0, zero, s0    #restauramos nuestra variable x en a0
-    add a1, zero, s1    #restauramos nuestra variable y en a1
-    lw ra, 0(sp)        #
-    lw s0, 4(sp)        #restauramos los registros seguros y el return address
-    lw s1, 8(sp)        #
-    addi sp, sp, 12     #regresamos el stack a la posición original
-</pre></div>
-
-<h1 id="risc-v-instruction-formats">RISC V Instruction Formats<a class="headerlink" href="#risc-v-instruction-formats" title="Permanent link">&para;</a></h1>
+                <h1 id="compiling-assembling-linking-and-loading-call">Compiling, Assembling, Linking and Loading (CALL)<a class="headerlink" href="#compiling-assembling-linking-and-loading-call" title="Permanent link">&para;</a></h1>
+<h2 id="notas-importantes-multiplicacion-y-division">Notas Importantes: Multiplicación y División<a class="headerlink" href="#notas-importantes-multiplicacion-y-division" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Gran idea:</strong> almacenar los programas en la computadora (Programa almacenado)
-¡Lectura recomendada: https://es.wikipedia.org/wiki/John_von_Neumann !</li>
-<li>
-<p>Nacen dos grandes arquitecturas:</p>
-<ol>
-<li>Harvard (instrucciones y datos separados)</li>
-<li>Von Neumann (programas y datos en una memoria en común)</li>
-</ol>
-</li>
-<li>
-<p>Program counter: alambrado a un sumador para moverse de 4 en 4 (que es el tamaño de instruccción) ó cuando hay saltos.</p>
-</li>
-<li>¿qué pasa con los programas que se distriuyen en forma binaria?</li>
-<li>6 tipos básicos de instrucciones:<ol>
-<li>R: operaciones aritméticas con dos registros</li>
-<li>I: operaciones con valores inmediatos</li>
-<li>S: para stores</li>
-<li>B: para branch's</li>
-<li>U: para upper immediate (20 bits)</li>
-<li>J: para jump</li>
-</ol>
-</li>
+<li>La multiplicación de enteros de <strong>n</strong> bytes puede generar enteros de hasta <strong>2n</strong> bytes</li>
+<li>La multiplicación es una operación mucho más costosa que la suma</li>
+<li>RISC-V maneja la multiplicación de la siguiente forma: <strong>mul rd, rs1, rs2</strong> multiplica <strong>rs1</strong> y <strong>rs2</strong> y deja la <em>parte baja</em> del resultado en <strong>rd</strong>, <strong>mulh rd, rs1, rs2</strong> multiplica <strong>rs1</strong> y <strong>rs2</strong> y deja la <em>parte alta</em> del resultado en <strong>rd</strong>.</li>
+<li>Para la división existen tambien dos operaciones: <strong>div rd, rs1, rs2</strong> que realiza la división entera <strong>rs1/rs2</strong> y coloca el resultado en <strong>rd</strong>, y <strong>rem rd, rs1, rs2</strong> qye realiza una división entera <strong>rs1/rs2</strong> y coloca el residuo en <strong>rd</strong></li>
 </ul>
-<h2 id="formato-r">Formato R<a class="headerlink" href="#formato-r" title="Permanent link">&para;</a></h2>
-<p>32 bits dividido en 6 campos (7, 5,5,3,5,7 bits respectivamente)
-funct7 | rs2 | rs1 | funct3 | rd | opcode
--- | --|--|--|--|--|
-7 bits | 5 bits|5 bits | 3 bits | 5 bits | 7 bits</p>
+<h2 id="interpretacion-vs-traduccion">Interpretación vs Traducción<a class="headerlink" href="#interpretacion-vs-traduccion" title="Permanent link">&para;</a></h2>
+<p>Un programa en lenguajes compilados, como C, tiene los siguientes niveles de representación:
+|Stack de Traducción|
+|--|
+|Lenguaje de Alto Nivel: C|
+|Lenguaje Ensamblador: RISC-V Assembler|
+|Código de Máquina: RISC-V Machine Code|
+|Hardware: Compuertas Lógicas, Transistores|</p>
+<h4 id="ventajas-de-traduccion">Ventajas de Traducción<a class="headerlink" href="#ventajas-de-traduccion" title="Permanent link">&para;</a></h4>
 <ul>
-<li>el opcode nos especifica parcialmente que instrucción es</li>
-<li>funct7 + funct3: combinado con el opcode, decriben que operación hacer.</li>
-<li>Las tipo I y las R tienen el mismo funct3</li>
+<li>Se hace unicamente una vez</li>
+<li>Es muy rapida en tiempo de ejecución</li>
+<li>Nos da cierto nivel de <em>privacidad</em> en el código fuente: podemos distribuir unicamente el archivo ya compilado</li>
 </ul>
-<h2 id="formato-i">Formato I<a class="headerlink" href="#formato-i" title="Permanent link">&para;</a></h2>
-<p>imm | rs1 | funct3 | rd | opcode
--- |--|--|--|--|
-12 bits | 5 bits | 3 bits | 5 bits | 7 bits
-- imm puede tener valores en el rango [-2048, 2047]</p>
+<h4 id="ventajas-de-interpretacion">Ventajas de Interpretación<a class="headerlink" href="#ventajas-de-interpretacion" title="Permanent link">&para;</a></h4>
+<ul>
+<li>No se necesita compilarlo mós de una vez para una arquitectura y sistema operativo particulares</li>
+<li>No se tiene que recompilar el archivo luego de hacer un cambio</li>
+<li>Un archivo corre sobre todas las combinaciones de sistema operativo y arquitectura siempre que se tenga el interprete instalado</li>
+</ul>
                 
                   
                 
@@ -571,6 +634,27 @@ funct7 | rs2 | rs1 | funct3 | rd | opcode
         
 <footer class="md-footer">
   
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../02_Intro-RISCV/" title="RISC-V" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Anterior
+                </span>
+                RISC-V
+              </span>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-footer-copyright">
@@ -586,7 +670,6 @@ funct7 | rs2 | rs1 | funct3 | rd | opcode
           Material for MkDocs</a>
       </div>
       
-        
   <div class="md-footer-social">
     <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
     
@@ -594,14 +677,13 @@ funct7 | rs2 | rs1 | funct3 | rd | opcode
     
   </div>
 
-      
     </div>
   </div>
 </footer>
       
     </div>
     
-      <script src="../../assets/javascripts/application.b41f3d20.js"></script>
+      <script src="../../assets/javascripts/application.b806dc00.js"></script>
       
         
         
@@ -623,9 +705,6 @@ funct7 | rs2 | rs1 | funct3 | rd | opcode
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       
         <script src="../../js/latex.js"></script>
-      
-    
-    
       
     
   </body>
