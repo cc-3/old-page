@@ -13,7 +13,7 @@
         <meta name="description" content="Grandes Ideas en Arquitectura de Computadora">
       
       
-        <link rel="canonical" href="https://cc-3.github.io/notes/03_Instruction-Format/">
+        <link rel="canonical" href="https://cc-3.github.io/labs/lab08/">
       
       
         <meta name="author" content="CC-3">
@@ -42,7 +42,7 @@
     
     
       
-        <title>RISC V Instruction Formats - Estructura de Máquinas</title>
+        <title>Lab 7 - Pipelining y preparación para el CPU - Estructura de Máquinas</title>
       
     
     
@@ -104,7 +104,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#risc-v-instruction-formats" tabindex="1" class="md-skip">
+      <a href="#lab-7-pipelining-y-preparacion-para-el-cpu" tabindex="1" class="md-skip">
         Saltar a contenido
       </a>
     
@@ -129,7 +129,7 @@
               Estructura de Máquinas
             </span>
             <span class="md-header-nav__topic">
-              RISC V Instruction Formats
+              Lab 7 - Pipelining y preparación para el CPU
             </span>
           
         </div>
@@ -270,7 +270,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../labs/lab00/" title="0: Git" class="md-nav__link">
+    <a href="../lab00/" title="0: Git" class="md-nav__link">
       0: Git
     </a>
   </li>
@@ -282,7 +282,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../labs/lab01/" title="1: C y GDB" class="md-nav__link">
+    <a href="../lab01/" title="1: C y GDB" class="md-nav__link">
       1: C y GDB
     </a>
   </li>
@@ -294,7 +294,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../labs/lab02/" title="2: C y MM" class="md-nav__link">
+    <a href="../lab02/" title="2: C y MM" class="md-nav__link">
       2: C y MM
     </a>
   </li>
@@ -306,7 +306,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../labs/lab03/" title="3: RISC-V" class="md-nav__link">
+    <a href="../lab03/" title="3: RISC-V" class="md-nav__link">
       3: RISC-V
     </a>
   </li>
@@ -318,7 +318,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../labs/lab04/" title="4: RISC-V" class="md-nav__link">
+    <a href="../lab04/" title="4: RISC-V" class="md-nav__link">
       4: RISC-V
     </a>
   </li>
@@ -330,7 +330,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../labs/lab05/" title="5: Logisim" class="md-nav__link">
+    <a href="../lab05/" title="5: Logisim" class="md-nav__link">
       5: Logisim
     </a>
   </li>
@@ -342,7 +342,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../labs/lab06/" title="6: Logisim Avanzado" class="md-nav__link">
+    <a href="../lab06/" title="6: Logisim Avanzado" class="md-nav__link">
       6: Logisim Avanzado
     </a>
   </li>
@@ -354,7 +354,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../labs/lab07/" title="7: Logisim PJ2 ALU" class="md-nav__link">
+    <a href="../lab07/" title="7: Logisim PJ2 ALU" class="md-nav__link">
       7: Logisim PJ2 ALU
     </a>
   </li>
@@ -426,7 +426,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../00_Numbers-Representation/" title="Números" class="md-nav__link">
+    <a href="../../notes/00_Numbers-Representation/" title="Números" class="md-nav__link">
       Números
     </a>
   </li>
@@ -438,7 +438,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../01_C/" title="C" class="md-nav__link">
+    <a href="../../notes/01_C/" title="C" class="md-nav__link">
       C
     </a>
   </li>
@@ -450,7 +450,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../02_Intro-RISCV/" title="RISC-V" class="md-nav__link">
+    <a href="../../notes/02_Intro-RISCV/" title="RISC-V" class="md-nav__link">
       RISC-V
     </a>
   </li>
@@ -482,36 +482,36 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#formato-r" title="Formato R" class="md-nav__link">
-    Formato R
+  <a href="#objetivo" title="Objetivo" class="md-nav__link">
+    Objetivo
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#formato-i" title="Formato I" class="md-nav__link">
-    Formato I
+  <a href="#preparacion" title="Preparación" class="md-nav__link">
+    Preparación
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#formato-s" title="Formato S" class="md-nav__link">
-    Formato S
+  <a href="#ejercicio-1-pipeline" title="Ejercicio 1: Pipeline" class="md-nav__link">
+    Ejercicio 1: Pipeline
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#formato-j" title="Formato J" class="md-nav__link">
-    Formato J
+  <a href="#calificacion" title="Calificación" class="md-nav__link">
+    Calificación
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#formato-b" title="Formato B" class="md-nav__link">
-    Formato B
+  <a href="#ejercicio-2-guia-del-proyecto-de-cpu" title="Ejercicio 2: Guía del proyecto de CPU" class="md-nav__link">
+    Ejercicio 2: Guía del proyecto de CPU
   </a>
   
 </li>
@@ -532,149 +532,56 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/cc-3/MachineStructures/edit/master/page/es/docs/notes/03_Instruction-Format.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/cc-3/MachineStructures/edit/master/page/es/docs/labs/lab08.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="risc-v-instruction-formats">RISC V Instruction Formats<a class="headerlink" href="#risc-v-instruction-formats" title="Permanent link">&para;</a></h1>
-<ul>
-<li><strong>Gran idea:</strong> almacenar los programas en la computadora (Programa almacenado)
-¡Lectura recomendada: https://es.wikipedia.org/wiki/John_von_Neumann !</li>
-<li>
-<p>Nacen dos grandes arquitecturas:</p>
-<ol>
-<li>Harvard (instrucciones y datos separados)</li>
-<li>Von Neumann (programas y datos en una memoria en común)</li>
-</ol>
-</li>
-<li>
-<p>Program counter: alambrado a un sumador para moverse de 4 en 4 (que es el tamaño de instruccción) ó cuando hay saltos.</p>
-</li>
-<li>¿qué pasa con los programas que se distriuyen en forma binaria?</li>
-<li>6 tipos básicos de instrucciones:<ol>
-<li>R: operaciones aritméticas con dos registros</li>
-<li>I: operaciones con valores inmediatos</li>
-<li>S: para stores</li>
-<li>B: para branch's</li>
-<li>U: para upper immediate (20 bits)</li>
-<li>J: para jump</li>
-</ol>
-</li>
-</ul>
-<h2 id="formato-r">Formato R<a class="headerlink" href="#formato-r" title="Permanent link">&para;</a></h2>
-<p>32 bits dividido en 6 campos (7, 5,5,3,5,7 bits respectivamente)
-funct7 | rs2 | rs1 | funct3 | rd | opcode
--- | --|--|--|--|--|
-7 bits | 5 bits|5 bits | 3 bits | 5 bits | 7 bits</p>
-<ul>
-<li>el opcode nos especifica parcialmente que instrucción es</li>
-<li>funct7 + funct3: combinado con el opcode, decriben que operación hacer.</li>
-<li>Las tipo I y las R tienen el mismo funct3</li>
-</ul>
-<h2 id="formato-i">Formato I<a class="headerlink" href="#formato-i" title="Permanent link">&para;</a></h2>
-<p>imm | rs1 | funct3 | rd | opcode
--- |--|--|--|--|
-12 bits | 5 bits | 3 bits | 5 bits | 7 bits
-- imm puede tener valores en el rango [-2048, 2047]
-- Las instrucciones <strong>load</strong> son tipo I</p>
-<h2 id="formato-s">Formato S<a class="headerlink" href="#formato-s" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>imm[5:11]</th>
-<th>rs2</th>
-<th>rs1</th>
-<th>function3</th>
-<th>imm[0:4]</th>
-<th>opcode</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>7 bits</td>
-<td>5 bits</td>
-<td>5 bits</td>
-<td>3 bits</td>
-<td>5 bits</td>
-<td>7 bits</td>
-</tr>
-<tr>
-<td>- A pesar de que en assembler los <strong>loads</strong> y <strong>stores</strong> son similares, en lenguaje de máquina son dos tipos diferentes de instrucciones. Esto se debe a que los <strong>stores</strong> no tienen registro destino</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- La razón por la que los 5 bits menos significativos del valor inmediato están donde estan, es para mantener rs1 y rs2 en las mismas posiciones</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="formato-j">Formato J<a class="headerlink" href="#formato-j" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>imm[20]</th>
-<th>imm[10:1]</th>
-<th>imm[11]</th>
-<th>imm[19:12]</th>
-<th>rd</th>
-<th>opcode</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1 bits</td>
-<td>10 bits</td>
-<td>1 bits</td>
-<td>8 bits</td>
-<td>5 bits</td>
-<td>7 bits</td>
-</tr>
-</tbody>
-</table>
-<h2 id="formato-b">Formato B<a class="headerlink" href="#formato-b" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>imm[12]</th>
-<th>imm[10:5]</th>
-<th>rs2</th>
-<th>rs1</th>
-<th>func3</th>
-<th>imm[4:1]</th>
-<th>imm[11]</th>
-<th>opcode</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1 bit</td>
-<td>6 bits</td>
-<td>5 bits</td>
-<td>5 bits</td>
-<td>3 bits</td>
-<td>4 bits</td>
-<td>1 bit</td>
-<td>7 bits</td>
-</tr>
-<tr>
-<td>- El valor inmediato representa la cantidad de <strong>halfwords</strong> (2 bytes) que se van a saltar, en representación complemento a 2. Se utilizan <strong>halfwords</strong> y no <strong>words</strong> para mantener compatibilidad con la versión reducida de de RISC-V que utiliza instrucciones de 16 bits.</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+                <h1 id="lab-7-pipelining-y-preparacion-para-el-cpu">Lab 7 - Pipelining y preparación para el CPU<a class="headerlink" href="#lab-7-pipelining-y-preparacion-para-el-cpu" title="Permanent link">&para;</a></h1>
+<h2 id="objetivo">Objetivo<a class="headerlink" href="#objetivo" title="Permanent link">&para;</a></h2>
+<p>Este laboratorio es bastante corto. Consiste únicamente en un ejercicio de <em>pipelining</em>, con el objetivo de darles suficiente tiempo para el proyecto 2.</p>
+<h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
+<p>Para este laboratorio, nuevamente, es necesario que tengan la aplicación de <a href="http://www.cburch.com/logisim/index.html">Logisim</a>. Adicionalmente pueden utilizar la <a href="http://www.cburch.com/logisim/docs.html">documentación</a> de Logisim para refrescar el conocimiento que adquirieron en los laboratorios anteriores.</p>
+<p>También tienen que tener todos los archivos base, estos se encuentran <a href="https://galileo.edu">aquí</a>. Recuerden que deben aceptar la asignación de <strong>GitHub Classroom</strong> y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):</p>
+<div class="codehilite"><pre><span></span>git clone &lt;link del repositorio&gt;
+</pre></div>
+
+<h2 id="ejercicio-1-pipeline">Ejercicio 1: Pipeline<a class="headerlink" href="#ejercicio-1-pipeline" title="Permanent link">&para;</a></h2>
+<p>Asuman que, al encender, todos los registros tienen 0. </p>
+<p>Consideren el siguiente FSM de 2 entradas, Su salida es calculada con una multiplicación de sus entradas, sumada a su estado actual.</p>
+<h2 id="calificacion">Calificación<a class="headerlink" href="#calificacion" title="Permanent link">&para;</a></h2>
+<p>Cuando crean que tengan ejercicios completos, pueden utilizar el autograder localmente escribiendo en la terminal:</p>
+<div class="codehilite"><pre><span></span>./check
+</pre></div>
+
+<p>Si todo esta correcto les saldrá algo como esto:</p>
+<div class="codehilite"><pre><span></span>   ___       __                        __       
+  / _ <span class="p">|</span>__ __/ /____  ___  _______ ____/ /__ ____
+ / __ / // / __/ _ <span class="se">\/</span> _ <span class="se">\/</span> __/ _ <span class="se">\/</span> _  / -_<span class="o">)</span> __/
+/_/ <span class="p">|</span>_<span class="se">\_</span>,_/<span class="se">\_</span>_/<span class="se">\_</span>__/<span class="se">\_</span>, /_/  <span class="se">\_</span>,_/<span class="se">\_</span>,_/<span class="se">\_</span>_/_/
+                   /___/
+
+             Machine Structures
+     Great Ideas in Computer Architecture
+              Advanced Logisim
+
+
+Exercise           Grade   Message
+----------------  -------  ---------
+<span class="m">1</span>. Pipeline           <span class="m">100</span>  <span class="nv">Passed</span>
+
+<span class="o">=</span>&gt; Score: <span class="m">100</span>/100
+</pre></div>
+
+<p>Cuando hayan terminado su laboratorio, o crean que están listos para obtener su nota, pueden subir su laboratorio al autograder utilizando:</p>
+<div class="codehilite"><pre><span></span>./submit &lt;TOKEN&gt;
+</pre></div>
+
+<blockquote>
+<p><strong>NOTA</strong>: Tienen que reemplazar &lt;TOKEN> por el  token que les da la siguiente <a href="https://dashboard.cc-3.site">página</a></p>
+</blockquote>
+<p>Luego, cuando haya sido calificado, pueden ver su resultado en <a href="https://dashboard.cc3.site/">https://dashboard.cc-3.site/</a>.</p>
+<h2 id="ejercicio-2-guia-del-proyecto-de-cpu">Ejercicio 2: Guía del proyecto de CPU<a class="headerlink" href="#ejercicio-2-guia-del-proyecto-de-cpu" title="Permanent link">&para;</a></h2>
+<p>Queremos incluir esta guía para guiarlos en la segunda parte del proyecto, cuando esté asignada. Aprovechen esta guía para comenzar la parte 2.</p>
+<p>Empezar esta parte desde cero puede ser intimidante, así que queremos guiarlos en la forma de pensar en este proyecto con un ejemplo de instrucciones tipo R: una suma (la instrucción <code>add</code>).</p>
                 
                   
                 
