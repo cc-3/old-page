@@ -711,22 +711,21 @@
                 
                 <h1 id="lab-8-pipelining-y-preparacion-para-el-cpu">Lab 8 - Pipelining y preparación para el CPU<a class="headerlink" href="#lab-8-pipelining-y-preparacion-para-el-cpu" title="Permanent link">&para;</a></h1>
 <h2 id="objetivo">Objetivo<a class="headerlink" href="#objetivo" title="Permanent link">&para;</a></h2>
-<p>Este laboratorio es bastante corto. Consiste únicamente en un ejercicio de <em>pipelining</em>, con el objetivo de darles suficiente tiempo para el proyecto 2.</p>
+<p>Este laboratorio es bastante corto. Consiste únicamente en un ejercicio de <em>pipelining</em>, con el objetivo de darles suficiente tiempo para el proyecto 2, empiecen pronto...</p>
 <h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
 <p>Para este laboratorio, nuevamente, es necesario que tengan la aplicación de <a href="http://www.cburch.com/logisim/index.html">Logisim</a>. Adicionalmente, pueden utilizar la <a href="http://www.cburch.com/logisim/docs.html">documentación</a> de Logisim para refrescar el conocimiento que adquirieron en los laboratorios anteriores.</p>
-<p>También, tienen que tener todos los archivos base, estos se encuentran <a href="https://galileo.edu">aquí</a>. Recuerden que deben aceptar la asignación de <strong>GitHub Classroom</strong> y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):</p>
+<p>También, tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/pxWdbD4u">aquí</a>. Recuerden que deben aceptar la asignación de <strong>GitHub Classroom</strong> y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):</p>
 <div class="codehilite"><pre><span></span>git clone &lt;link del repositorio&gt;
 </pre></div>
 
 <h2 id="ejercicio-1-pipeline">Ejercicio 1: Pipeline<a class="headerlink" href="#ejercicio-1-pipeline" title="Permanent link">&para;</a></h2>
-<p>Asuman que, al encender, todos los registros tienen 0. </p>
+<p>Asuman que, al encender, todos los registros tienen 0.</p>
 <p>Consideren el siguiente FSM de 2 entradas, su salida es calculada por medio de una multiplicación de sus entradas y sumada a su estado actual.</p>
-<p><img alt="Imagen" src="/path/of/image" />
-Aquí irá una imagen</p>
+<p><img alt="Imagen" src="/img/labs/lab08/fsm.png" /></p>
 <p>Asuman que el tiempo de propagación de un bloque de suma es de 50ns, el tiempo de propagación de un bloque de multiplicación es de 55ns, y el clk-to-q delay de un registro es de 5ns. Calculen la máxima frecuencia del reloj en la que puede operar este circuito. Asuman que el tiempo de configuración de un registro es despreciable y que las 2 entradas vienen de registros sincronizados que reciben información de fuentes externas.</p>
 <p>Ahora, deben mejorar el desempeño de este circuito, de manera que pueda operar a una frecuencia de reloj más alta. Para ello, deben separar la multiplicación y la suma en dos etapas de <em>pipeline</em>. En la primera etapa, se realiza la multiplicación de las 2 entradas y, en la segunda etapa, se le suma el producto al estado actual.</p>
 <p>La forma en que se evaluará es muy simple: La secuencia de salidas de este circuito está bien, ssi corresponde a la secuencia de salidas del circuito sin <em>pipeline</em>, potencialmente, con algunos ceros en el principio. Por ejemplo, si el circuito da como salidas [3,5,1,2,4,...], su circuito correcto podría devolver [0,3,5,1,2,4,...] para la misma secuencia de entradas.</p>
-<p>Para facilitar el proceso de calificación, se les dará un punto de inicio estándar en los archivos del laboratorio. En <code>pipeline.circ</code>, el sub-circuito <code>Non- pipelined</code> está estructurado exactamente como la imagen de arriba. El <code>main</code> está programado para que la salida del subcircuito sin <em>pipeline</em> sea [3,5,1,2,4,-1,0,0,...]. Esto, también, los ayudará como ejemplo de cómo usar una memoria con datos desde un archivo. El bloque ROM debería tener los datos correctos, pero, si no, denle click derecho al bloque y elijan la opción "Load image..." y escogan <code>ROMdata</code>. </p>
+<p>Para facilitar el proceso de calificación, se les dará un punto de inicio estándar en los archivos del laboratorio. En <code>pipeline.circ</code>, el sub-circuito <code>Non- pipelined</code> está estructurado exactamente como la imagen de arriba. El <code>main</code> está programado para que la salida del subcircuito sin <em>pipeline</em> sea [3,5,1,2,4,-1,0,0,...]. Esto, también, los ayudará como ejemplo de cómo usar una memoria con datos desde un archivo. El bloque ROM debería tener los datos correctos, pero, si no, denle click derecho al bloque y elijan la opción "Load image..." y escogan <code>ROMdata</code>.</p>
 <p>Noten que necesitarán un registro para guardar un valor intermedio entre etapas del <em>pipeline</em>, esto es bastante común en pipelines.</p>
 <ol>
 <li>Completen el subcircuito <code>pipelined</code>. Tendrán que agregar un registro entre los bloques de producto y suma para separar las dos etapas.</li>
@@ -747,7 +746,7 @@ Aquí irá una imagen</p>
 
              Machine Structures
      Great Ideas in Computer Architecture
-              Advanced Logisim
+              Lab <span class="m">8</span>: Pipeline
 
 
 Exercise           Grade   Message
@@ -757,14 +756,10 @@ Exercise           Grade   Message
 <span class="o">=</span>&gt; Score: <span class="m">100</span>/100
 </pre></div>
 
-<p>Cuando hayan terminado su laboratorio, o crean que están listos para obtener su nota, pueden subir su laboratorio al autograder utilizando:</p>
+<p>Pueden subir su laboratorio para calificación utilizando:</p>
 <div class="codehilite"><pre><span></span>./submit &lt;TOKEN&gt;
 </pre></div>
 
-<blockquote>
-<p><strong>NOTA</strong>: Tienen que reemplazar &lt;TOKEN> por el token que les da la siguiente <a href="https://dashboard.cc-3.site">página</a></p>
-</blockquote>
-<p>Luego, cuando haya sido calificado, pueden ver su resultado en <a href="https://dashboard.cc3.site/">https://dashboard.cc-3.site/</a>.</p>
 <h2 id="ejercicio-2-guia-del-proyecto-de-cpu">Ejercicio 2: Guía del proyecto de CPU<a class="headerlink" href="#ejercicio-2-guia-del-proyecto-de-cpu" title="Permanent link">&para;</a></h2>
 <p>Queremos incluir esta guía para guiarlos en la tercera parte del proyecto. Aprovechen esta guía para comenzar la parte 3 (CPU).</p>
 <p>Empezar esta parte desde cero puede ser intimidante, así que queremos guiarlos en la forma de pensar en este proyecto con un ejemplo de instrucciones tipo R: una suma (la instrucción <code>add</code>).</p>
