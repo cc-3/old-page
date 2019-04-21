@@ -1084,11 +1084,10 @@ test/
 <div class="codehilite"><pre><span></span><span class="nb">cd</span> data
 ./download
 <span class="nb">cd</span> ..
+</pre></div>
 
-***Gprof*** es una herramienta que vamos a estar utilizando para perfilar el código base para ver que funciones se pueden beneficiar de alguna optimización. Para correr Gprof, ustedes tienen que compilar el código base utilizando la bandera <span class="s2">&quot;**`-pg`**&quot;</span>:
-
-<span class="sb">```</span>shell
-make clean
+<p><strong><em>Gprof</em></strong> es una herramienta que vamos a estar utilizando para perfilar el código base para ver que funciones se pueden beneficiar de alguna optimización. Para correr Gprof, ustedes tienen que compilar el código base utilizando la bandera "<strong><code>-pg</code></strong>":</p>
+<div class="codehilite"><pre><span></span>make clean
 make baseline <span class="nv">CFLAGS</span><span class="o">=</span><span class="s2">&quot;-Wall -Isrc/include -Wno-unused-result -march=haswell -std=c99 -fopenmp -pg -O0&quot;</span>
 </pre></div>
 
