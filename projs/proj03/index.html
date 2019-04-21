@@ -1080,8 +1080,15 @@ test/
 <p>Siempre que ustedes empiecen a optimizar algún código dado, ustedes primero tienen que determinar en donde es que se gasta la mayor parte del tiempo. Por ejemplo, acelerar una parte que únicamente toma 5% del tiempo total les va a dar como máximo una aceleración del 5% y es probable que no valga su tiempo y esfuerzo.</p>
 <p>En clase, ustedes oyeron acerca de la ley de Amdahl, que es una manera genial para estimar el impacto del performance esperado de una optimización. Como vimos en clase, para aplicar la ley de Amdahl, primero tenemos que encontrar que fracción del tiempo se gastan en diferentes partes del programa.</p>
 <h3 id="utilizando-gprof">Utilizando Gprof<a class="headerlink" href="#utilizando-gprof" title="Permanent link">&para;</a></h3>
-<p><strong><em>Gprof</em></strong> es una herramienta que vamos a estar utilizando para perfilar el código base para ver que funciones se pueden beneficiar de alguna optimización. Para correr Gprof, ustedes tienen que compilar el código base utilizando la bandera "<strong><code>-pg</code></strong>":</p>
-<div class="codehilite"><pre><span></span>make clean
+<p>Antes de hacer cualquier cosa primero tienen que descargar el dataset que vamos a estar utilizando:</p>
+<div class="codehilite"><pre><span></span><span class="nb">cd</span> data
+./download
+<span class="nb">cd</span> ..
+
+***Gprof*** es una herramienta que vamos a estar utilizando para perfilar el código base para ver que funciones se pueden beneficiar de alguna optimización. Para correr Gprof, ustedes tienen que compilar el código base utilizando la bandera <span class="s2">&quot;**`-pg`**&quot;</span>:
+
+<span class="sb">```</span>shell
+make clean
 make baseline <span class="nv">CFLAGS</span><span class="o">=</span><span class="s2">&quot;-Wall -Isrc/include -Wno-unused-result -march=haswell -std=c99 -fopenmp -pg -O0&quot;</span>
 </pre></div>
 
@@ -1134,7 +1141,7 @@ gprof optimized <span class="p">|</span> less
 <p>Finalmente ustedes deberían de utilizar OpenMP para paralelizar el computo. Noten que la forma más fácil de paralelizar la clasificación de un gran numero de imágenes es clasificar batches de ellas en paralelo (dado que estos batches son independientes). Noten que ustedes van a necesitar asegurarse que ninguno de los diferentes threads sobreescriban los datos de otro. Solo utilizando <code>#pragma omp parallel for</code> puede causar errores o tal vez no si lo hacen de manera correcta.</p>
 <p>Noten que las instancias de Amazon que van a utilizar tienen 8 cores con un thread por cada core. Esto quiere decir que ustedes deberían de esperar una aceleración aprox de ~8x.</p>
 <h2 id="pruebas-de-funcionamiento-correcto">Pruebas de Funcionamiento Correcto<a class="headerlink" href="#pruebas-de-funcionamiento-correcto" title="Permanent link">&para;</a></h2>
-<p>Primero tienen que descargar el dataset, esto se puede lograr fácilmente desde la carpeta del proyecto ingresando los siguientes comandos:</p>
+<p>Primero tienen que descargar el dataset, si es que todavía no lo han hecho:</p>
 <div class="codehilite"><pre><span></span><span class="nb">cd</span> data
 ./download
 <span class="nb">cd</span> ..
