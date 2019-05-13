@@ -38,7 +38,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.1.1">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.2.0">
     
     
       
@@ -46,12 +46,12 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.3020aac5.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.750b69bd.css">
       
       
     
     
-      <script src="../../assets/javascripts/modernizr.01ccdecf.js"></script>
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
     
     
       
@@ -903,31 +903,31 @@
 <li>No se olviden que el tema de caches viene en el examen parcial, por lo que la visualización de acceso a caches es una manera práctica para aprender sobre los <em>cache hits</em> y <em>cache misses</em>.</li>
 </ul>
 <p>En este punto, lean <strong>cache.s</strong> para tener una idea de qué es lo que hace. Asegúrense de revisar qué contienen los registros de argumentos antes de proceder a analizar la configuración del cache. 
-<em> Lo más importante de entender de este archivo es que se pondrán en cero algunos elementos de un arreglo (opción 0) o se incrementarán (opción 1).
-</em> Los elementos a editar están determinados por el <em>step size</em> y la cantidad de veces que se realiza este procedimiento lo indica <em>repcount</em>. <strong>Estos dos parámetros son los que más afectarán la cantidad de cache hits y misses que ocurrirán.</strong> El valor de <em>option</em> también alterará algunas, así como los parámetros del cache mismo, por supuesto.</p>
+* Lo más importante de entender de este archivo es que se pondrán en cero algunos elementos de un arreglo (opción 0) o se incrementarán (opción 1).
+* Los elementos a editar están determinados por el <em>step size</em> y la cantidad de veces que se realiza este procedimiento lo indica <em>repcount</em>. <strong>Estos dos parámetros son los que más afectarán la cantidad de cache hits y misses que ocurrirán.</strong> El valor de <em>option</em> también alterará algunas, así como los parámetros del cache mismo, por supuesto.</p>
 <h2 id="ejercicio-1-algunos-escenarios-de-acceso-a-memoria">Ejercicio 1: Algunos Escenarios de Acceso a Memoria<a class="headerlink" href="#ejercicio-1-algunos-escenarios-de-acceso-a-memoria" title="Permanent link">&para;</a></h2>
 <p>Para este ejercicio deben de contestar las preguntas adjuntas, con el formato indicado, en el archivo <code>ex1.txt</code>. Intenten razonar cuál va a ser la tasa de aciertos ANTES de correr la simulación. Luego de ejecutar el código, asegúrense de entender <strong>POR QUÉ</strong> ocurre lo que ocurre.</p>
 <p><em>No duden en preguntar si se sienten confundidos. Eso es totalmente normal y los auxiliares están ahí para ayudarlos.</em></p>
 <p>Estas son buenas preguntas para hacerse mientras realizan los ejercicios: 
-<em> ¿Qué tan grande es su <strong>cache block</strong>?
-</em> ¿Cuántos accesos <strong>consecutivos</strong> (tomando en cuenta el <em>step size</em>) caben en un único block?
-<em> ¿Cuánta data cabe en el cache COMPLETO?
-</em> ¿Qué tan lejos, en memoria, están los bloques que mapean al mismo set (y que pudieran causar conflictos)?
-<em> ¿Cuál es la asociatividad de su cache?
-</em> ¿En qué parte del cache mapea algún bloque particular?
+* ¿Qué tan grande es su <strong>cache block</strong>?
+* ¿Cuántos accesos <strong>consecutivos</strong> (tomando en cuenta el <em>step size</em>) caben en un único block?
+* ¿Cuánta data cabe en el cache COMPLETO?
+* ¿Qué tan lejos, en memoria, están los bloques que mapean al mismo set (y que pudieran causar conflictos)?
+* ¿Cuál es la asociatividad de su cache?
+* ¿En qué parte del cache mapea algún bloque particular?
 * Al considerar por qué un acceso específico es un hit o un miss: ¿ya se accedió a esta data antes? Si sí, ¿sigue en el cache o no?</p>
 <h3 id="escenario-1">Escenario #1<a class="headerlink" href="#escenario-1" title="Permanent link">&para;</a></h3>
 <p><strong>Cache Parameters:</strong> (editados en la pestaña de "Cache" en el simulador)
-<em> <strong>Política de colocación:</strong> Direct Mapping
-</em> <strong>Política de reemplazo de bloques:</strong> LRU
-<em> <strong>Tamaño del set (bloques) (setSize):</strong> 1
-</em> <strong>Cantidad de bloques:</strong> 4
+* <strong>Política de colocación:</strong> Direct Mapping
+* <strong>Política de reemplazo de bloques:</strong> LRU
+* <strong>Tamaño del set (bloques) (setSize):</strong> 1
+* <strong>Cantidad de bloques:</strong> 4
 * <strong>Tamaño de los bloques del cache (en <em>words</em>) (blockSize):</strong> 2</p>
 <p><strong>Parámetros del Programa:</strong> (inicializando los valores de los argumentos en el código)
-<em> <strong>Tamaño del arreglo (arraySize):</strong> 128 bytes
-</em> <strong>Tamaño del salto (stepSize):</strong> 8
-<em> <strong>Número de repeticiones (repCount):</strong> 4
-</em> <strong>Opción:</strong> 0</p>
+* <strong>Tamaño del arreglo (arraySize):</strong> 128 bytes
+* <strong>Tamaño del salto (stepSize):</strong> 8
+* <strong>Número de repeticiones (repCount):</strong> 4
+* <strong>Opción:</strong> 0</p>
 <p><strong>Tip</strong>: Si les es difícil visualizar <em>qué está entrando en el cache</em> en cada acceso a memoria simplemente viendo el código, prueben utilizando lápiz y papel: escriban cuál sería el tag:index:offset de las direcciones y averigüen cuáles direcciones de memoria mapean a los distintos sets en cache con los bits del index.</p>
 <p>Preguntas:</p>
 <ol>
@@ -950,16 +950,16 @@
 </ol>
 <h3 id="escenario-2">Escenario #2<a class="headerlink" href="#escenario-2" title="Permanent link">&para;</a></h3>
 <p><strong>Cache Parameters:</strong>
-<em> <strong>Política de colocación:</strong> N-Way Set Associative
-</em> <strong>Política de reemplazo de bloques:</strong> LRU
-<em> <strong>Tamaño del set (bloques) (setSize):</strong> 4
-</em> <strong>Cantidad de bloques:</strong> 16
+* <strong>Política de colocación:</strong> N-Way Set Associative
+* <strong>Política de reemplazo de bloques:</strong> LRU
+* <strong>Tamaño del set (bloques) (setSize):</strong> 4
+* <strong>Cantidad de bloques:</strong> 16
 * <strong>Tamaño de los bloques del cache (en <em>words</em>) (blockSize):</strong> 4</p>
 <p><strong>Parámetros del Programa:</strong> (inicializando los valores de los argumentos en el código)
-<em> <strong>Tamaño del arreglo (arraySize):</strong> 256 bytes
-</em> <strong>Tamaño del salto (stepSize):</strong> 2
-<em> <strong>Número de repeticiones:</strong> 1
-</em> <strong>Opción (repCount):</strong> 1</p>
+* <strong>Tamaño del arreglo (arraySize):</strong> 256 bytes
+* <strong>Tamaño del salto (stepSize):</strong> 2
+* <strong>Número de repeticiones:</strong> 1
+* <strong>Opción (repCount):</strong> 1</p>
 <p>Preguntas:</p>
 <ol>
 <li>
@@ -1035,8 +1035,8 @@
 
 <p><strong>Hecho:</strong> La multiplicación de matrices se encuentran detrás de numerosos algoritmos de álgebra lineal y la operación eficaz de ello es crítico para muchas aplicaciones dentro de las ciencias aplicadas.</p>
 <p>Nótese que en el código superior los ciclos están ordenados como i, j, k. Si se examina el bucle más íntimo, se puede ver que este...:
-<em> recorre B en pasos unitarios.
-</em> recorre A en progresos de tamaño n.
+* recorre B en pasos unitarios.
+* recorre A en progresos de tamaño n.
 * no recorre C.</p>
 <p><strong>RECORDAR:</strong> Para calcular la multiplicación de matrices de manera correcta, <strong>no importa el orden de los ciclos</strong>.</p>
 <p><strong>PERO</strong>, el orden elegido para acceder a los elementos de las matrices pueden tener <strong>un impacto muy grande en el rendimiento</strong>. Los caches se benefician más (más cache hits; menos misses) cuando el acceso a memoria se aprovecha de la temporalidad espacial y de la espacial, utilizando bloques ya dentro del cache. Optimizando los accesos de memoria de un programa es esencial para aprovecharse de la jerarquía de memoria.</p>
@@ -1290,7 +1290,7 @@ Al terminar, deben de subir su laboratorio al calificador en línea con:
       
     </div>
     
-      <script src="../../assets/javascripts/application.dc02f8ce.js"></script>
+      <script src="../../assets/javascripts/application.39abc4af.js"></script>
       
         
         

@@ -38,7 +38,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.1.1">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.2.0">
     
     
       
@@ -46,12 +46,12 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.3020aac5.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.750b69bd.css">
       
       
     
     
-      <script src="../../assets/javascripts/modernizr.01ccdecf.js"></script>
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
     
     
       
@@ -597,6 +597,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tokenizar-texto-en-palabras" title="Tokenizar texto en palabras" class="md-nav__link">
+    Tokenizar texto en palabras
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#depuracion" title="Depuración" class="md-nav__link">
     Depuración
   </a>
@@ -828,6 +835,13 @@
           <li class="md-nav__item">
   <a href="#dataset" title="Dataset" class="md-nav__link">
     Dataset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tokenizar-texto-en-palabras" title="Tokenizar texto en palabras" class="md-nav__link">
+    Tokenizar texto en palabras
   </a>
   
 </li>
@@ -1180,6 +1194,22 @@ reviews-labels-large.txt
 </pre></div>
 
 <p>Recuerden que review_stars solo puede considerar <strong>1</strong>, <strong>3</strong> o <strong>5</strong>, y que el texto es "texto crudo" (<em>raw text</em>), que no está separado por palabras.</p>
+<h3 id="tokenizar-texto-en-palabras">Tokenizar texto en palabras<a class="headerlink" href="#tokenizar-texto-en-palabras" title="Permanent link">&para;</a></h3>
+<p>Ya que hay diferentes maneras en Python de tokenizar un texto en palabras, ustedes tienen que utilizar lo siguiente
+para realizar esta tarea:</p>
+<div class="codehilite"><pre><span></span><span class="c1"># texto a tokenizar</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;Hello World!!&#39;</span>
+<span class="c1"># remueve la puntuacion</span>
+<span class="n">text2</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">maketrans</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">))</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="c1"># genera un arreglo de palabras en minuscula</span>
+<span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">text2</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+</pre></div>
+
+<pre id="tokenizer-out"></pre>
+
+<p><button class="brun" onclick="tokenizer()">Run</button> <button id="btokenizer" class="bclear" onclick="rm('btokenizer', 'tokenizer-out')" style="visibility: hidden;">Clear</button></p>
+<p>De esta forma su resultado será igual al esperado por el autograder si por alguna razón no llegan al tiempo esperado.</p>
 <h3 id="depuracion">Depuración<a class="headerlink" href="#depuracion" title="Permanent link">&para;</a></h3>
 <p>Para este proyecto no hay autograder local. Pero vamos a dejar el output del staff para un dataset de ejemplo. Este dataset de ejemplo contiene 10 reviews para entrenamiento y 5 reviews para clasificación. Siéntanse libres de utilizarlo para depurar su salida de cada parte de su implementación. Cuando ustedes corran el dataset de ejemplo, <code>run.py</code> va a generar automáticamente un archivo llamado <code>debug_diffs.txt</code> en el directorio <code>out/</code>, que va a contener las diferencias de su implementación con respecto a las del staff (si es que hay alguna) o indicar que todo está correcto. Noten que como es un dataset demasiado pequeño, no se tienen que preocupar del porcentaje de acierto si es bajo o 0. Pueden correr el dataset de ejemplo utilizando:</p>
 <div class="codehilite"><pre><span></span>./check sample
@@ -1382,7 +1412,7 @@ Exercise                                   Grade  Message
       
     </div>
     
-      <script src="../../assets/javascripts/application.dc02f8ce.js"></script>
+      <script src="../../assets/javascripts/application.39abc4af.js"></script>
       
         
         

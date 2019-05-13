@@ -334,3 +334,9 @@ function cls() {
     'bcls'
   )
 }
+
+function tokenizer() {
+  var mypre = document.getElementById('tokenizer-out');
+  mypre.innerHTML = '<div class="codehilite"><pre><span></span><span class="p">[</span><span class="s1">\'hello\'</span><span class="p">,</span> <span class="s1">\'world\'</span><span class="p"><span class="p">]</span></pre></div>';
+  document.getElementById('btokenizer').style.visibility = 'visible';
+}
