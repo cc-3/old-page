@@ -1195,7 +1195,7 @@
 <li>P&amp;H: B-43</li>
 </ul>
 <h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
-<p>En este proyecto ustedes deben de crear un emulador que pueda ejecutar un subconjunto de instrucciones de <strong>RISC-V</strong>. Ustedes se van a encargar de hacer un programa que decodifique y ejecute varias instrucciones de RISC-V. Considérenlo como una versión miniatura de <a href="https://www.riscvsim.com">V-Sim</a>.</p>
+<p>En este proyecto ustedes deben de crear un emulador que pueda ejecutar un subconjunto de instrucciones de <strong>RISC-V</strong>. Ustedes se van a encargar de hacer un programa que decodifique y ejecute varias instrucciones de RISC-V. Considérenlo como una versión miniatura de Jupiter</a>.</p>
 <h2 id="risc-v-green-card">RISC-V Green Card<a class="headerlink" href="#risc-v-green-card" title="Permanent link">&para;</a></h2>
 <p>Aquí hay dos <strong>RISC-V Green Cards</strong> que pueden consultar y así tener más herramientras que les pueden ayudar a completar el proyecto. La primera tiene información acerca de los <em>opcodes</em> y otros campos de cada uno de los diferentes formatos de instrucción, por lo que esta sería su mejor opción.</p>
 <p align="center">
@@ -1784,8 +1784,8 @@ random_disasm TEST PASSED!
 <div class="codehilite"><pre><span></span>make [test_name]_disasm
 </pre></div>
 
-<p>Para crear sus propios archivos de prueba, primero necesitarán crear código de máquina. Para ello pueden ayudarse de V-Sim o hacerlo a mano. Si utilizan V-Sim tienen que crear un archivo <code>.s</code> y hacer un <code>dump</code> del código de máquina utilizando la bandera <code>-code</code> en la terminal:</p>
-<div class="codehilite"><pre><span></span>vsim &lt;archivo&gt;.s -code &lt;test_name&gt;.input
+<p>Para crear sus propios archivos de prueba, primero necesitarán crear código de máquina. Para ello pueden ayudarse de Jupiter o hacerlo a mano. Si utilizan Jupiter tienen que crear un archivo <code>.s</code> y hacer un <code>dump</code> del código de máquina utilizando la bandera <code>-code</code> en la terminal:</p>
+<div class="codehilite"><pre><span></span>jupiter &lt;archivo&gt;.s --dump-code &lt;test_name&gt;.input
 </pre></div>
 
 <p>Ustedes deben de poner las instrucciones en código de máquina en un archivo llamado <code>[test_name].input</code>
