@@ -388,6 +388,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#entrega-de-laboratorio" title="Entrega de laboratorio" class="md-nav__link">
+    Entrega de laboratorio
+  </a>
+  
+</li>
+      
       
       
       
@@ -781,6 +788,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#entrega-de-laboratorio" title="Entrega de laboratorio" class="md-nav__link">
+    Entrega de laboratorio
+  </a>
+  
+</li>
+      
       
       
       
@@ -810,11 +824,12 @@
 <li>Ganar más confianza al trabajar con punteros.</li>
 </ul>
 <h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
-<p>Visiten este <a href="https://classroom.github.com/a/R92ylAB1">link</a>. Aquí encontrarán todos los archivos necesarios para completar este lab. En esta página, encontrarán un botón que dice "Accept assignment". Al presionar este botón, se creará automáticamente un repositorio en Github llamado "www.github.com/cc-3/lab1-c-gdb-USUARIO". Noten que el "dueño" de este repositorio es un usuario llamado <code>cc-3</code>, y el usuario de ustedes es únicamente el sufijo del nombre del repo. De esta forma, nos encargamos de tener acceso siempre a su código, en caso existan copias o cualquier otro tipo de trampa. Sepan de una vez que, si encontramos plagio o cualquier otro tipo de trampa en sus laboratorios, su nota será AUTOMÁTICAMENTE 0,  sin posibilidad de cambiarla. De repetirse nuevamente este acontecimiento, el staff del curso organizará una reunión con ustedes y sus directores de carrera para contarles lo ocurrido y sancionarlos conforme al reglamento de la universidad.</p>
+<p>Visiten este <a href="https://classroom.github.com/a/Tk-1TrzP">link</a>. Aquí encontrarán todos los archivos necesarios para completar este lab. En esta página, encontrarán un botón que dice "Accept assignment". Al presionar este botón, se creará automáticamente un repositorio en Github llamado <code>www.github.com/cc-3/lab01-2021-USUARIO</code>. Noten que el "dueño" de este repositorio es un usuario llamado <code>cc-3</code>, y el usuario de ustedes es únicamente el sufijo del nombre del repo. De esta forma, nos encargamos de tener acceso siempre a su código, en caso existan copias o cualquier otro tipo de trampa. Sepan de una vez que, si encontramos plagio o cualquier otro tipo de trampa en sus laboratorios, su nota será AUTOMÁTICAMENTE 0,  sin posibilidad de cambiarla. De repetirse nuevamente este acontecimiento, el staff del curso organizará una reunión con ustedes y sus directores de carrera para contarles lo ocurrido y sancionarlos conforme al reglamento de la universidad.</p>
 <p>Después de realizar esto, en la máquina virtual (o sus propias computadoras) abran una terminal en el directorio que prefieran, y ejecuten el siguiente comando:
-<div class="codehilite"><pre><span></span>git clone https://github.com/cc-3/lab1-c-gdb-&lt;SU USUARIO DE GITHUB&gt;
+<div class="codehilite"><pre><span></span>git clone https://github.com/cc-3/lab1-2021-&lt;SU USUARIO DE GITHUB&gt;
 </pre></div>
 esto descargará en el directorio que escogieron todos los archivos base para este laboratorio.</p>
+<p>Para futuro, un <code>clone</code> solo lo hacemos la primera vez que vamos a bajar el codigo de un repositorio a nuestra maquina. Nunca bajen el zip que Github les ofrece, por favor, eso solo nos va a causar problemas.</p>
 <h2 id="compilando-y-ejecutando-un-programa-de-c">Compilando y ejecutando un programa de C<a class="headerlink" href="#compilando-y-ejecutando-un-programa-de-c" title="Permanent link">&para;</a></h2>
 <p>En este laboratorio, estaremos usando el programa <code>gcc</code> para compilar programas en c. La manera más sencilla de ejecutar <code>gcc</code> es la siguiente:
 <div class="codehilite"><pre><span></span>gcc program.c
@@ -846,7 +861,7 @@ Yoshua
 Go BEARS!
 </pre></div></p>
 <p>Hay múltiples combinaciones de valores en las macros que consiguen este resultado, El reto para ustedes en este ejercicio es: Consideren el <strong>mínimo</strong> número de distintos valores que las constantes <code>v0</code> a <code>v3</code> puedan tener que aún den el mismo resultado correcto. Como ejemplo, el máximo teórico es cuatro (cuando todos son diferentes uno de otro).</p>
-<p>Cuando ya hayan logrado esto, pueden actualizar el archivo en su repositorio en github, de esta manera:
+<p>Cuando ya hayan logrado esto, pueden actualizar el archivo en su repositorio en Github, de esta manera:
 <div class="codehilite"><pre><span></span>$ git add eccentric.c
 $ git commit -m <span class="s2">&quot;Ejercicio 1 terminado&quot;</span>
 $ git push -u origin master
@@ -942,7 +957,7 @@ Aquí tendrán que responder las siguientes preguntas de opción múltiple (no t
 </em>b. quit <br />
 <em>c. exit <br />
 </em>d. finish   </p>
-<p>Después de responder estas preguntas, no olviden hacer el submit y push de este archivo hacia github:
+<p>Después de responder estas preguntas, no olviden hacer el commit y push de este archivo hacia Github:
 <div class="codehilite"><pre><span></span>$ git add ex2.txt
 $ git commit -m <span class="s2">&quot;Ejercicio 2 terminado&quot;</span>
 $ git push -u origin master
@@ -1007,8 +1022,9 @@ $ git commit -m <span class="s2">&quot;LAB01 terminado&quot;</span>
 $ git push -u origin master
 </pre></div>
 
-<p>Ya con todos los ejercicios completados, no olviden ejecutar <code>./submit TOKEN</code> Para poder ver su nota.</p>
-<p>Para finalizar, la parábola de <a href="http://read.gov/aesop/025.html">la tortuga y la liebre</a> es relevante siempre, especialmente en este curso. Escribir sus programas en C a paso lento pero seguro (ayudándose de programas como CGDB) es lo que les hará ganar la carrera.</p>
+<p>Para finalizar, la fábula de <a href="http://read.gov/aesop/025.html">la tortuga y la liebre</a> es relevante siempre, especialmente en este curso. Escribir sus programas en C a paso lento pero seguro (ayudándose de programas como CGDB) es lo que les hará ganar la carrera.</p>
+<h2 id="entrega-de-laboratorio">Entrega de laboratorio<a class="headerlink" href="#entrega-de-laboratorio" title="Permanent link">&para;</a></h2>
+<p>Mas tarde se actualizara esta pagina y se pondran las instrucciones de entrega, por favor regrese pronto.</p>
                 
                   
                 
