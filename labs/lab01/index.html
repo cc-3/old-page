@@ -976,7 +976,7 @@ Segmentation fault
 <p>Después de corregir el problema, compilen nuevamente y ejecuten el código. ¿Notan la diferencia?</p>
 <p>Al finalizar, no olviden subir el archivo modificado a su repositorio remoto:</p>
 <div class="codehilite"><pre><span></span>$ git add ll_equal.c
-$ git commit -m <span class="s2">&quot;Ejercicio 2 terminado&quot;</span>
+$ git commit -m <span class="s2">&quot;Ejercicio 3 terminado&quot;</span>
 $ git push -u origin master
 </pre></div>
 
@@ -1024,7 +1024,64 @@ $ git push -u origin master
 
 <p>Para finalizar, la fábula de <a href="http://read.gov/aesop/025.html">la tortuga y la liebre</a> es relevante siempre, especialmente en este curso. Escribir sus programas en C a paso lento pero seguro (ayudándose de programas como CGDB) es lo que les hará ganar la carrera.</p>
 <h2 id="entrega-de-laboratorio">Entrega de laboratorio<a class="headerlink" href="#entrega-de-laboratorio" title="Permanent link">&para;</a></h2>
-<p>Mas tarde se actualizara esta pagina y se pondran las instrucciones de entrega, por favor regrese pronto.</p>
+<p>A partir de este laboratorio contaremos con autograders, por lo que podra conocer su nota de inmediato.</p>
+<p>Para poder utilizarlo debemos realizar una pequena instalacion (todos, incluyendo a quienes bajaron nuestra maquina virtual, los autograders estan recien salidos del horno).</p>
+<p>Para instalar necesitamos tener Python 3.6 o superior, nuestra maquina virtual ya lo cumple. Comenzamos con...</p>
+<div class="codehilite"><pre><span></span>pip3 install autograders-cli
+</pre></div>
+
+
+<p>Esto instala el modulo a traves del cual entregara su asignacion. Luego tenemos que registrarnos. Por favor sea MUY CUIDADOSO al ingresar sus datos. Como es usual en Linux no se vera su contrasena mientras la escribe, de momento NO EXISTE RECUPERACION DE CONTRASENA por si se equivoca o se le olvida. SEA MUY CUIDADOSO.</p>
+<div class="codehilite"><pre><span></span>autograder --register
+</pre></div>
+
+
+<p>Tras llenar su nombre completo, correo y crear su contrasena se le enviara un correo. Haga click en el link que va en el correo (es posible que al hacer click se quede "trabado" en redirecting/redirigiendo, esto es normal, no se preocupe).</p>
+<p>Luego de hacer click en ese link, esta listo para entregar.</p>
+<p>Navegue hacia la carpeta donde tiene sus archivos, haga un <code>ls</code> y asegurese que le aparece el archivo <code>autograders.json</code>; si aparecio, esta en el lugar correcto. Ahora puede entregar su laboratorio con...</p>
+<div class="codehilite"><pre><span></span>autograder --upload
+</pre></div>
+
+
+<p>Espera un minuto aprox. y luego puede ver sus resultados con...</p>
+<div class="codehilite"><pre><span></span>autograders --stats
+</pre></div>
+
+
+<p>Vera desplegado sus resultados de esta manera (excepto que usted tendra 100 en lugar de 0 :P). Si dice <code>Queued: True</code> significa que el autograder esta un poquito ocupado y no le ha calificado, revise de nuevo en unos cinco minutos.</p>
+<div class="codehilite"><pre><span></span>   ___       __                        __
+  / _ |__ __/ /____  ___ ________ ____/ /__ _______
+ / __ / // / __/ _ \/ _ `/ __/ _ `/ _  / -_) __(_-
+/_/ |_\_,_/\__/\___/\_, /_/  \_,_/\_,_/\__/_/ /___/
+               /___/
+
+        Command Line Interface
+           Autograders.org
+
+Get Task Stats
+
+ - Queued: False
+ - Grade: 0.00/100
+ - Created At: 2021-01-29T12:57:05.454Z
+ - Updated At: 2021-01-29T12:57:12.131Z
+
+Details:
+
+╒══════════════╤═════════╤════════════════════════════════════════╕
+│ Name         │   Grade │ Message                                │
+╞══════════════╪═════════╪════════════════════════════════════════╡
+│ 1. Eccentric │       0 │ incomplete: some answers are wrong...  │
+├──────────────┼─────────┼────────────────────────────────────────┤
+│ 2. CGDB      │       0 │ incomplete: q1,q2,q3,q4,q5,q6,q7,q8,q9 │
+├──────────────┼─────────┼────────────────────────────────────────┤
+│ 3. ll_equal  │       0 │ failed: runtime error                  │
+├──────────────┼─────────┼────────────────────────────────────────┤
+│ 4. ll_cycle  │       0 │ failed: Failed some tests...           │
+╘══════════════╧═════════╧════════════════════════════════════════╛
+</pre></div>
+
+
+<p>Felicidades! Termino su lab 1. Envie el link de su repo en el GES (el GES le permite enviar links, no pegue su link en un TXT u otro documento, es incomodo).</p>
                 
                   
                 
