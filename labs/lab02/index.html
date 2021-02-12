@@ -411,26 +411,6 @@
     Calificación
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#submit" title="Submit" class="md-nav__link">
-    Submit
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#server-status" title="Server Status" class="md-nav__link">
-    Server Status
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
       
@@ -825,26 +805,6 @@
     Calificación
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#submit" title="Submit" class="md-nav__link">
-    Submit
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#server-status" title="Server Status" class="md-nav__link">
-    Server Status
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
       
@@ -878,23 +838,23 @@
 </ul>
 </li>
 <li>Pensar cómo el manejo de memoria dinámica los puede hacer mejores personas.<ul>
-<li>Son bromas, pero sólo los puede volver mejores programadores.</li>
+<li>Son bromas, pero sí los puede volver mejores programadores.</li>
 </ul>
 </li>
 </ul>
 <h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
-<p>De primero, deben de descargar todos los archivos que necesitarán para completar este laboratorio, estos se encuentran <a href="https://classroom.github.com/a/buYf8gbm">aquí</a>. Recuerden que deben aceptar la asignación y se les creará automáticamente un repositorio con una extensión que termina con su usuario.
+<p>De primero, deben de descargar todos los archivos que necesitarán para completar este laboratorio, estos se encuentran <a href="https://classroom.github.com/a/YnOshM8E">aquí</a>. Recuerden que deben aceptar la asignación y se les creará automáticamente un repositorio con una extensión que termina con su usuario.
 Recuerden que este será revisado en búsqueda de copia o plagio, así que no lo hagan. De lo contrario, será sancionado acorde al reglamento de la universidad.</p>
 <p>Ahora, ya pueden ejecutar en la terminal el comando que les descargará los archivos base en el directorio a su elección:
 <div class="codehilite"><pre><span></span>git clone link_al_lab
 </pre></div></p>
 <h2 id="ejercicio-1-operando-bits">Ejercicio 1: Operando Bits<a class="headerlink" href="#ejercicio-1-operando-bits" title="Permanent link">&para;</a></h2>
 <p>Para este inciso, su trabajo es completar los archivos <strong>ex1/get_bit.c</strong>, <strong>ex1/set_bit.c</strong> y <strong>ex1/flip_bit.c</strong> de manera que las funciones cumplan con su tarea (así como el nombre de las funciones sugiere). Para ello deberán utilizar las operaciones de bits básicas: and (&amp;), or (|), xor (^), not (~) y los corrimientos a la derecha (>>) y a la izquierda (&lt;&lt;). Deben evitar el uso de ciclos o condicionales.</p>
-<p>¡¡¡¡No usen ciclos ni condicionales!!!! Eso significa que mientras realicen el ejercicio no pueden y no deben de <strong>escribir</strong> las palabras: if, else, do, while, for, switch o algo de índole similar. Por favor no traten de engañarnos, todo el personal involucrado (esperamos) sabe cómo se miran todas estas palabras, entonces si encontramos una de ellas...</p>
+<p>¡¡¡¡No usen ciclos ni condicionales!!!! Eso significa que mientras realicen el ejercicio no pueden y no deben de escribir las palabras: if, else, do, while, for, switch o algo de índole similar. Por favor no traten de engañarnos, el staff y el autograder saben cómo se miran todas estas palabras, entonces si encontramos una de ellas...</p>
 <p align="center">
   <img src="/img/labs/lab02/YouShallNotPassGIF.gif" alt="YOU SHALL NOT PASS" />
   <br/>
-  <small>El autograder analiza su código de todas formas... ¯\_(ツ)_/¯ sorry not sorry</small>
+  <small>El autograder analiza su código y no le dará puntos si las usa ¯\_(ツ)_/¯ sorry not sorry</small>
 </p>
 
 <p><strong>NOTA IMPORTANTE:</strong> Considerar que <em>n</em> es un valor que inicia en la posición cero, contando desde la derecha, por lo que el bit que se encuentra hasta la derecha es el bit cero.</p>
@@ -919,8 +879,8 @@ Recuerden que este será revisado en búsqueda de copia o plagio, así que no lo
 <div class="codehilite"><pre><span></span>make bit_ops
 ./bit_ops
 </pre></div>
-Lo cual imprimirá el resultado de algunas pruebas. Si tienen curiosidad pueden revisar con libertad la carpeta tests/ que contiene las pruebas que se van a realizar en cada ejercicio de este laboratorio y que reflejan bastante lo que evaluará el autograder, por ejemplo el archivo que se utiliza para este ejercicio es <strong>tests/bit_ops_test.c</strong>. De ahora en adelante hasta que esten 100% seguros de que tienen completo el laboratorio o ya esté cerca la hora de entregar su laboratorio, pueden mandar sus archivos como en los laboratorios pasados utilizando <code>./submit &lt;TOKEN&gt;</code>.</p>
-<p>Acuérdense de realizar el proceso de "hacerle push" al archivo para subirlo al repositorio de GitHub.</p>
+Lo cual imprimirá el resultado de algunas pruebas. Si tienen curiosidad pueden revisar con libertad la carpeta tests/ que contiene las pruebas que se van a realizar en cada ejercicio de este laboratorio y que reflejan bastante lo que evaluará el autograder, por ejemplo el archivo que se utiliza para este ejercicio es <strong>tests/bit_ops_test.c</strong>.</p>
+<p>Acuérdense de realizar el proceso de add+commit+push al archivo para subirlo al repositorio de GitHub.</p>
 <h2 id="ejercicio-2-registro-de-corrimiento-con-retroalimentacion-lineal">Ejercicio 2: Registro de Corrimiento con Retroalimentación Lineal<a class="headerlink" href="#ejercicio-2-registro-de-corrimiento-con-retroalimentacion-lineal" title="Permanent link">&para;</a></h2>
 <p>En este ejercicio deben de implementar una función que compute la siguiente iteración de un registro de corrimiento de retroalimentación lineal (LFSR por sus siglas en inglés). ¡Algunas aplicaciones que utilizan LFSRs son: televisión digital, teléfonos con acceso múltiple por división de código, Ethernet, USB 3.0 y mucho más! Esta función deberá generar números pseudo-aleatorios utilizando operadores binarios. Para un poco de información adicional, pueden visitar el siguiente <a href="https://es.wikipedia.org/wiki/LFSR">link de Wikipedia</a>.
 En el archivo <strong>ex2/lfsr_calculate.c</strong> deben de completar la función <em>lfsr_calculate()</em> de manera que realice lo siguiente:</p>
@@ -978,47 +938,27 @@ De nuevo, recuérdense de hacer el push.</p>
 </ul>
 <p>Es momento de revisar el código de <em>ex3/vector.c</em> si no lo han hecho. Aquí hay comentarios complementarios que describen cómo deberían de correr las funciones. Recuerden que los usuarios de su estructura de datos <em>vector_t</em> deben asumir que todas las entradas al vector son 0, a menos que hayan sido definidas de otra manera por ellos. Tengan esto en mente, porque <em>malloc</em> no hace esto por ustedes.</p>
 <h3 id="que-deben-hacer">¿Qué deben hacer?<a class="headerlink" href="#que-deben-hacer" title="Permanent link">&para;</a></h3>
+<p>Hay exactamente seis (6) espacios para que escriban una expresión en C, indicados con el comentario que dice <em>/* YOUR CODE HERE */</em>. Escriban una expresión en cada uno de estos sitios, normalmente no es más de una línea de código en cada lugar, pero podría ser un poquiiitooo más si usa algún if. Los comentarios que aparecen son su guía de qué debe realizar.</p>
 <ul>
-<li>Completen <em>vector_new</em>, la versión correcta. Hay exactamente seis (6) espacios para que escriban una expresión en C, indicados con el comentario que dice <em>/* YOUR CODE HERE */</em>. Escriban una <em>expresión</em> en estos sitios. Esto significa no más de una línea de código. Existen comentarios adicionales que describen qué debería de suceder en la línea de código inferior a cada división.</li>
-<li>Terminen <em>vector_get()</em> de la misma manera en que lo hicieron para la función anterior: de manera respetuosa, dispuesto a aprender, con mente abierta y conscientes de qué es lo que están escribiendo, ya que esta es la mejor forma de programar.</li>
+<li>Completen <em>vector_new</em>, aquí se está creando nuestra estructura, por fuera y por dentro.</li>
+<li>Terminen <em>vector_get()</em>, lea bien las instrucciones y cumpla con lo que se le pide. Sea consciente de lo que está haciendo, no trabaje ensayo-y-error.</li>
 <li>Complementen <em>vector_delete()</em>. Una solución satisfactoria no debería de llevar más de dos líneas de código.</li>
 <li>Corrijan a <em>vector_set()</em>. Esta es la más complicada. Bienvenidos a las ligas mayores. El problema de manipular una posición/índice arbitrario en un vector <em>v</em> es que es posible que no se haya reservado suficiente espacio con <em>malloc</em> en <em>vector-&gt;data</em> (sí, eso significa que tuvieron que haber guardado memoria con <em>malloc</em>). Piensen cómo administrar la memoria para lograr esto, para ver qué hacer con la data que estaba ahí antes y de qué otras cosas deben de hacer en su nuevo bloque de datos.   Ayuda: Recuerden que los índices que no hayan sido alterados deben de ser cero. Hay distintas formas de acabar resolviendo esta función. Consideren el uso de las 3 funciones <em>__alloc</em>, porque pueden resultar útiles...</li>
 </ul>
 <p>Saber cómo reorganizar y liberar memoria es importante para la programación en C. Piensen que el manejo de memoria es como un parqueo, si hay carros parqueados y los dueños nunca se van, entonces no tienen espacio para nuevos carros. <strong>Y recuerden que deberían tener un 'heap' vacío al terminar su programa. Utilicen free y todo estará bien.</strong></p>
 <h2 id="calificacion">Calificación<a class="headerlink" href="#calificacion" title="Permanent link">&para;</a></h2>
-<p>Como en todos los demás laboratorios, hay un autograder y este no es la excepción. El <strong>staff</strong> trabajo bastante para que su experiencia en este curso sea de las mejores, por eso ahora pueden visitar la siguiente página <a href="https://dashboard.cc-3.site/">https://dashboard.cc-3.site/</a> en donde al iniciar sesión, <strong>con su cuenta de galileo</strong>, puedan ver el reporte de notas de los laboratorios y proyectos.</p>
-<p align="center">
-  <img src="/img/labs/lab02/dashboard.png" alt="Dashboard" />
-</p>
-
-<h3 id="submit">Submit<a class="headerlink" href="#submit" title="Permanent link">&para;</a></h3>
-<p>Si ustedes navegan hacia la página de <a href="https://dashboard.cc-3.site/labs">laboratorios</a>, allí van a aparecer el estado de sus laboratorios, si ya están calificados o están pendientes de calificar por el autograder, la fecha y hora en que lo subieron al hacer <code>./submit</code> y el output de la consola y esto en tiempo real. De esta manera pueden  obtener el feedback más rapidamente en caso en el GES todavía no estén subidas las notas.</p>
-<p align="center">
-  <img src="/img/labs/lab02/labs.png" alt="Labs" />
-</p>
-
-<p>Como notarán en este laboratorio y en adelante ahora cuando hagan submit, el resultado no les aparecerá inmediatamente en la consola, sino que se subirá a nuestros servidores, entrará a una cola de espera y eventualmente será calificado. Si el autograder todavía no ha terminado de calificarles sus archivos no les dejará volver hacer submit, esto es para animarlos a que hagan primero sus pruebas locales con los tests que les damos antes de subir los archivos al autograder. Recuerden para hacer submit al autograder siempre es:</p>
-<div class="codehilite"><pre><span></span>./submit TOKEN
+<p>Entregaremos este lab de la misma manera que el pasado.</p>
+<p>Navegue hacia la carpeta donde tiene sus archivos, haga un <code>ls</code> y asegurese que le aparece el archivo <code>autograders.json</code>; si aparecio, esta en el lugar correcto. Ahora puede entregar su laboratorio con...</p>
+<div class="codehilite"><pre><span></span>autograder --upload
 </pre></div>
 
-<blockquote>
-<p><strong>NOTA</strong>: Tienen que crear su nuevo token en la página <a href="https://dashboard.cc-3.site/">https://dashboard.cc-3.site/</a></p>
-</blockquote>
-<h3 id="server-status">Server Status<a class="headerlink" href="#server-status" title="Permanent link">&para;</a></h3>
-<p>Finalmente, ya que todo esto utiliza recursos de AWS EC2 y que es un servicio que consume créditos del <strong>staff</strong> el servidor se apagará cuando haya terminado la fecha límite para subir el laboratorio al autograder indicada en el GES, así que tomen en cuenta esto. Cuando el servidor está prendido y está recibiendo peticiones de ustedes lo notarán en el pie de página:</p>
-<p align="center">
-  <img src="/img/labs/lab02/status_up.png" alt="Server Up" />
-</p>
 
-<p>El punto verde significa que el servidor esta recibiendo peticiones y a la derecha les dice el tamaño de la cola (submits pendientes de calificar). Cuando esté así pueden mandar sus archivos al autograder. Cuando el servidor está apagado lo notarán de igual manera:</p>
-<p align="center">
-  <img src="/img/labs/lab02/status_down.png" alt="Server Down" />
-</p>
+<p>Espera un minuto aprox. y luego puede ver sus resultados con...</p>
+<div class="codehilite"><pre><span></span>autograders --stats
+</pre></div>
 
-<p>El punto rojo significa que el servidor no está aceptando peticiones, así que si ven esto son malas noticias si no han terminado la asignación. Si ustedes notan este punto rojo y todavía su calificación les aparece pendiente (porque hicieron submit antes), no se preocupen ya está en camino a ser calificado y en su momento les aparecerá su nota.</p>
-<blockquote>
-<p><strong>NOTA</strong>: recuerden hacer submit, primero generando su nuevo token luego: ./submit <TOKEN></p>
-</blockquote>
+
+<p>Si le aparece Queued: True, espere un par de minutos y luego repita el <code>--stats</code> únicamente. Al terminar todo, suba el link de su repositorio al GES.</p>
                 
                   
                 
