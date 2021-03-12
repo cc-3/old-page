@@ -760,7 +760,7 @@
 <li>P&amp;H: 2.12</li>
 </ul>
 <h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
-<p>Para comenzar con el laboratorio primero tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/MsWT1Xr0">aquí</a>. Recuerden que deben
+<p>Para comenzar con el laboratorio primero tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/pP8Y0e10">aquí</a>. Recuerden que deben
 aceptar la asignación de <strong>GitHub Classroom</strong> y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub.
 Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):</p>
 <div class="codehilite"><pre><span></span>git clone &lt;link del repositorio&gt;
@@ -770,7 +770,7 @@ Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos
 <p><strong>NOTA</strong>: Tienen que reemplazar &lt;link del repositorio> con el link del repositorio que se creó.</p>
 </blockquote>
 <h2 id="ejercicio-1-depurando-megalistmanipss">Ejercicio 1: Depurando megalistmanips.s<a class="headerlink" href="#ejercicio-1-depurando-megalistmanipss" title="Permanent link">&para;</a></h2>
-<p>Hace mucho tiempo, su catedrático Ali era un principiante en RISC-V, y escribió su solución a un lab en este archivo: <strong>megalistmanips.s</strong>. Ustedes, ahora que ya son expertos en RISC-V, deben arreglar los bugs que cometió Ali.</p>
+<p>Hace mucho tiempo, el catedrático Ali era un principiante en RISC-V, y escribió su solución a un lab en este archivo: <strong>megalistmanips.s</strong>. Ustedes, ahora que ya son expertos en RISC-V, deben arreglar los bugs que cometió Ali.</p>
 <p>El objetivo principal de este ejercicio es que encuentren los errores en la función <strong>map</strong> en <strong>megalistmanips.s</strong>.
 Antes de hacer eso, familiarícense con lo que la función trata de hacer.</p>
 <p>En el lab anterior, teníamos una lista encadenada de enteros, ahora nuestra estructura de datos es una lista encadena cuyo valor en cada nodo es un <strong>arreglo</strong> de enteros. Recuerden que cuando se trabaja con arreglos en structs, necesitamos almacenar explícitamente el tamaño del array. En código de C, el <code>struct</code> se vería así:</p>
@@ -795,7 +795,7 @@ Antes de hacer eso, familiarícense con lo que la función trata de hacer.</p>
 <p>Algunas pistas:</p>
 <ul>
 <li>¿Por qué necesitamos guardar cosas en el stack antes de llamar a <code>jal</code>?</li>
-<li>¿Cuál es la diferencia entre <code>add t0, s0, x0</code> y <code>lw t0, 0(s0)</code>?</li>
+<li>¿Cuál es la diferencia entre <code>add t0, s0, x0</code> y <code>lw t0, 0(s0)</code>? (HINT: el add que se le menciona es lo mismo que <code>mv t0 s0</code>)</li>
 <li>Presten atención a los tipos de los atributos en el <code>struct</code>.</li>
 </ul>
 <p>¡Gracias por hacer el ejercicio! Estamos seguros de que Ali se estará preguntando dónde estaban para ayudarlo cuando no entendía RISC-V hace un tiempo atrás.</p>
@@ -812,14 +812,18 @@ Antes de hacer eso, familiarícense con lo que la función trata de hacer.</p>
 \end{align}$</p>
 <p>No les vamos a mentir, es una función muy tonta. Sin embargo, su tarea es implementarla en RISC-V, con la condición de que <strong><span style="color: red;">NO</span></strong> pueden utilizar las instrucciones de branch por ningún motivo. Por suerte alguna persona ha dejado por accidente un array de enteros en la sección <code>.data</code> de <strong><em>discrete_fn.s</em></strong>. ¿Cómo pueden utilizarlo para tener ventaja sobre eso y completar esta tarea que aparenta ser imposible?</p>
 <h2 id="calificacion">Calificación<a class="headerlink" href="#calificacion" title="Permanent link">&para;</a></h2>
-<p>Cuando hayan terminado su laboratorio, o crean que están listos para obtener su nota, pueden subir su laboratorio al autograder utilizando:</p>
-<div class="codehilite"><pre><span></span>./submit &lt;TOKEN&gt;
+<p>Al terminar los ejercicios agreguelos a su repositorio.</p>
+<div class="codehilite"><pre><span></span>git add *
+git commit -m &quot;Mensaje descriptivo de lo que acaba de terminar&quot;
+git push origin main
 </pre></div>
 
-<blockquote>
-<p><strong>NOTA</strong>: Tienen que reemplazar &lt;TOKEN> por el  token que les da la siguiente <a href="https://dashboard.cc-3.site">página</a></p>
-</blockquote>
-<p>Luego, cuando haya sido calificado, pueden ver su resultado en <a href="https://dashboard.cc3.site/">https://dashboard.cc-3.site/</a>.</p>
+<p>Y luego haga <code>--upload</code> al autograder.
+<div class="codehilite"><pre><span></span>autograder --upload
+</pre></div></p>
+<p>Revise su nota con <code>--stats</code>.
+<div class="codehilite"><pre><span></span>autograder --stats
+</pre></div></p>
                 
                   
                 
