@@ -1702,10 +1702,10 @@ utils.h
     <td>OPERACIÓN</td>
   </tr>
   <tr>
-    <td><font color="#ff0000">jal</font> <font color="#0000ff">rd</font>, <font color="#ff00ff">imm</font></td>
+    <td><font color="#ff0000">jal</font> <font color="#0000ff">rd</font>, <font color="#ff00ff">offset</font></td>
     <td></td>
     <td></td>
-    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]&lt;- <font color="#ff0000">PC</font> + <font color="#00ff00">4</font> <br><font color="#ff0000">PC</font>&lt;- <font color="#ff0000">PC</font> + {<font color="#ff00ff">imm</font>, 1b'0}</td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]&lt;- <font color="#ff0000">PC</font> + <font color="#00ff00">4</font> <br><font color="#ff0000">PC</font>&lt;- <font color="#ff0000">PC</font> + {<font color="#ff00ff">offset</font>, 1b'0}</td>
   </tr>
 </table></p>
 <p>Al igual que la arquitectura RISC-V normal, el sistema RISC-V que están implementando es little-endian. Esto significa que cuando se le da un valor compuesto de múltiples bytes, el byte menos significativo se almacena en la dirección más baja. Consulten <a href="https://www.freecodecamp.org/news/what-is-endianness-big-endian-vs-little-endian/">este artículo</a> para obtener información sobre endianness.</p>
@@ -1803,7 +1803,7 @@ ASM_TESTS := simple multiply random test_name
 <div class="codehilite"><pre><span></span>autograder --upload
 </pre></div>
 
-<p><strong>Si están trabajando en pareja, <span style="color: red">AMBOS</span> miembros del grupo tienen que hacer el submit con su respectivo TOKEN</strong>.</p>
+<p><strong>Si están trabajando en pareja, <span style="color: red">AMBOS</span> miembros del grupo tienen que hacer el upload</strong>.</p>
 <h2 id="parte-2">Parte 2<a class="headerlink" href="#parte-2" title="Permanent link">&para;</a></h2>
 <p>Su segunda tarea es completar el emulador implementando los métodos <strong><em>execute_instruction()</em></strong>. <strong><em>execute()</em></strong>s, <strong><em>store()</em></strong> y <strong><em>load()</em></strong> del archivo <strong><em>part2.c</em></strong>.</p>
 <h3 id="requisitos">Requisitos<a class="headerlink" href="#requisitos" title="Permanent link">&para;</a></h3>
