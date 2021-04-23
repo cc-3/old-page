@@ -502,18 +502,6 @@
   </li>
 
         
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../projs/proj03/" title="3: Optimizaciones" class="md-nav__link">
-      3: Optimizaciones
-    </a>
-  </li>
-
-        
       </ul>
     </nav>
   </li>
@@ -720,10 +708,10 @@
                 
                 <h1 id="lab-7-alu-proyecto-2">Lab 7 - ALU Proyecto 2<a class="headerlink" href="#lab-7-alu-proyecto-2" title="Permanent link">&para;</a></h1>
 <h2 id="objetivo">Objetivo<a class="headerlink" href="#objetivo" title="Permanent link">&para;</a></h2>
-<p>Este laboratorio es bastante corto y representa los primeros <strong>25 puntos</strong> de su proyecto 2 (procesador de RISC-V en logisim). El motivo principal es que tengan más tiempo para invertir en otras partes del proyecto. Si logran sacar 100 en el laboratorio tendrán una de tres partes terminadas... éxitos.</p>
+<p>Este laboratorio es bastante corto y representa los primeros <strong>25 puntos</strong> de su proyecto 2 (procesador de RISC-V en Logisim). El motivo principal es que tengan más tiempo para invertir en otras partes del proyecto. Si logran sacar 100 en el laboratorio tendrán una de tres partes terminadas... éxitos.</p>
 <h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
 <p>Para este laboratorio, nuevamente, es necesario que tengan la aplicación de <a href="http://www.cburch.com/logisim/index.html">Logisim</a>. Adicionalmente pueden utilizar la <a href="http://www.cburch.com/logisim/docs.html">documentación</a> de Logisim para refrescar el conocimiento que adquirieron en los laboratorios anteriores.</p>
-<p>También tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/TShXsHsb">aquí</a>. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):</p>
+<p>También tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/DX-8g8bp">aquí</a>. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):</p>
 <div class="codehilite"><pre><span></span>git clone &lt;link del repositorio&gt;
 </pre></div>
 
@@ -850,32 +838,9 @@
 <p>Algunas cosas adicionales que tienen que tener en mente:</p>
 <p>La salidas <code>Equal</code>, <code>LT</code>, <code>LTU</code> siempre tienen que sacar el valor correcto de comparación sin importar el valor de <code>ALU Op</code>. Ustedes no pueden modificar (mover, reemplazar, cortar, pegar, eliminar, etc) los pines de entrada ni de salida que nosotros les damos de lo contrario el autograder no va a funcionar correctamente, tengan en cuenta esto para evitar problemas con el autograder a la hora de hacer submit.</p>
 <h2 id="calificacion">Calificación<a class="headerlink" href="#calificacion" title="Permanent link">&para;</a></h2>
-<p>Ustedes pueden verificar que su ALU funcione correctamente utilizando el autograder local corriendo el siguiente comando en la terminal:</p>
-<div class="codehilite"><pre><span></span>./check
-</pre></div>
-
-<p>Si todo esta correcto les saldrá algo como esto:</p>
-<div class="codehilite"><pre><span></span>   ___       __                        __       
-  / _ <span class="p">|</span>__ __/ /____  ___  _______ ____/ /__ ____
- / __ / // / __/ _ <span class="se">\/</span> _ <span class="se">\/</span> __/ _ <span class="se">\/</span> _  / -_<span class="o">)</span> __/
-/_/ <span class="p">|</span>_<span class="se">\_</span>,_/<span class="se">\_</span>_/<span class="se">\_</span>__/<span class="se">\_</span>, /_/  <span class="se">\_</span>,_/<span class="se">\_</span>,_/<span class="se">\_</span>_/_/
-                   /___/
-
-             Machine Structures
-     Great Ideas in Computer Architecture
-               Lab <span class="m">7</span>: PJ2 ALU
-
-
-Exercise      Grade  Message
-----------  -------  ---------
-<span class="m">1</span>. ALU          <span class="m">100</span>  <span class="nv">passed</span>
-
-<span class="o">=</span>&gt; Score: <span class="m">100</span>/100
-</pre></div>
-
-<p>Pueden subir su laboratorio para calificación utilizando:</p>
-<div class="codehilite"><pre><span></span>./submit &lt;TOKEN&gt;
-</pre></div>
+<p>Al finalizar su circuito puede usar <code>./check</code> para probarlo de forma local. Debido a lo importante que sera el ALU para su proyecto, este lab se calificara con 0 o 100 unicamente.</p>
+<p>Cuando haya superado el test local puede hacer <code>autograder --upload</code> para subir su laboratorio y luego <code>autograder --stats</code> para comprobar su 100 de nota.</p>
+<p>No olvide hacer add + commit + push a su repositorio y subir el link de este al GES.</p>
                 
                   
                 

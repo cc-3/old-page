@@ -721,18 +721,6 @@
   </li>
 
         
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../proj03/" title="3: Optimizaciones" class="md-nav__link">
-      3: Optimizaciones
-    </a>
-  </li>
-
-        
       </ul>
     </nav>
   </li>
@@ -1183,12 +1171,12 @@
 <img alt="KR" src="/img/KR.jpg" />
 <img alt="PH" src="/img/PH.jpg" /></p>
 <ul>
-<li>Guía Práctica de RISC-V: cap 2</li>
-<li>K&amp;R: cap 6</li>
-<li><a href="https://www.freecodecamp.org/news/what-is-endianness-big-endian-vs-little-endian/">Endianness</a></li>
+<li>Guía Práctica de RISC-V: 2</li>
+<li>K&amp;R: 6</li>
+<li>P&amp;H: B-43</li>
 </ul>
 <h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
-<p>En este proyecto ustedes deben de crear un emulador que pueda ejecutar un subconjunto de instrucciones de <strong>RISC-V</strong>. Ustedes se van a encargar de hacer un programa que decodifique y ejecute varias instrucciones de RISC-V. Considérenlo como una versión miniatura de Jupiter.</p>
+<p>En este proyecto ustedes deben de crear un emulador que pueda ejecutar un subconjunto de instrucciones de <strong>RISC-V</strong>. Ustedes se van a encargar de hacer un programa que decodifique y ejecute varias instrucciones de RISC-V. Considérenlo como una versión miniatura de <a href="https://www.riscvsim.com">V-Sim</a>.</p>
 <h2 id="risc-v-green-card">RISC-V Green Card<a class="headerlink" href="#risc-v-green-card" title="Permanent link">&para;</a></h2>
 <p>Aquí hay dos <strong>RISC-V Green Cards</strong> que pueden consultar y así tener más herramientras que les pueden ayudar a completar el proyecto. La primera tiene información acerca de los <em>opcodes</em> y otros campos de cada uno de los diferentes formatos de instrucción, por lo que esta sería su mejor opción.</p>
 <p align="center">
@@ -1198,7 +1186,7 @@
 
 <h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
 <p><strong>Antes de comenzar asegúrense de que hayan <span style="color: red">leído y comprendido</span> todas las instrucciones del proyecto de principio a fin</strong>. Si tienen alguna pregunta pueden consultar la sección de preguntas frecuentes para ver si ya ha sido resuelta, de lo contrario por favor diríjanse a <strong>Slack</strong> y pregunten en los canales correspondientes.</p>
-<p>Para comenzar con el proyecto, primero tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/g/3h_yZ2Ed">aquí</a>. Tienen permitido trabajar en parejas o de forma individual, por lo que al aceptar la asignación les preguntará si desean crear un grupo nuevo o unirse a uno ya existente. Si crean un grupo nuevo, ingresen un nombre que represente al grupo y que no esté ya en los grupos existentes.</p>
+<p>Para comenzar con el proyecto, primero tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/g/MYXRaevS">aquí</a>. Tienen permitido trabajar en parejas o de forma individual, por lo que al aceptar la asignación les preguntará si desean crear un grupo nuevo o unirse a uno ya existente. Si crean un grupo nuevo, ingresen un nombre que represente al grupo y que no esté ya en los grupos existentes.</p>
 <p><img alt="Create group" src="/img/projs/proj01/classroom1.png" /></p>
 <p>Si desean unirse a un grupo ya creado, tienen que buscar el nombre del grupo y pulsar el botón que dice <strong>join</strong></p>
 <p><img alt="Join group" src="/img/projs/proj01/classroom2.png" /></p>
@@ -1702,13 +1690,13 @@ utils.h
     <td>OPERACIÓN</td>
   </tr>
   <tr>
-    <td><font color="#ff0000">jal</font> <font color="#0000ff">rd</font>, <font color="#ff00ff">offset</font></td>
+    <td><font color="#ff0000">jal</font> <font color="#0000ff">rd</font>, <font color="#ff00ff">imm</font></td>
     <td></td>
     <td></td>
-    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]&lt;- <font color="#ff0000">PC</font> + <font color="#00ff00">4</font> <br><font color="#ff0000">PC</font>&lt;- <font color="#ff0000">PC</font> + {<font color="#ff00ff">offset</font>, 1b'0}</td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]&lt;- <font color="#ff0000">PC</font> + <font color="#00ff00">4</font> <br><font color="#ff0000">PC</font>&lt;- <font color="#ff0000">PC</font> + {<font color="#ff00ff">imm</font>, 1b'0}</td>
   </tr>
 </table></p>
-<p>Al igual que la arquitectura RISC-V normal, el sistema RISC-V que están implementando es little-endian. Esto significa que cuando se le da un valor compuesto de múltiples bytes, el byte menos significativo se almacena en la dirección más baja. Consulten <a href="https://www.freecodecamp.org/news/what-is-endianness-big-endian-vs-little-endian/">este artículo</a> para obtener información sobre endianness.</p>
+<p>Al igual que la arquitectura RISC-V normal, el sistema RISC-V que están implementando es little-endian. Esto significa que cuando se le da un valor compuesto de múltiples bytes, el byte menos significativo se almacena en la dirección más baja. Consulten la página <strong>B-43</strong> de <strong>P&amp;H</strong> (4ª edición) para obtener información sobre endianness.</p>
 <h3 id="estructura-del-codigo">Estructura del Código<a class="headerlink" href="#estructura-del-codigo" title="Permanent link">&para;</a></h3>
 <p>El código base que les fue proporcionado funciona de la siguiente manera:</p>
 <ol>
@@ -1777,11 +1765,10 @@ random_disasm TEST PASSED!
 <div class="codehilite"><pre><span></span>make [test_name]_disasm
 </pre></div>
 
-<p>Para crear sus propios archivos de prueba, primero necesitarán crear código de máquina. Para ello pueden ayudarse de Venus, Jupiter o hacerlo a mano. Si utilizan Jupiter tienen que crear un archivo <code>.s</code> y hacer un <code>dump</code> del código de máquina utilizando la bandera <code>--dump-code</code> en la terminal:</p>
-<div class="codehilite"><pre><span></span>jupiter &lt;archivo&gt;.s --dump-code &lt;test_name&gt;.input
+<p>Para crear sus propios archivos de prueba, primero necesitarán crear código de máquina. Para ello pueden ayudarse de V-Sim o hacerlo a mano. Si utilizan V-Sim tienen que crear un archivo <code>.s</code> y hacer un <code>dump</code> del código de máquina utilizando la bandera <code>-code</code> en la terminal:</p>
+<div class="codehilite"><pre><span></span>vsim &lt;archivo&gt;.s -code &lt;test_name&gt;.input
 </pre></div>
 
-<p>Recuerde que Jupiter requiere el <code>.global __start</code> y la etiqueta <code>__start:</code> para poder ensamblar. Luego que hizo el <code>--dump-code</code> entre al archivo generado y elimine las primeras dos líneas, estas corresponden al <code>__start</code> y su proyecto no necesita preocuparse de esto.</p>
 <p>Ustedes deben de poner las instrucciones en código de máquina en un archivo llamado <code>[test_name].input</code>
 y colocar el archivo dentro de la carpeta <code>riscvcode/code</code>. Después, deben crear el archivo <code>[test_name].solution</code> el cual contendrá las instrucciones que se espera obtener; y colocar el archivo en la carpeta <code>riscvcode/ref</code>. Vean las pruebas proporcionadas como ejemplos de este tipo de archivos. Para integrar sus pruebas en el comando <code>make</code>, ustedes deben de modificar el archivo <code>Makefile</code>. En la línea 4 del archivo <code>Makefile</code>, donde dice <code>ASM_TESTS</code>, agregar <code>[test_name]</code> a la lista con espacios entre cada nombre de archivo:</p>
 <div class="codehilite"><pre><span></span>SOURCES := utils.c part1.c part2.c riscv.c
@@ -1800,12 +1787,12 @@ ASM_TESTS := simple multiply random test_name
 
 <h3 id="calificacion-parte-1">Calificación Parte 1<a class="headerlink" href="#calificacion-parte-1" title="Permanent link">&para;</a></h3>
 <p><strong>Recuerden que para la primera parte, sólo deben modificar los archivos <em>part1.c</em> y <em>utils.c</em></strong>, esto representa el 50% de su nota así que pueden enviar sus archivos al autograder para verificar su nota de esta parte haciendo:</p>
-<div class="codehilite"><pre><span></span>autograder --upload
+<div class="codehilite"><pre><span></span>./submit &lt;TOKEN&gt;
 </pre></div>
 
-<p><strong>Si están trabajando en pareja, <span style="color: red">AMBOS</span> miembros del grupo tienen que hacer el upload</strong>.</p>
+<p><strong>Si están trabajando en pareja, <span style="color: red">AMBOS</span> miembros del grupo tienen que hacer el submit con su respectivo TOKEN</strong>.</p>
 <h2 id="parte-2">Parte 2<a class="headerlink" href="#parte-2" title="Permanent link">&para;</a></h2>
-<p>Su segunda tarea es completar el emulador implementando los métodos <strong><em>execute_instruction()</em></strong>. <strong><em>execute()</em></strong>s, <strong><em>store()</em></strong> y <strong><em>load()</em></strong> del archivo <strong><em>part2.c</em></strong>.</p>
+<p>Su segunda tarea es completar el emulador implementando los métodos <strong><em>execute_instruction()</em></strong>. <strong><em>execute()</em></strong>'s, <strong><em>store()</em></strong> y <strong><em>load()</em></strong> del archivo <strong><em>part2.c</em></strong>.</p>
 <h3 id="requisitos">Requisitos<a class="headerlink" href="#requisitos" title="Permanent link">&para;</a></h3>
 <p>Esta parte consistirá en implementar la funcionalidad de cada instrucción. Por favor implementen las funciones descritas a continuación (todas en <strong><em>part2.c</em></strong>):</p>
 <ul>
@@ -1813,7 +1800,7 @@ ASM_TESTS := simple multiply random test_name
 <p><strong><em>execute_instruction()</em></strong>: Ejecuta la instrucción proporcionada como parámetro. Esta debería modificar los registros apropiados, realizar las llamadas a memoria necesarias y actualizar el program counter para apuntar a la siguiente instrucción a ejecutar.</p>
 </li>
 <li>
-<p><strong><em>execute()</em></strong>s: Varias funciones de ayuda para ser llamadas en ciertas condiciones para ciertas instrucciones. Es su decisión usar estas funciones, pero estas les ayudarán de gran manera a organizar el código.</p>
+<p><strong><em>execute()</em></strong>'s: Varias funciones de ayuda para ser llamadas en ciertas condiciones para ciertas instrucciones. Es su decisión usar estas funciones, pero estas les ayudarán de gran manera a organizar el código.</p>
 </li>
 <li>
 <p><strong><em>store()</em></strong>: Toma una dirección, un tamaño, un valor y almacena los primeros (tamaño) bytes del valor dado en la dirección dada. Cuando el parámetro <code>check_align</code> sea <code>1</code> se validarán las restricciones de alineación. Se incluyó este parámetro para obligar a las instrucciones a estar alineadas por palabras de memoria (word-aligned). Cuando implementen el <code>store</code> y <code>load</code>, este parámetro debe ser <code>0</code> dado que RISC-V no hace cumplir las restricciones de alineación.</p>
@@ -1842,10 +1829,10 @@ Ahora compilen su test de ensamblador y ejecútenlo escribiendo el siguiente com
 <p>Ustedes pueden, y en efecto deben, escribir sus propios test para probar instrucciones específicas y todos los posibles casos. Además, ustedes deben compilar y probar su código después de cada grupo de instrucciones implementadas. De lo contrario será muy difícil probar su proyecto si esperan hasta el final.</p>
 <h3 id="calificacion-parte-2">Calificación Parte 2<a class="headerlink" href="#calificacion-parte-2" title="Permanent link">&para;</a></h3>
 <p>Al completar esta parte ustedes sólo deberían haber modificado los archivos <code>part1.c</code>, <code>part2.c</code> y <code>utils.c</code>, deben realizar commit de todos los cambios realizados y enviar el link de su repositorio por medio del GES. Para obtener su nota completa tienen que hacer:</p>
-<div class="codehilite"><pre><span></span>autograder --upload
+<div class="codehilite"><pre><span></span>./submit &lt;TOKEN&gt;
 </pre></div>
 
-<p><strong>Si están trabajando en pareja, <span style="color: red">AMBOS</span> miembros del grupo tienen que hacer el upload</strong>.</p>
+<p><strong>Si están trabajando en pareja, <span style="color: red">AMBOS</span> miembros del grupo tienen que hacer el submit con su respectivo TOKEN</strong>.</p>
 <h2 id="preguntas-frecuentes">Preguntas Frecuentes<a class="headerlink" href="#preguntas-frecuentes" title="Permanent link">&para;</a></h2>
 <h3 id="1-como-puedo-empezar">1. ¿Cómo puedo empezar?<a class="headerlink" href="#1-como-puedo-empezar" title="Permanent link">&para;</a></h3>
 <p>Lo mejor es revisar <code>types.h</code> y analizar la estructura <code>Instruction</code> para empezar a trabajar en la <code>parte1.c</code>, por ejemplo como acceder a cada campo de cada diferente tipo de instrucción y al opcode también. Por ejemplo, para acceder al <code>opcode</code> pueden utilizar:</p>
@@ -1871,13 +1858,33 @@ Ahora compilen su test de ensamblador y ejecútenlo escribiendo el siguiente com
 <span class="kt">int32_t</span> <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="p">;</span>
 </pre></div></div>
 </div>
-<p>La solución para la división por <code>0</code> es simplemente tienen que devolver <code>-1</code> como dice la especificación de RISC-V  y para el residuo devolver el primer argumento de la operación, en el caso de <code>overflow</code> la solución es castear las variables a un tipo con más bytes:</p>
-<div class="codehilite"><pre><span></span><span class="kt">int32_t</span> <span class="n">z</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int32_t</span><span class="p">)((</span><span class="kt">int64_t</span><span class="p">)</span><span class="n">x</span> <span class="o">/</span> <span class="p">(</span><span class="kt">int64_t</span><span class="p">)</span><span class="n">y</span><span class="p">);</span>
-</pre></div>
-
+<p>La solución para la división por <code>0</code> es simplemente tienen que devolver <code>-1</code> como dice la especificación de RISC-V  y para el residuo devolver el primer argumento de la operación. En el caso de <code>overflow</code> devolvemos <code>rs1</code> para la division y <code>0</code> para el residuo.</p>
+<div class="superfences-tabs">
+<input name="__tabs_2" type="radio" id="__tab_2_0" checked="checked" />
+<label for="__tab_2_0">Division</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="c1">// division</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">rs2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">rd</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>                <span class="c1">// division entre cero</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">rs1</span> <span class="o">==</span> <span class="mh">0x80000000</span> <span class="o">&amp;&amp;</span> <span class="n">rs2</span> <span class="o">==</span> <span class="mh">0xffffffff</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">rd</span> <span class="o">=</span> <span class="n">rs1</span><span class="p">;</span>               <span class="c1">// overflow</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">rd</span> <span class="o">=</span> <span class="n">rs1</span> <span class="o">/</span> <span class="n">rs2</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div></div>
+<input name="__tabs_2" type="radio" id="__tab_2_1" />
+<label for="__tab_2_1">Residuo</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="c1">// residuo</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">rs2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">rd</span> <span class="o">=</span> <span class="n">rs1</span><span class="p">;</span>               <span class="c1">// residuo entre cero</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">rs1</span> <span class="o">==</span> <span class="mh">0x80000000</span> <span class="o">&amp;&amp;</span> <span class="n">rs2</span> <span class="o">==</span> <span class="mh">0xffffffff</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">rd</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>                 <span class="c1">// overflow</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">rd</span> <span class="o">=</span> <span class="n">rs1</span> <span class="o">%</span> <span class="n">rs2</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div></div>
+</div>
 <h3 id="4-en-la-parte-1-el-formato-nunca-es-el-esperado-por-las-pruebas-por-que">4. En la parte 1 el formato nunca es el esperado por las pruebas, ¿por qué?<a class="headerlink" href="#4-en-la-parte-1-el-formato-nunca-es-el-esperado-por-las-pruebas-por-que" title="Permanent link">&para;</a></h3>
-<p>Seguramente no están utilizando el formato correcto, les recomendamos que utilicen las siguientes <code>macros</code> para imprimir las instrucciones que se encuentran en el archivo <code>utils.h</code>:
-s
+<p>Seguramente no están utilizando el formato correcto, les recomendamos que utilicen las siguientes <code>macros</code> para imprimir las instrucciones que se encuentran en el archivo <code>utils.h</code>:</p>
 <div class="codehilite"><pre><span></span><span class="cp">#define RTYPE_FORMAT &quot;%s\tx%d, x%d, x%d\n&quot;</span>
 <span class="cp">#define ITYPE_FORMAT &quot;%s\tx%d, x%d, %d\n&quot;</span>
 <span class="cp">#define JALR_FORMAT &quot;jalr\tx%d, x%d, %d\n&quot;</span>
@@ -1887,7 +1894,8 @@ s
 <span class="cp">#define JAL_FORMAT &quot;jal\tx%d, %d\n&quot;</span>
 <span class="cp">#define BRANCH_FORMAT &quot;%s\tx%d, x%d, %d\n&quot;</span>
 <span class="cp">#define ECALL_FORMAT &quot;ecall\n&quot;</span>
-</pre></div></p>
+</pre></div>
+
 <h3 id="5-puedo-crear-mis-propias-funciones">5. ¿Puedo crear mis propias funciones?<a class="headerlink" href="#5-puedo-crear-mis-propias-funciones" title="Permanent link">&para;</a></h3>
 <p>Sí, siempre y cuando estas estén declaradas, ya sea en <code>part1.c</code>, <code>part2.c</code> o <code>utils.c</code>, ya que son los únicos archivos que se envían al autograder. Sin embargo, <strong><span style="color: red">NO</span> está permitido renombrar o eliminar las siguientes funciones</strong>:</p>
 <div class="codehilite"><pre><span></span><span class="cm">/* archivo part1.c */</span>
