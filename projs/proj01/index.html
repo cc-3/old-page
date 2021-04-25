@@ -1786,11 +1786,11 @@ ASM_TESTS := simple multiply random test_name
 </pre></div>
 
 <h3 id="calificacion-parte-1">Calificación Parte 1<a class="headerlink" href="#calificacion-parte-1" title="Permanent link">&para;</a></h3>
-<p><strong>Recuerden que para la primera parte, sólo deben modificar los archivos <em>part1.c</em> y <em>utils.c</em></strong>, esto representa el 50% de su nota así que pueden enviar sus archivos al autograder para verificar su nota de esta parte haciendo:</p>
-<div class="codehilite"><pre><span></span>./submit &lt;TOKEN&gt;
+<p><strong>Recuerden que para la primera parte, sólo deben modificar los archivos <em>part1.c</em> y <em>utils.c</em></strong>, esto representa el 50% de su nota. Entregan haciendo un upload como es acostumbrado.</p>
+<div class="codehilite"><pre><span></span>autograder --upload
 </pre></div>
 
-<p><strong>Si están trabajando en pareja, <span style="color: red">AMBOS</span> miembros del grupo tienen que hacer el submit con su respectivo TOKEN</strong>.</p>
+<p><strong>Si están trabajando en pareja, <span style="color: red">AMBOS</span> miembros del grupo tienen que hacer el upload</strong>.</p>
 <h2 id="parte-2">Parte 2<a class="headerlink" href="#parte-2" title="Permanent link">&para;</a></h2>
 <p>Su segunda tarea es completar el emulador implementando los métodos <strong><em>execute_instruction()</em></strong>. <strong><em>execute()</em></strong>'s, <strong><em>store()</em></strong> y <strong><em>load()</em></strong> del archivo <strong><em>part2.c</em></strong>.</p>
 <h3 id="requisitos">Requisitos<a class="headerlink" href="#requisitos" title="Permanent link">&para;</a></h3>
@@ -1828,11 +1828,11 @@ Ahora compilen su test de ensamblador y ejecútenlo escribiendo el siguiente com
 
 <p>Ustedes pueden, y en efecto deben, escribir sus propios test para probar instrucciones específicas y todos los posibles casos. Además, ustedes deben compilar y probar su código después de cada grupo de instrucciones implementadas. De lo contrario será muy difícil probar su proyecto si esperan hasta el final.</p>
 <h3 id="calificacion-parte-2">Calificación Parte 2<a class="headerlink" href="#calificacion-parte-2" title="Permanent link">&para;</a></h3>
-<p>Al completar esta parte ustedes sólo deberían haber modificado los archivos <code>part1.c</code>, <code>part2.c</code> y <code>utils.c</code>, deben realizar commit de todos los cambios realizados y enviar el link de su repositorio por medio del GES. Para obtener su nota completa tienen que hacer:</p>
-<div class="codehilite"><pre><span></span>./submit &lt;TOKEN&gt;
+<p>Al completar esta parte ustedes sólo deberían haber modificado los archivos <code>part1.c</code>, <code>part2.c</code> y <code>utils.c</code>, deben realizar commit de todos los cambios realizados y enviar el link de su repositorio por medio del GES. Antes de hacer el upload asegurese de probar su proyecto, revise que no tenga errores de compilacion ni ciclos infinitos. Luego puede hacer su upload.</p>
+<div class="codehilite"><pre><span></span>autograder --upload
 </pre></div>
 
-<p><strong>Si están trabajando en pareja, <span style="color: red">AMBOS</span> miembros del grupo tienen que hacer el submit con su respectivo TOKEN</strong>.</p>
+<p><strong>Si están trabajando en pareja, <span style="color: red">AMBOS</span> miembros del grupo tienen que hacer el upload</strong>.</p>
 <h2 id="preguntas-frecuentes">Preguntas Frecuentes<a class="headerlink" href="#preguntas-frecuentes" title="Permanent link">&para;</a></h2>
 <h3 id="1-como-puedo-empezar">1. ¿Cómo puedo empezar?<a class="headerlink" href="#1-como-puedo-empezar" title="Permanent link">&para;</a></h3>
 <p>Lo mejor es revisar <code>types.h</code> y analizar la estructura <code>Instruction</code> para empezar a trabajar en la <code>parte1.c</code>, por ejemplo como acceder a cada campo de cada diferente tipo de instrucción y al opcode también. Por ejemplo, para acceder al <code>opcode</code> pueden utilizar:</p>
