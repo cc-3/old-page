@@ -529,8 +529,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../projs/proj03/" title="3: Optimizaciones" class="md-nav__link">
-      3: Optimizaciones
+    <a href="../../projs/projextra/" title="Extra" class="md-nav__link">
+      Extra
     </a>
   </li>
 
@@ -767,9 +767,8 @@
 <li>Aprender las herramientas básicas y el funcionamiento de Logisim.</li>
 </ul>
 <h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
-<p>Para este laboratorio, es necesaria la aplicación Logisim, la cual se puede descargar en este <a href="http://www.cburch.com/logisim/index.html">link</a>. Después de descargar el jar, debe darle permiso de ejecución con </p>
-<p><code>chmod u+x nombreDelArchivoDescargado</code></p>
-<p>También tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/4hsERGkA">aquí</a>. Recuerden que deben aceptar la asignación de <strong>GitHub Classroom</strong> y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):</p>
+<p>Para este laboratorio, es necesaria la aplicación Logisim. La cual se puede descargar en este <a href="http://www.cburch.com/logisim/index.html">link</a>.</p>
+<p>También tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/Hq6PqUPO">aquí</a>. Recuerden que deben aceptar la asignación de <strong>GitHub Classroom</strong> y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):</p>
 <div class="codehilite"><pre><span></span>git clone &lt;link del repositorio&gt;
 </pre></div>
 
@@ -891,16 +890,11 @@ Para regresar al circuito principal, hay que hacer click en el módulo del circu
 <p>¿Cómo se lee?
 La primera fila de la tabla se entiende de esta manera: “Dado el estado 00, si el input es 0, entonces se hace una transición al estado 01 y devuelve un output de 1”.</p>
 <p>Para este ejercicio se les provee el circuito <strong>ex3.circ</strong>. El trabajo a realizar es completar el circuito y lograr que se comporte como el AFD mostrado anteriormente. Para esto ustedes solo van a modificar 2 subcircuitos: <strong>StateBitOne</strong> y <strong>StateBitZero</strong>.</p>
-<p>Se tienen dos opciones para completar el circuito: 1) suma de productos (es decir por fuerza bruta) 2) mapas de Karnaugh.</p>
-<p>Con fuerza bruta tendrá que usar bastantes compuertas. Con mapas de Karnaugh tendrá que usar solo 3 compuertas. ¡Éxitos! :D</p>
+<p>Se tienen dos opciones para completar el circuito: 1) fuerza bruta o 2) imaginación.
+Con la imaginación es posible completar el circuito utilizando un total de 3 componentes, pero, si se resuelve con la fuerza bruta, el número será mucho mayor. Se tiene todas las herramientas y las pistas necesarias para terminar el ejercicio con 3 componentes.
+¡Éxitos! :D</p>
 <h1 id="calificacion">Calificación<a class="headerlink" href="#calificacion" title="Permanent link">&para;</a></h1>
-<p>Al terminar los ejercicios agreguelos a su repositorio.</p>
-<div class="codehilite"><pre><span></span>git add *
-git commit -m &quot;Mensaje descriptivo de lo que acaba de terminar&quot;
-git push origin main
-</pre></div>
-
-<p>Cuando crea que tiene ejercicios completos puede probar localmente escribiendo en la terminal:</p>
+<p>Cuando crean que tiene ejercicios completos pueden hacer la prueba localmente escribiendo en la terminal:</p>
 <div class="codehilite"><pre><span></span>./check
 </pre></div>
 
@@ -926,12 +920,14 @@ Exercise                    Grade  Message
 <span class="o">=</span>&gt; Score: <span class="m">100</span>/100
 </pre></div>
 
-<p>Cuando logre un avance en sus pruebas locales, recuerde hacer <code>--upload</code> al autograder.
-<div class="codehilite"><pre><span></span>autograder --upload
-</pre></div></p>
-<p>Revise su nota con <code>--stats</code>.
-<div class="codehilite"><pre><span></span>autograder --stats
-</pre></div></p>
+<p>Cuando hayan terminado su laboratorio, o crean que están listos para obtener su nota, pueden subir su laboratorio al autograder utilizando:</p>
+<div class="codehilite"><pre><span></span>./submit &lt;TOKEN&gt;
+</pre></div>
+
+<blockquote>
+<p><strong>NOTA</strong>: Tienen que reemplazar &lt;TOKEN> por el  token que les da la siguiente <a href="https://dashboard.cc-3.site">página</a></p>
+</blockquote>
+<p>Luego, cuando haya sido calificado, pueden ver su resultado en <a href="https://dashboard.cc3.site/">https://dashboard.cc-3.site/</a>.</p>
                 
                   
                 

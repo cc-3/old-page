@@ -556,8 +556,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../projs/proj03/" title="3: Optimizaciones" class="md-nav__link">
-      3: Optimizaciones
+    <a href="../../projs/projextra/" title="Extra" class="md-nav__link">
+      Extra
     </a>
   </li>
 
@@ -826,7 +826,7 @@
 <h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
 <p>Visiten este <a href="https://classroom.github.com/a/Tk-1TrzP">link</a>. Aquí encontrarán todos los archivos necesarios para completar este lab. En esta página, encontrarán un botón que dice "Accept assignment". Al presionar este botón, se creará automáticamente un repositorio en Github llamado <code>www.github.com/cc-3/lab01-2021-USUARIO</code>. Noten que el "dueño" de este repositorio es un usuario llamado <code>cc-3</code>, y el usuario de ustedes es únicamente el sufijo del nombre del repo. De esta forma, nos encargamos de tener acceso siempre a su código, en caso existan copias o cualquier otro tipo de trampa. Sepan de una vez que, si encontramos plagio o cualquier otro tipo de trampa en sus laboratorios, su nota será AUTOMÁTICAMENTE 0,  sin posibilidad de cambiarla. De repetirse nuevamente este acontecimiento, el staff del curso organizará una reunión con ustedes y sus directores de carrera para contarles lo ocurrido y sancionarlos conforme al reglamento de la universidad.</p>
 <p>Después de realizar esto, en la máquina virtual (o sus propias computadoras) abran una terminal en el directorio que prefieran, y ejecuten el siguiente comando:
-<div class="codehilite"><pre><span></span>git clone https://github.com/cc-3/lab01-2021-&lt;SU USUARIO DE GITHUB&gt;
+<div class="codehilite"><pre><span></span>git clone https://github.com/cc-3/lab1-2021-&lt;SU USUARIO DE GITHUB&gt;
 </pre></div>
 esto descargará en el directorio que escogieron todos los archivos base para este laboratorio.</p>
 <p>Para futuro, un <code>clone</code> solo lo hacemos la primera vez que vamos a bajar el codigo de un repositorio a nuestra maquina. Nunca bajen el zip que Github les ofrece, por favor, eso solo nos va a causar problemas.</p>
@@ -864,7 +864,7 @@ Go BEARS!
 <p>Cuando ya hayan logrado esto, pueden actualizar el archivo en su repositorio en Github, de esta manera:
 <div class="codehilite"><pre><span></span>$ git add eccentric.c
 $ git commit -m <span class="s2">&quot;Ejercicio 1 terminado&quot;</span>
-$ git push -u origin main
+$ git push -u origin master
 </pre></div></p>
 <h2 id="ejercicio-2-debugger-depurador">Ejercicio 2: <em>Debugger</em> (depurador)<a class="headerlink" href="#ejercicio-2-debugger-depurador" title="Permanent link">&para;</a></h2>
 <h3 id="que-es-un-debugger">¿Qué es un <em>debugger</em>?<a class="headerlink" href="#que-es-un-debugger" title="Permanent link">&para;</a></h3>
@@ -960,7 +960,7 @@ Aquí tendrán que responder las siguientes preguntas de opción múltiple (no t
 <p>Después de responder estas preguntas, no olviden hacer el commit y push de este archivo hacia Github:
 <div class="codehilite"><pre><span></span>$ git add ex2.txt
 $ git commit -m <span class="s2">&quot;Ejercicio 2 terminado&quot;</span>
-$ git push -u origin main
+$ git push -u origin master
 </pre></div></p>
 <h2 id="ejercicio-3-depurando-un-problema-con-fallas-usando-gdb">Ejercicio 3: Depurando un problema con fallas usando GDB<a class="headerlink" href="#ejercicio-3-depurando-un-problema-con-fallas-usando-gdb" title="Permanent link">&para;</a></h2>
 <p>Ahora, usarán su nuevo conocimiento para depurar un pequeño programa. Vean el programa <code>ll_equal.c</code>. Compilen y ejecuten el programa, y analicen un poco lo que hace. Así como está, producirá un resultado como el siguiente:
@@ -976,8 +976,8 @@ Segmentation fault
 <p>Después de corregir el problema, compilen nuevamente y ejecuten el código. ¿Notan la diferencia?</p>
 <p>Al finalizar, no olviden subir el archivo modificado a su repositorio remoto:</p>
 <div class="codehilite"><pre><span></span>$ git add ll_equal.c
-$ git commit -m <span class="s2">&quot;Ejercicio 3 terminado&quot;</span>
-$ git push -u origin main
+$ git commit -m <span class="s2">&quot;Ejercicio 2 terminado&quot;</span>
+$ git push -u origin master
 </pre></div>
 
 <h2 id="ejercicio-4-debuggeando-un-programa-en-c-que-requiere-interaccion-del-usuario">Ejercicio 4: "Debuggeando" un programa en C que requiere interacción del usuario<a class="headerlink" href="#ejercicio-4-debuggeando-un-programa-en-c-que-requiere-interaccion-del-usuario" title="Permanent link">&para;</a></h2>
@@ -1019,69 +1019,12 @@ Checking length-zero list <span class="k">for</span> cycles. There should be non
 Si su código presenta errores, entonces ya son capaces de utilizar CGDB para poder encontrarlos y corregirlos. Finalmente, pueden subir el archivo a github:</p>
 <div class="codehilite"><pre><span></span>$ git add ll_cycle.c
 $ git commit -m <span class="s2">&quot;LAB01 terminado&quot;</span>
-$ git push -u origin main
+$ git push -u origin master
 </pre></div>
 
 <p>Para finalizar, la fábula de <a href="http://read.gov/aesop/025.html">la tortuga y la liebre</a> es relevante siempre, especialmente en este curso. Escribir sus programas en C a paso lento pero seguro (ayudándose de programas como CGDB) es lo que les hará ganar la carrera.</p>
 <h2 id="entrega-de-laboratorio">Entrega de laboratorio<a class="headerlink" href="#entrega-de-laboratorio" title="Permanent link">&para;</a></h2>
-<p>A partir de este laboratorio contaremos con autograders, por lo que podra conocer su nota de inmediato.</p>
-<p>Para poder utilizarlo debemos realizar una pequena instalacion (todos, incluyendo a quienes bajaron nuestra maquina virtual, los autograders estan recien salidos del horno).</p>
-<p>Para instalar necesitamos tener Python 3.6 o superior, nuestra maquina virtual ya lo cumple. Comenzamos con...</p>
-<div class="codehilite"><pre><span></span>pip3 install autograders-cli
-</pre></div>
-
-
-<p>Esto instala el modulo a traves del cual entregara su asignacion. Luego tenemos que registrarnos. Por favor sea MUY CUIDADOSO al ingresar sus datos. Como es usual en Linux no se vera su contrasena mientras la escribe, de momento NO EXISTE RECUPERACION DE CONTRASENA por si se equivoca o se le olvida. SEA MUY CUIDADOSO.</p>
-<div class="codehilite"><pre><span></span>autograder --register
-</pre></div>
-
-
-<p>Tras llenar su nombre completo, correo y crear su contrasena se le enviara un correo. Haga click en el link que va en el correo (es posible que al hacer click se quede "trabado" en redirecting/redirigiendo, esto es normal, no se preocupe).</p>
-<p>Luego de hacer click en ese link, esta listo para entregar.</p>
-<p>Navegue hacia la carpeta donde tiene sus archivos, haga un <code>ls</code> y asegurese que le aparece el archivo <code>autograders.json</code>; si aparecio, esta en el lugar correcto. Ahora puede entregar su laboratorio con...</p>
-<div class="codehilite"><pre><span></span>autograder --upload
-</pre></div>
-
-
-<p>Espera un minuto aprox. y luego puede ver sus resultados con...</p>
-<div class="codehilite"><pre><span></span>autograder --stats
-</pre></div>
-
-
-<p>Vera desplegado sus resultados de esta manera (excepto que usted tendra 100 en lugar de 0 :P). Si dice <code>Queued: True</code> significa que el autograder esta un poquito ocupado y no le ha calificado, revise de nuevo en unos cinco minutos.</p>
-<div class="codehilite"><pre><span></span>   ___       __                        __
-  / _ |__ __/ /____  ___ ________ ____/ /__ _______
- / __ / // / __/ _ \/ _ `/ __/ _ `/ _  / -_) __(_-
-/_/ |_\_,_/\__/\___/\_, /_/  \_,_/\_,_/\__/_/ /___/
-               /___/
-
-        Command Line Interface
-           Autograders.org
-
-Get Task Stats
-
- - Queued: False
- - Grade: 0.00/100
- - Created At: 2021-01-29T12:57:05.454Z
- - Updated At: 2021-01-29T12:57:12.131Z
-
-Details:
-
-╒══════════════╤═════════╤════════════════════════════════════════╕
-│ Name         │   Grade │ Message                                │
-╞══════════════╪═════════╪════════════════════════════════════════╡
-│ 1. Eccentric │       0 │ incomplete: some answers are wrong...  │
-├──────────────┼─────────┼────────────────────────────────────────┤
-│ 2. CGDB      │       0 │ incomplete: q1,q2,q3,q4,q5,q6,q7,q8,q9 │
-├──────────────┼─────────┼────────────────────────────────────────┤
-│ 3. ll_equal  │       0 │ failed: runtime error                  │
-├──────────────┼─────────┼────────────────────────────────────────┤
-│ 4. ll_cycle  │       0 │ failed: Failed some tests...           │
-╘══════════════╧═════════╧════════════════════════════════════════╛
-</pre></div>
-
-
-<p>Felicidades! Termino su lab 1. Envie el link de su repo en el GES (el GES le permite enviar links, no pegue su link en un TXT u otro documento, es incomodo).</p>
+<p>Mas tarde se actualizara esta pagina y se pondran las instrucciones de entrega, por favor regrese pronto.</p>
                 
                   
                 
