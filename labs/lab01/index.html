@@ -980,15 +980,19 @@ Ahora, traten de depurarlo paso a paso en CGDB
 <div class="codehilite"><pre><span></span>cgdb int_hello
 </pre></div>
 ¿Qué pasa cuando intentar ejecutar el programa hasta el final? ¿Logró terminar o se quedó trabado?</p>
-<p>Vamos a aprender un poco acerca de las redirecciones. Para comenzar, puede ir a leer un poco en los siguientes links:
-- <a href="http://linuxcommand.org/lc3_lts0070.php">Standard Input</a>
-- <a href="https://stackoverflow.com/questions/19467865/how-to-use-redirection-in-c-for-file-input">Discusion en Stack Overflow</a></p>
+<p>Vamos a aprender un poco acerca de las redirecciones. Para comenzar, puede ir a leer un poco en los siguientes links:</p>
+<ul>
+<li><a href="http://linuxcommand.org/lc3_lts0070.php">Standard Input</a></li>
+<li><a href="https://stackoverflow.com/questions/19467865/how-to-use-redirection-in-c-for-file-input">Discusion en Stack Overflow</a></li>
+</ul>
 <p>Ahora uniremos algunas piezas de conocimiento... ¿Qué se le ocurre hacer con el <code>run</code> que vió en el ejercicio 2 y el <code>&lt;</code> que acaba de conocer? (Hint: Si está pensando en crear un archivo de texto, va en buen camino)</p>
-<p>¿Ya lo pensó un poco por su cuenta? Muy bien, hora de ver la solución sobre cómo enviar datos que nuestro programa de C espera leer.
-- Cree un archivo <code>nombre.txt</code> y escriba adentro su nombre, en una sola línea. Guarde el archivo en la carpeta de su lab.
-- Compile su programa con banderas de debugging <code>gcc -g -o int_hello interactive_hello.c</code>
-- Inicie el debugger <code>cgdb int_hello</code>
-- En lugar de solo hacer <code>run</code> como antes, haga <code>run &lt; nombre.txt</code></p>
+<p>¿Ya lo pensó un poco por su cuenta? Muy bien, hora de ver la solución sobre cómo enviar datos que nuestro programa de C espera leer.</p>
+<ul>
+<li>Cree un archivo <code>nombre.txt</code> y escriba adentro su nombre, en una sola línea. Guarde el archivo en la carpeta de su lab.</li>
+<li>Compile su programa con banderas de debugging <code>gcc -g -o int_hello interactive_hello.c</code></li>
+<li>Inicie el debugger <code>cgdb int_hello</code></li>
+<li>En lugar de solo hacer <code>run</code> como antes, haga <code>run &lt; nombre.txt</code></li>
+</ul>
 <p>¿Apareció su nombre automágicamente allí escrito? Ese es el poder de las redirecciones, el <code>&lt;</code> nos permite enviar el contenido del archivo de texto, hacia el programa que se está debuggeando.</p>
 <p>El debugger no es una herramienta muy atractiva visualmente, pero es increiblemente poderosa al momento de buscar errores. Úsela siempre que tenga problemas, aunque las instrucciones no se lo indiquen.</p>
 <h2 id="ejercicio-4-punteros-y-estructuras-en-c">Ejercicio 4: Punteros y estructuras en C<a class="headerlink" href="#ejercicio-4-punteros-y-estructuras-en-c" title="Permanent link">&para;</a></h2>
