@@ -407,29 +407,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#calificacion" title="Calificación" class="md-nav__link">
-    Calificación
+  <a href="#entrega-de-laboratorio" title="Entrega de laboratorio" class="md-nav__link">
+    Entrega de laboratorio
   </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#submit" title="Submit" class="md-nav__link">
-    Submit
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#server-status" title="Server Status" class="md-nav__link">
-    Server Status
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -572,18 +552,6 @@
   <li class="md-nav__item">
     <a href="../../projs/proj02/" title="2: Procesador" class="md-nav__link">
       2: Procesador
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../projs/projextra/" title="Extra" class="md-nav__link">
-      Extra
     </a>
   </li>
 
@@ -821,29 +789,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#calificacion" title="Calificación" class="md-nav__link">
-    Calificación
+  <a href="#entrega-de-laboratorio" title="Entrega de laboratorio" class="md-nav__link">
+    Entrega de laboratorio
   </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#submit" title="Submit" class="md-nav__link">
-    Submit
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#server-status" title="Server Status" class="md-nav__link">
-    Server Status
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -883,21 +831,21 @@
 </li>
 </ul>
 <h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
-<p>De primero, deben de descargar todos los archivos que necesitarán para completar este laboratorio, estos se encuentran <a href="https://classroom.github.com/a/buYf8gbm">aquí</a>. Recuerden que deben aceptar la asignación y se les creará automáticamente un repositorio con una extensión que termina con su usuario.
+<p>De primero, deben de descargar todos los archivos que necesitarán para completar este laboratorio, estos se encuentran <a href="https://classroom.github.com/a/PZdKDEHm">aquí</a>. Recuerden que deben aceptar la asignación y se les creará automáticamente un repositorio con una extensión que termina con su usuario.
 Recuerden que este será revisado en búsqueda de copia o plagio, así que no lo hagan. De lo contrario, será sancionado acorde al reglamento de la universidad.</p>
 <p>Ahora, ya pueden ejecutar en la terminal el comando que les descargará los archivos base en el directorio a su elección:
-<div class="codehilite"><pre><span></span>git clone link_al_lab
+<div class="codehilite"><pre><span></span>git clone https://github.com/cc-3/lab02-2022-SU-USUARIO-DE-GITHUB
 </pre></div></p>
 <h2 id="ejercicio-1-operando-bits">Ejercicio 1: Operando Bits<a class="headerlink" href="#ejercicio-1-operando-bits" title="Permanent link">&para;</a></h2>
-<p>Para este inciso, su trabajo es completar los archivos <strong>ex1/get_bit.c</strong>, <strong>ex1/set_bit.c</strong> y <strong>ex1/flip_bit.c</strong> de manera que las funciones cumplan con su tarea (así como el nombre de las funciones sugiere). Para ello deberán utilizar las operaciones de bits básicas: and (&amp;), or (|), xor (^), not (~) y los corrimientos a la derecha (>>) y a la izquierda (&lt;&lt;). Deben evitar el uso de ciclos o condicionales.</p>
-<p>¡¡¡¡No usen ciclos ni condicionales!!!! Eso significa que mientras realicen el ejercicio no pueden y no deben de <strong>escribir</strong> las palabras: if, else, do, while, for, switch o algo de índole similar. Por favor no traten de engañarnos, todo el personal involucrado (esperamos) sabe cómo se miran todas estas palabras, entonces si encontramos una de ellas...</p>
+<p>Para este inciso, su trabajo es completar los archivos <strong>ex1/get_bit.c</strong>, <strong>ex1/set_bit.c</strong> y <strong>ex1/flip_bit.c</strong> de manera que las funciones cumplan con la tarea que su nombre indica. Para ello deberán utilizar las operaciones de bits básicas: and (&amp;), or (|), xor (^), not (~) y los corrimientos a la derecha (>>) y a la izquierda (&lt;&lt;). </p>
+<p>Para este ejercicio <strong>no pueden utilizar condicionales ni ciclos</strong>. Es decir, no escriba ningún if, else, do, while, for, switch o case. No intente engañarnos, revisaremos que no los use.</p>
 <p align="center">
   <img src="/img/labs/lab02/YouShallNotPassGIF.gif" alt="YOU SHALL NOT PASS" />
   <br/>
   <small>El autograder analiza su código de todas formas... ¯\_(ツ)_/¯ sorry not sorry</small>
 </p>
 
-<p><strong>NOTA IMPORTANTE:</strong> Considerar que <em>n</em> es un valor que inicia en la posición cero, contando desde la derecha, por lo que el bit que se encuentra hasta la derecha es el bit cero.</p>
+<p><strong>NOTA IMPORTANTE:</strong> Considerar que <em>n</em> es un valor que inicia en la posición cero. Su bit menos significativo (es decir hasta la derecha) es el bit 0, y su bit más significativo (es decir hasta la izquierda) sería su bit 31.</p>
 <p><div class="codehilite"><pre><span></span><span class="c1">// Return the nth bit of x.</span>
 <span class="c1">// Assume 0 &lt;= n &lt;= 31</span>
 <span class="kt">unsigned</span> <span class="nf">get_bit</span><span class="p">(</span><span class="kt">unsigned</span> <span class="n">x</span><span class="p">,</span>
@@ -914,16 +862,26 @@ Recuerden que este será revisado en búsqueda de copia o plagio, así que no lo
 <span class="kt">void</span> <span class="nf">flip_bit</span><span class="p">(</span><span class="kt">unsigned</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span>
               <span class="kt">unsigned</span> <span class="n">n</span><span class="p">);</span>
 </pre></div>
-<strong>Ayuda</strong> para <em>set_bit</em>: La parte complicada es no saber el valor del bit antes de cambiarlo. Pero, sabemos que <em>0 | x = x</em>, pero ¿podemos aprovecharnos de esto? ¿Es posible volverlo cero?</p>
+<strong>Idea para set_bit():</strong>  La parte complicada es no que no sabemos el valor del bit antes de cambiarlo. Recuerde las propiedades que vió en Info 1:</p>
+<div class="codehilite"><pre><span></span>x &amp; 0 = 0
+x &amp; 1 = x
+x | 0 = x
+x | 1 = 1
+</pre></div>
+
+<p>¿Qué tal si usamos dos de estas propiedades para resolver el ejercicio?</p>
+<p><strong>Otra idea para set_bit():</strong> ¿Habrá otra operación bitwise que no haya usado tanto como el and y or? Quizás hay alguna que me haga la tarea...</p>
 <p>Una vez terminen de editar las funciones, pueden compilar y correr el código con:
 <div class="codehilite"><pre><span></span>make bit_ops
 ./bit_ops
 </pre></div>
-Lo cual imprimirá el resultado de algunas pruebas. Si tienen curiosidad pueden revisar con libertad la carpeta tests/ que contiene las pruebas que se van a realizar en cada ejercicio de este laboratorio y que reflejan bastante lo que evaluará el autograder, por ejemplo el archivo que se utiliza para este ejercicio es <strong>tests/bit_ops_test.c</strong>. De ahora en adelante hasta que esten 100% seguros de que tienen completo el laboratorio o ya esté cerca la hora de entregar su laboratorio, pueden mandar sus archivos como en los laboratorios pasados utilizando <code>./submit &lt;TOKEN&gt;</code>.</p>
-<p>Acuérdense de realizar el proceso de "hacerle push" al archivo para subirlo al repositorio de GitHub.</p>
+Lo cual imprimirá el resultado de algunas pruebas. Si tienen curiosidad pueden revisar con libertad la carpeta tests/ que contiene las pruebas que se van a realizar en cada ejercicio de este laboratorio y que reflejan bastante lo que evaluará el autograder, por ejemplo el archivo que se utiliza para este ejercicio es <strong>tests/bit_ops_test.c</strong>.</p>
+<p>Al terminar su ejercicio recuerde hacer add + commit + push hacia Github.</p>
 <h2 id="ejercicio-2-registro-de-corrimiento-con-retroalimentacion-lineal">Ejercicio 2: Registro de Corrimiento con Retroalimentación Lineal<a class="headerlink" href="#ejercicio-2-registro-de-corrimiento-con-retroalimentacion-lineal" title="Permanent link">&para;</a></h2>
-<p>En este ejercicio deben de implementar una función que compute la siguiente iteración de un registro de corrimiento de retroalimentación lineal (LFSR por sus siglas en inglés). ¡Algunas aplicaciones que utilizan LFSRs son: televisión digital, teléfonos con acceso múltiple por división de código, Ethernet, USB 3.0 y mucho más! Esta función deberá generar números pseudo-aleatorios utilizando operadores binarios. Para un poco de información adicional, pueden visitar el siguiente <a href="https://es.wikipedia.org/wiki/LFSR">link de Wikipedia</a>.
-En el archivo <strong>ex2/lfsr_calculate.c</strong> deben de completar la función <em>lfsr_calculate()</em> de manera que realice lo siguiente:</p>
+<p>En este ejercicio deben de implementar una función que compute la siguiente iteración de un registro de corrimiento de retroalimentación lineal (LFSR por sus siglas en inglés). </p>
+<p>Algunas aplicaciones que utilizan LFSRs son: televisión digital, teléfonos con acceso múltiple por división de código, Ethernet, USB 3.0 y mucho más. </p>
+<p>Esta función deberá generar números pseudo-aleatorios utilizando operadores binarios. Si quiere conocer un poco más, puede visitar el siguiente <a href="https://es.wikipedia.org/wiki/LFSR">link de Wikipedia</a>.</p>
+<p>En el archivo <strong>ex2/lfsr_calculate.c</strong> deben de completar la función <em>lfsr_calculate()</em> de manera que realice lo siguiente:</p>
 <h3 id="diagrama-del-hardware-explicacion-mas-abajo">Diagrama del Hardware (Explicación Más Abajo)<a class="headerlink" href="#diagrama-del-hardware-explicacion-mas-abajo" title="Permanent link">&para;</a></h3>
 <p align="center">
   <img src="/img/labs/lab02/LFSR-F16.gif" alt="LFSR" />
@@ -932,13 +890,14 @@ En el archivo <strong>ex2/lfsr_calculate.c</strong> deben de completar la funci�
 <h3 id="explicacion-del-diagrama-de-arriba">Explicación del Diagrama de Arriba<a class="headerlink" href="#explicacion-del-diagrama-de-arriba" title="Permanent link">&para;</a></h3>
 <ul>
 <li>En cada llamada de <em>lfsr_calculate()</em>, deben de correr el contenido del registro un bit hacia la derecha.</li>
-<li>Este corrimiento no es ni lógico, ni aritmético. En el lado izquierdo deben de colocar un bit equivalente a un XOR de los bits que estaban, originalmente, en las posiciones 1, 3, 4 y 6.</li>
+<li>Este corrimiento no es el lógico ni aritmético que ya conoce, sino que en el lado izquierdo deben de colocar un bit equivalente a un XOR de los bits que estaban, originalmente, en las posiciones 1, 3, 4 y 6.</li>
 <li>El objeto que parece un faro de automóvil curvado es un XOR, el cual recibe dos entradas (a, b) y devuelve en su salida a^b.</li>
 <li>A diferencia del ejercicio 1, las posiciones de los bits <strong>inician con 1</strong>.</li>
 </ul>
 <p>Después que hayan implementado de manera correcta <em>lfsr_calculate()</em>, compilen y córranlo. Su respuesta debe ser similar a lo siguiente:</p>
 <p><div class="codehilite"><pre><span></span>make lfsr
 ./lfsr
+
 My number is: <span class="m">1</span>
 My number is: <span class="m">5185</span>
 My number is: <span class="m">38801</span>
@@ -966,59 +925,42 @@ My number is: <span class="m">16285</span>
 Got <span class="m">65535</span> numbers before cycling!
 Congratulations! It works!
 </pre></div>
-De nuevo, recuérdense de hacer el push.</p>
+De nuevo, recuérdense de hacer add + commit + push.</p>
 <h2 id="ejercicio-3-manejo-de-memoria">Ejercicio 3: Manejo de Memoria<a class="headerlink" href="#ejercicio-3-manejo-de-memoria" title="Permanent link">&para;</a></h2>
-<p>Este ejercicio requiere de los archivos: <strong>tests/include/vector.h</strong>, <strong>tests/vector_test.c</strong> y <strong>ex3/vector.c</strong>, en donde les proveemos con la base para la implementación de un arreglo de longitud variable. Este inciso busca que se familiaricen con el uso de los "structs" de C, así como el manejo de memoria en este lenguaje. En otras palabras, no se preocupen por los detalles prácticos de esta estructura de datos un tanto extraña. Sólo no lo hagan.</p>
-<p><strong>Su trabajo es completar las funciones </strong> <em>vector_new()</em>, <em>vector_get()</em>, <em>vector_delete()</em> <strong>y</strong> <em>vector_set()</em> <strong>en</strong> <em>ex3/vector.c</em> <strong>de manera que</strong> <em>tests/vector-test.c</em> <strong>corra sin errores de manejo de memoria.</strong></p>
+<p>Para este ejercicio lea los archivos <strong>tests/include/vector.h</strong>, <strong>tests/vector_test.c</strong> y luego complete el archivo <strong>ex3/vector.c</strong>, en donde les proveemos con la base para la implementación de un arreglo de longitud variable. Este inciso busca que se familiaricen con el uso de los "structs" de C, así como el manejo de memoria en este lenguaje. En otras palabras, no se preocupen por los detalles prácticos de esta estructura de datos un tanto extraña.</p>
+<p><strong>Su trabajo es completar las funciones <code>vector_new()</code>, <code>vector_get()</code>, <code>vector_delete()</code> y <code>vector_set()</code> en <em>ex3/vector.c</em> de manera que <em>tests/vector-test.c</em> corra sin errores de manejo de memoria.</strong></p>
 <h3 id="como-funciona-un-vector_t">¿Cómo funciona un <em>vector_t</em>?<a class="headerlink" href="#como-funciona-un-vector_t" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Posee un <em>int size</em> que indica cuántos elementos posee actualmente. En otras palabras, el <em>size</em> es igual al índice de la última posición que ha sido alterada del vector. Por ejemplo, si se tiene un vector con un <em>size</em> de 5 y se altera su ducentécimo bit (índice iniciando en cero),  su tamaño se verá actualizado a 201. La longitud por defecto del vector <em>vector_new</em> es de 1.</li>
-<li>Tiene un <em>int *data</em>, un arreglo dinámico de enteros que contiene los valores de los componentes del vector. Si se altera el ducentécimo elemento de un vector <em>v</em> a 8 entonces el elemento modificado (de nuevo, iniciando en cero) de <em>v-&gt;data</em> debería evaluar a 8. El valor de un vector <em>vector_new</em> es 0 por defecto.</li>
-<li>El valor de cualquier componente de algún vector que no ha sido explícitamente editado es 0. Si se deseara conocer el valor en la quinta posición de un vector, pero sólo se ha alterado el valor de los primeras dos, la interrogante tendría como respuesta 0. Además, si se quisiera el contenido en la séptima posición de un vector de longitud igual a 5, también sería 0. <strong>NO</strong> devolvería un error.</li>
+<li>Posee un <code>int size</code> que indica cuántos elementos tiene actualmente. Un vector con <code>size = 5</code>, por ejemplo, tendrá cinco casillas con índices entre 0 y 4. Por defecto la longitud de su vector será de 1.</li>
+<li>El vector debe aumentar de tamaño automáticamente si el <code>vector_set()</code> lo require. Por ejemplo, si su vector tiene <code>size = 5</code> pero le piden que haga un set en la casilla con índice 200, usted debe hacer que su vector aumente de tamaño para tener 201 casillas (Sí, primero dice índice 200 (doscientos) y luego dice 201 (doscientas un) casillas, como los índices inician en 0 esto está correcto).</li>
+<li>Tiene un <code>int *data</code>, un arreglo dinámico de enteros que contiene los valores de las casillas del vector. Los valores guardados por defecto al hacer un <code>vector_new()</code> deben ser cero.</li>
+<li>El valor de cualquier componente de algún vector que no ha sido explícitamente editado es 0.</li>
+<li>El vector no debe dar error, incluso si se consulta alguna casilla que todavía no existe. Por ejemplo, su vector tiene <code>size = 5</code> pero le hacen un <code>vector_get()</code> de la posición 10, esto <strong>no</strong> da error, sino que cuando le consulten una casilla que no existe usted devuelve como respuesta un 0.</li>
 </ul>
-<p>Es momento de revisar el código de <em>ex3/vector.c</em> si no lo han hecho. Aquí hay comentarios complementarios que describen cómo deberían de correr las funciones. Recuerden que los usuarios de su estructura de datos <em>vector_t</em> deben asumir que todas las entradas al vector son 0, a menos que hayan sido definidas de otra manera por ellos. Tengan esto en mente, porque <em>malloc</em> no hace esto por ustedes.</p>
+<p>Es momento de revisar el código de <em>ex3/vector.c</em> si no lo han hecho. Aquí hay comentarios complementarios que describen cómo deberían de correr las funciones. Recuerden que los usuarios de su estructura de datos <em>vector_t</em> asumiran que todas las entradas al vector son 0, a menos que hayan sido definidas de otra manera por ellos. Tengan esto en mente, porque <em>malloc</em> no hace esto por ustedes.</p>
 <h3 id="que-deben-hacer">¿Qué deben hacer?<a class="headerlink" href="#que-deben-hacer" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Completen <em>vector_new</em>, la versión correcta. Hay exactamente seis (6) espacios para que escriban una expresión en C, indicados con el comentario que dice <em>/* YOUR CODE HERE */</em>. Escriban una <em>expresión</em> en estos sitios. Esto significa no más de una línea de código. Existen comentarios adicionales que describen qué debería de suceder en la línea de código inferior a cada división.</li>
-<li>Terminen <em>vector_get()</em> de la misma manera en que lo hicieron para la función anterior: de manera respetuosa, dispuesto a aprender, con mente abierta y conscientes de qué es lo que están escribiendo, ya que esta es la mejor forma de programar.</li>
-<li>Complementen <em>vector_delete()</em>. Una solución satisfactoria no debería de llevar más de dos líneas de código.</li>
-<li>Corrijan a <em>vector_set()</em>. Esta es la más complicada. Bienvenidos a las ligas mayores. El problema de manipular una posición/índice arbitrario en un vector <em>v</em> es que es posible que no se haya reservado suficiente espacio con <em>malloc</em> en <em>vector-&gt;data</em> (sí, eso significa que tuvieron que haber guardado memoria con <em>malloc</em>). Piensen cómo administrar la memoria para lograr esto, para ver qué hacer con la data que estaba ahí antes y de qué otras cosas deben de hacer en su nuevo bloque de datos.   Ayuda: Recuerden que los índices que no hayan sido alterados deben de ser cero. Hay distintas formas de acabar resolviendo esta función. Consideren el uso de las 3 funciones <em>__alloc</em>, porque pueden resultar útiles...</li>
+<li>Completen <em>vector_new</em>(). Hay exactamente seis (6) espacios para que escriban una código de C, indicados con el comentario que dice <em>/* YOUR CODE HERE */</em>. Escriban una <em>expresión</em> en estos sitios. En cada uno de estos lugares solo debería necesitar escribir una línea de código.</li>
+<li>Terminen <em>vector_get()</em> de la misma manera en que lo hicieron para la función anterior, ponga bastante atención, piense en cada línea que pondrá y no intente ensayo-y-error.</li>
+<li>Complementen <em>vector_delete()</em>. Es muy probable que le salga con solo dos líneas de código.</li>
+<li>Corrijan a <em>vector_set()</em>. Esta es la más complicada, bienvenidos a las ligas mayores. El problema de manipular una posición/índice arbitrario en un vector <em>v</em> es que es posible que no se haya reservado suficiente espacio con <em>malloc</em> en <em>vector-&gt;data</em> (sí, eso significa que tuvieron que haber guardado memoria con <em>malloc</em>). Piensen cómo administrar la memoria para lograr esto, para ver qué hacer con la data que estaba ahí antes y de qué otras cosas deben de hacer en su nuevo bloque de datos.   Ayuda: Recuerden que los índices que no hayan sido alterados deben de ser cero. Hay distintas formas de acabar resolviendo esta función. Consideren el uso de las 3 funciones <em>__alloc</em>, porque pueden resultar útiles.</li>
 </ul>
-<p>Saber cómo reorganizar y liberar memoria es importante para la programación en C. Piensen que el manejo de memoria es como un parqueo, si hay carros parqueados y los dueños nunca se van, entonces no tienen espacio para nuevos carros. <strong>Y recuerden que deberían tener un 'heap' vacío al terminar su programa. Utilicen free y todo estará bien.</strong></p>
-<h2 id="calificacion">Calificación<a class="headerlink" href="#calificacion" title="Permanent link">&para;</a></h2>
-<p>Como en todos los demás laboratorios, hay un autograder y este no es la excepción. El <strong>staff</strong> trabajo bastante para que su experiencia en este curso sea de las mejores, por eso ahora pueden visitar la siguiente página <a href="https://dashboard.cc-3.site/">https://dashboard.cc-3.site/</a> en donde al iniciar sesión, <strong>con su cuenta de galileo</strong>, puedan ver el reporte de notas de los laboratorios y proyectos.</p>
-<p align="center">
-  <img src="/img/labs/lab02/dashboard.png" alt="Dashboard" />
-</p>
-
-<h3 id="submit">Submit<a class="headerlink" href="#submit" title="Permanent link">&para;</a></h3>
-<p>Si ustedes navegan hacia la página de <a href="https://dashboard.cc-3.site/labs">laboratorios</a>, allí van a aparecer el estado de sus laboratorios, si ya están calificados o están pendientes de calificar por el autograder, la fecha y hora en que lo subieron al hacer <code>./submit</code> y el output de la consola y esto en tiempo real. De esta manera pueden  obtener el feedback más rapidamente en caso en el GES todavía no estén subidas las notas.</p>
-<p align="center">
-  <img src="/img/labs/lab02/labs.png" alt="Labs" />
-</p>
-
-<p>Como notarán en este laboratorio y en adelante ahora cuando hagan submit, el resultado no les aparecerá inmediatamente en la consola, sino que se subirá a nuestros servidores, entrará a una cola de espera y eventualmente será calificado. Si el autograder todavía no ha terminado de calificarles sus archivos no les dejará volver hacer submit, esto es para animarlos a que hagan primero sus pruebas locales con los tests que les damos antes de subir los archivos al autograder. Recuerden para hacer submit al autograder siempre es:</p>
-<div class="codehilite"><pre><span></span>./submit TOKEN
+<p>Saber cómo reorganizar y liberar memoria es importante para la programación en C. Piensen que el manejo de memoria es como un parqueo, si hay carros parqueados y los dueños nunca se van, entonces no tienen espacio para nuevos carros. <strong>Y recuerden que deberían tener un heap vacío al terminar su programa. Utilicen free y todo estará bien.</strong></p>
+<p>Al finalizar, pruebe su programa con:
+<div class="codehilite"><pre><span></span>make vector
+./vector
+</pre></div></p>
+<h2 id="entrega-de-laboratorio">Entrega de laboratorio<a class="headerlink" href="#entrega-de-laboratorio" title="Permanent link">&para;</a></h2>
+<p>Si no hizo el lab 1, se cambió de máquina, no usó el autograder, etc. vaya primero a consultar las <a href="https://cc-3.github.io/labs/lab01/#entrega-de-laboratorio">instrucciones de instalación</a></p>
+<p>Cuando quiera conocer su nota, utilize el comando:
+<div class="codehilite"><pre><span></span>./check
+</pre></div></p>
+<p>Si se encuentra con cualquier problema raro, pruebe hacer:
+<div class="codehilite"><pre><span></span>make clean
+make
 </pre></div>
-
-<blockquote>
-<p><strong>NOTA</strong>: Tienen que crear su nuevo token en la página <a href="https://dashboard.cc-3.site/">https://dashboard.cc-3.site/</a></p>
-</blockquote>
-<h3 id="server-status">Server Status<a class="headerlink" href="#server-status" title="Permanent link">&para;</a></h3>
-<p>Finalmente, ya que todo esto utiliza recursos de AWS EC2 y que es un servicio que consume créditos del <strong>staff</strong> el servidor se apagará cuando haya terminado la fecha límite para subir el laboratorio al autograder indicada en el GES, así que tomen en cuenta esto. Cuando el servidor está prendido y está recibiendo peticiones de ustedes lo notarán en el pie de página:</p>
-<p align="center">
-  <img src="/img/labs/lab02/status_up.png" alt="Server Up" />
-</p>
-
-<p>El punto verde significa que el servidor esta recibiendo peticiones y a la derecha les dice el tamaño de la cola (submits pendientes de calificar). Cuando esté así pueden mandar sus archivos al autograder. Cuando el servidor está apagado lo notarán de igual manera:</p>
-<p align="center">
-  <img src="/img/labs/lab02/status_down.png" alt="Server Down" />
-</p>
-
-<p>El punto rojo significa que el servidor no está aceptando peticiones, así que si ven esto son malas noticias si no han terminado la asignación. Si ustedes notan este punto rojo y todavía su calificación les aparece pendiente (porque hicieron submit antes), no se preocupen ya está en camino a ser calificado y en su momento les aparecerá su nota.</p>
-<blockquote>
-<p><strong>NOTA</strong>: recuerden hacer submit, primero generando su nuevo token luego: ./submit <TOKEN></p>
-</blockquote>
+Esto borrará sus archivos compilados, y luego compilará de nuevo <code>bit_ops</code>, <code>lfsr</code> y <code>vector</code>.</p>
+<p>Cuando esté satisfecho con su nota (¡apúntele al 100!), haga <code>add</code>, <code>commit</code> y <code>push</code>. Luego suba el link de su repositorio al GES.</p>
                 
                   
                 
