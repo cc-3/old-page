@@ -373,8 +373,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#cosas-basicas-en-v-sim" title="Cosas básicas en V-Sim:" class="md-nav__link">
-    Cosas básicas en V-Sim:
+  <a href="#cosas-basicas-en-jupiter" title="Cosas básicas en Jupiter:" class="md-nav__link">
+    Cosas básicas en Jupiter:
   </a>
   
 </li>
@@ -385,8 +385,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ejercicio-1-familiarizandote-con-v-sim" title="Ejercicio 1: Familiarizándote con V-Sim" class="md-nav__link">
-    Ejercicio 1: Familiarizándote con V-Sim
+  <a href="#ejercicio-1-familiarizandote-con-jupiter" title="Ejercicio 1: Familiarizándote con Jupiter" class="md-nav__link">
+    Ejercicio 1: Familiarizándote con Jupiter
   </a>
   
     <nav class="md-nav">
@@ -425,15 +425,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ejercicio-3-factorial" title="Ejercicio 3: Factorial." class="md-nav__link">
-    Ejercicio 3: Factorial.
+  <a href="#ejercicio-3-factorial" title="Ejercicio 3: Factorial" class="md-nav__link">
+    Ejercicio 3: Factorial
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#ejercicio-4-list-map" title="Ejercicio 4:  List Map" class="md-nav__link">
-    Ejercicio 4:  List Map
+  <a href="#ejercicio-4-list-map-extra" title="Ejercicio 4:  List Map (extra)" class="md-nav__link">
+    Ejercicio 4:  List Map (extra)
   </a>
   
 </li>
@@ -572,18 +572,6 @@
   <li class="md-nav__item">
     <a href="../../projs/proj02/" title="2: Procesador" class="md-nav__link">
       2: Procesador
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../projs/projextra/" title="Extra" class="md-nav__link">
-      Extra
     </a>
   </li>
 
@@ -775,8 +763,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#cosas-basicas-en-v-sim" title="Cosas básicas en V-Sim:" class="md-nav__link">
-    Cosas básicas en V-Sim:
+  <a href="#cosas-basicas-en-jupiter" title="Cosas básicas en Jupiter:" class="md-nav__link">
+    Cosas básicas en Jupiter:
   </a>
   
 </li>
@@ -787,8 +775,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ejercicio-1-familiarizandote-con-v-sim" title="Ejercicio 1: Familiarizándote con V-Sim" class="md-nav__link">
-    Ejercicio 1: Familiarizándote con V-Sim
+  <a href="#ejercicio-1-familiarizandote-con-jupiter" title="Ejercicio 1: Familiarizándote con Jupiter" class="md-nav__link">
+    Ejercicio 1: Familiarizándote con Jupiter
   </a>
   
     <nav class="md-nav">
@@ -827,15 +815,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ejercicio-3-factorial" title="Ejercicio 3: Factorial." class="md-nav__link">
-    Ejercicio 3: Factorial.
+  <a href="#ejercicio-3-factorial" title="Ejercicio 3: Factorial" class="md-nav__link">
+    Ejercicio 3: Factorial
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#ejercicio-4-list-map" title="Ejercicio 4:  List Map" class="md-nav__link">
-    Ejercicio 4:  List Map
+  <a href="#ejercicio-4-list-map-extra" title="Ejercicio 4:  List Map (extra)" class="md-nav__link">
+    Ejercicio 4:  List Map (extra)
   </a>
   
 </li>
@@ -879,45 +867,54 @@
 <li>P&amp;H: 2.12</li>
 </ul>
 <h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
-<p>Para comenzar con el laboratorio primero tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/NXxaoGEW">aquí</a>. Recuerden que deben
+<p>Para comenzar con el laboratorio primero tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/vb1EJqfF">aquí</a>. Recuerden que deben
 aceptar la asignación de <strong>GitHub Classroom</strong> y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub.<br />
 Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd> <kbd>+</kbd> <kbd>T</kbd> ):</p>
-<div class="codehilite"><pre><span></span>git clone &lt;link del repositorio&gt;
+<div class="codehilite"><pre><span></span>git clone https://github.com/cc-3/lab03-2022-SU-USUARIO-DE-GITHUB
 </pre></div>
 
-<blockquote>
-<p><strong>NOTA</strong>: Tienen que reemplazar &lt;link del repositorio> con el link del repositorio que se creó.</p>
-</blockquote>
 <h2 id="introduccion-a-lenguaje-ensamblador-risc-v">Introducción a Lenguaje Ensamblador RISC-V<a class="headerlink" href="#introduccion-a-lenguaje-ensamblador-risc-v" title="Permanent link">&para;</a></h2>
-<p>Los siguientes ejercicios utilizan un ensamblador y simulador de RISC-V, desarrollado por nuestro auxiliar <strong>Andrés Castellanos</strong>. El simulador se llama <strong>V-Sim</strong> y es un proyecto open source inspirado, inicialmente, en el lengendario <a href="http://spimsimulator.sourceforge.net/"><em>SPIM</em></a> y, posteriormente, en <a href="http://courses.missouristate.edu/KenVollmar/mars/"><em>MARS</em></a> y <a href="http://www.kvakil.me/venus/"><em>VENUS</em></a> para la versión gráfica.</p>
+<p>Los siguientes ejercicios utilizan un ensamblador y simulador de RISC-V, desarrollado por el catedrático de la sección nocturna <strong>Andrés Castellanos</strong>. El simulador se llama <strong>Jupiter</strong> (la versión anterior se llamaba V-Sim, por si mira ese nombre en algún lado) y es un proyecto open source inspirado, inicialmente, en el lengendario <a href="http://spimsimulator.sourceforge.net/"><em>SPIM</em></a> y, posteriormente, en <a href="http://courses.missouristate.edu/KenVollmar/mars/"><em>MARS</em></a> y <a href="http://www.kvakil.me/venus/"><em>VENUS</em></a> para la versión gráfica.</p>
 <p align="center">
-  <img src="/img/labs/lab03/vsim.png"  alt="V-Sim"/>
+  <img src="/img/labs/lab03/jupiter.png"  alt="V-Sim"/>
 </p>
 
-<p>Para instalarlo en su computadora sólo necesitan ejecutar en una terminal uno de los siguientes comandos:</p>
-<p><strong>Con cURL</strong>:</p>
-<div class="codehilite"><pre><span></span>curl https://git.io/fh9sW -L -o vsim <span class="o">&amp;&amp;</span> chmod +x vsim <span class="o">&amp;&amp;</span> . ./vsim <span class="o">&amp;&amp;</span> rm vsim
+<p>Para instalarlo en su computadora, siga estas instrucciones:</p>
+<p><strong>Máquina virtual del curso</strong></p>
+<p>Felicidades! No necesita instalar nada, puede ejecutar Jupiter usando el siguiente comando</p>
+<div class="codehilite"><pre><span></span>jupiter
 </pre></div>
 
-<p><strong>Con wget</strong>:
-<div class="codehilite"><pre><span></span>wget -O vsim https://git.io/fh9sW <span class="o">&amp;&amp;</span> chmod +x vsim <span class="o">&amp;&amp;</span> . ./vsim <span class="o">&amp;&amp;</span> rm vsim
-</pre></div></p>
-<p>Y, por último, hacer source a su bash profile</p>
-<div class="codehilite"><pre><span></span><span class="nb">source</span> ~/.bashrc
+<p><strong>Ubuntu 18</strong></p>
+<p>Instale Jupiter con los siguientes comandos</p>
+<div class="codehilite"><pre><span></span>sudo add-apt-repository ppa:andrescv/jupiter
+sudo apt-get update
+sudo apt-get install jupiter
 </pre></div>
 
-<h3 id="cosas-basicas-en-v-sim">Cosas básicas en V-Sim:<a class="headerlink" href="#cosas-basicas-en-v-sim" title="Permanent link">&para;</a></h3>
-<p>A continuación, les vamos a dar una pequeña guía de V-Sim, para más información visiten la página de documentación en <a href="https://www.riscvsim.com">https://www.riscvsim.com</a>.</p>
+<p>Luego ejecute usando <code>jupiter</code></p>
+<p><strong>Ubuntu 20</strong></p>
+<p>Descargue <a href="https://github.com/andrescv/Jupiter/releases/download/v3.1/Jupiter-3.1-linux.zip">este archivo</a>, luego en su terminal vaya a la carpeta donde lo descargó y ejecute estos comandos</p>
+<div class="codehilite"><pre><span></span>unzip Jupiter-3.1-linux.zip
+sudo mv image /opt/jupiter
+echo &#39;export PATH=/opt/jupiter/bin:$PATH&#39; &gt;&gt; ~/.bashrc 
+source ~/.bashrc
+</pre></div>
+
+<p>Después de esto, ya debería poder usar <code>jupiter</code>. Si aun no funciona, la vieja y confiable, reinicie su máquina.</p>
+<h3 id="cosas-basicas-en-jupiter">Cosas básicas en Jupiter:<a class="headerlink" href="#cosas-basicas-en-jupiter" title="Permanent link">&para;</a></h3>
+<p>A continuación, les vamos a dar una pequeña guía de Jupiter, para más información visiten <a href="https://jupitersim.gitbook.io/jupiter/">la documentación completa</a>.</p>
 <ul>
 <li>Pueden crear archivos, editarlos y borrarlos desde la pestaña "Editor".</li>
-<li>Los programas empiezan en la etiqueta global <code>main</code>, es decir que tienen que definir una etiqueta llamada <code>main</code> y declararla como global.</li>
+<li>Los programas empiezan en la etiqueta global <code>__start</code>, es decir que tienen que definir una etiqueta llamada <code>__start</code> y declararla como global.</li>
 </ul>
-<div class="codehilite"><pre><span></span><span class="na">.globl</span> <span class="no">main</span>
-<span class="nl">main:</span>
-  <span class="nf">li</span> <span class="no">a0</span><span class="p">,</span> <span class="mi">10</span>
+<div class="codehilite"><pre><span></span><span class="na">.globl</span> <span class="no">__start</span>
+<span class="nl">__start:</span>
+  <span class="nf">li</span> <span class="no">a0</span> <span class="mi">10</span>
   <span class="nf">ecall</span> <span class="c"># exit</span>
 </pre></div>
 
+<p>Sí, allí dice <code>.globl</code>, no <code>.global</code>.</p>
 <ul>
 <li>Las etiquetas terminan con dos puntos como ven en el ejemplo anterior.</li>
 <li>Los comentarios comienzan con el simbolo "#" o ";".</li>
@@ -925,14 +922,13 @@ Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos
 <li>Cuando hayan terminado de editar las instrucciones que conforman su código, guarden y presionen <kbd>F3</kbd> para preparar la ejecución.</li>
 <li>Los programas siempre tienen que terminar con un <code>ecall</code> de exit y esto se logra poniendo un 10 en <code>a0</code> (<em>exactamente como el ejemplo anterior</em>). Esto le indica al programa que tiene que terminar. Las instrucciones <code>ecall</code> son análogas a los "System Calls" (llamadas al sistema) y nos permiten hacer cosas como imprimir a consola o reservar memoria dinámica.</li>
 </ul>
-<h2 id="ejercicio-1-familiarizandote-con-v-sim">Ejercicio 1: Familiarizándote con V-Sim<a class="headerlink" href="#ejercicio-1-familiarizandote-con-v-sim" title="Permanent link">&para;</a></h2>
-<p>Para este ejercicio ustedes van a familiarizarse con <strong>V-Sim</strong> corriendo un programa sencillo de RISC-V y, luego, contestarán unas preguntas.</p>
+<h2 id="ejercicio-1-familiarizandote-con-jupiter">Ejercicio 1: Familiarizándote con Jupiter<a class="headerlink" href="#ejercicio-1-familiarizandote-con-jupiter" title="Permanent link">&para;</a></h2>
+<p>Para este ejercicio ustedes van a familiarizarse con <strong>Jupiter</strong> corriendo un programa sencillo de RISC-V y, luego, contestarán unas preguntas.</p>
 <ol>
-<li>Abran una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>) y diríjanse a la carpeta del repositorio que clonaron.</li>
-<li>Abran el modo GUI de V-Sim ejecutando en la terminal <code>vsim</code>.</li>
+<li>Abran la interfaz gráfica de Jupiter, escribiendo <code>jupiter</code> en su terminal. </li>
 <li>Desde el editor abran el archivo llamado <strong>ex1.s</strong> que esta en la carpeta <strong>ex1</strong>.</li>
-<li>En la barra de herramientas de V-Sim, vayan a settings y asegúrense de que <strong>Assemble Only Selected Tab</strong> esté seleccionado con un cheque verde.</li>
-<li>Presionen <kbd>F3</kbd>. Esto va a preparar el código para que pueda ser ejecutado y simulado. Si hacen click a la pestaña "Editor", su simulación se va a reiniciar.</li>
+<li>En la barra de herramientas de Jupiter, vayan a settings y asegúrense de que <strong>Assemble Only Selected Tab</strong> esté seleccionado con un cheque verde.</li>
+<li>Guarden su programa, luego presionen <kbd>F3</kbd>. Esto va a preparar el código para que pueda ser ejecutado y simulado. Si hacen click a la pestaña "Editor", su simulación se va a reiniciar.</li>
 <li>En el simulador, para ejecutar la siguiente instrucción, presionen el botón que dice "step".</li>
 <li>Para regresar un paso atrás, presionen el botón que dice "backstep".</li>
 <li>Para correr todo el programa hasta que termine, presionen el botón que dice "go".</li>
@@ -942,7 +938,7 @@ Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos
 <li>Para ver el contenido de la memoria, en el mismo lugar que los registros hay una pestaña que dice <code>Memory</code>, pueden navegar a diferentes secciones de la memoria haciendo click derecho encima de la tabla que muestra el estado de la memoria.</li>
 </ol>
 <h3 id="preguntas">Preguntas<a class="headerlink" href="#preguntas" title="Permanent link">&para;</a></h3>
-<p>Ahora que ya han corrido su primer programa de RISC-V y que ganaron experiencia con V-Sim pueden contestar las siguientes preguntas en el archivo <strong>ex1.txt</strong> que se encuentra en la carpeta <strong>ex1</strong>.</p>
+<p>Ahora que ya han corrido su primer programa de RISC-V y que ganaron experiencia con Jupiter pueden contestar las siguientes preguntas en el archivo <strong>ex1.txt</strong> que se encuentra en la carpeta <strong>ex1</strong>.</p>
 <ol>
 <li>¿Qué significan las directivas <code>.data</code>, <code>.word</code>, <code>.text</code>, es decir, para qué las utilizan? Escriban sólo una de las siguientes letras para responder. Pista: Piensen acerca de las cuatro secciones de memoria.<ul>
 <li>A) Son como etiquetas sirven para hacer referencia a cosas que están en memoria, con <code>.data</code> apuntamos hacia los datos con <code>.word</code> hacia palabras de 32 bits y con <code>.text</code> hacia texto.</li>
@@ -967,7 +963,7 @@ Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos
 <h3 id="preguntas_1">Preguntas<a class="headerlink" href="#preguntas_1" title="Permanent link">&para;</a></h3>
 <ol>
 <li>¿Cuál es el registro que representa la variable <code>k</code>?</li>
-<li>¿Cuáles son los registros que actúan como punteros a los arreglos <code>source</code> y <code>dest</code> (separados por coma)?</li>
+<li>¿Cuáles son los registros que actúan como punteros a los arreglos <code>source</code> y <code>dest</code> (separaV-Simdos por coma)?</li>
 <li>¿De qué número de línea a que número línea se encuentra el loop (separado por coma)?</li>
 <li>¿En qué número de línea se copia el contenido de <code>source</code> a <code>dest</code>?, es decir ¿dónde se puede observar <code>dest[k] = source[k]</code>?.</li>
 <li>¿Cómo son manipulados los punteros en el código? Escriban sólo una de las siguientes letras para responder:<ul>
@@ -978,9 +974,9 @@ Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos
 </ul>
 </li>
 </ol>
-<h2 id="ejercicio-3-factorial">Ejercicio 3: Factorial.<a class="headerlink" href="#ejercicio-3-factorial" title="Permanent link">&para;</a></h2>
+<h2 id="ejercicio-3-factorial">Ejercicio 3: Factorial<a class="headerlink" href="#ejercicio-3-factorial" title="Permanent link">&para;</a></h2>
 <p>En este ejercicio, tienen que implementar la función de factorial en RISC-V que toma un sólo parámetro entero $n$ y retorna $n!$. Pueden encontrar un esqueleto de esta función en el archivo <strong>factorial.s</strong>, que se encuentra en la carpeta <strong>ex3</strong> del repositorio que clonaron. Ustedes sólo necesitan agregar las instrucciones bajo la etiqueta <code>factorial</code>, y el argumento que se pasa a la función va en el registro <code>a0</code>. Pueden resolver este problema ya sea de forma recursiva o iterativa. Asegúrense de que su función retorne de forma apropidada lo siguiente $3! = 6$, $7! = 5040$ y $8! = 40320$.</p>
-<h2 id="ejercicio-4-list-map">Ejercicio 4:  List Map<a class="headerlink" href="#ejercicio-4-list-map" title="Permanent link">&para;</a></h2>
+<h2 id="ejercicio-4-list-map-extra">Ejercicio 4:  List Map (extra)<a class="headerlink" href="#ejercicio-4-list-map-extra" title="Permanent link">&para;</a></h2>
 <p>Para este ejercicio van a utilizar el archivo <strong>list_map.s</strong> que se encuentra en la carpeta <strong>ex4</strong>. En este ejercicio, van a completar una función de "map" con listas encadenadas en RISC-V. La función se simplificará en mutar la lista en cuestión, es decir que tomará una lista encadenada como entrada y va a retornar la lista con los valores modificados. Nuestro procedimiento de "map" toma dos parámetros, el primero será la dirección del nodo "head" de una lista encadenada, cuyos valores son enteros de 32 bits. Entonces, en C, la estructura se define como:</p>
 <div class="codehilite"><pre><span></span><span class="k">struct</span> <span class="n">node</span> <span class="p">{</span>
   <span class="kt">int</span> <span class="n">value</span><span class="p">;</span>
@@ -1005,14 +1001,16 @@ Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos
 
 <p>La primera línea es la lista original, y la segunda es la lista modificada después de que se aplicó la función "map".</p>
 <h2 id="calificacion">Calificación<a class="headerlink" href="#calificacion" title="Permanent link">&para;</a></h2>
-<p>Cuando hayan terminado su laboratorio, o crean que están listos para obtener su nota, pueden subir su laboratorio al autograder utilizando:</p>
-<div class="codehilite"><pre><span></span>./submit &lt;TOKEN&gt;
+<p>Si no ha hecho los labs anteriores, se cambió de máquina, no usó el autograder, etc. vaya primero a consultar las <a href="https://cc-3.github.io/labs/lab01/#entrega-de-laboratorio">instrucciones de instalación</a></p>
+<p>Si está usando nuestra máquina virtual (es decir, ya tenía Jupiter pre-instalado), para conocer su nota use el comando:</p>
+<div class="codehilite"><pre><span></span>./check
 </pre></div>
 
-<blockquote>
-<p><strong>NOTA</strong>: Tienen que reemplazar &lt;TOKEN> por el  token que les da la siguiente <a href="https://dashboard.cc-3.site/">página</a></p>
-</blockquote>
-<p>Luego, cuando haya sido calificado, pueden ver su resultado en <a href="https://dashboard.cc-3.site/">https://dashboard.cc-3.site/</a>.</p>
+<p>Si está usando su propio Linux y le tocó instalar Jupiter a usted mismo, use el comando:</p>
+<div class="codehilite"><pre><span></span>./check -x
+</pre></div>
+
+<p>Cuando esté satisfecho con su nota haga add, commit y push. Luego suba el link de su repositorio al GES.</p>
                 
                   
                 
