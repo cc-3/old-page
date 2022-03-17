@@ -416,6 +416,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#calificacion" title="Calificación" class="md-nav__link">
+    Calificación
+  </a>
+  
+</li>
+      
       
       
       
@@ -519,18 +526,6 @@
   <li class="md-nav__item">
     <a href="../../projs/proj02/" title="2: Procesador" class="md-nav__link">
       2: Procesador
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../projs/projextra/" title="Extra" class="md-nav__link">
-      Extra
     </a>
   </li>
 
@@ -741,6 +736,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#calificacion" title="Calificación" class="md-nav__link">
+    Calificación
+  </a>
+  
+</li>
+      
       
       
       
@@ -768,7 +770,7 @@
 </ul>
 <h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
 <p>Para este laboratorio, es necesaria la aplicación Logisim. La cual se puede descargar en este <a href="http://www.cburch.com/logisim/index.html">link</a>.</p>
-<p>También tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/Hq6PqUPO">aquí</a>. Recuerden que deben aceptar la asignación de <strong>GitHub Classroom</strong> y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):</p>
+<p>También tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/wG4ZCRXU">aquí</a>. Recuerden que deben aceptar la asignación de <strong>GitHub Classroom</strong> y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):</p>
 <div class="codehilite"><pre><span></span>git clone &lt;link del repositorio&gt;
 </pre></div>
 
@@ -793,7 +795,7 @@ Entre dichos íconos se encuentran:</p>
 <li><img src="/img/labs/lab05/output.png" alt="output1" /> Este es un acceso directo al componente llamado “Output Pin”. Permite crear salidas de los circuitos.</li>
 <li><img src="/img/labs/lab05/not.png" alt="not1" /> Este es un acceso directo a la compuerta lógica “Not”.</li>
 <li><img src="/img/labs/lab05/and.png" alt="and1" /> Permite crear compuertas lógicas de tipo “And”.</li>
-<li><img src="/img/labs/lab05/or.png" alt="or1" /> Generacompuertas lógicas de tipo “Or”.</li>
+<li><img src="/img/labs/lab05/or.png" alt="or1" /> Genera compuertas lógicas de tipo “Or”.</li>
 </ul>
 <p>Por el momento, estas son las herramientas que se van a necesitar para este laboratorio.</p>
 <h2 id="ejercicio-0-las-bases">Ejercicio 0: Las Bases<a class="headerlink" href="#ejercicio-0-las-bases" title="Permanent link">&para;</a></h2>
@@ -862,11 +864,13 @@ También, se pueden rotar los componentes presionando las teclas de flechas del 
   <img src="/img/labs/lab05/componentes.png" alt="componentes1" />
 </p>
 
-<p>Los componentes utilizados son los siguientes:
-<em> Sumador: Ubicado en la librería “Aritmética”.
-</em> Registro: Ubicado en la librería “Memoria”.
-<em> Constante Numérica: Ubicado en la librería “Wiring”.
-</em> Reloj: Ubicado en la librería “Wiring”.</p>
+<p>Los componentes utilizados son los siguientes:</p>
+<ul>
+<li>Sumador: Ubicado en la librería “Aritmética”.</li>
+<li>Registro: Ubicado en la librería “Memoria”.</li>
+<li>Constante Numérica: Ubicado en la librería “Wiring”.</li>
+<li>Reloj: Ubicado en la librería “Wiring”.</li>
+</ul>
 <p>Cabe mencionar que ahora se utilizan <strong>Output Pins</strong> de más de un bit, se puede aumentar el número de bits en la configuración de los componentes. Seleccionar un componente y, en el lado izquierdo, se puede encontrar el mismo menú que se usa para darle orientación a los componentes y asignarles una etiqueta, en donde se está la opción de “Bits De Datos”. Para este ejercicio ya está hecho esto para los <em>Output pins</em>, pero si tienen que hacerlo para el registro, para la constante numérica y el sumador.</p>
 <p>Una vez se termine de construir el circuito… ¡es hora de simularlo!</p>
 <p>Seleccionar la opción “Simular” (ubicado en la parte superior de la pantalla) y presionar la opción de “activar reloj”. Se podrá notar que el circuito funciona por sí solo y que, efectivamente, cumple con su objetivo: ¡contar! (si se hizo correctamente).</p>
@@ -890,11 +894,10 @@ Para regresar al circuito principal, hay que hacer click en el módulo del circu
 <p>¿Cómo se lee?
 La primera fila de la tabla se entiende de esta manera: “Dado el estado 00, si el input es 0, entonces se hace una transición al estado 01 y devuelve un output de 1”.</p>
 <p>Para este ejercicio se les provee el circuito <strong>ex3.circ</strong>. El trabajo a realizar es completar el circuito y lograr que se comporte como el AFD mostrado anteriormente. Para esto ustedes solo van a modificar 2 subcircuitos: <strong>StateBitOne</strong> y <strong>StateBitZero</strong>.</p>
-<p>Se tienen dos opciones para completar el circuito: 1) fuerza bruta o 2) imaginación.
-Con la imaginación es posible completar el circuito utilizando un total de 3 componentes, pero, si se resuelve con la fuerza bruta, el número será mucho mayor. Se tiene todas las herramientas y las pistas necesarias para terminar el ejercicio con 3 componentes.
-¡Éxitos! :D</p>
-<h1 id="calificacion">Calificación<a class="headerlink" href="#calificacion" title="Permanent link">&para;</a></h1>
-<p>Cuando crean que tiene ejercicios completos pueden hacer la prueba localmente escribiendo en la terminal:</p>
+<p>Se tienen dos opciones para completar el circuito: 1) Suma de productos o 2) Mapas de Karnaugh. Si utiliza mapas, podra completar el ejercicio usando solo tres compuertas, si lo hace por suma de productos tendra que utilizar muchas mas. ¡Éxitos! :D</p>
+<h2 id="calificacion">Calificación<a class="headerlink" href="#calificacion" title="Permanent link">&para;</a></h2>
+<p>Si no ha hecho los labs anteriores, se cambió de máquina, no usó el autograder, etc. vaya primero a consultar las <a href="https://cc-3.github.io/labs/lab01/#entrega-de-laboratorio">instrucciones de instalación</a></p>
+<p>Para probar sus ejercicios en el autograder utilice el comando:</p>
 <div class="codehilite"><pre><span></span>./check
 </pre></div>
 
@@ -920,14 +923,7 @@ Exercise                    Grade  Message
 <span class="o">=</span>&gt; Score: <span class="m">100</span>/100
 </pre></div>
 
-<p>Cuando hayan terminado su laboratorio, o crean que están listos para obtener su nota, pueden subir su laboratorio al autograder utilizando:</p>
-<div class="codehilite"><pre><span></span>./submit &lt;TOKEN&gt;
-</pre></div>
-
-<blockquote>
-<p><strong>NOTA</strong>: Tienen que reemplazar &lt;TOKEN> por el  token que les da la siguiente <a href="https://dashboard.cc-3.site">página</a></p>
-</blockquote>
-<p>Luego, cuando haya sido calificado, pueden ver su resultado en <a href="https://dashboard.cc3.site/">https://dashboard.cc-3.site/</a>.</p>
+<p><strong>Vaya haciendo add + commit + push hacia Github cada vez que termine un ejercicio.</strong> Para bien o para mal, Logisim está construído sobre Java y a veces corrompe archivos. Proteja su avance subiéndolo a Github cada cierto tiempo. Al terminar, envíe su link de Github al GES.</p>
                 
                   
                 
