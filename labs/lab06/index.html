@@ -550,18 +550,6 @@
   </li>
 
         
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../projs/projextra/" title="Extra" class="md-nav__link">
-      Extra
-    </a>
-  </li>
-
-        
       </ul>
     </nav>
   </li>
@@ -881,53 +869,57 @@
 
 <h2 id="ejercicio-1-divisores-splitters">Ejercicio 1: Divisores (Splitters)<a class="headerlink" href="#ejercicio-1-divisores-splitters" title="Permanent link">&para;</a></h2>
 <p>Para este ejercicio van a utilizar los splitters para crear un par de circuitos simples manipulando un numero de 8 bits. Van a estar trabajando en el archivo <strong>splitters.circ</strong>.</p>
-<ol>
+<ul>
 <li>
 <p>Vayan al folder llamado "Wiring" y seleccionen un splitter. Este circuito va a tomar un cable y lo va a dividir en un set de cables con un ancho de bits menor.</p>
 </li>
 <li>
-<p>Antes de colocar el circuito en el esquemático, cambien el ancho a 8 bits en las propiedades del circuito y "Fan Out" a 3 también. Si ustedes mueven el cursor sobre el esquemático, su cursor debería de verse algo así: <img alt="Splitter" src="/img/labs/lab06/splitter.gif" />.</p>
+<p>Antes de colocar el circuito en el esquemático, cambien el ancho a 8 bits en las propiedades del circuito y "Fan Out" al tamano que considere conveniente, 3 es una buena idea para comenzar. Si ustedes mueven el cursor sobre el esquemático, su cursor debería de verse algo así: <img alt="Splitter" src="/img/labs/lab06/splitter.gif" />.</p>
 </li>
 <li>
-<p>Ahora, seleccionen que bits enviar a cada <strong>rama</strong> de su splitter. El bit menos significativo es el bit 0 y el bit más significativo es el 7. Cambien los bits 1, 2 y 6 para que se vuelvan parte de la rama 1 del splitter (la de en medio) y dejen los demás como están. La opción "None" significa que el bit seleccionado no va a salir de ninguna rama del splitter.</p>
+<p>Tareas a realizar:</p>
+<ul>
+<li>Out1: Realice un AND entre el bit más significativo y el menos significativo del input<ul>
+<li>Arriba le sugerimos que pusiera un fan out de 3. En el panel de la izquierda configure para que solo el bit 0 vaya a la salida 0 (Top), y que solo el bit 7 vaya a la salida 2 (Bottom), todos los demás bits puede mandarlos hacia la salida 1.</li>
+<li>Listo! Gracias al splitter, logró separar el bit más significativo y el menos significativo del resto.</li>
+</ul>
 </li>
-<li>
-<p>Una vez ya han configurado su splitter, pueden colocar su splitter en el circuito.</p>
+<li>Out2: Trabajando en signo-magnitud, obtenga el inverso aditivo del input<ul>
+<li>Recordatorio: inverso aditivo significa cambiarle de signo de positivo a negativo, y viceversa.</li>
+<li>Recordatorio: <a href="https://en.wikipedia.org/wiki/Signed_number_representations#Signed_magnitude_representation">Signo Magnitud</a> es una otra forma de representar números con signo, la vimos la primera semana de clases.</li>
+<li>Usted ya partió al input en pedacitos para resolver Out1, puede usar algunos de esos pedacitos y alguna compuerta para obtener el inverso aditivo.</li>
+<li>Luego puede utilizar otro splitter, ahora colocado al revés para reconstruir su número: de varios pedacitos, pasará a tener un valor de 8 bits.</li>
+</ul>
 </li>
-<li>
-<p>Conecten el pin de entrada <strong><em>In</em></strong> al splitter (utilizando túneles). Colóquen una compuerta AND de dos entradas y conecten las ramas 0 y 2 del splitter a la compuerta y por último la salida de la compuerta que vaya al pin de salida "Out1" (recurden utilizar túneles).</p>
+</ul>
 </li>
-<li>
-<p>Ahora tienen que interpretar la entrada como un numero en "Signo Magnitud". Coloquen compuertas lógicas u otros circuitos que ustedes crean necesarios para que el pin de salida "Out2" sea el negativo en "Signo Magnitud" del valor de entrada. <a href="https://en.wikipedia.org/wiki/Signed_number_representations#Signed_magnitude_representation">Signo Magnitud</a> es una forma alternativa de representar valores con signo (como complemento a 2, pero mucho más simple). La lógica combinacional debería de ser bastante simple.</p>
-</li>
-<li>
-<p>Van a necesitar otro splitter para recombinar las ramas en un bus de datos de 8 bits. Coloquen otro splitter con las características apropiadas (Ancho de Bits: 8, Fan Out: 3 y ancho de bits correcto en cada rama).</p>
-</li>
-</ol>
+</ul>
 <h2 id="ejercicio-2-rotate-right">Ejercicio 2: Rotate Right<a class="headerlink" href="#ejercicio-2-rotate-right" title="Permanent link">&para;</a></h2>
-<p>Con el conocimiento que tienen acerca de los splitters y su experiencia utilizando multiplexores en el lab pasado, están listos para implementar un bloque de lógica combinacional no trivial: <code>rotr</code>, que significa <strong>Rotate Right</strong>. La idea es que <code>rotr A,B</code> va a rotar el patrón de bits de la entrada <code>A</code> a la derecha por <code>B</code> bits. Por ejemplo, si <code>A</code> fuera $0\text{b}10110101011\color{blue}1\color{blue}0\color{blue}0\color{blue}1\color{blue}1$ y <code>B</code> fuera $0\text{b}0101$ (5 en decimal), el output del bloque sería $0\text{b}\color{red}1\color{red}0\color{red}0\color{red}1\color{red}110110101011$. Noten que los 5 bits de más a la derecha de <code>A</code> (azul) fueron rotados a la derecha y puestos de vuelta a la izquierda (rojo). En RTL, la operación sería algo como:</p>
+<p>Con el conocimiento que tienen acerca de los splitters y multiplexores, están listos para implementar un bloque de lógica combinacional no trivial: <code>rotr</code>, que significa <strong>Rotate Right</strong>. </p>
+<p>La idea es que <code>rotr A,B</code> va a rotar el patrón de bits de la entrada <code>A</code> a la derecha por <code>B</code> bits. Por ejemplo, si <code>A</code> fuera $0\text{b}10110101011\color{blue}1\color{blue}0\color{blue}0\color{blue}1\color{blue}1$ y <code>B</code> fuera $0\text{b}0101$ (5 en decimal), el output del bloque sería $0\text{b}\color{red}1\color{red}0\color{red}0\color{red}1\color{red}110110101011$. Noten que los 5 bits de más a la derecha de <code>A</code> (azul) fueron rotados a la derecha y puestos de vuelta a la izquierda (rojo). En RTL, la operación sería algo como:</p>
 <div class="codehilite"><pre><span></span><span class="n">R</span> <span class="o">=</span> <span class="n">A</span> <span class="o">&gt;&gt;</span> <span class="n">B</span> <span class="o">|</span> <span class="n">A</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="mi">16</span> <span class="o">-</span> <span class="n">B</span><span class="p">)</span>
 </pre></div>
 
 <p>Ustedes tienen que implementar el subcircuito llamado <strong>rotr</strong> en el archivo <strong>rotr.circ</strong> que tiene las siguientes entradas y salida:</p>
 <ul>
 <li><strong>A</strong>, 16 bits, la entrada a ser rotada.</li>
-<li><strong>B</strong>, 4 bits, la cantidad de rotación (¿Por qué 4 bits? <i class="em em-thinking_face"></i>)</li>
+<li><strong>B</strong>, 4 bits, la cantidad de rotación (Respóndase a usted mismo, ¿por qué 4 bits? <i class="em em-thinking_face"></i>)</li>
 <li><strong>C</strong>, 16 bits, salida con el resultado de la rotación.</li>
 </ul>
-<p>La salida en el output debería de ser <code>A</code> rotado por <code>B</code> bits, como se indicó anteriormente. Ustedes <strong>NO</strong> pueden utilizar los shifters que trae Logisim en su solución, pero todos los demás bloques combinacionales (multiplexores, constantes, compuertas, sumadores, etc) son permitidos.</p>
+<p>La salida en el output debería de ser <code>A</code> rotado por <code>B</code> bits, como se indicó anteriormente. Ustedes <strong>NO</strong> pueden utilizar los shifters que trae Logisim en su solución, pero todos los demás bloques combinacionales (multiplexores, splitters, túneles, constantes, compuertas, sumadores, etc) son permitidos.</p>
 <blockquote>
 <p><strong>HINT 1</strong>: Antes de empezar a cablear, deberían de pensar muuuuuuuy bien acerca de como pueden descomponer este problema en pequeñas partes y unirlas. Deberían de sentirse libres de implementar subcircuitos para implementar este ejercicio. Si no los utilizan, se van a arrepentir.</p>
-<p><strong>HINT 2</strong>: Solo porque les dimos una representación en RTL no significa que esta sea la mejor opción para abordar el problema. Piensen en los bits de entrada de <code>B</code> y en como pueden utilizar efectivamente los splitters. ¿Pueden ustedes hacer algo parecido a el ejercicio 4 del <a href="https://cc-3.github.io/labs/lab00/">Lab 0</a>, donde utilizaron una forma binaria para resolver el problema?</p>
+<p><strong>HINT 2</strong>: Solo porque les dimos una representación en RTL no significa que esta sea la mejor opción para abordar el problema. Piense en los bits de entrada de <code>B</code> y en como pueden utilizar efectivamente los splitters. Piense en cómo resolvio el multiplexor de 4 a 1 la semana pasada, usando su multiplexor de 2 a 1.</p>
 </blockquote>
-<p>Si su cableado de un splitter grande se está volviendo desordenado, a veces cambiar los splitters pueden mantener las cosas más limpias y localizables. Por ejemplo, un split de 1 a 16 puede ser alcanzado, cambiando la propiedad fan out a 4 y conectar 4 splitters con fan out de 4 también.</p>
+<p>Si su cableado de un splitter grande se está volviendo desordenado, a veces cambiar los splitters pueden mantener las cosas más limpias y localizables. Por ejemplo, en lugar de utilizar un splitter de 1 a 16, puede primero dividir en 4, y luego volver a dividir en 4.</p>
+<p>¡Este ejercicio lo hará pensar bastante!</p>
 <h2 id="ejercicio-3-alu">Ejercicio 3: ALU<a class="headerlink" href="#ejercicio-3-alu" title="Permanent link">&para;</a></h2>
 <p>En este ejercicio ustedes van a implementar un ALU de 32 bits. Van estar trabajando en el archivo llamado <strong>ALU.circ</strong>. Como un recordatorio, ALU significa <em>Arithmetic Logic Unit</em> (Unidad Arimética Lógica). Un ALU es una pieza fundamental de un CPU y realiza operaciones aritméticas y lógicas (bitwise). La función que el ALU realiza (ejemplo add, xor) es determinada por el control de nuestro datapath, que esta determinado por la instrucción que nuestro procesador está ejecutando. El ALU está resaltado en el siguiente diagrama de un datapath simplificado:</p>
 <p align="center">
   <img src="/img/labs/lab06/alu.png" alt="ALU" width="400" />
 </p>
 
-<p>Este ejercicio de laboratorio es bastante similiar a una parte del proyecto 2 (bueno, la verdad es que esta en comparación con la del proyecto es un poco más simplificada). Esperamos que al realizar este ejercicio, el proyecto 2 se les haga un poco más fácil y suave de llevar.</p>
+<p>Este ejercicio es una versión simplificada de lo que le tocará hacer en el proyecto 2. Esperamos que al realizar este ejercicio, el proyecto 2 se les haga un poco más fácil y suave de llevar.</p>
 <p>Las 8 funciones que tienen que implementar son: <strong>shift left logical</strong>, <strong>shift right logical</strong>, <strong>shift right arithmetic</strong>, <strong>rotate left</strong>, <strong>rotate right</strong>, <strong>and</strong>, <strong>or</strong> y <strong>xor</strong>. El ALU va a realizar la función deseada sobre 2 entradas de 32 bits y tendrá una salida de 32 bits como resultado. <strong>Noten que Logisim tiene compuertas que hacen todas estas funciones, NO tienen que implementar ninguna por su cuenta, por favor no lo hagan</strong>.</p>
 <blockquote>
 <p><strong>HINT 1</strong>: Busquen el folder en Logisim etiquetado como Arithmetic para poder encontrar shifter, que será útil para varias de las operaciones.</p>
@@ -977,7 +969,7 @@
 </tbody>
 </table>
 <h2 id="calificacion">Calificación<a class="headerlink" href="#calificacion" title="Permanent link">&para;</a></h2>
-<p>Cuando crean que tengan ejercicios completos, pueden utilizar el autograder localmente escribiendo en la terminal:</p>
+<p>Cuando crean que tengan ejercicios completos, pueden utilizar el autograder escribiendo en la terminal:</p>
 <div class="codehilite"><pre><span></span>./check
 </pre></div>
 
@@ -1002,14 +994,7 @@ Exercise           Grade   Message
 <span class="o">=</span>&gt; Score: <span class="m">100</span>/100
 </pre></div>
 
-<p>Cuando hayan terminado su laboratorio, o crean que están listos para obtener su nota, pueden subir su laboratorio al autograder utilizando:</p>
-<div class="codehilite"><pre><span></span>./submit &lt;TOKEN&gt;
-</pre></div>
-
-<blockquote>
-<p><strong>NOTA</strong>: Tienen que reemplazar &lt;TOKEN> por el  token que les da la siguiente <a href="https://dashboard.cc-3.site">página</a></p>
-</blockquote>
-<p>Luego, cuando haya sido calificado, pueden ver su resultado en <a href="https://dashboard.cc3.site/">https://dashboard.cc-3.site/</a>.</p>
+<p>Al finalizar, recuerde hacer <code>add</code>, <code>commit</code> y <code>push</code> hacia Github. Luego envíe el link de su repositorio en el GES. Si no envía el link, no podremos ponerle nota!</p>
                 
                   
                 
