@@ -557,18 +557,6 @@
   </li>
 
         
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../projextra/" title="Extra" class="md-nav__link">
-      Extra
-    </a>
-  </li>
-
-        
       </ul>
     </nav>
   </li>
@@ -836,23 +824,23 @@
 <ul>
 <li>Pueden utilizar cualquier bloque ya existente en Logisim para el proyecto.</li>
 <li>Guarden constantemente. Realicen commits y hagan push al menos una vez por cada día que trabajen.</li>
-<li>Logisim es un excelente simulador pero ocasionalmente tiene errores, entonces hagamos caso a la indicación anterior. Guarden constantemente...</li>
+<li>Logisim es un excelente simulador pero ocasionalmente tiene errores, entonces hagamos caso a la indicación anterior: Guarden constantemente.</li>
 <li>Trabajemos de la misma forma que en un proyecto de software: Construyamos el proyecto pieza por pieza y realicemos pruebas antes de unir un bloque con otros. Podemos construir todos los subcircuitos adicionales que necesitemos, siempre y cuando sigamos las reglas específicas que cada parte impone (más de esto a continuación).</li>
-<li>Se incluyen algunos tests. Sólo se debe correr el script ./check (esto seguramente tendrán que hacerlo en Linux, se requiere Python 3.X instalado).</li>
+<li>Se incluyen algunos tests que podrán correr con ./check como hemos hecho antes.</li>
 <li>¡Necesitaremos más tests! Cada equipo debería hacer sus propios tests adicionales. En la sección de <em>Testing</em> hay algunas indicaciones de cómo hacer pruebas adicionales.</li>
 </ul>
 <p>Finalmente, las dos indicaciones más importantes:</p>
 <ul>
-<li>Se les darán algunos armazones (harnesses) a los cuales sus circuitos se conectarán. ASEGURENSE QUE SÍ SE ADAPTAN DE FORMA CORRECTA, TODOS LOS TESTS FALLARÁN SI NO LO HACEN.</li>
-<li>En el camino nos hemos encontrado con algunos problemas de git merge si ambos miembros del equipo estaban trabajando en el mismo archivo; a veces git los resolvía automáticamente y a veces no. En Logisim es garantizado que git NO RESOLVERÁ ESTO DE FORMA CORRECTA, entonces si trabajamos en equipo NO DEBEMOS MODIFICAR EL MISMO ARCHIVO AL MISMO TIEMPO</li>
+<li>Se les darán algunos armazones (harnesses) a los cuales sus circuitos se conectarán. Asegúrese de no eliminar, mover o renombrar las entradas y salidas que ya vienen allí. Si lo hace, todo el autograder fallará y deberá volver a cablear desde cero.</li>
+<li>Guarde constantemente y haga push constantemente. Para bien o para mal, Logisim está construído sobre Java y a veces se traba y borra su progreso. Guarde cosntantemente y haga push constantemente.</li>
 </ul>
 <h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
 <p><strong>Antes de comenzar, asegúrense de que hayan <span style="color: red">leído y comprendido</span> todas las instrucciones del proyecto de principio a fin</strong>. Si tienen alguna pregunta, por favor diríjanse a <strong>Slack</strong> y pregunten en los canales correspondientes.</p>
-<p>Para comenzar con el proyecto, primero tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/g/88J4afXx">aquí</a>. Tienen permitido trabajar en parejas o de forma individual, por lo que al aceptar la asignación les preguntará si desean crear un grupo nuevo o unirse a uno ya existente. Si crean un grupo nuevo, ingresen un nombre que los represente. (Elijan un nombre bonito, que sea facil de identificar, no pongan algo aburrido como Proyecto-CC3-11002191)</p>
+<p>Para comenzar con el proyecto, primero tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/36MgGRlV">aquí</a>. Tienen permitido trabajar en parejas o de forma individual, por lo que al aceptar la asignación les preguntará si desean crear un grupo nuevo o unirse a uno ya existente. Si crean un grupo nuevo, ingresen un nombre que represente lo represente  y que no haya sido tomado por otro.</p>
 <p><img alt="Create group" src="/img/projs/proj01/classroom1.png" /></p>
 <p>Si desean unirse a un grupo ya creado, tienen que buscar el nombre del grupo y pulsar el botón que dice <strong>join</strong></p>
 <p><img alt="Join group" src="/img/projs/proj01/classroom2.png" /></p>
-<p><strong>Tienen que tener mucho cuidado al unirse a un grupo ya existente, ya que esto no se puede cambiar después, además, lo consideraremos como <span style="color: red">PLAGIO</span> si lo realizan de manera incorrecta, ya que al hacer esto pueden tener acceso al repositorio del otro miembro del grupo.</strong></p>
+<p><strong>Tienen que tener mucho cuidado al unirse a un grupo ya existente, ya que esto no se puede cambiar después, además lo consideraremos como <span style="color: red">PLAGIO</span> si lo realizan de manera incorrecta, ya que al hacer esto pueden tener acceso al repositorio del otro miembro del grupo.</strong></p>
 <p>Ya sea que se unan o creen un nuevo grupo, al finalizar el proceso les creará automáticamente un repositorio con una extensión que termina con su nombre de grupo. Ya habiendo hecho todo eso, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd >CTRL</kbd> <kbd>+</kbd> <kbd>T</kbd>):</p>
 <div class="codehilite"><pre><span></span>git clone &lt;link del repositorio&gt;
 </pre></div>
@@ -907,6 +895,7 @@
 </tr>
 </tbody>
 </table>
+<p><strong>IMPORTANTE:</strong> Tienen que poner los registros zero y a1, estos sí se usa en el proyecto aunque no aparezcan en el esqueleto que se menciona a continuación.</p>
 <p>En el archivo <strong>regfile.circ</strong> se encuentra el esqueleto de un register file.</p>
 <p><img alt="Register File" src="/img/projs/proj02/regfile.png" /></p>
 <p>Este tiene seis entradas:</p>
@@ -1009,11 +998,12 @@
 </tbody>
 </table>
 <p>Las salidas para DEBUG/TEST están presentes porque son registros de uso frecuente (por ejemplo, tienen un trabajo importante en las llamadas a funciones). Se utilizarán sólo para pruebas del autograder. En un register file de verdad estas salidas no existirían. Para el proyecto deben estar presentes y funcionar bien para facilitar la calificación.</p>
-<p>Pueden modificar regfile.circ como deseen, pero las salidas deben cumplir con el comportamiento que se indica. Deben ser cuidadosos de no modificar (mover, reemplazar, cortar, pegar, eliminar, etc) los pines de entrada o salida. Si necesitan más espacio, pueden moverlos mientras sean cuidadosos de mantener el posicionamiento relativo que estos tienen. Para verificar que nuestros cambios no "rompan" nada, podemos abrir regfile-harness.circ y revisar que no existan errores allí y que todo funcione bien.</p>
+<p>Pueden modificar regfile.circ como deseen, pero las salidas deben cumplir con el comportamiento que se indica. Deben ser cuidadosos de no modificar (mover a lo loco, reemplazar, cortar, pegar, eliminar, etc) los pines de entrada o salida. Si necesitan más espacio, pueden moverlos mientras sean cuidadosos de mantener el posicionamiento relativo que estos tienen (es decir, no acercarlos ni alejarlos entre sí). Para verificar que nuestros cambios no "rompan" nada, podemos abrir <strong>regfile-harness.circ</strong> y revisar que no existan errores allí y que todo funcione bien.</p>
+<p>HINT: Sus muxes siempre deberían estar habilitados y emitiendo algún valor.</p>
 <h2 id="parte-2-alu">Parte 2: ALU<a class="headerlink" href="#parte-2-alu" title="Permanent link">&para;</a></h2>
 <p>Su segunda tarea es crear un ALU que soporte todas las operaciones que necesitan las instrucciones de nuestro ISA (se detallan más adelante). Van a estar trabajando en el archivo <strong>alu.circ</strong>.</p>
 <p><img alt="ALU" src="/img/projs/proj02/alu.png" /></p>
-<p>Este tiene tres entradas:</p>
+<p>Este tiene tres entradas...</p>
 <table>
 <thead>
 <tr>
@@ -1040,7 +1030,7 @@
 </tr>
 </tbody>
 </table>
-<p>...y cuatro salidas:</p>
+<p>...y cuatro salidas</p>
 <table>
 <thead>
 <tr>
@@ -1131,13 +1121,14 @@
 </tr>
 </tbody>
 </table>
-<p>Algunas cosas adicionales que deben tener en mente:</p>
-<p>La salidas <code>Equal</code>, <code>LT</code>, <code>LTU</code> siempre tienen que sacar el valor correcto de comparación sin importar el valor de <code>ALU Op</code>. Nuevamente, deben tener cuidado con los inputs y output pins, no los modifiquen por ningún motivo.</p>
+<p>Algunas cosas adicionales que tienen que tener en mente:</p>
+<p>La salidas <code>Equal</code>, <code>LT</code>, <code>LTU</code> siempre tienen que sacar el valor correcto de comparación sin importar el valor de <code>ALU Op</code>. Nuevamente, tienen que tener cuidado con los inputs y output pins, no los modifiquen por ningún motivo.</p>
 <p>Su ALU debería de encajar con el harness <strong>alu_harness.circ</strong>. Sigan las mismas instrucciones que en el register file. En particular, ustedes deberían de asegurar que su ALU es cargado correctamente por el harness antes de que hagan submit.</p>
 <h2 id="parte-3-cpu">Parte 3: CPU<a class="headerlink" href="#parte-3-cpu" title="Permanent link">&para;</a></h2>
 <p>Se les provee un esqueleto del procesador en <strong>cpu.circ</strong>. Su procesador tendrá una instancia de su ALU y Register File, así como una unidad de memoria que ya se les provee. Ustedes son los responsables de construir el datapath y control completos, desde cero. Su procesador debe implementar el ISA que se detalla más abajo.</p>
 <p><img alt="CPU" src="/img/projs/proj02/cpu.png" /></p>
 <p>Su procesador obtendrá su programa del armazón (harness) <strong>riscv.circ</strong>. Su procesador tendrá un output llamado FETCH_ADDRESS que indica cuál instrucción queremos, esta dirección será entregada al harness y este nos dará una instrucción. La instrucción será recibida por el procesador y será ejecutada. Revisen riscv.circ para ver exactamente qué sucede.</p>
+<p>Resumiendo un poco de esto: En <strong>cpu.circ</strong> usted no pone memoria de instrucciones, las instrucciones se obtienen del <strong>riscv.circ</strong> ya hecho por nosotros.</p>
 <p>El procesador tiene dos inputs que vienen del harness:</p>
 <table>
 <thead>
@@ -1261,7 +1252,7 @@
 <h3 id="control">Control<a class="headerlink" href="#control" title="Permanent link">&para;</a></h3>
 <p>Las señales de control tienen un papel muy importante en el proyecto. Se sugiere volver a leer el capítulo 4 del libro para darse cuenta dónde podemos necesitar un MUX y, por lo tanto, alguna señal de control.</p>
 <p>Existen varias formas de implementar las señales de control. Por ejemplo, pueden construir una palabra de control y guardarla en una memoria ROM (micro-codigo) o pueden construir un circuito que elija qué acción tomar basándose en algunos bits del opcode, func3 y func7.</p>
-<p><strong>Es obligatorio que sus componentes estén unidos y las señales de control necesarias estén implementadas. <span style="color: red">Si en la calificación del proyecto sólo tiene componentes sueltos (como el ALU y Reg File de la primera fase) y estos no se comunican entre sí, su nota será cero.</span></strong></p>
+<p><strong>Es obligatorio que sus componentes estén unidos y las señales de control necesarias estén implementadas.</strong> Si en la calificación del proyecto sólo tiene componentes sueltos (como el ALU y Reg File de la primera fase) y estos no se comunican entre sí, su nota será cero.</p>
 <p>Consejo final: ¡Modularicen! Creen los subcircuitos que sean necesarios y diséñenlos bien antes de empezar a construirlos.</p>
 <h3 id="isa">ISA<a class="headerlink" href="#isa" title="Permanent link">&para;</a></h3>
 <p><img alt="Formato de instrucciones" src="/img/projs/proj02/instruction_format.png" /></p>
@@ -1523,12 +1514,13 @@
 <p>Logisim tiene un "Reference", en la pestaña "Help", y les dice las especificaciones de cada componente.</p>
 <p>Do NOT gate the clock! (esto no tiene una traducción directa). Los clocks tienen que llegar directo a los circuitos, ni en CC3 ni en un curso donde usen hardware deberían colocar compuertas antes que la señal de reloj entre al componente.</p>
 <p>Si están usando varias ventanas de Logisim tengan mucho cuidado cuando hagan copy-paste de una ventana a otra. Asegúrense que sí se copió el circuito completo que querían y que funcione bien después de pegarlo.</p>
-<p>Cuando importen otro archivo (Project -&gt; Load Library -&gt; Logisim Library...), este aparecerá como un folder en el panel de la izquierda. Los archivos esqueleto deberían de tener importado todo lo necesario.</p>
-<p>Cambiar los atributos antes de colocar un componente cambia el default. Si quieren colocar varios pines de 32 bits (por ejemplo), habría que cambiarlo antes de colocar el primero. Si sólo quieren cambiar algún valor para un componente, primero lo colocan y luego lo cambian.</p>
+<p>Cuando importen otro archivo (Project -&gt; Load Library -&gt; Logisim Library...), este aparecerá como un folder en el panel de la izquierda. Los archivos esqueleto traen ya importado todo lo necesario.</p>
+<p>Cambiar los atributos antes de colocar un componente cambia el default. Si quieren colocar varios pines de 32 bits (por ejemplo), habría que cambiarlo antes de colocar el primero. Si sólo quieren cambiar algún valor para un componente, primero lo colocan y, luego, lo cambian.</p>
 <p>Cuando cambian los inputs y outputs de un subcircuito que ya colocaron en main, Logisim automáticamente añade o remueve puertos según los cambios que hagan. Esto, muchas veces, afecta el tamaño o posición del subcircuito. Si ya habían cables conectados, Logisim intentará moverlos, pero no siempre lo hace bien. Se recomienda que si van a cambiar los inputs y outputs de un circuito, primero desconecten todos los cables que este pueda tener en main o lo eliminen del main y lo vuelvan a colocar después de cambiarlo. <strong>Recuerden que sólo pueden hacer esto para los subcircuitos que USTEDES agregan</strong>.</p>
 <p>Los cables rojos significan que algo está mal conectado. Algunos casos pueden no ser tan obvios, revisen bien todas las conexiones cercanas.</p>
 <p><img alt="Red Wires" src="/img/projs/proj02/error_wire.png" /></p>
-<p>Logisim tiene algunas herramientas de análisis combinacional (nos puede construir mapas de Karnaugh o circuitos completos con sólo darle una tabla :D). Si ustedes aprenden a usarla, puede serles util para implementar su parte de Control.</p>
+<p>Logisim tiene algunas herramientas de análisis combinacional (nos puede construir mapas de Karnaugh o circuitos completos con sólo darle una tabla :D).</p>
+<p>Finalmente, <strong>guarden y hagan push constantemente</strong>, no se arriesguen a perder su avance en caso que Logisim falle.</p>
 <h2 id="calificacion">Calificación<a class="headerlink" href="#calificacion" title="Permanent link">&para;</a></h2>
 <p>Ustedes pueden verificar que cada parte funcione correctamente utilizando el autograder local, corriendo el siguiente comando en la terminal:</p>
 <div class="codehilite"><pre><span></span>./check
@@ -1548,24 +1540,15 @@
 
 Exercise            Grade  Message
 ----------------  -------  ---------
-<span class="m">1</span>. ALU                 <span class="m">25</span>  passed
-<span class="m">2</span>. Register File       <span class="m">25</span>  passed
-<span class="m">3</span>. CPU                 <span class="m">50</span>  <span class="nv">passed</span>
+<span class="m">1</span>. ALU                 <span class="m">20</span>  passed
+<span class="m">2</span>. Register File       <span class="m">20</span>  passed
+<span class="m">3</span>. CPU                 <span class="m">60</span>  <span class="nv">passed</span>
 
 <span class="o">=</span>&gt; Score: <span class="m">100</span>/100
 </pre></div>
 
-<p>Pueden subir su proyecto para calificación utilizando:</p>
-<div class="codehilite"><pre><span></span>autograder --upload
-</pre></div>
-
-<p>Luego revisan su nota usando:</p>
-<div class="codehilite"><pre><span></span>autograder --stats
-</pre></div>
-
-<p><strong>Es obligatorio que sus componentes estén unidos y las señales de control necesarias estén implementadas. <span style="color: red">Si en la calificación del proyecto sólo tiene componentes sueltos (como el ALU y Reg File de la primera fase) y estos no se comunican entre sí, su nota será cero.</span></strong></p>
-<p><strong>En otras palabras: no puede hacer solo el ALU y Reg File para sacar 50/100, si lo intenta se le pondra 0/100 (cero puntos sobre cien) de nota. Tiene que hacer unir este ALU, Reg File y demás componentes y hacer funcionar varias instrucciones</strong></p>
-<p>Si considera que el autograder no le esta dando suficientes puntos, <a href="#testing">haga sus propias pruebas</a> y al momento de la calificacion personal uselas para demostrar que sus instrucciones funcionan.</p>
+<p>Al finalizar, haga <code>add</code>, <code>commit</code> y <code>push</code>. Ambos miembros del equipo deben subir el link de su repo al GES.</p>
+<p>Recuerde que si solo entrega piezas sueltas, tendrá cero en el proyecto. En otras palabras, debe sacar puntos en <code>3. CPU</code> para que su nota cuente.</p>
                 
                   
                 
@@ -1601,13 +1584,13 @@ Exercise            Grade  Message
           </a>
         
         
-          <a href="../projextra/" title="Extra" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../tutorials/python/" title="Python" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Siguiente
                 </span>
-                Extra
+                Python
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
