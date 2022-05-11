@@ -105,7 +105,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#lab-10-simd-intrinsics-y-loop-unrolling" tabindex="1" class="md-skip">
+      <a href="#lab-8-simd-intrinsics-y-loop-unrolling" tabindex="1" class="md-skip">
         Saltar a contenido
       </a>
     
@@ -439,6 +439,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#informacion-importante-sobre-el-speedup" title="Información importante sobre el speedup" class="md-nav__link">
+    Información importante sobre el speedup
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#calificacion" title="Calificación" class="md-nav__link">
     Calificación
   </a>
@@ -709,6 +716,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#informacion-importante-sobre-el-speedup" title="Información importante sobre el speedup" class="md-nav__link">
+    Información importante sobre el speedup
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#calificacion" title="Calificación" class="md-nav__link">
     Calificación
   </a>
@@ -734,7 +748,7 @@
                   <a href="https://github.com/cc-3/MachineStructures/edit/master/page/es/docs/labs/lab10.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="lab-10-simd-intrinsics-y-loop-unrolling">Lab 10 - SIMD Intrinsics y Loop Unrolling<a class="headerlink" href="#lab-10-simd-intrinsics-y-loop-unrolling" title="Permanent link">&para;</a></h1>
+                <h1 id="lab-8-simd-intrinsics-y-loop-unrolling">Lab 8 - SIMD Intrinsics y Loop Unrolling<a class="headerlink" href="#lab-8-simd-intrinsics-y-loop-unrolling" title="Permanent link">&para;</a></h1>
 <h2 id="objetivos">Objetivos<a class="headerlink" href="#objetivos" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Aprender acerca de las instrucciones SIMD y hacer data level parallelism.</li>
@@ -742,7 +756,7 @@
 <li>Aprender acerca de loop unrolling y por qué este funciona.</li>
 </ul>
 <h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
-<p>Tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/X0ZZNHpp">aquí</a>. Recuerden que tienen que aprovechar el uso de Git y subir el link de su repositorio al GES, así como al autograder, de lo contrario su nota será de <strong>0</strong>.</p>
+<p>Tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/2NUF1_kz">aquí</a>. Recuerde hacer commit y push hacia Github, así como subir su link al GES, de lo contrario su nota será <strong>0</strong>.</p>
 <h2 id="ejercicio-1-familiarizandose-con-las-funciones-simd">Ejercicio 1: Familiarizándose con las funciones SIMD.<a class="headerlink" href="#ejercicio-1-familiarizandose-con-las-funciones-simd" title="Permanent link">&para;</a></h2>
 <p>Dado el gran número disponible de instrucciones SIMD, queremos que ustedes aprendan cómo encontrar aquellas que necesitarán para determinadas aplicaciones. Intel proporciona una variedad de herramientas relacionadas a intrinsics, las cuales pueden encontrar <a href="https://software.intel.com/en-us/isa-extensions">aquí</a> (estas no son necesarias para este laboratorio). Nosotros estamos, particularmente, interesados en la <a href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/">Guía Intel Intrinsics</a>. Abran esta página y, una vez estén dentro, hagan click en todos los checkboxes que empiecen con <strong><em>SSE</em></strong> (desde SSE hasta SSE4.2). Hagan su mejor esfuerzo para interpretar esta nueva sintaxis y terminología.</p>
 <p>Encuentren la instrucción de 128 bits para las siguientes operaciones SIMD:</p>
@@ -863,11 +877,26 @@
 <div class="codehilite"><pre><span></span>./sum
 </pre></div>
 
-<h2 id="calificacion">Calificación<a class="headerlink" href="#calificacion" title="Permanent link">&para;</a></h2>
-<p>Al terminar, deben de subir su laboratorio al autograder con:</p>
-<p><div class="codehilite"><pre><span></span>./submit &lt;TOKEN&gt;
+<h2 id="informacion-importante-sobre-el-speedup">Información importante sobre el speedup<a class="headerlink" href="#informacion-importante-sobre-el-speedup" title="Permanent link">&para;</a></h2>
+<p>Cuando ejecute <code>./sum</code> verá cuatro tiempos desplegados, parecidos a estos. Cada quien tendrá tiempos distintos, y estos cambiarán cada vez que se ejecute.</p>
+<div class="codehilite"><pre><span></span>               naive: 3.37 microseconds
+            unrolled: 2.56 microseconds
+          vectorized: 2.04 microseconds
+ vectorized unrolled: 1.23 microseconds
 </pre></div>
-No olviden subir el link de su repositorio en Github al GES.</p>
+
+<p>Tenemeos dos objetivos:</p>
+<ul>
+<li>Para obtener los puntos del ejercicio 2, el tiempo de <code>vectorized</code> debe ser menor al de <code>naive</code> y menor al de <code>unrolled</code></li>
+<li>Para obtener los puntos del ejercicio 3, tiene que cumplir con lo anterior, y adicionalmente el tiempo de <code>vectorized unrolled</code> debe ser menor al de <code>vectorized</code></li>
+</ul>
+<p>Pruebe varias veces y asegúrese que <strong>casi siempre</strong> se cumplan los objetivos, es normal que <strong>a veces</strong> falle. Por ejemplo, si pruebo 10 veces espero lograr el objetivo unas 7 u 8 veces.</p>
+<h2 id="calificacion">Calificación<a class="headerlink" href="#calificacion" title="Permanent link">&para;</a></h2>
+<p>Una vez obtenidos los speedups indicados en el inciso anterior, haga check y debería obtener una nota de 100 puntos.</p>
+<div class="codehilite"><pre><span></span>./check
+</pre></div>
+
+<p>Recuerde hacer <code>add</code>, <code>commit</code> y <code>push</code> de sus archivos. Después suba el link de su repositorio al GES.</p>
                 
                   
                 
