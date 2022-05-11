@@ -105,7 +105,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#lab-8-simd-intrinsics-y-loop-unrolling" tabindex="1" class="md-skip">
+      <a href="#lab-10-simd-intrinsics-y-loop-unrolling" tabindex="1" class="md-skip">
         Saltar a contenido
       </a>
     
@@ -439,13 +439,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#informacion-importante-sobre-la-calificacion-de-este-laboratorio" title="Informacion importante sobre la calificacion de este laboratorio" class="md-nav__link">
-    Informacion importante sobre la calificacion de este laboratorio
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#calificacion" title="Calificación" class="md-nav__link">
     Calificación
   </a>
@@ -519,18 +512,6 @@
   <li class="md-nav__item">
     <a href="../../projs/proj02/" title="2: Procesador" class="md-nav__link">
       2: Procesador
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../projs/projextra/" title="Extra" class="md-nav__link">
-      Extra
     </a>
   </li>
 
@@ -728,13 +709,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#informacion-importante-sobre-la-calificacion-de-este-laboratorio" title="Informacion importante sobre la calificacion de este laboratorio" class="md-nav__link">
-    Informacion importante sobre la calificacion de este laboratorio
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#calificacion" title="Calificación" class="md-nav__link">
     Calificación
   </a>
@@ -760,7 +734,7 @@
                   <a href="https://github.com/cc-3/MachineStructures/edit/master/page/es/docs/labs/lab10.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="lab-8-simd-intrinsics-y-loop-unrolling">Lab 8 - SIMD Intrinsics y Loop Unrolling<a class="headerlink" href="#lab-8-simd-intrinsics-y-loop-unrolling" title="Permanent link">&para;</a></h1>
+                <h1 id="lab-10-simd-intrinsics-y-loop-unrolling">Lab 10 - SIMD Intrinsics y Loop Unrolling<a class="headerlink" href="#lab-10-simd-intrinsics-y-loop-unrolling" title="Permanent link">&para;</a></h1>
 <h2 id="objetivos">Objetivos<a class="headerlink" href="#objetivos" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Aprender acerca de las instrucciones SIMD y hacer data level parallelism.</li>
@@ -768,7 +742,7 @@
 <li>Aprender acerca de loop unrolling y por qué este funciona.</li>
 </ul>
 <h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
-<p>Tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/rmvvFKYA">aquí</a>. Recuerden que deben subir el link de su repositorio al GES, así como enviar a traves del autograder, de lo contrario su nota será de <strong>0</strong>.</p>
+<p>Tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/X0ZZNHpp">aquí</a>. Recuerden que tienen que aprovechar el uso de Git y subir el link de su repositorio al GES, así como al autograder, de lo contrario su nota será de <strong>0</strong>.</p>
 <h2 id="ejercicio-1-familiarizandose-con-las-funciones-simd">Ejercicio 1: Familiarizándose con las funciones SIMD.<a class="headerlink" href="#ejercicio-1-familiarizandose-con-las-funciones-simd" title="Permanent link">&para;</a></h2>
 <p>Dado el gran número disponible de instrucciones SIMD, queremos que ustedes aprendan cómo encontrar aquellas que necesitarán para determinadas aplicaciones. Intel proporciona una variedad de herramientas relacionadas a intrinsics, las cuales pueden encontrar <a href="https://software.intel.com/en-us/isa-extensions">aquí</a> (estas no son necesarias para este laboratorio). Nosotros estamos, particularmente, interesados en la <a href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/">Guía Intel Intrinsics</a>. Abran esta página y, una vez estén dentro, hagan click en todos los checkboxes que empiecen con <strong><em>SSE</em></strong> (desde SSE hasta SSE4.2). Hagan su mejor esfuerzo para interpretar esta nueva sintaxis y terminología.</p>
 <p>Encuentren la instrucción de 128 bits para las siguientes operaciones SIMD:</p>
@@ -889,28 +863,11 @@
 <div class="codehilite"><pre><span></span>./sum
 </pre></div>
 
-<h2 id="informacion-importante-sobre-la-calificacion-de-este-laboratorio">Informacion importante sobre la calificacion de este laboratorio<a class="headerlink" href="#informacion-importante-sobre-la-calificacion-de-este-laboratorio" title="Permanent link">&para;</a></h2>
-<p>Cuando ejecute <code>./sum</code> vera cuatro tiempos desplegados, parecidos a estos (cada quien tendra tiempos distintos que cambiaran cada vez que ejecute)
-<div class="codehilite"><pre><span></span>               naive: 3.37 microseconds
-            unrolled: 2.56 microseconds
-          vectorized: 2.04 microseconds
- vectorized unrolled: 1.23 microseconds
-</pre></div></p>
-<p>Tenemos dos objetivos:</p>
-<ul>
-<li>Para obtener los puntos del ejercicio 2: El tiempo de <code>vectorized</code> debe ser menor al de <code>naive</code> y menor al de <code>unrolled</code></li>
-<li>Para obtener los puntos del ejercicio 3: Debe tener bueno el ejercicio 2, y adicionalmente el tiempo de <code>vectorized unrolled</code> debe ser menor al de <code>vectorized unrolled</code></li>
-</ul>
-<p>Antes de subir al autograder, pruebe varias veces y asegurese que <strong>casi siempre</strong> se cumplan los objetivos, es normal que <strong>a veces</strong> falle. Por ejemplo, si pruebo 10 veces espero lograr el objetivo por lo menos unas 7 u 8 veces. Cuando logre esto, ya puede subir al autograder.</p>
-<p><strong>Ya subi al autograder, pero este me marca malos mis ejercicios!</strong> Si esta seguro que cumplio con lo anterior, por favor vuelva a subir al autograder (asi como la medicion puede fallar en su maquina, tambien puede fallar en nuestro servidor, desafortunadamente esto es inevitable). Si despues de un par de intentos el problema continua, por favor avisele a alguien del staff para que lo apoyen en revisar su codigo.</p>
 <h2 id="calificacion">Calificación<a class="headerlink" href="#calificacion" title="Permanent link">&para;</a></h2>
-<p>Al terminar, haga add + commit + push de su trabajo hacia Github.</p>
-<p>Entrege su laboratorio usando el comando:
-<div class="codehilite"><pre><span></span>autograder --upload
-</pre></div></p>
-<p>Revise su nota usando el comando:
-<div class="codehilite"><pre><span></span>autograder --stats
-</pre></div></p>
+<p>Al terminar, deben de subir su laboratorio al autograder con:</p>
+<p><div class="codehilite"><pre><span></span>./submit &lt;TOKEN&gt;
+</pre></div>
+No olviden subir el link de su repositorio en Github al GES.</p>
                 
                   
                 
