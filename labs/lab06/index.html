@@ -105,7 +105,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#lab-5-logisim" tabindex="1" class="md-skip">
+      <a href="#lab-6-logisim" tabindex="1" class="md-skip">
         Saltar a contenido
       </a>
     
@@ -457,8 +457,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../lab08/" title="8: Logisim PJ2 ALU" class="md-nav__link">
-      8: Logisim PJ2 ALU
+    <a href="../lab08/" title="8: SIMD" class="md-nav__link">
+      8: SIMD
     </a>
   </li>
 
@@ -469,20 +469,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../lab09/" title="9: SIMD" class="md-nav__link">
-      9: SIMD
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../lab10/" title="10: OpenMP" class="md-nav__link">
-      10: OpenMP
+    <a href="../lab09/" title="9: OpenMP" class="md-nav__link">
+      9: OpenMP
     </a>
   </li>
 
@@ -760,7 +748,7 @@
                   <a href="https://github.com/cc-3/MachineStructures/edit/master/page/es/docs/labs/lab06.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="lab-5-logisim">Lab 6 - Logisim<a class="headerlink" href="#lab-5-logisim" title="Permanent link">&para;</a></h1>
+                <h1 id="lab-6-logisim">Lab 6 - Logisim<a class="headerlink" href="#lab-6-logisim" title="Permanent link">&para;</a></h1>
 <h2 id="objetivos">Objetivos<a class="headerlink" href="#objetivos" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Aprender a usar Logisim y simular circuitos en dicho programa.</li>
@@ -768,7 +756,7 @@
 </ul>
 <h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
 <p>Para este laboratorio, es necesaria la aplicación Logisim. La cual se puede descargar en este <a href="http://www.cburch.com/logisim/index.html">link</a>.</p>
-<p>También tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/jeBySPd8">aquí</a>. Recuerden que deben aceptar la asignación de <strong>GitHub Classroom</strong> y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):</p>
+<p>También tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/jeBySPd8&quot;&gt;aquí">aquí</a>. Recuerden que deben aceptar la asignación de <strong>GitHub Classroom</strong> y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):</p>
 <div class="codehilite"><pre><span></span>git clone &lt;link del repositorio&gt;
 </pre></div>
 
@@ -890,9 +878,7 @@ Para regresar al circuito principal, hay que hacer click en el módulo del circu
 <p>¿Cómo se lee?
 La primera fila de la tabla se entiende de esta manera: “Dado el estado 00, si el input es 0, entonces se hace una transición al estado 01 y devuelve un output de 1”.</p>
 <p>Para este ejercicio se les provee el circuito <strong>ex3.circ</strong>. El trabajo a realizar es completar el circuito y lograr que se comporte como el AFD mostrado anteriormente. Para esto ustedes solo van a modificar 2 subcircuitos: <strong>StateBitOne</strong> y <strong>StateBitZero</strong>.</p>
-<p>Se tienen dos opciones para completar el circuito: 1) fuerza bruta o 2) imaginación.
-Con la imaginación es posible completar el circuito utilizando un total de 3 componentes, pero, si se resuelve con la fuerza bruta, el número será mucho mayor. Se tiene todas las herramientas y las pistas necesarias para terminar el ejercicio con 3 componentes.
-¡Éxitos! :D</p>
+<p>Se tienen dos opciones para completar el circuito: 1) fuerza bruta (suma de productos) o 2) aprovechar patrones (mapas de Karnaugh). Si lo resuelve con mapas de Karnaugh, usará significativamente menos componentes en su respuesta.</p>
 <h1 id="calificacion">Calificación<a class="headerlink" href="#calificacion" title="Permanent link">&para;</a></h1>
 <p>Cuando crean que tiene ejercicios completos pueden hacer la prueba localmente escribiendo en la terminal:</p>
 <div class="codehilite"><pre><span></span>./check
@@ -919,8 +905,6 @@ Exercise                    Grade  Message
 
 <span class="o">=</span>&gt; Score: <span class="m">100</span>/100
 </pre></div>
-
-
                 
                   
                 

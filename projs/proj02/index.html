@@ -375,8 +375,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../labs/lab08/" title="8: Logisim PJ2 ALU" class="md-nav__link">
-      8: Logisim PJ2 ALU
+    <a href="../../labs/lab08/" title="8: SIMD" class="md-nav__link">
+      8: SIMD
     </a>
   </li>
 
@@ -387,20 +387,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../labs/lab09/" title="9: SIMD" class="md-nav__link">
-      9: SIMD
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../labs/lab10/" title="10: OpenMP" class="md-nav__link">
-      10: OpenMP
+    <a href="../../labs/lab09/" title="9: OpenMP" class="md-nav__link">
+      9: OpenMP
     </a>
   </li>
 
@@ -848,7 +836,7 @@
 </ul>
 <h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
 <p><strong>Antes de comenzar, asegúrense de que hayan <span style="color: red">leído y comprendido</span> todas las instrucciones del proyecto de principio a fin</strong>. Si tienen alguna pregunta, por favor diríjanse a <strong>Slack</strong> y pregunten en los canales correspondientes.</p>
-<p>Para comenzar con el proyecto, primero tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/g/Lvvwg7Wz">aquí</a>. Tienen permitido trabajar en parejas o de forma individual, por lo que al aceptar la asignación les preguntará si desean crear un grupo nuevo o unirse a uno ya existente. Si crean un grupo nuevo, ingresen un nombre que represente lo represente  y que no haya sido tomado por otro.</p>
+<p>Para comenzar con el proyecto, primero tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/KKOa0Ell">aquí</a>. Tienen permitido trabajar en parejas o de forma individual, por lo que al aceptar la asignación les preguntará si desean crear un grupo nuevo o unirse a uno ya existente. Si crean un grupo nuevo, ingresen un nombre que represente lo represente  y que no haya sido tomado por otro.</p>
 <p><img alt="Create group" src="/img/projs/proj01/classroom1.png" /></p>
 <p>Si desean unirse a un grupo ya creado, tienen que buscar el nombre del grupo y pulsar el botón que dice <strong>join</strong></p>
 <p><img alt="Join group" src="/img/projs/proj01/classroom2.png" /></p>
@@ -1009,8 +997,9 @@
 </tbody>
 </table>
 <p>Las salidas para DEBUG/TEST están presentes porque son registros de uso frecuente (por ejemplo, tienen un trabajo importante en las llamadas a funciones). Se utilizarán sólo para pruebas del autograder. En un register file de verdad estas salidas no existirían. Para el proyecto deben estar presentes y funcionar bien para facilitar la calificación.</p>
+<p><strong>IMPORTANTE:</strong> En la primera tabla aparecen nueve registros y en la tabla anterior aparecen siete salidas, eso es intencional. Se estarán <strong>usando</strong> nueve, pero solo se estará <strong>revisando</strong> el valor de siete de ellos.</p>
 <p>Pueden modificar regfile.circ como deseen, pero las salidas deben cumplir con el comportamiento que se indica. Deben ser cuidadosos de no modificar (mover, reemplazar, cortar, pegar, eliminar, etc) los pines de entrada o salida. Si necesitan más espacio, pueden moverlos mientras sean cuidadosos de mantener el posicionamiento relativo que estos tienen. Para verificar que nuestros cambios no "rompan" nada, podemos abrir regfile-harness.circ y revisar que no existan errores allí y que todo funcione bien.</p>
-<p>HINTS: (1) Cuidado con los muxes. Si estos tienen un enable ese debería estar activo (o mejor aún, buscamos en la ayuda de Logisim cómo quitar esa funcionalidad). (2) ¿Tri-estado? Three-state? En CC3 no debemos pensar en estados de alta impedancia (qu'est-ce que c'est?) entonces lo mejor es deshabilitar el uso de three-state.</p>
+<p>HINTS: (1) Cuidado con los muxes. Si estos tienen un enable ese debería estar activo (o mejor aún, buscamos en la ayuda de Logisim cómo quitar esa funcionalidad). (2) Si en algún momento se encuentra con algo que diga three-state o tri-estado, no lo use, desactíve esta opción. En cursos futuros le mencionarán estados de alta impedancia, pero eso no importa en CC3 y en Logisim.</p>
 <h2 id="parte-2-alu">Parte 2: ALU<a class="headerlink" href="#parte-2-alu" title="Permanent link">&para;</a></h2>
 <p>Su segunda tarea es crear un ALU que soporte todas las operaciones que necesitan las instrucciones de nuestro ISA (se detallan más adelante). Van a estar trabajando en el archivo <strong>alu.circ</strong>.</p>
 <p><img alt="ALU" src="/img/projs/proj02/alu.png" /></p>
@@ -1261,7 +1250,7 @@
 </table>
 <h3 id="control">Control<a class="headerlink" href="#control" title="Permanent link">&para;</a></h3>
 <p>Las señales de control tienen un papel muy importante en el proyecto. Se sugiere volver a leer el capítulo 4 del libro para darse cuenta dónde podemos necesitar un MUX y, por lo tanto, alguna señal de control.</p>
-<p>Existen varias formas de implementar las señales de control. Por ejemplo, pueden construir una palabra de control y guardarla en una memoria ROM (micro-codigo) o pueden construir un circuito que elija qué acción tomar basándose en algunos bits del opcode, func3 y func7.</p>
+<p>Existen varias formas de implementar las señales de control. Por ejemplo, pueden construir una palabra de control y guardarla en una memoria ROM (micro-código) o pueden construir un circuito que elija qué acción tomar basándose en algunos bits del opcode, func3 y func7.</p>
 <p><strong>Es obligatorio que sus componentes estén unidos y las señales de control necesarias estén implementadas.</strong> Si en la calificación del proyecto sólo tiene componentes sueltos (como el ALU y Reg File de la primera fase) y estos no se comunican entre sí, su nota será cero.</p>
 <p>Consejo final: ¡Modularicen! Creen los subcircuitos que sean necesarios y diséñenlos bien antes de empezar a construirlos.</p>
 <h3 id="isa">ISA<a class="headerlink" href="#isa" title="Permanent link">&para;</a></h3>
@@ -1549,16 +1538,14 @@
 
 Exercise            Grade  Message
 ----------------  -------  ---------
-<span class="m">1</span>. ALU                 <span class="m">25</span>  passed
-<span class="m">2</span>. Register File       <span class="m">25</span>  passed
-<span class="m">3</span>. CPU                 <span class="m">50</span>  <span class="nv">passed</span>
+<span class="m">1</span>. ALU                 <span class="m">10</span>  passed
+<span class="m">2</span>. Register File       <span class="m">10</span>  passed
+<span class="m">3</span>. CPU                 <span class="m">80</span>  <span class="nv">passed</span>
 
 <span class="o">=</span>&gt; Score: <span class="m">100</span>/100
 </pre></div>
 
-<p>Pueden subir su proyecto para calificación utilizando:</p>
-<div class="codehilite"><pre><span></span>./submit &lt;TOKEN&gt;
-</pre></div>
+<p><strong>IMPORTANTE:</strong> Para tener derecho a nota debe presentar un procesador conectado y funcionando. Es posible obtener los puntos de ALU y de Register File con componentes sueltos y desconectados, sin emgargo si usted presenta esto se le pondrá CERO de nota. En otras palabras, todas las notas de 20 o menos se convierten en CERO.</p>
                 
                   
                 
