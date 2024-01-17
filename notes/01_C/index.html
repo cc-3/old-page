@@ -567,6 +567,20 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#tipos-de-declaracion" title="Tipos de declaración" class="md-nav__link">
+    Tipos de declaración
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#declaracion-de-constantes" title="Declaración de constantes" class="md-nav__link">
+    Declaración de constantes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#valores-booleanos-en-c" title="Valores Booleanos en C" class="md-nav__link">
     Valores Booleanos en C
   </a>
@@ -650,8 +664,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ejemplo-asiginar-valores-usando-punteros" title="Ejemplo: Asiginar Valores Usando Punteros" class="md-nav__link">
-    Ejemplo: Asiginar Valores Usando Punteros
+  <a href="#ejemplo-asignar-valores-usando-punteros" title="Ejemplo: Asignar Valores Usando Punteros" class="md-nav__link">
+    Ejemplo: Asignar Valores Usando Punteros
   </a>
   
 </li>
@@ -748,6 +762,20 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#tipos-de-declaracion" title="Tipos de declaración" class="md-nav__link">
+    Tipos de declaración
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#declaracion-de-constantes" title="Declaración de constantes" class="md-nav__link">
+    Declaración de constantes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#valores-booleanos-en-c" title="Valores Booleanos en C" class="md-nav__link">
     Valores Booleanos en C
   </a>
@@ -831,8 +859,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ejemplo-asiginar-valores-usando-punteros" title="Ejemplo: Asiginar Valores Usando Punteros" class="md-nav__link">
-    Ejemplo: Asiginar Valores Usando Punteros
+  <a href="#ejemplo-asignar-valores-usando-punteros" title="Ejemplo: Asignar Valores Usando Punteros" class="md-nav__link">
+    Ejemplo: Asignar Valores Usando Punteros
   </a>
   
 </li>
@@ -873,30 +901,28 @@
 <p>C es un lenguaje compilado; se compila una vez para cada arquitectura y se genera un binario que se puede ejecutar directamente. Para poder compilar y ejecutar un archivo llamado HelloWorld.c, se realiza de la siguiente manera:</p>
 <div class="codehilite"><pre><span></span><span class="err">$</span> <span class="n">gcc</span> <span class="n">HelloWorld</span><span class="p">.</span><span class="n">c</span>		<span class="c1">// se compila el archivo</span>
 <span class="err">$</span> <span class="p">.</span><span class="o">/</span><span class="n">a</span><span class="p">.</span><span class="n">out</span>				<span class="c1">// se ejecuta el programa</span>
-<span class="err">$</span> <span class="n">Hello</span> <span class="n">World</span> 			<span class="c1">//output del programa, en este caso</span>
+<span class="err">$</span> <span class="n">Hello</span> <span class="n">World</span> 			<span class="c1">// output del programa, en este caso</span>
 </pre></div>
 
 <p>Notese que el compilador que estamos utilizando se llama <strong>gcc</strong>. <strong><em>gcc</em>* se encuentra por defecto en la mayoria de sistemas operativos con kernel </strong>linux<strong>. Cuando nosotros no especificamos un nombre para el archivo de salida, </strong>cgg<strong> lo nombra, por defecto, </strong>a.out**.</p>
 <p>Si queremos especificar un nombre para el archivo de salida entonces podemos utilizar la bandera <strong>-o</strong>:</p>
 <div class="codehilite"><pre><span></span><span class="err">$</span> <span class="n">gcc</span> <span class="o">-</span><span class="n">o</span> <span class="n">Hello</span> <span class="n">HelloWorld</span><span class="p">.</span><span class="n">c</span>		<span class="c1">// se compila el archivo</span>
 <span class="err">$</span> <span class="p">.</span><span class="o">/</span><span class="n">Hello</span>				        <span class="c1">// se ejecuta el programa</span>
-<span class="err">$</span> <span class="n">Hello</span> <span class="n">World</span> 			        <span class="c1">//output del programa, en este caso</span>
+<span class="err">$</span> <span class="n">Hello</span> <span class="n">World</span> 			        <span class="c1">// output del programa, en este caso</span>
 </pre></div>
 
 <h2 id="comentarios-en-c">Comentarios en c<a class="headerlink" href="#comentarios-en-c" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><span class="c1">// para realizar comentarios de una línea</span>
+
 <span class="cm">/* TODO LO QUE ESTE DENTRO</span>
 <span class="cm">	DE ESTA PARTE ES UN COMENTARIO */</span>
-<span class="err">```</span><span class="o">~</span>
-<span class="cp">## Tipos de declaración</span>
+</pre></div>
 
-<span class="n">Las</span> <span class="n">variables</span> <span class="n">deben</span> <span class="n">ser</span> <span class="n">declaradas</span> <span class="n">antes</span> <span class="n">de</span> <span class="n">usarse</span> <span class="n">y</span> <span class="n">el</span> <span class="n">tipo</span> <span class="n">de</span> <span class="n">la</span> <span class="n">variable</span> <span class="n">no</span> <span class="n">puede</span> <span class="n">ser</span> <span class="n">cambiado</span><span class="p">.</span> <span class="n">En</span> <span class="n">C</span><span class="p">,</span> <span class="n">el</span> <span class="n">tamaño</span> <span class="n">de</span> <span class="n">la</span> <span class="n">variable</span> <span class="n">depende</span> <span class="n">de</span> <span class="n">la</span> <span class="n">arquitectura</span> <span class="n">en</span> <span class="n">la</span> <span class="n">cual</span> <span class="n">se</span> <span class="n">este</span> <span class="n">trabajando</span> <span class="p">(</span><span class="n">x_86</span><span class="p">,</span> <span class="n">x_86_84</span><span class="p">,</span> <span class="n">ARM</span><span class="p">,</span> <span class="n">RISC</span><span class="o">-</span><span class="n">V</span><span class="p">,</span> <span class="n">etc</span><span class="p">.).</span>
-
-<span class="n">Algo</span> <span class="n">muy</span> <span class="n">importante</span> <span class="n">que</span> <span class="n">diferencia</span> <span class="n">lenguajes</span> <span class="n">como</span> <span class="n">Java</span> <span class="n">de</span> <span class="n">C</span><span class="p">,</span> <span class="n">es</span> <span class="n">que</span> <span class="n">en</span> <span class="n">C</span><span class="p">,</span> <span class="n">si</span> <span class="n">no</span> <span class="n">se</span> <span class="n">inicializa</span> <span class="n">el</span> <span class="n">valor</span> <span class="n">de</span> <span class="n">la</span> <span class="n">variable</span><span class="p">,</span> <span class="n">la</span> <span class="n">podemos</span> <span class="n">utilizar</span> <span class="n">sin</span> <span class="n">problemas</span><span class="p">,</span> <span class="n">pero</span> <span class="n">contendrá</span> <span class="n">información</span> <span class="s">&quot;basura&quot;</span><span class="p">,</span> <span class="n">es</span> <span class="n">decir</span><span class="p">,</span> <span class="n">los</span> <span class="n">datos</span> <span class="n">que</span> <span class="n">estaban</span> <span class="n">ubicados</span> <span class="n">previamente</span> <span class="n">en</span> <span class="n">la</span> <span class="n">dirección</span> <span class="n">de</span> <span class="n">memoria</span> <span class="n">en</span> <span class="n">donde</span> <span class="n">la</span> <span class="n">variable</span> <span class="n">fue</span> <span class="n">guardada</span><span class="p">.</span>
-
-<span class="cp">## Declaración de constantes</span>
-<span class="err">```</span><span class="n">C</span>
-<span class="cp">#define CONSTANTE_DEFINE 25</span>
+<h2 id="tipos-de-declaracion">Tipos de declaración<a class="headerlink" href="#tipos-de-declaracion" title="Permanent link">&para;</a></h2>
+<p>Las variables deben ser declaradas antes de usarse y el tipo de la variable no puede ser cambiado. En C, el tamaño de la variable depende de la arquitectura en la cual se este trabajando (x_86, x_86_84, ARM, RISC-V, etc.).</p>
+<p>Algo muy importante que diferencia lenguajes como Java de C, es que en C, si no se inicializa el valor de la variable, la podemos utilizar sin problemas, pero contendrá información "basura", es decir, los datos que estaban ubicados previamente en la dirección de memoria en donde la variable fue guardada.</p>
+<h2 id="declaracion-de-constantes">Declaración de constantes<a class="headerlink" href="#declaracion-de-constantes" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><span class="cp">#define CONSTANTE_DEFINE 25</span>
 <span class="k">enum</span> <span class="n">T_ENUM</span> <span class="p">{</span> <span class="n">CONSTANTE_ENUM</span> <span class="o">=</span> <span class="mi">25</span> <span class="p">};</span>
 <span class="k">const</span> <span class="kt">int</span> <span class="n">CONSTANTE_VARIABLE</span> <span class="o">=</span> <span class="mi">25</span><span class="p">;</span>
 </pre></div>
@@ -992,7 +1018,7 @@
 <span class="kt">char</span> <span class="o">**</span><span class="n">args</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">;</span>
 </pre></div>
 
-<h4 id="ejemplo-asiginar-valores-usando-punteros">Ejemplo: Asiginar Valores Usando Punteros<a class="headerlink" href="#ejemplo-asiginar-valores-usando-punteros" title="Permanent link">&para;</a></h4>
+<h4 id="ejemplo-asignar-valores-usando-punteros">Ejemplo: Asignar Valores Usando Punteros<a class="headerlink" href="#ejemplo-asignar-valores-usando-punteros" title="Permanent link">&para;</a></h4>
 <p><div class="codehilite"><pre><span></span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
 <span class="kt">int</span> <span class="o">*</span><span class="n">pi</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">;</span> <span class="c1">//al puntero pi se le asigna la dirección de memoria de la variable x.</span>
 <span class="kt">int</span> <span class="n">valorx</span> <span class="o">=</span> <span class="o">*</span><span class="n">pi</span><span class="p">;</span> <span class="c1">// en la variable valorx se almacena el valor al cual apunta la variable pi, en este ejemplo es 10</span>
@@ -1027,20 +1053,17 @@ C pasa los argumentos a una función por valor, esto quiere decir que la informa
 <li>Heap: Almacena datos <strong>dinámicos</strong>, como por ejemplo, un arreglo del tamaño indicado por el usuario. En C, el Heap es la unica estructura de memoria que es administrada directamente por el programador (reservar, liberar y respetar el espacio asignado). El heap, a diferencia del Stack, crece a direcciones de memorias más altas.</li>
 </ul>
 <h2 id="manejo-del-heap">Manejo del Heap<a class="headerlink" href="#manejo-del-heap" title="Permanent link">&para;</a></h2>
-<ul>
-<li>función <code>malloc()</code>: los devuelve un bloque de memoria. No los inicializa con ningún valor.
-    <div class="codehilite"><pre><span></span><span class="n">ptr</span> <span class="o">=</span> <span class="p">(</span><span class="n">cast</span><span class="o">-</span><span class="n">type</span><span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="n">byte</span><span class="o">-</span><span class="n">size</span><span class="p">)</span> <span class="c1">// prt es un puntero</span>
+<p><div class="codehilite"><pre><span></span><span class="n">type</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="p">(</span><span class="n">type</span><span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="n">byte</span><span class="o">-</span><span class="n">size</span><span class="p">);</span> <span class="c1">// prt es un puntero</span>
 </pre></div>
-    #### Ejemplo
-    <div class="codehilite"><pre><span></span><span class="c1">// ptr es puntero a un &quot;bloque&quot; de 100 enteros.</span>
-<span class="n">ptr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
-</pre></div></li>
-<li>función <code>calloc()</code>: bloque de memoria inicializada con ceros. Es una operación lenta. Evitar usarla en cuanto sea posible.</li>
-<li>función <code>free()</code>: libera un bloque de memoria que previamente pedimos.</li>
-<li>cuidado con usar malloc sin el free. "Aquí no hay garbage collector"</li>
-<li>Puede ser lento buscar espacio disponible</li>
-<li>Recordar que manejar el heap es tarea del programador.</li>
-</ul>
+<div class="codehilite"><pre><span></span><span class="c1">// ptr es puntero a un &quot;bloque&quot; de 100 enteros.</span>
+<span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+</pre></div>
+- función <code>malloc()</code>: los devuelve un bloque de memoria. No los inicializa con ningún valor.
+- función <code>calloc()</code>: bloque de memoria inicializada con ceros. Es una operación lenta. Evitar usarla en cuanto sea posible.
+- función <code>free()</code>: libera un bloque de memoria que previamente pedimos.
+- cuidado con usar malloc sin el free. Aquí no hay garbage collector.
+- Puede ser lento buscar espacio disponible
+- Recordar que manejar el heap es tarea del programador.</p>
 <h3 id="uso-de-valgrid">Uso de Valgrid<a class="headerlink" href="#uso-de-valgrid" title="Permanent link">&para;</a></h3>
 <p>Se puede descargar de: http://valgrind.org/
 - Ayuda a la depuración de problemas de memoria. Puede servir para detectar problemas como fugas de memoria (memory leak).</p>
